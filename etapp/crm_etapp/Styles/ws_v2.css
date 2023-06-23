@@ -1,0 +1,117 @@
+﻿body
+{
+     background-color:#ededed;
+}
+.topBar
+{
+    width:100%;
+    background-color:#000000;
+    border-bottom:1px solid #ededed;
+}
+.topBarInternal
+{
+     height:35px;
+     width:950px;
+     margin:0px auto;
+     overflow:hidden;
+}
+.topBanner
+{
+     width:100%;
+     background-color:#ededed;
+     border-top:1px solid #000000;
+     border-bottom:1px solid #bdd4ee;
+}
+.topBannerInternal
+{
+     height:140px;
+     width:950px;
+     margin:0px auto;
+}
+.middleBar
+{
+    width:100%;
+    background-color:#bdd4ee;
+    border-top:1px solid #ededed;
+}
+.middleBarInternal
+{
+    height:50px;
+    width:950px;
+    margin:0px auto;
+    border:0px solid black;
+}
+.middleBanner
+{
+    width:100%;
+    background-color:#15476e;
+    border-bottom:1px solid #ededed;
+    background-image:url(../images/LP2_Banner2_Bgnd.png);
+    background-repeat:repeat-x;
+}
+.middleBanner2
+{
+    width:950px;
+    margin:0px auto;
+    overflow:hidden;
+    background-image:url(../images/Internal_Banner2_Bgnd.png);
+    background-repeat:repeat-x;
+}
+.middleBannerInternal
+{
+    height:380px;
+    width:950px;
+    margin:0px auto;
+    overflow:hidden;
+}
+.ulFeatures
+{
+     list-style:none;
+     margin:0px;
+     padding:0px;
+}
+.featureNew
+{
+     background:url(../images/animated_new.gif) no-repeat 0 7px;
+     padding:30px;
+}
+.ulFeatures li
+{
+     line-height:25px;
+     margin: .30em 0;
+     padding:0 0 0 25px;
+     background:url(../images/CheckMarkx20.png) no-repeat 0 7px;
+     font-size:16px;
+}
+.featuresHeader
+{
+    color:#3f3f3f;
+    padding-top:10px;
+}
+
+/*=================================================================
+  Testimonials
+  =================================================================*/
+.testimonialWidget
+{
+    width:315px;
+    margin:5px;
+}
+.testimonial
+{
+    border-left:1px solid #a1a1a1;
+    border-right:1px solid #a1a1a1;
+    font-size:11px;
+    font-style:italic;
+    padding:5px;
+}
+.testimonialSource
+{
+    font-size:10px;
+    font-weight:600;
+    font-style:normal;
+    padding:2px;
+}
+
+
+

@@ -1,0 +1,87 @@
+﻿<div class="ContentArea">
+    <!-- Top Options for current module
+    ================================================== -->
+    <div class="TopOptions" style="text-align:center;">
+        <h3 style="margin-top: 2px;">CRM - QuickBooks Customers Match</h3>
+    </div>
+
+        <!-- Content Area
+    ================================================== -->
+    <div class="MainContent group" style="padding:5px;">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span5">
+                    <h5>CRM Customers List</h5>
+                    <div>
+                        <label class="radio inline">
+                          <input type="radio" id="crmFilter0"  name="crmFilter" value="0" ng-model="crmFilterOpt"> Show All
+                        </label>
+                        <label class="radio inline">
+                          <input type="radio" id="crmFilter1" name="crmFilter" value="1" ng-model="crmFilterOpt" checked> Show Not Matched Only
+                        </label>
+                        <label class="radio inline">
+                          <input type="radio" id="crmFilter2" name="crmFilter" value="2" ng-model="crmFilterOpt"> Show Matched Only
+                        </label>
+                    </div>
+                    <div class="well" style="height:600px;overflow:scroll;">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr style="background-color:#ffd800;font-weight:600;">
+                                    <td>Company Name</td>
+                                    <td>Dealer</td>
+                                    <td>Is Matched?</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="itm in qbMatch.crmCustomers | filter:crmFilterFunc">
+                                    <td>{{itm.name}}</td>
+                                    <td>{{itm.dealerName}}</td>
+                                    <td>{{itm.isMatched}}</td>
+                                    <td>
+                                        <input type="radio" name="crmPick" ng-click="crmPick(itm.id)" ng-hide="itm.isMatched"/>
+                                        <button class="btn btn-mini" ng-click="unlinkPair(itm.id)" ng-show="itm.isMatched">Unlink</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-mini btn-success" ng-click="showMatch(itm.id)" ng-show="itm.isMatched">Check</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="span1">
+
+                </div>
+                <div class="span5">
+                    <h5>Quickbooks Customers List</h5>
+                    <div>
+                        <div class="btn-group">
+                          <button class="btn btn-success" ng-click="linkPair()">Link</button>
+                        </div>
+                    </div>
+                    <div class="well" style="height:600px;overflow:scroll;">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr style="background-color:#ffd800;font-weight:600;">
+                                    <td></td>
+                                    <td>Company Name</td>
+                                    <td>Contact Name</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="itm in qbMatch.qbCustomers">
+                                    <td><input type="radio" name="qbPick" ng-click="qbPick(itm.id)" /></td>
+                                    <td ng-class="{isMatched: itm.isMatched}">{{itm.companyName}}</td>
+                                    <td ng-class="{isMatched: itm.isMatched}">{{itm.contactName}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

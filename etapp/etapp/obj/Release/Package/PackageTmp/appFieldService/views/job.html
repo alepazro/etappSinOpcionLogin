@@ -1,0 +1,207 @@
+﻿
+
+<div class="container">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Job Form <small>No. <label>{{job.jobNumber}}</label></small></h1>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <button class="btn btn-danger" ng-click="cancelEntry()">Cancel</button>
+                    <button class="btn btn-success" ng-click="saveJob()">Save</button>
+                    <button class="btn btn-success" ng-click="saveAndMore()">Save and new</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Customer Information</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal" role="form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtCustomer" class="col-sm-2 control-label">Customer</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                  <input type="text" class="form-control" id="txtCustomer" placeholder="Customer Name" ng-model="job.customerName">
+                                  <span class="input-group-addon" ng-click="searchCustomers()"><span class=" glyphicon glyphicon-zoom-in"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtContact" class="col-sm-2 control-label">Contact</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtContact" placeholder="Contact Name" ng-model="job.contactName">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtAddress" class="col-sm-2 control-label">Address</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtAddress" placeholder="Address" ng-model="job.address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtPhone" class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtPhone" placeholder="Phone" ng-model="job.phone">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Work Description</h3>
+        </div>
+        <div class="panel-body">
+            <div role="form">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label for="txtJobDescription">Job Description</label>
+                            <textarea  class="form-control" id="txtJobDescription" ng-model="job.jobDescription" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="cbxJobCategories">Job Category</label>
+                            <select id="cbxJobCategories" class="form-control" ng-model="job.categoryId" ng-options="item.id as item.name for item in categories"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Assignment and Scheduling</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal" role="form">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cbxPriorities" class="col-sm-4 control-label">Priority</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="cbxPriorities" ng-model="job.priorityId" ng-options="item.id as item.name for item in priorities"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cbxSpecialties" class="col-sm-4 control-label">Specialty</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="cbxSpecialties" ng-model="job.specialtyId" ng-options="item.id as item.name for item in specialties"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cbxTechnicians" class="col-sm-4 control-label">Assign To</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="cbxTechnicians" ng-model="job.assignedToId" ng-options="item.id as item.name for item in technicians"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="datScheduledStart" class="col-sm-4 control-label">Scheduled Start</label>
+                            <div class="col-sm-8">
+                                <input id="datScheduledStart" ng-model="job.scheduledStart" ng-change="recalcDueDate()" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtHours" class="col-sm-4 control-label">Duration (HH:MM)</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input id="txtHours" class="form-control" type="number" value="0" min="0" max="24" step="1" style="width:100px;" ng-model="job.durationHH" ng-change="recalcDueDate()"/>
+                                    <input id="txtMins" class="form-control" type="number" value="0" min="0" max="59" step="1"  style="width:100px;" ng-model="job.durationMM" ng-change="recalcDueDate()"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="datDueBy" class="col-sm-4 control-label">Due By</label>
+                            <div class="col-sm-8">
+                                <input id="datDueBy" ng-model="job.dueOn" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pull-right">
+        <button class="btn btn-danger" ng-click="cancelEntry()">Cancel</button>
+        <button class="btn btn-success" ng-click="saveJob()">Save</button>
+        <button class="btn btn-success" ng-click="saveAndMore()">Save and new</button>
+    </div>
+</div>
+
+<div id="searchCustomersModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Search Customers</h2>
+            </div>
+            <div class="modal-body">
+                <form id="Form1">
+                    <div class="form-group">
+                        <label for="searchCustomerFilter">Search for customers where name is like...</label>
+                        <div class="input-group">
+                            <input type="text" id="searchCustomerFilter" class="form-control" placeholder="Customer Name" ng-model="searchCustName" required>
+                            <span class="input-group-addon" ng-click="searchCustomersNow()">Search</span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div id="searchCustDb">
+                        <div id="searchCustGrid" kendo-grid k-data-source="dsSearchCust" k-options="searchCustGridOptions" style="height:150px;"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" ng-click="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div> 
+
+<script type="text/javascript">
+
+    $("#datScheduledStart").kendoDateTimePicker({
+        value: new Date()
+    });
+    $("#datDueBy").kendoDateTimePicker({
+        value: new Date()
+    });
+
+    $("#txtHours").kendoNumericTextBox({
+        format: "#"
+    });
+
+    $("#txtMins").kendoNumericTextBox({
+        format: "#"
+    });
+
+</script>
+
+

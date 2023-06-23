@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html ng-app="etApp">
+<head>
+    <title>New Job</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="vendors/jquery-ui-1.10.3.custom/css/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="vendors/bootstrap-3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="appFieldService/css/jobs.css" rel="stylesheet" />
+
+    <script src="vendors/jquery-1.10.2.min.js"></script>
+    <script src="vendors/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="vendors/underscore-min.js"></script>
+    <script src="vendors/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+    <script src="vendors/bootstrap-3.0.3/js/bootstrap.min.js"></script>
+    <script src="vendors/kendo-2013.3.1119/js/kendo.web.min.js"></script>
+    <script src="vendors/angular-kendo.min.js"></script>
+
+    <script src="Scripts/authorization_006.js"></script>
+    <script src="Scripts/util.js"></script>
+
+    <script src="appJobForm/etApp.js"></script>
+    <script src="appFieldService/services/services.js"></script>
+    <script src="appJobForm/controllers/jobController.js"></script>
+    <script src="app/controllers/etLogoutController.js"></script>
+
+
+</head>
+<body ng-cloak>
+    <div id="header">
+        <div id="topMenu">
+            <div class="row">
+                <div class="col-md-3">
+                    <span id="dealerBrand" class="logoDesign">eTrack</span>
+                </div>
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-3">
+                    <div id="welcomeTitle1" class="pull-right" style="padding:3px;">
+                        <span id="welcomeTitle">Welcome, John</span>
+                        <input type="hidden" id="userFullName" />
+                        <button class="btn" ng-controller="logoutController" ng-click="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="MiddleContentArea" ng-view>         
+            <!-- Content (Put here the application modules)
+    	    ================================================== -->
+        </div>
+    </div>   
+
+</body>
+</html>

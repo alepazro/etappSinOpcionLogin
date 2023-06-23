@@ -1,0 +1,113 @@
+﻿
+<div id="jobsMain" style="width:100%;">
+    <div id="left-pane">
+        <div id="leftPanes">
+            <div id="woStatsPane">
+                <div class="pane-content">
+                    <div id="woStatsDb">
+                        <div id="woStatsGrid"kendo-grid k-data-source="dsWOStats" k-options="woStatsGridOptions"></div>
+                    </div>
+                    <div id="woStatsToolbar">
+                        <p>
+                            <button type="button" data-role="button" data-sprite-css-class="k-icon k-i-cancel" ng-click="woStatsGridClear()">Clear Selection</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="workZonesPane">
+                <div class="pane-content">
+                    <div id="workZonesDb">
+                        <div id="wzGrid" kendo-grid k-data-source="dsWorkZones" k-options="wzGridOptions"></div>
+                    </div>
+                    <div id="wzToolbar">
+                        <p>
+                            <button type="button" data-role="button" data-sprite-css-class="k-icon k-i-cancel" ng-click="wzGridClear()">Clear Selection</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="techsPane">
+                <div class="pane-content">
+                    <div id="techsDb">
+                        <div id="techsGrid" kendo-grid k-data-source="dsTechnicians" k-options="techsGridOptions"></div>
+                    </div>
+                    <div id="techsToolbar">
+                        <p>
+                            <button type="button" data-role="button" data-sprite-css-class="k-icon k-i-cancel" ng-click="techsGridClear()">Clear Selection</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="main-pane">
+        <div class="pane-content">
+            <div id="jobsData">
+                <div id="jobsFiltersPane">
+                    <div class="pane-content">
+                        <div id="jobFilters" class="k-content" style="padding:10px;">
+                            <input type="text" id="filterJobNumber" value="" ng-model="filterJobNumber">
+                            <input type="text" id="filterCustomerName" value="" ng-model="filterCustomerName">
+                            <button type="button" id="filterSearch" data-role="button" ng-click="loadJobs()">Search</button>
+                            <button type="button" id="filterClear" data-role="button" ng-click="clearFilters()">Clear Filters</button>
+                            <!--<button type="button" id="btnNewJob" data-role="button" class="btn btn-success" ng-click="newJob()">New Job</button>-->
+                        </div>
+                    </div>
+                </div>
+                <div id="jobsPane">
+                    <div class="pane-content">
+                        <div id="jobsDb">
+                            <div id="jobsGrid" kendo-grid k-data-source="dsJobs" k-options="jobsGridOptions"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var contentH = h - 150;
+    $("#jobsMain").attr("style", "height: " + contentH + "px");
+    $("#leftPanes").attr("style", "height: " + contentH + "px");
+    $("#jobsData").attr("style", "height: " + (contentH - 10) + "px");
+    $("#jobsGrid").attr("style", "height: " + (contentH - 70) + "px");
+    $("#woStatsPane").attr("style", "height: " + (contentH / 3) + "px");
+    $("#woStatsGrid").attr("style", "height: " + ((contentH / 3) - 40) + "px");
+    $("#workZonesPane").attr("style", "height: " + (contentH / 3) + "px");
+    $("#wzGrid").attr("style", "height: " + ((contentH / 3) - 40) + "px");
+    $("#techsPane").attr("style", "height: " + (contentH / 3) + "px");
+    $("#techsGrid").attr("style", "height: " + ((contentH/ 3) - 50) + "px");
+
+    $("#jobsMain").kendoSplitter({
+        panes: [
+            { collapsible: true, size: "300px" },
+            { collapsible: true }
+        ]
+    });
+    $("#leftPanes").kendoSplitter({
+        orientation: "vertical",
+        panes: [
+            { collapsible: false, size: (contentH / 3) + "px" },
+            { collapsible: false, size: (contentH / 3) + "px" },
+            { collapsible: false, size: (contentH / 3) + "px" }
+        ]
+    });
+    $("#jobsData").kendoSplitter({
+        orientation: "vertical",
+        panes: [
+            { collapsible: false, resizable: false, size: "50px" },
+            { collapsible: false, resizable: false, size: (contentH) + "px" }
+        ]
+    });
+
+    kendo.init("#woStatsToolbar");
+    kendo.init("#wzToolbar");
+    kendo.init("#techsToolbar");
+
+    $("#filterJobNumber").kendoAutoComplete({ dataSource: [], placeholder: "Job Number" });
+    $("#filterCustomerName").kendoAutoComplete({ dataSource: [], placeholder: "Customer Name" });
+    $("#filterSearch").kendoButton({ spriteCssClass: "k-icon k-i-search" });
+    $("#filterClear").kendoButton({ spriteCssClass: "k-icon k-i-cancel" });
+
+</script>

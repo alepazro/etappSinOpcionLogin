@@ -1,0 +1,1376 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.OpenH264</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.OpenH264.ColorMatrix">
+            <summary>
+            Color matrices for OpenH264, matching the "EColorMatrix" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.Value">
+            <summary>
+            Gets the internal char value representation of this object.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.Gbr">
+            <summary>
+            Gets a video format of OpenH264 "CM_GBR".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.BT709">
+            <summary>
+            Gets a video format of OpenH264 "CM_BT709".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.Undefined">
+            <summary>
+            Gets a video format of OpenH264 "CM_UNDEF".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.Reserved3">
+            <summary>
+            Gets a video format of OpenH264 "CM_RESERVED3".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.FCC">
+            <summary>
+            Gets a video format of OpenH264 "CM_FCC".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.BT470BG">
+            <summary>
+            Gets a video format of OpenH264 "CM_BT470BG".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.Smpte170M">
+            <summary>
+            Gets a video format of OpenH264 "CM_SMPTE170M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.Smpte240M">
+            <summary>
+            Gets a video format of OpenH264 "CM_SMPTE240M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.YCGCO">
+            <summary>
+            Gets a video format of OpenH264 "CM_YCGCO".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.BT2020NC">
+            <summary>
+            Gets a video format of OpenH264 "CM_BT2020NC".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.BT2020C">
+            <summary>
+            Gets a video format of OpenH264 "CM_BT2020C".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorMatrix.NumEnum">
+            <summary>
+            Gets a video format of OpenH264 "CM_NUM_ENUM".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.NativeLibraryInfo">
+            <summary>
+            Holds information about the Cisco native DLL for a particular platform.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.ParameterSetStrategy">
+            <summary>
+            Parameter set strategies for OpenH264, matching the "EParameterSetStrategy" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ParameterSetStrategy.Value">
+            <summary>
+            Gets the internal integer value representation of this parameter set strategy.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ParameterSetStrategy.ConstantId">
+            <summary>
+            Gets a parameter set strategy of OpenH264 "CONSTANT_ID".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ParameterSetStrategy.IncreasingId">
+            <summary>
+            Gets a parameter set strategy of OpenH264 "INCREASING_ID".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ParameterSetStrategy.SpsListing">
+            <summary>
+            Gets a parameter set strategy of OpenH264 "SPS_LISTING".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ParameterSetStrategy.SpsListingAndPpsIncreasing">
+            <summary>
+            Gets a parameter set strategy of OpenH264 "SPS_LISTING_AND_PPS_INCREASING".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ParameterSetStrategy.SpsPpsListing">
+            <summary>
+            Gets a parameter set strategy of OpenH264 "SPS_PPS_LISTING".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.ComplexityMode">
+            <summary>
+            Complexity modes for OpenH264, matching the "ECOMPLEXITY_MODE" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ComplexityMode.Value">
+            <summary>
+            Gets the internal integer value representation of this complexity mode.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ComplexityMode.Low">
+            <summary>
+            Gets a complexity mode of OpenH264 "LOW_COMPLEXITY".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ComplexityMode.Medium">
+            <summary>
+            Gets a complexity mode of OpenH264 "MEDIUM_COMPLEXITY".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ComplexityMode.High">
+            <summary>
+            Gets a complexity mode of OpenH264 "HIGH_COMPLEXITY".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.RateControlMode">
+            <summary>
+            Rate control modes for OpenH264, matching the "RC_MODES" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.RateControlMode.Value">
+            <summary>
+            Gets the internal integer value representation of this rate control mode.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.RateControlMode.QualityMode">
+            <summary>
+            Gets a rate control mode of OpenH264 "RC_QUALITY_MODE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.RateControlMode.BitrateMode">
+            <summary>
+            Gets a rate control mode of OpenH264 "RC_BITRATE_MODE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.RateControlMode.BufferBasedMode">
+            <summary>
+            Gets a rate control mode of OpenH264 "RC_BUFFERBASED_MODE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.RateControlMode.TimestampMode">
+            <summary>
+            Gets a rate control mode of OpenH264 "RC_TIMESTAMP_MODE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.RateControlMode.BitrateModePostSkip">
+            <summary>
+            Gets a rate control mode of OpenH264 "RC_BITRATE_MODE_POST_SKIP".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.RateControlMode.OffMode">
+            <summary>
+            Gets a rate control mode of OpenH264 "RC_OFF_MODE".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.UsageType">
+            <summary>
+            Usage types for OpenH264, matching the "EUsageType" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.UsageType.Value">
+            <summary>
+            Gets the internal integer value representation of this usage type.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.UsageType.CameraVideoRealTime">
+            <summary>
+            Gets a usage type of OpenH264 "CAMERA_VIDEO_REAL_TIME".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.UsageType.ScreenContentRealTime">
+            <summary>
+            Gets a usage type of OpenH264 "SCREEN_CONTENT_REAL_TIME".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.UsageType.CameraVideoNonRealTime">
+            <summary>
+            Gets a usage type of OpenH264 "CAMERA_VIDEO_NON_REAL_TIME".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.VideoBitstreamType">
+            <summary>
+            Video bitstream types for OpenH264, matching the "VIDEO_BITSTREAM_TYPE" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoBitstreamType.Value">
+            <summary>
+            Gets the internal integer value representation of this video bitstream type.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoBitstreamType.Avc">
+            <summary>
+            Gets a video bistream type of OpenH264 "VIDEO_BITSTREAM_AVC".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoBitstreamType.Svc">
+            <summary>
+            Gets a video bistream type of OpenH264 "VIDEO_BITSTREAM_SVC".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoBitstreamType.Default">
+            <summary>
+            Gets a video bistream type of OpenH264 "VIDEO_BITSTREAM_DEFAULT".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod">
+            <summary>
+            Error concealment methods for OpenH264, matching the "ERROR_CON_IDC" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.Value">
+            <summary>
+            Gets the internal integer value representation of this error concealment method.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.Disable">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_DISABLE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.FrameCopy">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_FRAME_COPY".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.SliceCopy">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_SLICE_COPY".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.FrameCopyCrossIdr">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_FRAME_COPY_CROSS_IDR".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.SliceCopyCrossIdr">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_SLICE_COPY_CROSS_IDR".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.SliceCopyCrossIdrFreezeResChange">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_SLICE_COPY_CROSS_IDR_FREEZE_RES_CHANGE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.SliceMvCopyCrossIdr">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_SLICE_MV_COPY_CROSS_IDR".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ErrorConcealmentMethod.SliceMvCopyCrossIdrFreezeResChange">
+            <summary>
+            Gets an error concealment method of OpenH264 "ERROR_CON_SLICE_MV_COPY_CROSS_IDR_FREEZE_RES_CHANGE".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.TransferCharacteristics">
+            <summary>
+            Transfer characteristics for OpenH264, matching the "ETransferCharacteristics" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Value">
+            <summary>
+            Gets the internal char value representation of this object.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Reserved0">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_RESERVED0".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.BT709">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_BT709".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Undefined">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_UNDEF".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Reserved3">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_RESERVED3".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.BT470M">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_BT470M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.BT470BG">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_BT470BG".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Smpte170M">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_SMPTE170M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Smpte240M">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_SMPTE240M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Linear">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_LINEAR".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Log100">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_LOG100".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Log316">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_LOG316".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Iec61966_2_4">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_IEC61966_2_4".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.BT1361E">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_BT1361E".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.Iec61966_2_1">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_IEC61966_2_1".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.BT2020_10">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_BT2020_10".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.BT2020_12">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_BT2020_12".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.TransferCharacteristics.NumEnum">
+            <summary>
+            Gets a transfer characteristics of OpenH264 "TRC_NUM_ENUM".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.Decoder">
+            <summary>
+            An OpenH264-based decoder.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Decoder.CodecConfig">
+            <summary>
+            Gets the decoder configuration.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Decoder.NeedsKeyFrame">
+            <summary>
+            Gets a value indicating whether the decoder needs a key frame.
+            </summary>
+            <value>
+              <c>true</c> if [needs key frame]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Decoder.ProfileLevelId">
+            <summary>
+            Gets the profile level identifier.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Decoder.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Decoder" /> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.#ctor(FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Decoder" /> class with a profile level ID.
+            </summary>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Decoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.#ctor(FM.LiveSwitch.IVideoOutput,FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Decoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.SetCodecConfig(FM.LiveSwitch.OpenH264.DecoderConfig)">
+            <summary>
+            Sets the decoder configuration.
+            </summary>
+            <returns>0 on success, non-zero on failure.</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.DoProcessFrame(FM.LiveSwitch.VideoFrame,FM.LiveSwitch.VideoBuffer)">
+            <summary>
+            Processes a frame.
+            </summary>
+            <param name="frame">The frame.</param>
+            <param name="inputBuffer">The input buffer.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.IsKeyFrame(FM.LiveSwitch.DataBuffer)">
+            <summary>
+            Determines whether a data buffer represents a keyframe.
+            </summary>
+            <param name="dataBuffer">The data buffer.</param>
+            
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Decoder.DoDestroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.DecoderConfig">
+            <summary>
+            Configuration for the OpenH264 decoder. Properties map to OpenH264 properties.
+            http://www.openh264.org
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.DecoderConfig.#ctor">
+            <summary>
+            Creates a new copy of the H264 decoder configuration with default values.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.DecoderConfig.FileNameRestructed">
+            <summary>
+            Gets or sets a value that maps to "pFileNameRestructed".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.DecoderConfig.CpuLoad">
+            <summary>
+            Gets or sets a value that maps to "uiCpuLoad".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.DecoderConfig.TargetDqLayer">
+            <summary>
+            Gets or sets a value that maps to "uiTargetDqLayer".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.DecoderConfig.EcActive">
+            <summary>
+            Gets or sets a value that maps to "eEcActiveIdc".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.DecoderConfig.ParseOnly">
+            <summary>
+            Gets or sets a value that maps to "bParseOnly".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.DecoderConfig.VideoSize">
+            <summary>
+            Gets or sets a value that maps to "sVideoProperty.size".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.DecoderConfig.VideoBsType">
+            <summary>
+            Gets or sets a value that maps to "sVideoProperty.eVideoBsType".
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.DecoderConfig.DeepCopy">
+            <summary>
+            Gets a deep copy of this configuration.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.Encoder">
+            <summary>
+            An OpenH264-based encoder.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Encoder.CodecConfig">
+            <summary>
+            Gets a copy of the encoder configuration.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Encoder.ForceKeyFrame">
+            <summary>
+            Gets or sets a value indicating whether a keyframe should be forced.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Encoder.MinCodecBitrate">
+            <summary>
+            Gets the minimum possible codec bitrate, in kbps.
+            Set to 100kbps.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Encoder.MaxCodecBitrate">
+            <summary>
+            Gets the maximum possible codec bitrate, in kbps.
+            Set to 100,000kbps.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Encoder.Quality">
+            <summary>
+            Gets or sets the target output quality.
+            </summary>
+            <value>
+            The quality.
+            </value>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Encoder.ProfileLevelId">
+            <summary>
+            Gets the profile level identifier.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Encoder.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Encoder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Encoder" /> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Encoder.#ctor(FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Encoder" /> class with a profile level ID.
+            </summary>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Encoder.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Encoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Encoder.#ctor(FM.LiveSwitch.IVideoOutput,FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Encoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Encoder.DoDestroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Encoder.SetCodecConfig(FM.LiveSwitch.OpenH264.EncoderConfig)">
+            <summary>
+            Sets the encoder configuration.
+            </summary>
+            <returns>0 on success, non-zero on failure.</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Encoder.DoProcessFrame(FM.LiveSwitch.VideoFrame,FM.LiveSwitch.VideoBuffer)">
+            <summary>
+            Processes a frame.
+            </summary>
+            <param name="frame">The frame.</param>
+            <param name="inputBuffer">The input buffer.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.EncoderConfig">
+            <summary>
+            Configuration for the OpenH264 encoder. Properties map to OpenH264 properties.
+            http://www.openh264.org
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.EncoderConfig.#ctor">
+            <summary>
+            Creates a new copy of the H264 encoder configurations with default values.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.SpatialLayers">
+            <summary>
+            Gets the spatial layer configurations that map to "sSpatialLayers".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.UsageType">
+            <summary>
+            Gets or sets a value that maps to "iUsageType".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.RcMode">
+            <summary>
+            Gets or sets a value that maps to "iRCMode".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.MaxFrameRate">
+            <summary>
+            Gets or sets a value that maps to "fMaxFrameRate".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.ComplexityMode">
+            <summary>
+            Gets or sets a value that maps to "iComplexityMode".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.IntraPeriod">
+            <summary>
+            Gets or sets a value that maps to "uiIntraPeriod".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.NumRefFrame">
+            <summary>
+            Gets or sets a value that maps to "iNumRefFrame".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.SpsPpsIdStrategy">
+            <summary>
+            Gets or sets a value that maps to "eSpsPpsIdStrategy".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.PrefixNalAddingControl">
+            <summary>
+            Gets or sets a value that maps to "bPrefixNalAddingCtrl".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableSsei">
+            <summary>
+            Gets or sets a value that maps to "bEnableSSEI".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.SimulcastAvc">
+            <summary>
+            Gets or sets a value that maps to "bSimulcastAVC".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.PaddingFlag">
+            <summary>
+            Gets or sets a value that maps to "iPaddingFlag".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EntropyCodingModeFlag">
+            <summary>
+            Gets or sets a value that maps to "iEntropyCodingModeFlag".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableFrameSkip">
+            <summary>
+            Gets or sets a value that maps to "bEnableFrameSkip".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.MinQP">
+            <summary>
+            Gets or sets a value that maps to "iMinQp".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.MaxQP">
+            <summary>
+            Gets or sets a value that maps to "iMaxQp".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.MaxNalSize">
+            <summary>
+            Gets or sets a value that maps to "uiMaxNalSize".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableLongTermReference">
+            <summary>
+            Gets or sets a value that maps to "bEnableLongTermReference".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.LtrRefNum">
+            <summary>
+            Gets or sets a value that maps to "iLTRRefNum".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.LtrMarkPeriod">
+            <summary>
+            Gets or sets a value that maps to "iLtrMarkPeriod".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.MultipleThreadIdc">
+            <summary>
+            Gets or sets a value that maps to "iMultipleThreadIdc".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.UseLoadBalancing">
+            <summary>
+            Gets or sets a value that maps to "bUseLoadBalancing".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.LoopFilterDisableIdc">
+            <summary>
+            Gets or sets a value that maps to "iLoopFilterDisaleIdc".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.LoopFilterAlphaC0Offset">
+            <summary>
+            Gets or sets a value that maps to "iLoopFilterAlphaC0Offset".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.LoopFilterBetaOffset">
+            <summary>
+            Gets or sets a value that maps to "iLoopFilterBetaOffset".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableDenoise">
+            <summary>
+            Gets or sets a value that maps to "bEnableDenoise".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableBackgroundDetection">
+            <summary>
+            Gets or sets a value that maps to "bEnableBackgroundDetection".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableAdaptiveQuant">
+            <summary>
+            Gets or sets a value that maps to "bEnableAdaptiveQuant".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableFrameCroppingFlag">
+            <summary>
+            Gets or sets a value that maps to "bEnableFrameCroppingFlag".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.EnableSceneChangeDetect">
+            <summary>
+            Gets or sets a value that maps to "bEnableSceneChangeDetect".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.IsLosslessLink">
+            <summary>
+            Gets or sets a value that maps to "bIsLosslessLink".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.TemporalLayerNum">
+            <summary>
+            Gets or sets a value that maps to "iTemporalLayerNum".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderConfig.SpatialLayerNum">
+            <summary>
+            Gets or sets a value that maps to "iSpatialLayerNum".
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.EncoderConfig.DeepCopy">
+            <summary>
+            Gets a deep copy of this configuration.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.ColorPrimaries">
+            <summary>
+            Color primaries for OpenH264, matching the "EColorPrimaries" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.Value">
+            <summary>
+            Gets the internal char value representation of this object.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.Reserved0">
+            <summary>
+            Gets a video format of OpenH264 "CP_RESERVED0".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.BT709">
+            <summary>
+            Gets a video format of OpenH264 "CP_BT709".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.Undefined">
+            <summary>
+            Gets a video format of OpenH264 "CP_UNDEF".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.Reserved3">
+            <summary>
+            Gets a video format of OpenH264 "CP_RESERVED3".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.BT470M">
+            <summary>
+            Gets a video format of OpenH264 "CP_BT470M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.BT470BG">
+            <summary>
+            Gets a video format of OpenH264 "CP_BT470BG".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.Smpte170M">
+            <summary>
+            Gets a video format of OpenH264 "CP_SMPTE170M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.Smpte240M">
+            <summary>
+            Gets a video format of OpenH264 "CP_SMPTE240M".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.Film">
+            <summary>
+            Gets a video format of OpenH264 "CP_FILM".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.BT2020">
+            <summary>
+            Gets a video format of OpenH264 "CP_BT2020".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ColorPrimaries.NumEnum">
+            <summary>
+            Gets a video format of OpenH264 "CP_NUM_ENUM".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.VideoFormatSPS">
+            <summary>
+            Video formats for OpenH264, matching the "EVideoFormatSPSSPS" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.Value">
+            <summary>
+            Gets the internal char value representation of this video format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.Component">
+            <summary>
+            Gets a video format of OpenH264 "VF_COMPONENT".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.Pal">
+            <summary>
+            Gets a video format of OpenH264 "VF_PAL".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.Ntsc">
+            <summary>
+            Gets a video format of OpenH264 "VF_NTSC".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.Secam">
+            <summary>
+            Gets a video format of OpenH264 "VF_SECAM".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.Mac">
+            <summary>
+            Gets a video format of OpenH264 "VF_MAC".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.Undefined">
+            <summary>
+            Gets a video format of OpenH264 "VF_UNDEF".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.VideoFormatSPS.NumEnum">
+            <summary>
+            Gets a video format of OpenH264 "VF_NUM_ENUM".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.SampleAspectRatio">
+            <summary>
+            Sample aspect ratios for OpenH264, matching the "ESampleAspectRatio" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Value">
+            <summary>
+            Gets the internal integer value representation of this sample aspect ratio.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Unspecified">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_UNSPECIFIED".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp1x1">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_1x1".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp12x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_12x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp10x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_10x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp16x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_16x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp40x33">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_40x33".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp24x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_24x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp20x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_20x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp32x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_32x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp80x33">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_80x33".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp18x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_18x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp15x11">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_15x11".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp64x33">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_64x33".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.Asp160x99">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_160x99".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SampleAspectRatio.AspExtSar">
+            <summary>
+            Gets a sample aspect ratio of OpenH264 "ASP_EXT_SAR".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.SliceMode">
+            <summary>
+            Slice modes for OpenH264, matching the "SliceModeEnum" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SliceMode.Value">
+            <summary>
+            Gets the internal integer value representation of this slice mode.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SliceMode.Single">
+            <summary>
+            Gets a slice mode of OpenH264 "SM_SINGLE_SLICE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SliceMode.FixedSliceNum">
+            <summary>
+            Gets a profile IDC of OpenH264 "SM_FIXEDSLCNUM_SLICE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SliceMode.Raster">
+            <summary>
+            Gets a slice mode of OpenH264 "SM_RASTER_SLICE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SliceMode.SizeLimited">
+            <summary>
+            Gets a slice mode of OpenH264 "SM_SIZELIMITED_SLICE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.SliceMode.Reserved">
+            <summary>
+            Gets a slice mode of OpenH264 "SM_RESERVED".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.LevelIdc">
+            <summary>
+            Level IDs for OpenH264, matching the "ELevelIdc" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Value">
+            <summary>
+            Gets the internal integer value representation of this levle ID.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Unknown">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_UNKNOWN".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level10">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_1_0".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level1B">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_1_B".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level11">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_1_1".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level12">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_1_2".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level13">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_1_3".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level20">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_2_0".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level21">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_2_1".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level22">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_2_2".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level30">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_3_0".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level31">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_3_1".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level32">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_3_2".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level40">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_4_0".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level41">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_4_1".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level42">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_4_2".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level50">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_5_0".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level51">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_5_1".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.LevelIdc.Level52">
+            <summary>
+            Gets a level ID of OpenH264 "LEVEL_5_2".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.ProfileIdc">
+            <summary>
+            Profile IDs for OpenH264, matching the "EProfileIdc" enum.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.Value">
+            <summary>
+            Gets the internal integer value representation of this profile ID.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.Unknown">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_UNKNOWN".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.Baseline">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_BASELINE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.Main">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_MAIN".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.Extended">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_EXTENDED".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.High">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_HIGH".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.High10">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_HIGH10".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.High422">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_HIGH422".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.High444">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_HIGH444".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.Cavlc444">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_CAVLC444".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.ScalableBaseline">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_SCALABLE_BASELINE".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.ProfileIdc.ScalableHigh">
+            <summary>
+            Gets a profile IDC of OpenH264 "PRO_SCALABLE_HIGH".
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig">
+            <summary>
+            Configuration for OpenH264 encoder spatial layers. Properties map to OpenH264 properties defined
+            in "SSpatialLayerConfig".
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.#ctor">
+            <summary>
+            Configuration for an OpenH264 spatial layer.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.FrameRate">
+            <summary>
+            Gets or sets a value that maps to "fFrameRate".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.ProfileIdc">
+            <summary>
+            Gets or sets a value that maps to "uiProfileIdc".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.LevelIdc">
+            <summary>
+            Gets or sets a value that maps to "uiLevelIdc".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.DLayerQp">
+            <summary>
+            Gets or sets a value that maps to "iDLayerQp".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.SliceMode">
+            <summary>
+            Gets or sets a value that maps to "sSliceArgument.uiSliceMode".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.SliceNum">
+            <summary>
+            Gets or sets a value that maps to "sSliceArgument.uiSliceNum".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.SliceMBNum">
+            <summary>
+            Gets or sets a value that maps to "sSliceArgument.uiSliceMbNum".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.SliceSizeConstraint">
+            <summary>
+            Gets or sets a value that maps to "sSliceArgument.uiSliceSizeConstraint".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.VideoSignalTypePresent">
+            <summary>
+            Gets or sets a value that maps to "bVideoSignalTypePresent".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.VideoFormat">
+            <summary>
+            Gets or sets a value that maps to "uiVideoFormatSPS".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.FullRange">
+            <summary>
+            Gets or sets a value that maps to "bFullRange".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.ColorDescriptionPresent">
+            <summary>
+            Gets or sets a value that maps to "bColorDescriptionPresent".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.ColorPrimaries">
+            <summary>
+            Gets or sets a value that maps to "uiColorPrimaries".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.TransferCharacteristics">
+            <summary>
+            Gets or sets a value that maps to "uiTransferCharacteristics".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.ColorMatrix">
+            <summary>
+            Gets or sets a value that maps to "uiColorMatrix".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.AspectRatioPresent">
+            <summary>
+            Gets or sets a value that maps to "bAspectRatioPresent".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.AspectRatio">
+            <summary>
+            Gets or sets a value that maps to "eAspectRatio".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.AspectRatioExtWidth">
+            <summary>
+            Gets or sets a value that maps to "sAspectRatioExtWidth".
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.AspectRatioExtHeight">
+            <summary>
+            Gets or sets a value that maps to "sAspectRatioExtHeight".
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.EncoderSpatialLayerConfig.DeepCopy">
+            <summary>
+            Gets a deep copy of this configuration.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Native.Bitrate">
+            <summary>
+            Gets or sets the bitrate.
+            </summary>
+            <value>
+            The bitrate.
+            </value>
+        </member>
+        <member name="P:FM.LiveSwitch.OpenH264.Native.NeedsKeyFrame">
+            <summary>
+            Gets or sets a value indicating whether [needs key frame].
+            </summary>
+            <value>
+              <c>true</c> if [needs key frame]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Native.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.OpenH264.Native"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Native.Destroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Native.Encode(FM.LiveSwitch.VideoBuffer,FM.LiveSwitch.VideoFormat)">
+            <summary>
+            Takes an I420 buffer, encodes and returns a openh264 buffer.
+            </summary>
+            <param name="buffer">The buffer.</param>
+            <param name="outputFormat">The output format.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Native.Decode(FM.LiveSwitch.VideoBuffer,FM.LiveSwitch.VideoFormat)">
+            <summary>
+            Decodes a buffer containing a VPX format to an I420 format.
+            </summary>
+            <param name="encodedFrame">The encoded frame.</param>
+            <param name="outputFormat">The output format.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.OpenH264.Utility">
+            <summary>
+            OpenH264-related utility functions.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.Initialize">
+            <summary>
+            Initializes OpenH264 native libraries.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.IsSupported">
+            <summary>
+            Determines whether this platform can run OpenH264.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.GetDownloadUrl">
+            <summary>
+            Gets the url for the OpenH264 library needed for this platform.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.GetLibraryName">
+            <summary>
+            Gets the filename for the OpenH264 library for this platform.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.GetLoadLibraryName">
+            <summary>
+            Gets the filename that should be used to load the OpenH264 library.  This may be different than
+            the return value from GetLibraryName() if a symlink must be used to load the library.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.DownloadOpenH264">
+            <summary>
+            Checks if the current OpenH264 native library exists in the expected location.  If so, return without doing
+            anything.  If not, then the current version will be downloaded from Cisco to that location.  If an older version
+            of the library is detected, it will be removed before downloading the new version.  Not supported in UWP.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.DownloadOpenH264(System.String)">
+            <summary>
+            Checks if the current OpenH264 native library exists in the expected location.  If so, return without doing
+            anything.  If not, then the current version will be downloaded from Cisco to that location.  If an older version
+            of the library is detected, it will be removed before downloading the new version.  Not supported in UWP.
+            </summary>
+            <param name="downloadPath">The location to download the OpenH264 library to.  Should normally be left empty to allow the correct
+            path to be chosen automatically.  But for Android, it should point to the application directory.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.OpenH264.Utility.DownloadOpenH264(System.String,System.Boolean)">
+            <summary>
+            Checks if the current OpenH264 native library exists in the expected location.  If so, return without doing
+            anything.  If not, then the current version will be downloaded from Cisco to that location.  Not supported in UWP.
+            </summary>
+            <param name="downloadPath">The location to download the OpenH264 library to.  Should normally be left empty to allow the correct
+            path to be chosen automatically.  But for Android, it should point to the application directory.</param>
+            <param name="removeOld">If true, and if a new version of OpenH264 is required, this method will clean up the existing older library.</param>
+        </member>
+    </members>
+</doc>

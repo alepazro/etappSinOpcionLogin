@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.Wpf</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.Wpf.ImageSink">
+            <summary>
+            A WPF-based Image sink.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Wpf.ImageSink.View">
+            <summary>
+            Gets the view.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Wpf.ImageSink.ViewScale">
+            <summary>
+            Gets or sets the view scale.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Wpf.ImageSink.ViewMirror">
+            <summary>
+            Gets or sets a value indicating whether the view is mirrored.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Wpf.ImageSink.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(System.Windows.Controls.Image)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="view">The view.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(System.Windows.Controls.Image,FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(System.Windows.Controls.Image,FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(System.Windows.Threading.Dispatcher)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="dispatcher">The dispatcher.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(System.Windows.Threading.Dispatcher,FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="dispatcher">The dispatcher.</param>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.#ctor(System.Windows.Threading.Dispatcher,FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.ImageSink" /> class.
+            </summary>
+            <param name="dispatcher">The dispatcher.</param>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.DoDestroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.ImageSink.RenderBuffer(FM.LiveSwitch.VideoBuffer)">
+            <summary>
+            Renders a video buffer.
+            </summary>
+            <param name="buffer">The buffer.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.Wpf.LayoutManager">
+            <summary>
+            A WPF layout manager for .NET.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Wpf.LayoutManager.Container">
+            <summary>
+            Gets the layout container.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.LayoutManager.#ctor(System.Windows.Controls.Canvas)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.LayoutManager"/> class.
+            </summary>
+            <param name="container">The layout container.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.LayoutManager.#ctor(System.Windows.Controls.Canvas,FM.LiveSwitch.LayoutPreset)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Wpf.LayoutManager"/> class.
+            </summary>
+            <param name="container">The layout container.</param>
+            <param name="preset">The layout preset.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.LayoutManager.AddView(System.Windows.FrameworkElement)">
+            <summary>
+            Adds a view to the container.
+            </summary>
+            <param name="view">The view to add.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.LayoutManager.RemoveView(System.Windows.FrameworkElement)">
+            <summary>
+            Removes a view from the container.
+            </summary>
+            <param name="view">The view to remove.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.LayoutManager.DispatchToMainThread(FM.LiveSwitch.Action2{System.Object,System.Object},System.Object,System.Object)">
+            <summary>
+            Dispatches an action to the main thread.
+            </summary>
+            <param name="action">The action to invoke.</param>
+            <param name="arg1">The first argument.</param>
+            <param name="arg2">The second argument.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.LayoutManager.Layout">
+            <summary>
+            Positions the local and remote views within the layout.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Wpf.Utility">
+            <summary>
+            WPF-related utility functions.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.Utility.DispatchToMainThread(System.Windows.Threading.Dispatcher,FM.LiveSwitch.Action0)">
+            <summary>
+            Dispatches an action to the main thread.
+            </summary>
+            <param name="dispatcher">The dispatcher.</param>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Wpf.Utility.DispatchToMainThread(System.Windows.Threading.Dispatcher,FM.LiveSwitch.Action0,System.Boolean)">
+            <summary>
+            Dispatches an action to the main thread.
+            </summary>
+            <param name="dispatcher">The dispatcher.</param>
+            <param name="action">The action.</param>
+            <param name="forceSync">Whether or not to force the action to run synchronously.</param>
+        </member>
+    </members>
+</doc>

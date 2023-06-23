@@ -1,0 +1,77 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+crm_etapp
+</name>
+</assembly>
+<members>
+<member name="T:crm_etapp.My.MyWebExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:crm_etapp.My.MyWebExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:crm_etapp.My.MyWebExtension.User">
+ <summary>
+ Returns information for the current Web user.
+ </summary>
+</member>
+<member name="P:crm_etapp.My.MyWebExtension.Request">
+ <summary>
+ Returns Request object.
+ </summary>
+</member>
+<member name="P:crm_etapp.My.MyWebExtension.Response">
+ <summary>
+ Returns Response object.
+ </summary>
+</member>
+<member name="P:crm_etapp.My.MyWebExtension.Log">
+ <summary>
+ Returns the Asp log object.
+ </summary>
+</member>
+<member name="F:crm_etapp.Login._RegisterHyperLink">
+<summary>
+RegisterHyperLink control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:crm_etapp.Login._LoginUser">
+<summary>
+LoginUser control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="M:crm_etapp.Ietrest.GetJobSupportTables(System.String,System.String)">
+ <summary>
+ Created: 1/1/2015 (estimated date)
+ </summary>
+ <param name="token"></param>
+ <param name="noCache"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:crm_etapp.userPreference">
+ <summary>
+ Module: TRACKING
+ - Preference: SHOWDEVICE: whether the device is selected or not to display in the map
+ -            Val1: DeviceID
+ -            Val2: true/false
+ </summary>
+ <remarks></remarks>
+</member>
+</members>
+</doc>

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+        <title>Demo Login Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+        <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+        <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/ws.css" rel="stylesheet" type="text/css" />
+
+    <!--    Javascript includes -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+        <script src="Scripts/db_v002.js" type="text/javascript"></script>
+        <script src="Scripts/branding.js" type="text/javascript"></script>
+        <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+        <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+        <script src="Scripts/webForms.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                getBrand();
+                $('.liveDemoAccessRequest').hide();
+                if (validateDemoToken() == false) {
+                    $('.noticeLabel').text('Invalid Access Token');
+                    $('.liveDemoAccessRequest').show();
+                }
+            });
+        </script>
+</head>
+<body>
+    <div id="headerWS">
+        <div id="topMenuWS">
+            <div class="logoPosition">
+                <span id="dealerBrand" class="logoDesign"></span>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div style="width:400px;margin:auto;margin-top:50px;text-align:center;">
+            <div style="margin-top:50px;">
+                <h2 class="noticeLabel">Validating access to the live demo account...</h2>
+
+                <div class="liveDemoAccessRequest" style="text-align:left;margin-top:20px;">
+                    <h3>You can request a new access token by filling the form below:</h3>
+                    <br />
+                    <fieldset>
+                        <input id="formId" name="formId" type="hidden" value="7B8D67B5-E36A-4C3A-B1A4-B07D6F5B6342" />
+                        <div style="width:400px; margin:1px; background-color:#d5edf7; padding:5px;">
+                            <h3 style="margin-left:10px;">Please send my link to access the live demo account:</h3>
+                        </div>
+                        <table style="background-color:#f1f1f1;width:410px;">
+                            <tr>
+                                <td style="padding:5px;padding-left:30px;vertical-align:middle;font-weight:600;">
+                                    <label for="firstName">First Name</label>
+                                </td>
+                                <td style="padding:5px;">
+                                    <input id="firstName" name="firstName" type="text" maxlength="20" size="30" class="formField"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:5px;padding-left:30px;vertical-align:middle;font-weight:600;">
+                                    <label for="lastName">Last Name</label>
+                                </td>
+                                <td style="padding:5px;">
+                                    <input id="lastName" name="lastName" type="text" maxlength="20" size="30" class="formField"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:5px;padding-left:30px;vertical-align:middle;font-weight:600;">
+                                    <label for="email">Email</label>
+                                </td>
+                                <td style="padding:5px;">
+                                    <input id="email" name="email" type="text" maxlength="100" size="30" class="formField mandatoryField"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="background-color:#f1f1f1;width:410px;">
+                            <tr style="text-align:center;">
+                                <td colspan="2" style="padding:10px;">
+                                    <input name="submit" type="button" value="Send My Access Link" style="width:200px;" onclick="getAccessLink()"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                    <div style="text-align:right;padding-right:10px;font-size:10px; width: 410px;">
+                        <span style="color:#888888;">Rep.ID:</span><input type="text" id="repId" name="repId" size="5" value="" style="height:15px;width:40px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

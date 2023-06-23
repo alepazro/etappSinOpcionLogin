@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function resultOk(data) {
+            var result = 'Ok';
+        }
+        function resultNok(msg, url, line) {
+            var result = 'Not ok';
+        }
+
+        function auth() {
+            try {
+                var data = 'test';
+                $.ajax({
+                    type: "GET",
+                    url: "etrest.svc/auth/" + data,
+                    contentType: "application/json; charset=utf-8",
+                    data: 0,
+                    dataType: "json",
+                    processdata: false,
+                    success: resultOk,
+                    error: resultNok
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+        function getList() {
+            try {
+                var data = '6CE1DED4-EE38-4F1B-A414-939F4DB5B4AB';
+                $.ajax({
+                    type: "GET",
+                    url: "etrest.svc/devList/" + data,
+                    contentType: "application/json; charset=utf-8",
+                    data: 0,
+                    dataType: "json",
+                    processdata: false,
+                    success: resultOk,
+                    error: resultNok
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+        function getDeviceInfo() {
+            try {
+                var data = 'F3B90383-731A-4215-BE30-20174719B422';
+                $.ajax({
+                    type: "GET",
+                    url: "etrest.svc/device/" + data,
+                    contentType: "application/json; charset=utf-8",
+                    data: 0,
+                    dataType: "json",
+                    processdata: false,
+                    success: resultOk,
+                    error: resultNok
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+        $(document).ready(function () {
+            var credentials = { 'login': 'jco', 'pw': 'test' };
+            var res = JSON.stringify(credentials);
+            var data = escape(res);
+        });
+    </script>
+
+</head>
+<body>
+
+<button id="btn1" onclick="auth()">Log In</button>
+<button id="btn2" onclick="getList()">Get List</button>
+<button id="btn3" onclick="getDeviceInfo()">Get One Unit</button>
+
+</body>
+</html>

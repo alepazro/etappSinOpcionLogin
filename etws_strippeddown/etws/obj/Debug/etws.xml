@@ -1,0 +1,137 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+etws
+</name>
+</assembly>
+<members>
+<member name="T:etws.My.MyWebExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:etws.My.MyWebExtension.Application">
+ <summary>
+ Returns information about the current application.
+ </summary>
+</member>
+<member name="P:etws.My.MyWebExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:etws.My.MyWebExtension.User">
+ <summary>
+ Returns information for the current Web user.
+ </summary>
+</member>
+<member name="P:etws.My.MyWebExtension.Request">
+ <summary>
+ Returns Request object.
+ </summary>
+</member>
+<member name="P:etws.My.MyWebExtension.Response">
+ <summary>
+ Returns Response object.
+ </summary>
+</member>
+<member name="P:etws.My.MyWebExtension.Log">
+ <summary>
+ Returns the Asp log object.
+ </summary>
+</member>
+<member name="P:etws.My.MyWebExtension.WebServices">
+ <summary>
+ Provides access to WebServices added to this project.
+ </summary>
+</member>
+<member name="T:etws.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:etws.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:etws.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="M:etws.Ijobs.getCustomersIdName(System.String,System.String)">
+ <summary>
+ Created: 4/30/2016
+ </summary>
+ <param name="token"></param>
+ <param name="wzId"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:etws.Ijobs.getJobCustomer(System.String,System.String)">
+ <summary>
+ Created: 4/30/2016
+ </summary>
+ <param name="token"></param>
+ <param name="custId"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:etws.Ijobs.postJobCustomer(System.String,etws.jobCustomer)">
+ <summary>
+ Created: 4/30/2016
+ </summary>
+ <param name="token"></param>
+ <param name="data"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="M:etws.Ijobs.GetJobSupportTables(System.String)">
+ <summary>
+ Created: 4/30/2016
+ </summary>
+ <param name="token"></param>
+ <returns></returns>
+ <remarks></remarks>
+</member>
+<member name="T:etws.jsonP.JsonpModule">
+ <summary>
+ Custom Http module for support Jsonp response
+ </summary>
+</member>
+<member name="F:etws.jsonP.JsonpModule.CallbackParameterName">
+ <summary>
+ callback Parameter Name for Jsonp request
+ </summary>
+</member>
+<member name="M:etws.jsonP.JsonpModule.Init(System.Web.HttpApplication)">
+ <summary>
+ Initializes a module and prepares it to handle requests.
+ </summary>
+ <param name="context">An <see cref="T:System.Web.HttpApplication"/> that provides access to the methods, properties, and events common to all application objects within an ASP.NET application</param>
+</member>
+<member name="M:etws.jsonP.JsonpModule.Dispose">
+ <summary>
+ Disposes of the resources (other than memory) used by the module that implements <see cref="T:System.Web.IHttpModule"/>.
+ </summary>
+</member>
+<member name="M:etws.jsonP.JsonpModule.Application_BeginRequest(System.Object,System.EventArgs)">
+ <summary>
+ Handles the BeginRequest event of the Application control.
+ </summary>
+ <param name="sender">The source of the event.</param>
+ <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+</member>
+<member name="M:etws.jsonP.JsonpModule.Application_EndRequest(System.Object,System.EventArgs)">
+ <summary>
+ Handles the EndRequest event of the Application control.
+ </summary>
+ <param name="sender">The source of the event.</param>
+ <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+</member>
+</members>
+</doc>

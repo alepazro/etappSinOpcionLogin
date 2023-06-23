@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+        <title>Real Time GPS Tracking - Login Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+        <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+        <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/ws.css" rel="stylesheet" type="text/css" />
+        <link href="vendors/bootstrap-2/css/bootstrap.min.css" rel="stylesheet" />
+
+        <script type="text/javascript">
+            if (window.location.href.indexOf('matchpointgps') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+            }
+            if (window.location.href.indexOf('adapco') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+            }
+            if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+            }
+        </script>
+
+    <!--    Javascript includes -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+        <script src="vendors/bootstrap-2/js/bootstrap.min.js"></script>
+        <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+        <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+        <script src="Scripts/db_v002.js" type="text/javascript"></script>
+        <script src="Scripts/branding.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                
+                getRememberMeCookie();
+                var landingTime = new Date();
+                $('#landingTime').text(landingTime);
+
+                getBrand();
+                getUserGUIDParam();
+                validateToken(false,'login.html');
+
+                if (window.location.href.indexOf('matchpointgps') != -1) {
+                    $('#eTrackNotice').hide();
+                }
+                if (window.location.href.indexOf('adapco') != -1) {
+                    $('#eTrackNotice').hide();
+                }
+
+            });
+        </script>
+
+    <!-- Start of easitrack Zendesk Widget script -->
+    <script>
+        ///*<![CDATA[*/window.zEmbed || function (e, t) { var n, o, d, i, s, a = [], r = document.createElement("iframe"); window.zEmbed = function () { a.push(arguments) }, window.zE = window.zE || window.zEmbed, r.src = "javascript:false", r.title = "", r.role = "presentation", (r.frameElement || r).style.cssText = "display: none", d = document.getElementsByTagName("script"), d = d[d.length - 1], d.parentNode.insertBefore(r, d), i = r.contentWindow, s = i.document; try { o = s } catch (e) { n = document.domain, r.src = 'javascript:var d=document.open();d.domain="' + n + '";void(0);', o = s } o.open()._l = function () { var o = this.createElement("script"); n && (this.domain = n), o.id = "js-iframe-async", o.src = e, this.t = +new Date, this.zendeskHost = t, this.zEQueue = a, this.body.appendChild(o) }, o.write('<body onload="document._l();">'), o.close() }("https://assets.zendesk.com/embeddable_framework/main.js", "easitrack.zendesk.com");
+        ///*]]>*/
+    </script>
+    <!-- End of easitrack Zendesk Widget script -->
+
+</head>
+<body>
+    <div id="headerWS">
+        <div id="topMenuWS">
+            <div class="loginDivClass2">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span>Login:</span>
+                                <input id="txtLogin" onkeypress="moveTo(event, txtPassword);" type="text" />
+                            </td>
+                            <td>
+                                <span>Password:</span>
+                                <input id="txtPassword" onkeypress="moveTo(event, btnSignIn);" type="password" />
+                            </td>
+                            <td>
+                                <input id="btnSignIn" value="Sign In" onclick="validateCredentials()" type="button" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:10px;"><input type="checkbox" id="chkRememberMe"/><span style="font-size:12px;color:#ffffff;text-decoration:underline;padding:5px;"><b>Remember Me</b></span></td>
+                            <td style="padding-top:10px;"><a href="recoverCredentials.html"><span style="font-size:12px;color:#ffffff;text-decoration:underline;padding:5px;"><b>Resend me my credentials</b></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="logoPosition">
+                <span id="dealerBrand" class="logoDesign"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="eTrackNotice" style="width:100%;">
+        <div class="container">
+            <div class="hero-unit">
+                <h2 class="text-center">Do you want eTrack in your smartphone?</h2>
+                <h3 class="text-center">Here's how to get the eTrack Mobile App</h3>
+                <p>From your smartphone or tablet:</p>
+                <ul>
+                    <li>View the status of your entire fleet: Current status, event time, location, speed, etc.</li>
+                    <li>Locate one device or your entire fleet in a map.</li>
+                    <li>Call your drivers from within the app with a click of a button.</li>
+                    <li>See the trail of a vehicle and the list of all the places where the vehicle has been at in the selected time frame.</li>
+                </ul>
+                <ul class="thumbnails">
+                    <li class="span4">
+                        <div class="well text-center">
+                            <a href="https://play.google.com/store/apps/details?id=com.e_manent.etrack"><img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" /></a>
+                        </div>
+                            
+                    </li>
+                    <li class="span4">
+                        <div class="well text-center">
+                            <a href="https://itunes.apple.com/us/app/etrack-locate/id967604468?mt=8" target="itunes_store"style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png) no-repeat;width:135px;height:40px;@media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.svg);}"></a>
+                        </div>                            
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="width:940px;margin:0 auto;display:none;">
+        <div style="width:100%;padding:50px 0px 0px;text-align:center;">
+            <h1>Customer Notification (1/21/2013)</h1>
+            <h2>Data Services are intermittent</h2>
+        </div>
+        <div style="width:100%;padding:20px 0px 0px;">
+            <!--<p style="font-weight:600;padding:5px;">Start Date: Saturday November 3, 2012 4:19 PM EST</p>
+            <p style="font-weight:600;padding:5px;">Resolution Date: TBD</p>-->
+            <p style="font-weight:600;padding:5px;">Services Impacted: Service is intermittent to EasiTrack outside Network</p>
+            <p style="font-weight:600;padding:5px;">Severity: Medium</p>
+            <p style="font-weight:600;padding:5px;">ISSUE:</p>
+            <p style="font-weight:600;padding:5px;">Our GPS Trackers transmit the data to our servers via Cellular Network provided by AT&T and TMobile mainly.  In the last few days some devices have had difficulties connecting to these networks, causing a delay in the data transmitted to our servers.  This is a problem affecting not only EasiTrack devices but also devices of other GPS Tracking vendors.</p>
+            <p style="font-weight:600;padding:5px;">This issue has affected only a portion of our devices population.  The devices affected are partially affected as they intermittently present this outage.</p>
+            <p style="font-weight:600;padding:5px;">Actions being taken:</p>
+            <p style="font-weight:600;padding:5px;">Our engineers have been working round-the-clock with the carriers' engineers in solving this problem.</p>
+            <p style="font-weight:600;padding:5px;color:Red;">Update:  The provider of Data Services has finally identified the exact problem and is working towards resolution.</p>
+            <p style="font-weight:600;padding:5px;">As soon as the issue has been determined and resolved, we will publish a resolution notice. If you experience issues related to this notice after EasiTrack has confirmed all operations are back to normal, please contact EasiTrack support at the numbers listed below.</p>
+            <br />
+            <p style="font-weight:600;padding:5px;">EasiTrack Support</p>
+            <p style="font-weight:600;padding:5px;">321-710-9996 (Business hours)</p>
+            <p style="font-weight:600;padding:5px;">support@EasiTrack.com</p>
+        </div>
+    </div>
+
+<!--    <script id="_webengage_script_tag" type="text/javascript">
+        window.webengageWidgetInit = window.webengageWidgetInit || function () {
+            webengage.init({
+                licenseCode: "~10a5cbb2c"
+            }).onReady(function () {
+                webengage.render();
+            });
+        };
+
+        (function (d) {
+            var _we = d.createElement('script');
+            _we.type = 'text/javascript';
+            _we.async = true;
+            _we.src = (d.location.protocol == 'https:' ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-3.0.js";
+            var _sNode = d.getElementById('_webengage_script_tag');
+            _sNode.parentNode.insertBefore(_we, _sNode);
+        })(document);
+    </script>-->
+    <span id="landingTime" style="font-color:#a1a1a1;"></span>
+</body>
+</html>

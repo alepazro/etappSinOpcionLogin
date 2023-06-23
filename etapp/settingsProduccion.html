@@ -1,0 +1,1330 @@
+﻿<!DOCTYPE HTML>
+<html ng-app="etApp">
+<head>
+	<link rel="icon" href="images/img/easitrack.ico">
+    <title>Settings Module</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <!--    CSS includes -->
+        <!--<link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />-->
+        <link href="vendors/jquery-ui-1.10.3.custom/css/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
+        <link href="themes/flick-1.9.0/jquery-ui-1.9.0.custom.min.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/colorPicker.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/dd.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/schedules.css" rel="stylesheet" type="text/css" />
+        <link href="vendors/kendo-2013.3.1119/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="vendors/kendo-2013.3.1119/styles/kendo.default.min.css" rel="stylesheet" />
+        <link href="vendors/bootstrap-2/css/bootstrap.min.css" rel="stylesheet" />
+
+        <script type="text/javascript">
+            if (window.location.href.indexOf('matchpointgps') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+            }
+            if (window.location.href.indexOf('adapco') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+            }
+            if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+            }
+        </script>
+
+        <!--    Javascript includes -->
+        <!--<script src="vendors/jquery-2.0.3.min.js" type="text/javascript"></script>>-->
+        <!--<script src="vendors/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>>-->
+        <script src="vendors/jquery-1.8.3.min.js"></script>
+        <script src="vendors/jquery-ui-1.9.2.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>-->
+        <script src="vendors/underscore-min.js" type="text/javascript"></script>
+        <script src="vendors/angular.min.js" type="text/javascript"></script>
+        <script src="vendors/angular-resource.min.js"></script>
+        <script src="vendors/angular-route.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-resource.min.js" type="text/javascript"></script>-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js" type="text/javascript"></script>-->
+        <script src="vendors/bootstrap-2/js/bootstrap.min.js"></script>
+        <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.dd.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.colorPicker.js" type="text/javascript"></script>
+        <script src="Scripts/date.format.js" type="text/javascript"></script>
+        <script src="Scripts/db_v002.js" type="text/javascript"></script>
+        <script src="Scripts/branding.js" type="text/javascript"></script>
+        <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+        <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+        <script src="Scripts/settings_001.js" type="text/javascript"></script>
+
+        <!--<script src="Scripts/geofences.js" type="text/javascript"></script>-->
+        <script src="Scripts/geofences_003.js" type="text/javascript"></script>
+        <!--<script src="Scripts/geofenceUpdate.js" type="text/javascript"></script>-->
+        <script src="Scripts/geofenceUpdate_005.js" type="text/javascript"></script>
+
+        <script src="Scripts/users_001.js" type="text/javascript"></script>
+        <script src="Scripts/devicesSettings.js" type="text/javascript"></script>
+        <script src="Scripts/alerts.js" type="text/javascript"></script>
+        <script src="Scripts/recurrentReports.js" type="text/javascript"></script>
+        <script src="Scripts/schedules.js" type="text/javascript"></script>
+        <script src="Scripts/routes.js" type="text/javascript"></script>
+        <script src="Scripts/iButtons.js" type="text/javascript"></script>
+        <script src="Scripts/devGroups.js" type="text/javascript"></script>
+        <script src="Scripts/temperature.js" type="text/javascript"></script>
+        <!--<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>-->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?client=gme-theautomaticoffice&v=3.17&sensor=false"></script>
+        <script src="vendors/kendo-2013.3.1119/js/kendo.web.min.js"></script>
+        <script src="vendors/angular-kendo.min.js"></script>
+        <script src="Scripts/pageEngagement.js"></script>
+
+        <script type="text/javascript">
+            function onBrandSet() {
+                try {
+                    if (dealerShowAccountSettings == true) {
+                        $('#accountSettingsItem').show();
+                        $('#buyNowDiv').show();
+                        $('#buyNowItem').show();
+                    }
+                    else {
+                        $('#buyNowDiv').hide();
+                        $('#buyNowItem').hide();
+                    }
+                }
+                catch (err) {
+                }
+            }
+
+            $(document).ready(function () {
+                getAppFeatures(4);
+                getBrand(onBrandSet);
+                $('#deviceUpdateIcons').msDropDown();
+                $(document.getElementById('ctrlPanel')).attr('style', 'height:' + (h - 80) + 'px; width:18%; float:left; overflow:hidden; display:inline-block;');
+                $(document.getElementById('settingsContent')).attr('style', 'height:' + (h - 80) + 'px; width:80%; float:right;overflow:auto;margin-right:2px; overflow:auto; display:inline-block;');
+                if (validateToken(false, 'settings.html') == true) {
+                    setWelcomeTitle();
+                    $('#chkDeviceUpdateIsARB').click(function () {
+                        $("#deviceUpdateTRU").toggle(this.checked);
+                    });
+                    $('#deviceUpdateTextColor').colorPicker();
+                    $('#deviceUpdateBgndColor').colorPicker();
+                    $('#deviceUpdateTextColor').change(function () {
+                        var color = $('#deviceUpdateTextColor').val();
+                        $('#deviceUpdateShortName').css('color', color);
+                    });
+                    $('#deviceUpdateBgndColor').change(function () {
+                        var color = $('#deviceUpdateBgndColor').val();
+                        $('#deviceUpdateShortName').css('background-color', color);
+                    });
+                    setLiveChat();
+                    setWebEngage();
+
+                    $("#dlgTelemetry").dialog({
+                        autoOpen: false,
+                        resizable: false,
+                        height: 540,
+                        width: 800,
+                        modal: true
+                    });
+
+                    $("#dlgHourMeters").dialog({
+                        autoOpen: false,
+                        resizable: false,
+                        height: 560,
+                        width: 800,
+                        modal: true
+                    });
+
+                    $("#dlgGeoTypes").dialog({
+                        autoOpen: false,
+                        resizable: false,
+                        height: 560,
+                        width: 750,
+                        modal: true
+                    });
+                    var module = getParameterByName('mod');
+                    if (module != '') {
+                        showSettingsDivs(module);
+                    }
+                    pageEngagement();
+
+                }
+
+            });
+        </script>
+
+    <!-- Start of easitrack Zendesk Widget script -->
+    <script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","easitrack.zendesk.com");
+/*]]>*/</script>
+    <!-- End of easitrack Zendesk Widget script -->
+
+</head>
+<body>
+    <div id="header">
+        <div id="topMenu" style="clear:both;">
+            <div id="feedback" style="float:right;height:15px;margin:7px 3px;padding:5px;background-color:#ffffff; vertical-align:middle;cursor:pointer;">
+                <div><span style="font-weight:600;">Feedback</span></div>
+            </div>
+            <div style="float:right;height:15px;margin:7px 3px;padding:5px;background-color:#ffffff; vertical-align:middle;">
+                <!-- BEGIN ProvideSupport.com Text Chat Link Code -->
+                <div id="ciWtVh" style="z-index:100;position:absolute"></div><div id="scWtVh" style="display:inline"></div><div id="sdWtVh" style="display:none"></div>
+                <noscript><div style="display:inline"><a href="https://www.providesupport.com?messenger=0325vm2g5aj6809q0cspkf44yw">Live Chat</a></div></noscript>
+                <!-- END ProvideSupport.com Text Chat Link Code -->
+            </div>
+            <div id="buyNowDiv" style="float:right;height:15px;margin:7px 3px;padding:5px;background-color:#ffffff;vertical-align:middle;cursor:pointer;display:none;">
+                <div onclick="buyNow()"><span><img src="icons\shoppingCart15.png" alt="Buy Devices Now" /></span></div>
+            </div>
+
+            <div style="float:right;width:50px;font-size:13px;background-color:#373737;margin-top:8px;padding-top:3px;height:25px;text-align:center;">
+                <a href="#" onclick="logout()" style="color:#ffffff;">Logout</a>
+            </div>
+            <div class="logoPosition" style="height:40px;">
+                <span id="dealerBrand" class="logoDesign"></span>
+            </div>
+            <div id="welcomeTitleDiv">
+                <span id="welcomeTitleSpan"></span>
+            </div>
+            <div id="panelTypes">
+                <span id="mod1"><input id="rbtTracking" name="panelType" onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Tracking</span></span>
+                <span id="mod2"><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Multi-Tracking</span></span>
+                <span id="mod3"><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Reports</span></span>
+                <span id="mod5"><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Maintenance</span></span>
+                <span id="mod13"><input id="rbtELOG" name="panelType" onclick="changePanel(13)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">E-LOG</span></span>
+                <span id="mod4"><input id="rbtSettings" name="panelType" checked="checked" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Settings</span></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <div id="settingsContent">
+            <div id="usrDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Create / Update Users</h2>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <button id="btnNewUser" class="btn btn-primary" onclick="newUser()">New User</button>
+                </div>
+                <table id="usersTbl" class="table table-condensed table-bordered table-hover">
+                    <tr id="usersTblTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td style="width:60px;">First Name</td>
+                        <td style="width:60px;">Last Name</td>
+                        <td style="width:160px;">Email</td>
+                        <td style="width:40px;">Email Alerts</td>
+                        <td style="width:90px;">Phone</td>
+                        <td style="width:90px;">Cell Phone</td>
+                        <td style="width:40px;">SMS Alerts</td>
+                        <td style="width:70px;">Login</td>
+                        <td style="width:70px;">Time Zone</td>
+                        <td style="width:70px;">Is Driver?</td>
+                        <td style="width:70px;">iButton</td>
+                        <td style="width:70px;">AccessLevel</td>
+                        <td style="text-align:center;width:40px;">PWD</td>
+                        <td style="text-align:center;width:40px;">Edit</td>
+                        <td style="text-align:center;width:40px;">Del</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="devDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Update Vehicles Information</h2>
+                </div>
+                <table id="devicesTbl" class="table table-condensed table-bordered table-hover">
+                    <tr id="devicesTblTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td>Icon</td>
+                        <td>Device Name</td>
+                        <td>Short Name</td>
+                        <td style="text-align:center;">Last Update On</td>
+                        <td>Last Event</td>
+                        <td style="text-align:center;">Last Event On</td>
+                        <td>Assigned Driver</td>
+                        <td style="text-align:center;">Idle Limit</td>
+                        <td style="text-align:center;">Speed Limit</td>
+                        <td style="text-align:center;">Odometer</td>
+                        <td>VIN</td>
+                        <td>License Plate</td>
+                        <td>Serial No</td>
+                        <td style="text-align:center;">Edit</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="geoDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Create / Update Geofences</h2>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <div class="btn-group">
+                      <button type="button" id="btnNewGeofence" class="btn btn-primary" onclick="newGeofence()">New Geofence</button>
+                      <button type="button" class="btn btn-success" onclick="openGeofenceTypes()">Custom Geofence Types</button>
+                    </div>
+                </div>
+                <table id="geofencesTbl" class="table table-condensed table-bordered table-hover">
+                    <tr id="geofencesTblTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td>GeofenceType</td>
+                        <td>Geofence Name</td>
+                        <td>Geofence Address</td>
+                        <td style="text-align:center;">Latitude</td>
+                        <td style="text-align:center;">Longitude</td>
+                        <td style="text-align:center;">Radius (feet)</td>
+                        <td>Notification</td>
+                        <td style="text-align:center;width:40px;">Edit</td>
+                        <td style="text-align:center;width:40px;">Del</td>
+                    </tr>
+                </table>
+                <div id="noGeofencesTitle" style="width:100%;text-align:center;"><span style="font-size:20px;font-weight:800;color:#e1e1e1;">There are no geofences</span></div>
+
+                <div id="dlgGeoTypes" title="Custom Geofences Types" style="display:none;" ng-controller="geoTypesCtrl">
+                    <div class="k-content">
+                        <div class="k-block k-info-colored" style="height:50px;">
+                            <form class="form-inline" style="padding:5px;">
+                                <label for="txtGeofenceTypeName">Geofence Type:</label>
+                                <input id="txtGeofenceTypeName" type="text" class="input-large" ng-model="geoTypeNameNew">
+                                <button class="btn" ng-click="saveNewType()">Save</button>
+                            </form>
+                        </div>
+                        <br />
+                        <div class="k-block k-info-colored" style="height:380px;">
+                            <table id="geoTypesTable" class="table table-condensed table-bordered" style="display:block;height:370px;overflow-y: scroll;padding:5px;">
+                                <thead>
+                                    <tr id="geoTypesTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                                        <td style="width:500px;">Name</td>
+                                        <td>Edit</td>
+                                        <td>Delete</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="geoType in geoTypes">
+                                        <td class="devicesListTD">
+                                            <span ng-show="geoType.viewMode == true || geoType.viewMode == undefined">{{geoType.name}}</span>
+                                            <input type="text" id="txtGeofenceTypeNameEdit" class="input-large" ng-model="geoType.editName" ng-hide="geoType.viewMode == true || geoType.viewMode == undefined" />
+                                        </td>
+                                        <td>
+                                            <button class="btn" ng-click="editGeoType($index)" ng-show="geoType.viewMode == true || geoType.viewMode == undefined">Edit</button>
+                                            <button class="btn btn-mini" ng-click="saveGeoType($index)" ng-hide="geoType.viewMode == true || geoType.viewMode == undefined" style="width:60px;">Save</button>
+                                            <button class="btn btn-mini" ng-click="cancelEditGeoType($index)" ng-hide="geoType.viewMode == true || geoType.viewMode == undefined" style="width:60px;">Cancel</button>
+                                        </td>
+                                        <td><button class="btn" ng-click="deleteGeoType(geoType.id)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="pull-right">
+                        <button class="btn btn-danger" ng-click="closeDlg()">Close</button>
+                    </div>
+                </div>
+
+            </div>
+            <div id="alertsDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Alerts Set Up</h2>
+                </div>
+                <div class="pull-right" style="width:400px;text-align:right;padding:5px;">
+                    <div class="input-group">
+                        <select id="cbxAlertsTypes" class="form-control"><option value="0">[Pick Type]</option></select>
+                        <span class="input-group-btn">
+                            <button id="btnNewAlert" class="btn btn-primary" onclick="newAlert()">New Alert</button>
+                        </span>
+                    </div>
+                </div>
+                <table id="alertsTbl" class="table table-condensed table-bordered table-hover">
+                    <tr id="alertsTblTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td>Alert Type</td>
+                        <td style="text-align:left;">Name</td>
+                        <td style="text-align:center;">Value</td>
+                        <td style="text-align:center;">Min.Interval</td>
+                        <td style="text-align:center;">Applies to all vehicles?</td>
+                        <td style="text-align:center;">Created On</td>
+                        <td style="text-align:center;">Edit</td>
+                        <td style="text-align:center;">Del</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="recurrentReportsDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Recurrent Reports Set Up</h2>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <button id="btnNewRecurrentReport" class="btn btn-primary" onclick="newRecurrentReport()">New Recurrent</button>
+                </div>
+                <table id="recurrentReportsTable" class="table table-condensed table-bordered table-hover">
+                    <tr id="recurrentReportsTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td style="text-align:left;">Report Name</td>
+                        <td style="text-align:left;">Frequency</td>
+                        <td style="text-align:center;">Include Weekends?</td>
+                        <td style="text-align:center;">All Vehicles?</td>
+                        <td style="text-align:center;">Created On</td>
+                        <td style="text-align:center;">Edit</td>
+                        <td style="text-align:center;">Del</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="schedulesDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Schedules Set Up</h2>
+                </div>
+                <div style="width:100%;padding:10px;">
+                    <h3>Tip:</h3>
+                    <p>Create schedules and assign them to Users to define when they can access the system.  If you want your employees to access the system only on business hours, create a schedule for your business hours and assign it to your users!</p>
+                    <p>The schedule only applies to non-administrators and users with acccess levels lower than Super-User.  Super-Users and Administrators will be able to bypass the schedule rules.</p>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <button id="btnNewSchedule" class="btn btn-primary" onclick="newSchedule()">New Schedule</button>
+                </div>
+                <table id="schedulesTable" class="table table-condensed table-bordered table-hover">
+                    <tr id="scheduleTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td style="text-align:left;">Schedule Name</td>
+                        <td style="text-align:center;">Created On</td>
+                        <td style="text-align:center;">Edit</td>
+                        <td style="text-align:center;">Del</td>
+                    </tr>
+                </table>
+            </div>
+
+<!--
+            <div id="routesDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Routes Set Up</h2>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <button id="btnNewRoute" onclick="newRoute()">New</button>
+                </div>
+                <table id="routesTable" class="table table-condensed table-bordered table-hover">
+                    <tr id="routesTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td style="text-align:left;">Route Name</td>
+                        <td style="text-align:center;">Created On</td>
+                        <td style="text-align:center;">Edit</td>
+                        <td style="text-align:center;">Del</td>
+                    </tr>
+                </table>
+            </div>
+-->
+
+            <div id="ibuttonsDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>iButtons Set Up</h2>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <button id="btnNewIButton" class="btn btn-primary" onclick="newIButton()">New iButton</button>
+                </div>
+                <table id="ibuttonsTable" class="table table-condensed table-bordered table-hover">
+                    <tr id="ibuttonsTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td style="text-align:left;">iButton ID</td>
+                        <td style="text-align:left;">iButton HEX</td>
+                        <td style="text-align:left;">iButton Type</td>
+                        <td style="text-align:left;">Assigned To</td>
+                        <td style="text-align:center;">Created On</td>
+                        <td style="text-align:center;">Edit</td>
+                        <td style="text-align:center;">Del</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="devGroupsDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Fleets Set Up</h2>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <button id="btnNewDevGroup" class="btn btn-primary" onclick="newDevGroup()">New Group</button>
+                </div>
+                <table id="devGroupsTable" class="table table-condensed table-bordered table-hover">
+                    <tr id="devGroupsTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td style="text-align:left;">Fleet Name</td>
+                        <td style="text-align:center;width:150px;">All Vehicles?</td>
+                        <td style="text-align:center;width:150px;">All Users?</td>
+                        <td style="text-align:center;width:150px;"><span>Speeding Control?</span><img id="hrlp_SettingsGroupsSG" src="icons\icon_question_mark.jpg" alt="help Group Speeding Control" title="Speeding Control Groups generate Real Time Speeding Incidents Alerts via email.  This feature requires SpeedGauge Add-On." /></td>
+                        <td style="text-align:center;width:150px;">Created On</td>
+                        <td style="text-align:center;width:80px;">Edit</td>
+                        <td style="text-align:center;width:80px;">Del</td>
+                    </tr>
+                </table>
+                <p>* Speeding Control: Groups with Speeding Control monitor vehicles' speed against the Posted Speed Limit of the streets.  Speeding incidents are sent in real time via email.  Also, daily and weekly detailed and summary reports are sent via email.  This feature requires the SpeedGauge Add-On.</p>
+            </div>
+
+            <div id="tempProfilesDiv" style="display:none;width:100%;">
+                <div style="width:100%;text-align:center;">
+                    <h2>Temperature Profiles Set Up</h2>
+                </div>
+                <div style="text-align:right;padding:5px;">
+                    <button id="btnNewTempProfile" class="btn btn-primary" onclick="newTempProfile()">New Profile</button>
+                </div>
+                <table id="tempProfileTable" class="table table-condensed table-bordered table-hover">
+                    <tr id="tempProfileTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                        <td style="text-align:left;">Profile Name</td>
+                        <td style="text-align:center;">Max. Limit</td>
+                        <td style="text-align:center;">Min. Limit</td>
+                        <td style="text-align:center;">Created On</td>
+                        <td style="text-align:center;">Edit</td>
+                        <td style="text-align:center;">Del</td>
+                    </tr>
+                </table> 
+            </div>
+
+            <div id="telemetryModule">
+                <div id="telemetryDiv" style="display:none;width:100%;">
+                    <div style="width:100%;text-align:center;">
+                        <h2>Telemetry Set Up</h2>
+                    </div>
+                    <table id="telemetryTable" class="table table-condensed table-bordered table-hover" ng-controller="telemetryTableCtrl">
+                        <thead>
+                            <tr id="telemetryTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                                <td style="text-align:left;">Device ID</td>
+                                <td style="text-align:left;">Device Name</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 1</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 2</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 3</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 4</td>
+                                <td style="text-align:center;color:#000000;background-color:#ffd800;">Edit</td>
+                                <td style="text-align:center;color:#808080;background-color:#00ff21;">Relay 1</td>
+                                <td style="text-align:center;color:#808080;background-color:#00ff21;">Relay 2</td>
+                                <td style="text-align:center;color:#808080;background-color:#00ff21;">Relay 3</td>
+                                <td style="text-align:center;color:#808080;background-color:#00ff21;">Relay 4</td>
+                                <td style="text-align:center;color:#000000;background-color:#00ff21;">Edit</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dev in devices">
+                                <td class="devicesListTD">{{dev.deviceId}}</td>
+                                <td class="devicesListTD">{{dev.name}}</td>
+
+                                <td class="devicesListTD devicesListCenteredTD">{{InputStatusText($index, dev.deviceId, 1, dev.inputStatus1, false)}}</td>
+                                <td class="devicesListTD devicesListCenteredTD">{{InputStatusText($index, dev.deviceId, 2, dev.inputStatus2, false)}}</td>
+                                <td class="devicesListTD devicesListCenteredTD">{{InputStatusText($index, dev.deviceId, 3, dev.inputStatus3, false)}}</td>
+                                <td class="devicesListTD devicesListCenteredTD">{{InputStatusText($index, dev.deviceId, 4, dev.inputStatus4, false)}}</td>
+                                <td><button class="btn" ng-click="editDevice(dev.deviceId, 1)">Inputs</button></td>
+
+                                <td class="devicesListTD devicesListCenteredTD">{{statusText($index, dev.deviceId, 1, dev.status1, false)}}</td>
+                                <td class="devicesListTD devicesListCenteredTD">{{statusText($index, dev.deviceId, 2, dev.status2, false)}}</td>
+                                <td class="devicesListTD devicesListCenteredTD">{{statusText($index, dev.deviceId, 3, dev.status3, false)}}</td>
+                                <td class="devicesListTD devicesListCenteredTD">{{statusText($index, dev.deviceId, 4, dev.status4, false)}}</td>
+                                <td><button class="btn" ng-click="editDevice(dev.deviceId, 2)">Outputs</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="dlgTelemetry" title="Telemetry Set Up" style="display:none;" ng-controller="telemetryDeviceCtrl">
+                    <div class="k-content">
+                        <h3>{{dev.name}}</h3>
+                        <p>This form allows you to customize the names of the {{IOTypeName}}, as well as the names of the OPEN / CLOSE status of the {{IOTypeName}}.</p>
+                        <hr />
+                        <div class="k-block k-info-colored">
+                            <table class="k-grid" style="width:100%;" style="padding:2px;margin:2px;">
+                                <thead class="k-grid-header">
+                                    <tr>
+                                        <td class="k-grid-column-menu" style="width:80px;">{{IOTypeName}}</td>
+                                        <td class="k-grid-column-menu" style="width:120px;">Name</td>
+                                        <td class="k-grid-column-menu" style="width:120px;">Open Label</td>
+                                        <td class="k-grid-column-menu" style="width:120px;">Close Label</td>
+                                        <td class="k-grid-column-menu" style="width:250px;"></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="k-grid-content">
+                                    <tr>
+                                        <td>1</td>
+                                        <td><input type="text" ng-model="dev.name1" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.on1Name" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.off1Name" style="width:110px;" /></td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                              <button type="button" class="btn btn-link" ng-click="cancelChange(1)">Cancel</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(1, false)">Apply</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(1, true)">All Devices</button>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><input type="text" ng-model="dev.name2" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.on2Name" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.off2Name" style="width:110px;" /></td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                              <button type="button" class="btn btn-link" ng-click="cancelChange(2)">Cancel</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(2, false)">Apply</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(2, true)">All Devices</button>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><input type="text" ng-model="dev.name3" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.on3Name" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.off3Name" style="width:110px;" /></td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                              <button type="button" class="btn btn-link" ng-click="cancelChange(3)">Cancel</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(3, false)">Apply</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(3, true)">All Devices</button>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><input type="text" ng-model="dev.name4" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.on4Name" style="width:110px;" /></td>
+                                        <td><input type="text" ng-model="dev.off4Name" style="width:110px;" /></td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                              <button type="button" class="btn btn-link" ng-click="cancelChange(4)">Cancel</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(4, false)">Apply</button>
+                                              <button type="button" class="btn btn-link" ng-click="applyChange(4, true)">All Devices</button>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr />
+                        <div class="pull-right">
+                            <button class="btn btn-success" ng-click="closeDlg()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="hourMetersModule">
+                <div id="hourMetersDiv" style="display:none;width:100%;">
+                    <div style="width:100%;text-align:center;">
+                        <h2>Hour Meters Set Up</h2>
+                    </div>
+                    <table id="hourMetersTable" class="table table-condensed table-bordered table-hover" ng-controller="hourMetersTableCtrl">
+                        <thead>
+                            <tr id="hourMetersTableTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                                <td style="text-align:left;width:180px;">Device Name</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Ignition</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 1</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 2</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 3</td>
+                                <td style="text-align:center;color:#808080;background-color:#ffd800;">Input 4</td>
+                                <td style="text-align:center;color:#000000;background-color:#ffd800;width:80px;">Edit</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dev in devices">
+                                <td class="devicesListTD">{{dev.name}}</td>
+                                <td class="devicesListTD devicesListCenteredTD">Ignition: <b>{{dev.ignitionOnTime}}</b></td>
+                                <td class="devicesListTD devicesListCenteredTD">{{dev.input1Name}}: <b>{{dev.input1OnTime}}</b></td>
+                                <td class="devicesListTD devicesListCenteredTD">{{dev.input2Name}}: <b>{{dev.input2OnTime}}</b></td>
+                                <td class="devicesListTD devicesListCenteredTD">{{dev.input3Name}}: <b>{{dev.input3OnTime}}</b></td>
+                                <td class="devicesListTD devicesListCenteredTD">{{dev.input4Name}}: <b>{{dev.input4OnTime}}</b></td>
+                                <td><button class="btn" ng-click="editDevice(dev.deviceId)">Edit</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="dlgHourMeters" title="Hour Meters Set Up" style="display:none;" ng-controller="hourMetersDeviceCtrl">
+                    <div class="k-content">
+                        <h3>{{dev.name}}</h3>
+                        <p>This form allows you to update the actual runtime hours of each input for your vehicle or equipment.</p>
+                        <hr />
+                        <div class="k-block k-info-colored">
+                            <table class="k-grid" style="width:100%;" style="padding:2px;margin:2px;">
+                                <thead class="k-grid-header">
+                                    <tr>
+                                        <td class="k-grid-column-menu" style="width:80px;">Input</td>
+                                        <td class="k-grid-column-menu" style="width:120px;">Hour Meter</td>
+                                        <td class="k-grid-column-menu" style="width:120px;">Recorded from Machine on</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="k-grid-content">
+                                    <tr>
+                                        <td>Ignition</td>
+                                        <td><input type="number" class="hourMeters" kendo-numeric-text-box ng-model="dev.ignitionOnTime" /></td>
+                                        <td><input kendo-date-time-picker ng-model="dev.ignitionLastSetOn" /><button class="btn btn-default btn-mini" ng-click="copyDateTime()">Copy</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dev.input1Name}}</td>
+                                        <td><input type="number" class="hourMeters" kendo-numeric-text-box ng-model="dev.input1OnTime"/></td>
+                                        <td><input  kendo-date-time-picker ng-model="dev.input1LastSetOn" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dev.input2Name}}</td>
+                                        <td><input type="number" class="hourMeters" kendo-numeric-text-box ng-model="dev.input2OnTime" /></td>
+                                        <td><input kendo-date-time-picker ng-model="dev.input2LastSetOn" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dev.input3Name}}</td>
+                                        <td><input type="number" class="hourMeters" kendo-numeric-text-box ng-model="dev.input3OnTime" /></td>
+                                        <td><input kendo-date-time-picker ng-model="dev.input3LastSetOn" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{dev.input4Name}}</td>
+                                        <td><input type="number" class="hourMeters" kendo-numeric-text-box ng-model="dev.input4OnTime" /></td>
+                                        <td><input kendo-date-time-picker ng-model="dev.input4LastSetOn" /></td>
+                                    </tr>
+                               </tbody>
+                            </table>
+                        </div>
+                        <hr />
+                        <div class="pull-right">
+                            <button class="btn btn-success" ng-click="saveDlg()">Save</button>
+                            <button class="btn btn-danger" ng-click="closeDlg()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mobileAppsDiv" style="display:none;width:100%;">
+                <div class="container">
+                    <h1>eTrack mobile app for Android and Apple devices</h1>
+                    <p class="lead">
+                        With eTrack mobile app you will be able to track your vehicles from your smartphone or tablet:
+                    </p>
+                    <ul>
+                        <li>View the status of your entire fleet: Current status, event time, location, speed, etc.</li>
+                        <li>Locate one device or your entire fleet in a map.</li>
+                        <li>Call your drivers from within the app with a click of a button.</li>
+                        <li>See the trail of a vehicle and the list of all the places where the vehicle has been at in the selected time frame.</li>
+                    </ul>
+                    <p>
+                        The app is named <strong>eTrack</strong> and can be found in Google Play and Apple Store.  Or you can click the link below to download it from here:
+                    </p>
+                    <ul class="thumbnails">
+                        <li class="span4">
+                            <div class="well">
+                                <a href="https://play.google.com/store/apps/details?id=com.etracklocate"><img alt="Android app on Google Play" src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" /></a>
+                            </div>
+                            
+                        </li>
+                        <li class="span4">
+                            <div class="well">
+                        <!--<a href="https://itunes.apple.com/us/app/etrack-locate/id967604468?mt=8" target="itunes_store"style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.png) no-repeat;width:135px;height:40px;@media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/en_us//images/web/linkmaker/badge_appstore-lrg.svg);}"></a>  -->
+                        <a href="https://itunes.apple.com/us/app/etrack-locate/id967604468?mt=8"><img alt="Itunes Store" src="img/AppleImage.png" /></a>
+                            </div>                            
+                        </li>
+                    </ul> 
+                </div>
+            </div>
+
+        </div>
+        <div id="ctrlPanel">
+            <div id="ctrlPanelContainer">
+                <div id="ctrlPanelContent">
+                    <div style="width:100%; display:block;">
+                        <p class="panelTitle">Company Settings</p>
+                    </div>
+                    <div style="width:100%; display:block; font-size:11px; margin-top:5px;">
+                        <p class="settingsItem" onclick="showSettingsDivs(1)"><span>Users</span></p>
+                        <p class="settingsItem" onclick="showSettingsDivs(2)"><span>Vehicles</span></p>
+                        <p class="settingsItem" onclick="showSettingsDivs(9)"><span>Fleet Builder</span></p>
+                        <p class="settingsItem" onclick="showSettingsDivs(3)"><span>Geofences</span></p>
+                        <p class="settingsItem" onclick="showSettingsDivs(4)"><span>Alerts Set Up</span></p>
+                        <p class="settingsItem" onclick="showSettingsDivs(5)"><span>Recurrent Reports</span></p>
+                        <p class="settingsItem" onclick="showSettingsDivs(6)"><span>Schedules</span><img id="help_settingsSchedules" src="icons\icon_question_mark.jpg" alt="help Schedule" title="Create schedules to enable or disable system access to users in your company." /></p>
+                        <!--<p class="settingsItem" onclick="showSettingsDivs(7)"><span>Routes Planning</span><img id="help_settingsRoutes" src="icons\icon_question_mark.jpg" alt="help" title="Create routes that are recurrent, and assign them to drivers when needed.  Assignment is done in the Dispatching Module." /></p>-->
+                        <p class="settingsItem" onclick="showSettingsDivs(8)"><span>i-Buttons</span><img id="help_settingsIButton" src="icons\icon_question_mark.jpg" alt="help iButton" title="iButtons are an add-on to your Fleet GPS Tracking System that allows you to control with 100% accuracy the time when your drivers start working and finish working.  Give 1 iButton to each driver as a means of identification.  They will use them to Log In every time they start their shift." /></p>
+                        <!--<p class="settingsItem" onclick="showSettingsDivs(10)"><span>Temperature Profiles</span><img id="help_settingsTempProfiles" src="icons\icon_question_mark.jpg" alt="help Temperature Profiles" title="With Temperature Profiles, you can predefine maximum and minimum temperatures depending on each type of cargo. You can set up to 4 zones per temperature profile.  After you create a Temperature Profile, you just assign it to the vehicle(s) that need any given profile dependong on their load.  Alerts are triggered via SMS and/or Email when the temperature goes outside of the predefined limits." /></p>-->
+                        <!--<p class="settingsItem" onclick="showSettingsDivs(11)"><span>Telemetry Profiles</span><img id="Img1" src="icons\icon_question_mark.jpg" alt="help Telemetry Profiles" title="With Telemetry Profiles, you can give name to each individual digital input of your devices.  For instance: Door Open/Close, Seat Belt On/Off, Back Door Open/Close, etc.  You can also set automatic features and alerts.  Example 1: You can have the system create a geofences when an input is activated.  This is useful for creating job sites automatically in the system.  Example 2: You can receive alerts via email or Text when an input is activated or deactivated." /></p>-->
+                        <p class="settingsItem" onclick="showSettingsDivs(13)"><span>Telemetry Set Up</span></p>
+                        <p class="settingsItem" onclick="showSettingsDivs(14)"><span>Hour Meters Set Up</span></p>
+                    </div>
+                    <div style="width:100%; display:block; font-size:11px; margin-top:10px;">
+                        <hr />
+                        <p id="accountSettingsItem" class="settingsItem" onclick="accountSettings()" style="display:none;"><span>Account Settings</span></p>
+                        <p id="mobileAppsItem" class="settingsItem" onclick="showSettingsDivs(12)"><span>Download Mobile Apps</span></p>
+                        <p id="buyNowItem" class="settingsItem" onclick="buyNow()" style="display:none;"><span><img src="icons\shoppingCart.png" alt="Shopping Cart" />&nbsp;Buy More Devices</span></p>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div id="newUserDlg" title="Add / Update a User" style="display:none;">
+        <p class="validateTips"></p>
+        <fieldset>
+            <table style="width:100%;">
+                <tr>
+                    <td class="cellpading">First Name:</td>
+                    <td class="cellpading"><input id="newUserFirstName" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Last Name:</td>
+                    <td class="cellpading"><input id="newUserLastName" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Email:</td>
+                    <td class="cellpading"><input id="newUserEmail" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Email Alerts:</td>
+                    <td class="cellpading"><input type="checkbox" id="newUserIsEmailAlerts" /><span style="font-size:10px;color:#a1a1a1;">Send me alerts via email</span></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Phone:</td>
+                    <td class="cellpading"><input id="newUserPhone" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Cell Phone:</td>
+                    <td class="cellpading"><input id="newUserCellPhone" style="width:100px;" /><span style="font-size:10px;color:#a1a1a1;">(ex. 5552223333)</span></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">SMS Alerts:</td>
+                    <td class="cellpading"><input type="checkbox" id="newUserIsSMSAlerts" /><span style="font-size:10px;color:#a1a1a1;">Send me alerts via SMS</span></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Cell Carrier:</td>
+                    <td class="cellpading"><select id="newUserCarrier"><option value="0">[Pick one]</option></select></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Login:</td>
+                    <td class="cellpading"><input id="newUserLogin" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Password:</td>
+                    <td class="cellpading"><input id="newUserPassword" type="password" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Time Zone:</td>
+                    <td class="cellpading">
+                        <select id="newUserTimeZone" style="width:200px;">
+                            <option value="AZ">Arizona Time</option>
+                            <option value="CST">Central Time</option>
+                            <option value="EST">Eastern Time</option>
+                            <option value="MST">Mountain Time</option>
+                            <option value="PST">Pacific Time</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Is Driver?</td>
+                    <td class="cellpading"><input id="newUserIsDriver" type="checkbox" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">iButton:</td>
+                    <td class="cellpading"><select id="newUserIButton"><option value="0">[Pick one]</option></select></td>
+                </tr>
+                <tr id="newUserSchedulesTR">
+                    <td class="cellpading">Access Schedule:</td>
+                    <td class="cellpading"><select id="newUserSchedules"><option value="0">No Schedule]</option></select><img id="help_userSchedule" src="icons\icon_question_mark.jpg" alt="help" title="Access Schedules: You can create schedules to determine when users can access the system.  For example, create a Business Hours schedule: Those users assigned to this schedule will not be able to access the system outside the defined business hours." /><img src="images/animated_new.gif" alt="New Feature"/></td>
+                </tr>
+                <tr id="userDlgIsAdmin" style="display:none;">
+                    <td class="cellpading">Is Administrator:</td>
+                    <td class="cellpading"><input type="checkbox" id="newUserIsAdministrator" /><img id="help_userIsAdministrator" src="icons\icon_question_mark.jpg" alt="help" title="Administrator status: Check this mark for the user(s) that can access the Account option.  Administrators will also have privileges to bypass certain restrictions, like schedules." /><span style="font-size:10px;color:#a1a1a1;">This user has administrator privileges</span></td>
+                </tr>
+                <tr id="usrDlgIsBillingContact" style="display:none;">
+                    <td class="cellpading">Is Billing Contact:</td>
+                    <td class="cellpading"><input type="checkbox" id="newUserIsBillingContact" /><img id="help_userIsBillingContact" src="icons\icon_question_mark.jpg" alt="help" title="Billing Contact: This user will be contacted by our Accounting Department to discuss any purchasing, billing or collection issues." /><span style="font-size:10px;color:#a1a1a1;">This user has billing privileges</span></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Access Level:</td>
+                    <td class="cellpading"><select id="newUserAccessLevel"><option value="0">[Pick one]</option></select></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div style="text-align:center;">
+                            <h3>Authorized Modules</h3>
+                        </div>
+                        <div style="width:100%; height:120px;overflow:auto;border:1px solid #a0a0a0;">
+                            <div class="newAlertSelectors">
+                                <ul>
+                                    <li><a href="#" style="padding-right:5px;" onclick="newAlertSelectAll('newUserModulesList', true)">Select All</a></li>
+                                    <li><a href="#" onclick="newAlertSelectAll('newUserModulesList', false)">Unselect All</a></li>
+                                </ul>
+                            </div>
+                            <br />
+                            <ul id="newUserModulesList" class="newAlertListClass">
+                                <li>&nbsp;</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    <div id="userRemoveDlg" title="Remove User" style="display:none;">
+        <p>Are you sure you want to remove <span id="userRemoveName"></span>?</p>
+    </div>
+    <div id="userChangePWDlg" title="Change Credentials" style="display:none;">
+        <p class="validateTips"></p>
+        <fieldset>
+            <table style="width:100%;">
+                <tr>
+                    <td class="cellpading">Login:</td>
+                    <td class="cellpading"><input id="userChangeLogin" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Password:</td>
+                    <td class="cellpading"><input id="userChangePW1" type="password" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Re-Enter Password:</td>
+                    <td class="cellpading"><input id="userChangePW2" type="password" style="width:200px;" /></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <div id="deviceUpdateDlg" title="Update Vehicle Information" style="display:none;">
+        <p class="validateTips"></p>
+        <fieldset>
+            <table style="width:100%;">
+                <tr style="display:none;">
+                    <td class="cellpading" style="display:none">Device ID:</td>
+                    <td class="cellpading" style="display:none"><span id="deviceUpdateDeviceId"></span></td>
+                </tr>
+
+                <tr>
+                    <td class="cellpading">Icon:</td>
+                    <td class="cellpading"><select id="deviceUpdateIcons" name="deviceUpdateIcons" style="width:200px;" class="mydds"><option value="0" title="">[No icons loaded]</option></select></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Device Name:</td>
+                    <td class="cellpading"><input id="deviceUpdateName" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Short Name:</td>
+                    <td class="cellpading"><input id="deviceUpdateShortName" style="width:50px;" maxlength="6" />(Max.6 chars.)</td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Short Name Color:</td>
+                    <td class="cellpading">
+                        <table>
+                            <tr>
+                                <td>Text:</td>
+                                <td><input id="deviceUpdateTextColor" name="deviceUpdateTextColor" type="text" value="#0000" /></td>
+                                <td>Background:</td>
+                                <td><input id="deviceUpdateBgndColor" name="deviceUpdateBgndColor" type="text" value="#ffff" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Driver:</td>
+                    <td class="cellpading"><select id="deviceUpdateDrivers"><option value="0">[No Drivers]</option></select></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Idle Threshold:</td>
+                    <td class="cellpading"><input id="deviceUpdateIdle" style="width:50px;text-align:center;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Speed Threshold:</td>
+                    <td class="cellpading"><input id="deviceUpdateSpeed" style="width:50px;text-align:center;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Label Line 2:</td>
+                    <td class="cellpading"><input id="deviceUpdateLine2" style="width:50px;" maxlength="6" />(Max.6 chars.)</td>
+                </tr>
+                <tr>
+                    <td class="cellpading">VIN:</td>
+                    <td class="cellpading"><input id="deviceUpdateVIN" style="width:200px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">License Plate:</td>
+                    <td class="cellpading"><input id="deviceUpdateLicensePlate" style="width:100px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Fuel Card ID:</td>
+                    <td class="cellpading"><input id="deviceUpdateFuelCardID" style="width:100px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Odometer Reading:</td>
+                    <td class="cellpading"><input id="deviceUpdateOdometerReading" style="width:100px;" /></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Is TRU:<img id="help_settingsARB" src="icons\icon_question_mark.jpg" alt="help deviceTRU" title="This option is for Transport Refrigeration Units - Alternative Technology Compliance Strategies for compliance with California’s TRU regulations." /></td>
+                    <td class="cellpading"><input id="chkDeviceUpdateIsARB" type="checkbox" /></td>
+                </tr>
+                <tr id="deviceUpdateTRU" style="display:none;">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>ARB Number:</td>
+                                <td><input id="deviceUpdateARBNumber" style="width:100px;" /></td>
+                            </tr>
+                            <tr>
+                                <td>Diesel Hourmeter:</td>
+                                <!--<td><select id="cbxDeviceUpdateDiesel"><option value="0">[Select Event]</option></select></td>-->
+                                <td><input type="text" id="deviceUpdateDieselMeter" style="text-align:center;width:80px;" /></td>
+                            </tr>
+                            <tr>
+                                <td>Electric Hourmeter:</td>
+                                <!--<td><select id="cbxDeviceUpdateElectric"><option value="0">[Select Event]</option></select></td>-->
+                                <td><input type="text" id="deviceUpdateElectricMeter" style="text-align:center;width:80px;" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Buzzer ON:<img id="help_settingsBuzzer" src="icons\icon_question_mark.jpg" alt="help buzzerOn" title="When a vehicle has the iButton add-on, this option allows the System Administrator to enable or disable the BUZZER alert of the iButton control.  For more information, please contact Customer Support." /></td>
+                    <td>
+                        <div class="switch">
+                            <input id="chkIBtnBuzzer" type="checkbox" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+    <div id="newAlertDlg" title="Create/Update Alert" style="display:none;">
+        <h2 id="alertTitle"></h2>
+        <fieldset>
+            <div id="alerts1Div">
+                <table style="width:100%;">
+                    <tr>
+                        <td class="cellpading">Alert Name:</td>
+                        <td><input id="newAlertName" style="width:200px;" /></td>
+                    </tr>
+                    <tr id="newAlertValueTR">
+                        <td class="cellpading"><span id="newAlertValueLabel"></span></td>
+                        <td><input id="newAlertValue" style="width:100px;" /></td>
+                    </tr>
+                    <tr id="newAlertTempHighTR" class="newAlertTemp" style="display:none;">
+                        <td class="cellpading">High Limit:</td>
+                        <td><input id="newAlertTempHigh" style="width:100px;" /></td>
+                    </tr>
+                    <tr id="newAlertTempLowTR" class="newAlertTemp" style="display:none;">
+                        <td class="cellpading">Low Limit:</td>
+                        <td><input id="newAlertTempLow" style="width:100px;" /></td>
+                    </tr>
+                    <tr>
+                        <td class="cellpading">Min.Interval (mins):<img id="help_SettingsAlertMinIntervals" src="icons\icon_question_mark.jpg" alt="Help Alert Min Interval" title="This setting will throttle alert notifications. For example, if set to 10 minutes and there is a speeding alert generated 3 times in that 10 minute period, only 1 notification will be sent. However, the event is still logged in the system and can be seen in reports." /></td>
+                        <td><input id="newAlertMinInterval" style="width:200px;" /></td>
+                    </tr>
+                    <tr id="newAlertScheduleDaysTR">
+                        <td class="cellpading">Select the days:</td>
+                        <td class="cellpading">
+                            <input id="newAlertSchedMon" type="checkbox" />Mon
+                            <input id="newAlertSchedTue" type="checkbox" />Tue
+                            <input id="newAlertSchedWed" type="checkbox" />Wed
+                            <input id="newAlertSchedThu" type="checkbox" />Thu
+                            <input id="newAlertSchedFri" type="checkbox" />Fri
+                            <input id="newAlertSchedSat" type="checkbox" />Sat
+                            <input id="newAlertSchedSun" type="checkbox" />Sun
+                            <!--<table style="width:100%;">
+                                <tr>
+                                    <td><input id="newAlertSchedWeekdays" type="checkbox" />Weekdays</td>
+                                    <td><input id="newAlertSchedWeekends" type="checkbox" />Weekends</td>
+                                </tr>
+                            </table>-->
+                        </td>
+                    </tr>
+                    <tr id="newAlertScheduleHoursTR">
+                        <td class="cellpading">Select the hours range:</td>
+                        <td class="cellpading">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>From: 
+                                        <select id="newAlertsHourFrom" style="font-size:11px; width:70px;">
+                                            <option style="font-size:11px;">12:00 AM</option>
+                                        </select>
+                                    </td>
+                                    <td>To:
+                                        <select id="newAlertsHourTo" style="font-size:11px; width:70px;">
+                                            <option style="font-size:11px;">12:00 AM</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr id="newAlertGeofenceMsgTR">
+                        <td colspan="2">
+                            <p>All geofences are evaluated on entry and exit.  Please select from the list below the people you want the system to notify of these events on every geofence.</p>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <table style="width:100%;">
+                    <tr>
+                        <td style="width:40%; vertical-align:top;">
+                            <div style="text-align:center;">
+                                <h3>Select the devices</h3>
+                            </div>
+                            <div style="width:100%; height:200px;overflow:auto;border:1px solid #a0a0a0;">
+                                <div class="newAlertSelectors">
+                                    <ul>
+                                        <li><a href="#" style="padding-right:5px;" onclick="newAlertSelectAll('newAlertDevicesList', true)">Select All</a></li>
+                                        <li><a href="#" onclick="newAlertSelectAll('newAlertDevicesList', false)">Unselect All</a></li>
+                                    </ul>
+                                </div>
+                                <br />
+                                <ul id="newAlertDevicesList" class="newAlertListClass">
+                                    <li>&nbsp;</li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td style="width:60%; vertical-align:top;">
+                            <div style="text-align:center;">
+                                <h3>Select the users</h3>
+<!--                                <div  class="newAlertSelectors">
+                                    <ul>
+                                        <li><a href="#" style="padding-right:5px;" onclick="newAlertSelectAll('newAlertUsersList', true)">Select All</a></li>
+                                        <li><a href="#" onclick="newAlertSelectAll('newAlertUsersList', false)">Unselect All</a></li>
+                                    </ul>
+                                </div>-->
+                            </div>
+                            <div style="width:100%; height:200px; overflow:auto; border:1px solid #a0a0a0;">
+                                <table id="newAlertUsersTbl">
+                                </table>
+                            </div>
+                            <!--<div style="width:100%; height:200px;overflow:auto;border:1px solid #a0a0a0;">
+                                <ul id="newAlertUsersList" class="newAlertListClass">
+                                    <li>&nbsp;</li>
+                                </ul>
+                            </div>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+    <div id="alertRemoveDlg" title="Remove Alert" style="display:none;">
+        <p>Are you sure you want to remove <span id="alertRemoveName"></span> alert?</p>
+    </div>
+
+    <div id="newRecRepDlg" title="Create/Update Recurrent Reports" style="display:none;">
+        <input id="recRepId" type="hidden" />
+        <fieldset>
+            <table style="width:100%;">
+                <tr>
+                    <td class="cellpading">Report:</td>
+                    <td class="cellpading"><select id="cbxRecRepReports" onchange="changeRecRepReports(this);"><option value="0">[Pick one]</option></select></td>
+                </tr>
+
+                <tr id="paramEventCode">
+                    <td>Event</td>
+                    <td>
+                        <select id="pEvents" style="font-size:11px; width:145px;">
+                            <option style="font-size:11px;">[No Events Loaded]</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr id="paramSpeedLimit">
+                    <td>Speed Limit</td>
+                    <td>
+                        <input id="pSpeedLimit" type="text" style="font-size:11px; width:60px; text-align:center;" value="" /> mph
+                    </td>
+                </tr>
+
+                <tr id="paramIdleLimit">
+                    <td>Idle Limit</td>
+                    <td>
+                        <input id="pIdleLimit" type="text" style="font-size:11px; width:60px; text-align:center;" value="" /> minutes
+                    </td>
+                </tr>
+
+                <tr id="paramMinTime">
+                    <td>Min.Time</td>
+                    <td>
+                        <input id="pMinTime" type="text" style="font-size:11px; width:60px; text-align:center;" value="" /> minutes
+                    </td>
+                </tr>
+
+                <tr id="paramDriverID">
+                    <td>Drivers</td>
+                    <td>
+                        <select id="pDrivers" style="font-size:11px; width:145px;">
+                            <option style="font-size:11px;">[No Drivers Loaded]</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr id="paramGeofenceID">
+                    <td>Geofences</td>
+                    <td>
+                        <select id="pGeofences" style="font-size:11px; width:145px;">
+                            <option style="font-size:11px;">[No Geofences Loaded]</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cellpading">Frequency:</td>
+                    <td class="cellpading"><select id="cbxRecRepFrequencies"><option value="0">[Pick one]</option></select></td>
+                </tr>
+                <tr>
+                    <td class="cellpading">Exclude Weekends:</td>
+                    <td class="cellpading"><input id="chkRecRepWeekends" type="checkbox" /></td>
+                </tr>
+            </table>
+            <br />
+            <table style="width:100%;">
+                <tr>
+                    <td style="width:50%;">
+                        <div style="text-align:center;">
+                            <h3>Select the devices</h3>
+                            <div class="newAlertSelectors">
+                                <ul>
+                                    <li><a href="#" style="padding-right:5px;" onclick="newAlertSelectAll('newRecRepDevicesList', true)">Select All</a></li>
+                                    <li><a href="#" onclick="newAlertSelectAll('newRecRepDevicesList', false)">Unselect All</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="width:100%; height:200px;overflow:auto;border:1px solid #a0a0a0;">
+                            <ul id="newRecRepDevicesList" class="newAlertListClass">
+                                <li>&nbsp;</li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td style="width:50%;">
+                        <div style="text-align:center;">
+                            <h3>Select the users</h3>
+                            <div  class="newAlertSelectors">
+                                <ul>
+                                    <li><a href="#" style="padding-right:5px;" onclick="newAlertSelectAll('newRecRepUsersList', true)">Select All</a></li>
+                                    <li><a href="#" onclick="newAlertSelectAll('newRecRepUsersList', false)">Unselect All</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="width:100%; height:200px;overflow:auto;border:1px solid #a0a0a0;">
+                            <ul id="newRecRepUsersList" class="newAlertListClass">
+                                <li>&nbsp;</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+    <div id="recRepRemoveDlg" title="Remove Recurrent Report" style="display:none;">
+        <p>Are you sure you want to remove <span id="recRepRemoveName"></span> recurrent report?</p>
+    </div>
+
+    <div id="newScheduleDlg" title="Create/Update Schedule" style="display:none;">
+        <input id="scheduleId" type="hidden" data-id="0" />
+        <table>
+            <tr>
+                <td>Schedule Name:</td>
+                <td><input id="scheduleName" type="text" maxlength="50" style="width:300px;" /></td>
+            </tr>
+        </table>
+        <br />
+        <table id="scheduleConfigTbl">
+            <tr>
+                <td class="schedConfigHeader">Time</td>
+                <td id="scTd1" class="schedConfigHeader" onclick="schedToggleAllDay(1)"><a href="#">Sun</a></td>
+                <td id="scTd2" class="schedConfigHeader" onclick="schedToggleAllDay(2)"><a href="#">Mon</a></td>
+                <td id="scTd3" class="schedConfigHeader" onclick="schedToggleAllDay(3)"><a href="#">Tue</a></td>
+                <td id="scTd4" class="schedConfigHeader" onclick="schedToggleAllDay(4)"><a href="#">Wed</a></td>
+                <td id="scTd5" class="schedConfigHeader" onclick="schedToggleAllDay(5)"><a href="#">Thu</a></td>
+                <td id="scTd6" class="schedConfigHeader" onclick="schedToggleAllDay(6)"><a href="#">Fri</a></td>
+                <td id="scTd7" class="schedConfigHeader" onclick="schedToggleAllDay(7)"><a href="#">Sat</a></td>
+            </tr>
+        </table>
+    </div>
+    <div id="scheduleRemoveDlg" title="Remove Schedule" style="display:none;">
+        <p>Are you sure you want to delete <span id="scheduleRemoveName"></span> schedule?</p>
+    </div>
+
+    <div id="newIButtonDlg" title="Create/Update iButtons" style="display:none;">
+        <input id="iButtonId" type="hidden" data-id="0" />
+        <table>
+            <tr>
+                <td>iButton ID:</td>
+                <td><input id="iButton" type="text" maxlength="50" style="width:100px;" /></td>
+            </tr>
+            <tr>
+                <td>Type:</td>
+                <td>
+                    <select id="cbxIButtonTypes" style="font-size:11px; width:145px;">
+                        <option style="font-size:11px;" value="2">Touch-N-Go</option>
+                        <option style="font-size:11px;" value="1">Retained</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Assigned To:</td>
+                <td>
+                    <select id="cbxIButtonAssignedTo" style="font-size:11px; width:145px;">
+                        <option style="font-size:11px;" value="0">[Not Assigned]</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <br />
+    </div>
+    <div id="iButtonRemoveDlg" title="Remove iButton" style="display:none;">
+        <p>Any device and Driver linked to this iButton will be unlinked.</p>
+        <p>You can always create this same iButton later, but its history will not be merged with the new events.</p>
+        <p>Are you sure you want to delete iButton <span id="iButtonRemoveId"></span>?</p>
+    </div>
+
+    <div id="newDevGroupDlg" title="Create/Update Fleets" style="display:none;">
+        <input id="newDevGroupId" type="hidden" data-id="0" />
+        <table>
+            <tr>
+                <td>Fleet Name:</td>
+                <td><input id="newDevGroupName" type="text" maxlength="50" style="width:400px;" /></td>
+            </tr>
+            <tr>
+                <td>Speeding Control:</td>
+                <td><input id="chkGroupHasSpeedGauge" type="checkbox" />&nbsp;<span style="font-size:11px;">(This feature requires SpeedGauge Add-On)</span></td>
+            </tr>
+        </table>
+        <br />
+        <table style="width:100%;">
+            <tr>
+                <td style="width:50%; vertical-align:top;">
+                    <div style="text-align:center;">
+                        <h3>Fleet Vehicles</h3>
+                    </div>
+                    <div style="width:100%; height:200px;overflow:auto;border:1px solid #a0a0a0;">
+                        <div class="newDevGroupSelectors newDevGroupDevicesSelectors">
+                            <ul>
+                                <li><a href="#" style="padding-right:5px;" onclick="newDevGroupSelectAll('newDevGroupDevicesList', true)">Select All</a></li>
+                                <li><a href="#" onclick="newDevGroupSelectAll('newDevGroupDevicesList', false)">Unselect All</a></li>
+                            </ul>
+                        </div>
+                        <br />
+                        <ul id="newDevGroupDevicesList" class="newDevGroupListClass">
+                            <li>&nbsp;</li>
+                        </ul>
+                    </div>
+                </td>
+                <td style="width:50%; vertical-align:top;">
+                    <div style="text-align:center;">
+                        <h3>Users with access to this fleet</h3>
+                    </div>
+                    <div style="width:100%; height:200px;overflow:auto;border:1px solid #a0a0a0;">
+                        <div class="newDevGroupSelectors">
+                            <ul>
+                                <li><a href="#" style="padding-right:5px;" onclick="newDevGroupSelectAll('newDevGroupUsersList', true)">Select All</a></li>
+                                <li><a href="#" onclick="newDevGroupSelectAll('newDevGroupUsersList', false)">Unselect All</a></li>
+                            </ul>
+                        </div>
+                        <br />
+                        <ul id="newDevGroupUsersList" class="newDevGroupListClass">
+                            <li>&nbsp;</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="devGroupRemoveDlg" title="Remove Group" style="display:none;">
+        <p>Are you sure you want to delete fleet <span id="devGroupRemoveId"></span>?</p>
+    </div>
+
+    <div id="divGeofencesTypes" class="modal fade" style="display:none;" ng-controller="ctrlGeofencesTypes">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Geofences Types</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script src="appSettings/etApp.js" type="text/javascript"></script>
+    <script src="appSettings/services/services.js"></script>
+    <script src="appGeofencesTypes/controllers/ctrlGeofencesTypes.js" type="text/javascript"></script>
+    <script src="appSettings/controllers/telemetryTableCtrl.js"></script>
+    <script src="appSettings/controllers/telemetryDeviceCtrl.js"></script>
+    <script src="appSettings/controllers/hourMetersTableCtrl.js"></script>
+    <script src="appSettings/controllers/hourMetersDeviceCtrl.js"></script>
+    <script src="appSettings/controllers/geoTypesCtrl.js"></script>
+
+        <!-- BEGIN ProvideSupport.com Visitor Monitoring Code -->
+        <div id="ciSsCz" style="z-index:100;position:absolute"></div><div id="sdSsCz" style="display:none"></div><noscript><div style="display:inline"><a href="https://www.providesupport.com?monitor=0325vm2g5aj6809q0cspkf44yw"><img src="https://image.providesupport.com/image/0325vm2g5aj6809q0cspkf44yw.gif" style="border:0px" alt=""/></a></div></noscript>
+        <!-- END ProvideSupport.com Visitor Monitoring Code -->
+
+</body>
+</html>

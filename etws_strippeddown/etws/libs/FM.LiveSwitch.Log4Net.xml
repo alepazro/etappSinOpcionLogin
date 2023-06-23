@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.Log4Net</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.Log4Net.LogProvider">
+            <summary>
+            An implementation of a logging provider that uses log4net.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Log4Net.LogProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Log4Net.LogProvider"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Log4Net.LogProvider.DoLog(FM.LiveSwitch.LogEvent)">
+            <summary>
+            Logs a message at the specified log level.
+            </summary>
+            <param name="logEvent">The log event details.</param>
+        </member>
+    </members>
+</doc>

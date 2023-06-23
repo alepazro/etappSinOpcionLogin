@@ -1,0 +1,32 @@
+﻿Public Class DTOBrokerOrder
+    Public ID As Integer
+    Public CompanyID As Integer
+    Public DeviceID As Integer
+    Public DriverID As Integer
+    Public TrakingID As Integer
+    Public Name As String
+    Public BrokerNumber As String
+    Public PickupAddress As String
+    Public Pickupdetetime As String
+    Public PickupAddresscoordinatesLat As Decimal
+    Public PickupAddresscoordinatesLng As Decimal
+    Public DeliveryAddress As String
+    Public Deliverydatetime As String
+    Public DeliveryAddressscoordinatesLat As Decimal
+    Public DeliveryAddressscoordinatesLng As Decimal
+    Public Observaciones As String
+    Public StatusID As Integer
+    Public CreateOn As String
+    Public CreatedBy As Integer
+    Public EmailSent As String
+    Public EmailLogo As String
+    Public TrackingWasSent As Boolean
+    Public TrackingWasSentDate As String
+    Public SendTo As String
+    Public DriverName As String
+    Public TrackingNumber As String
+    Public TrackingStatus As Boolean
+    Public DeviceName As String
+    Public CountStops As Integer
+    Public UrlTraking As String
+End Class

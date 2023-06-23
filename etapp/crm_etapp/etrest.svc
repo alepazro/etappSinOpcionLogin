@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="VB" Debug="true" Service="crm_etapp.etrest" CodeBehind="etrest.svc.vb" %>

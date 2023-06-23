@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.WinForms</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.WinForms.LayoutManager">
+            <summary>
+            A WinForms layout manager for .NET.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.LayoutManager.Container">
+            <summary>
+            Gets the layout container.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.LayoutManager.#ctor(System.Windows.Forms.Control)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.LayoutManager"/> class.
+            </summary>
+            <param name="container">The layout container.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.LayoutManager.#ctor(System.Windows.Forms.Control,FM.LiveSwitch.LayoutPreset)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.LayoutManager"/> class.
+            </summary>
+            <param name="container">The layout container.</param>
+            <param name="preset">The layout preset.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.LayoutManager.AddView(System.Windows.Forms.Control)">
+            <summary>
+            Adds a view to the container.
+            </summary>
+            <param name="view">The view to add.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.LayoutManager.RemoveView(System.Windows.Forms.Control)">
+            <summary>
+            Removes a view from the container.
+            </summary>
+            <param name="view">The view to remove.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.LayoutManager.DispatchToMainThread(FM.LiveSwitch.Action2{System.Object,System.Object},System.Object,System.Object)">
+            <summary>
+            Dispatches an action to the main thread.
+            </summary>
+            <param name="action">The action to invoke.</param>
+            <param name="arg1">The first argument.</param>
+            <param name="arg2">The second argument.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.LayoutManager.Layout">
+            <summary>
+            Positions the local and remote views within the layout.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.WinForms.PictureBoxControl">
+            <summary>
+            A custom PictureBox-based control used for rendering.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.PictureBoxControl.InternalScale">
+            <summary>
+            Gets or sets the scale.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxControl.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the Paint event.
+            </summary>
+            <param name="pe">A PaintEventArgs that contains the event data.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.PictureBoxControl"/> class.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.WinForms.PictureBoxSink">
+            <summary>
+            A WinForms-based PictureBox sink.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.PictureBoxSink.View">
+            <summary>
+            Gets the view.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.PictureBoxSink.ViewScale">
+            <summary>
+            Gets or sets the view scale.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.PictureBoxSink.ViewMirror">
+            <summary>
+            Gets or sets a value indicating whether the view is mirrored.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.PictureBoxSink.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.PictureBoxSink"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.PictureBoxSink"/> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.#ctor(FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.PictureBoxSink" /> class.
+            </summary>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.#ctor(FM.LiveSwitch.WinForms.PictureBoxControl)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.PictureBoxSink"/> class.
+            </summary>
+            <param name="view">The view.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.#ctor(FM.LiveSwitch.WinForms.PictureBoxControl,FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.PictureBoxSink" /> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.#ctor(FM.LiveSwitch.WinForms.PictureBoxControl,FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.PictureBoxSink" /> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.RenderBuffer(FM.LiveSwitch.VideoBuffer)">
+            <summary>
+            Renders a video buffer.
+            </summary>
+            <param name="buffer">The buffer.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.PictureBoxSink.RenderBitmap(System.Drawing.Bitmap)">
+            <summary>
+            Renders a bitmap.
+            </summary>
+            <param name="bitmap">The bitmap.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.WinForms.ScreenSourceApi">
+            <summary>
+            A screen source algorithm.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.WinForms.ScreenSourceApi.CopyFromScreen">
+            <summary>
+            Indicates Graphics.CopyFromScreen.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.WinForms.ScreenSourceApi.BitBlt">
+            <summary>
+            Indicates GDI BitBlt.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.WinForms.ScreenSource">
+            <summary>
+            A .NET-based screen capture provider.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.ScreenSource.TargetApi">
+            <summary>
+            Gets or sets the target API.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.ScreenSource.Api">
+            <summary>
+            Gets the current API.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.ScreenSource.GetInputs">
+            <summary>
+            Gets the available inputs.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FM.LiveSwitch.WinForms.ScreenSource.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.ScreenSource.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.ScreenSource"/> class.
+            </summary>
+            <param name="targetFrameRate">The target frame rate.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.ScreenSource.#ctor(FM.LiveSwitch.Rectangle,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.ScreenSource"/> class.
+            </summary>
+            <param name="targetRegion">The target region.</param>
+            <param name="targetFrameRate">The target frame rate.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.ScreenSource.#ctor(FM.LiveSwitch.ScreenConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.WinForms.ScreenSource"/> class.
+            </summary>
+            <param name="targetConfig">The target configuration.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.ScreenSource.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+            
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.ScreenSource.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+            
+        </member>
+        <member name="T:FM.LiveSwitch.WinForms.Utility">
+            <summary>
+            WinForms-related utility functions.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.Utility.DispatchToMainThread(System.Windows.Forms.Control,FM.LiveSwitch.Action0)">
+            <summary>
+            Dispatches an action to the main thread.
+            </summary>
+            <param name="control">The control.</param>
+            <param name="action">The action.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.WinForms.Utility.DispatchToMainThread(System.Windows.Forms.Control,FM.LiveSwitch.Action0,System.Boolean)">
+            <summary>
+            Dispatches an action to the main thread.
+            </summary>
+            <param name="control">The control.</param>
+            <param name="action">The action.</param>
+            <param name="forceSync">Whether or not to force the action to run synchronously.</param>
+        </member>
+    </members>
+</doc>

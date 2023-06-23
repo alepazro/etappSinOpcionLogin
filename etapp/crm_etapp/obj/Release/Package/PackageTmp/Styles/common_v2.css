@@ -1,0 +1,124 @@
+﻿/*
+ ATTENTION: DO NOT USE THIS CSS IN THE TRACKING APP.
+
+*/
+
+*
+{
+    margin:0px;
+    padding:0px;
+}
+
+body 
+{
+    width:100%;
+    border:0px;
+    font-family:Arial, Sans-Serif;
+    font-size:12px;
+}
+/* =============================================== *
+   Auxiliar Menu
+   =============================================== */
+#auxMenu
+{
+    padding:0px;
+    list-style-type:none;
+}
+#auxMenu li
+{
+    float:left;
+}
+.auxMenuOption
+{
+    padding:10px;
+}
+.auxMenuOptionDivider
+{
+    background-image: url(https://easitrack.net/images/MenuBackDivider.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.auxMenuOptionText
+{
+    color:#ffffff;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+}
+#auxMenu a:hover 
+{
+    text-decoration:underline;
+}
+/* =============================================== *
+   Main Menu
+   =============================================== */
+#mainMenu
+{
+    padding:0px;
+    list-style-type:none;
+}
+#mainMenu li
+{
+    float:left;
+}
+.mainMenuOption
+{
+    padding:10px 12px;
+}
+.mainMenuOptionDivider1st
+{
+    background-image: url(https://easitrack.net/images/mainMenuDivider.png);
+    background-repeat: no-repeat;
+    background-position: left;
+}
+.mainMenuOptionDivider
+{
+    background-image: url(https://easitrack.net/images/mainMenuDivider.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+.mainMenuOptionText
+{
+    color:#3f3f3f;
+    font-size:23px;
+    font-weight:600;
+    text-decoration:none;
+}
+#mainMenu a:hover 
+{
+    text-decoration:underline;
+}
+/* =============================================== *
+   Customer Login
+   =============================================== */
+#customerLogin
+{
+    height:30px;
+    width:125px;
+    margin:3px;
+    padding:5px;
+    float:right;
+    text-align:center;
+    background-image: url(https://easitrack.net/images/LoginBtnBgnd.png);
+    background-repeat:repeat-x;
+}
+.customerLoginText
+{
+    color:#ffffff;
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+}
+#customerLogin a:hover
+{
+    text-decoration:underline;
+}
+/* =============================================== *
+   Toll Free number
+   =============================================== */
+.tollFreeNumber
+{
+    font-size:24px;
+    font-weight:600;
+    color:#3f3f3f;
+}

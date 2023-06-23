@@ -1,0 +1,1436 @@
+﻿<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EasiTrack | Starter</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="plugins/css/all.min.css" />  <!--"plugins/css/all.min.css">-->
+    <!-- Theme style -->
+    <link rel="stylesheet" href="plugins/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.blueopal.min.css" />
+    <!--<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.default-v2.min.css" />-->
+    <style>
+        .k-grid-onabai, .k-grid-onabai:hover {
+            background-image: url(icons/wordgps.png);
+            background-size: 70%;
+            background-repeat: no-repeat;
+            /*background-position: 192px -248px;*/
+            background-position: center;
+            min-width: 50px !important;
+            min-height: 50px !important;
+            background-color: #bbb;
+            border-radius: 40%;
+            display: inline-block;
+            background-color: Transparent;
+            border: none;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(16)" class="nav-link">Traking</a>
+                </li>
+                <!--<li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(2)" class="nav-link">Multi-Traking</a>
+                </li>-->
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(15)" class="nav-link">Reports</a>
+                </li>
+                <!--<li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(3)" class="nav-link">Reports</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(5)" class="nav-link">Maintenance</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(13)" class="nav-link">E-Log</a>
+                </li>-->
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(14)" class="nav-link">Video</a>
+                </li>
+                <!--<li class="nav-item d-none d-sm-inline-block">
+                    <a onclick="changePanel(4)" class="nav-link">Settings</a>
+                </li>-->
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" style="margin-top: 0px; margin-right: 20px;background-color:yellow">
+                    <a href="reports.html" class="welcomeTitleDiv">Previous Version</a>
+                </li>
+                <li class="nav-item dropdown" style="margin-top: 0px; margin-right: 20px;">
+                    <div id="welcomeTitleDiv">
+                        <span id="welcomeTitleSpan"></span>
+                        <input type="hidden" id="userFullName" />
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="logout()" class="loginDivClass">Logout</a>
+                    <!--<a class="nav-link" href="#" role="button">
+
+                        <i class="fas fa-expand-arrows-alt">Logout</i>
+                    </a>-->
+                </li>
+            </ul>
+        </nav>
+
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar elevation-3" style="background-color: #BAC5BF">
+            <!-- Brand Logo -->
+            <img src="img/EasiTrac.jpg" alt="EasiTrack" class="brand-image img-circle" style="opacity: .8;width:inherit;height:inherit">
+            <!--<a href="EtReport.html" class="brand-link">
+                <img src="img/EasiTrac.jpg" alt="EasiTrack" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <h3><span class="brand-text font-weight-bold">EasiTrack</span></h3>
+            </a>-->
+            <!-- /.sidebar -->
+            <div class="sidebar">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div>
+                        <h2 class="brand-text font-weight-bold">Devices List</h2><br />
+                        <input id="textbox" style="width: 100%;" /><br />
+
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">
+                                Maps
+                            </h1>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="loading">
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        Reports Detail
+                                    </h5><br />
+                                    <div class="demo-section k-content wide">
+                                        <div id="map"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+
+        <!-- /.control-sidebar -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2021 <a href="https://easitrack.net/">EasiTrack</a>.</strong> All rights reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="plugins/js/adminlte.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.1207/js/kendo.all.min.js"></script>
+    <script src="Scripts/reports_v003.js" type="text/javascript"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+    <script src="Scripts/rptActivitySummary.js" type="text/javascript"></script>
+    <script src="https://kendo.cdn.telerik.com/2021.3.1207/js/jszip.min.js"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.3.913/js/pako_deflate.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh4usXj1g6YjObXSwU0_tCnxfe511JLzA&v=3.17&sensor=false"></script>
+    <script type="x/kendo-template" id="page-template">
+        <div class="page-template">
+          <div class="header">
+            Document generated by EasiTrack
+          </div>
+          <div class="watermark">EASITRACK</div>
+          <div class="footer">
+            Page #: pageNum # of #: totalPages #
+          </div>
+        </div>
+    </script>
+
+    <script>
+
+
+        var ListDevices = [];
+
+
+        var IdReport = '';
+        var IdDevice = '';
+        var IdEventCode = '';
+        var IdGeofences = '';
+        var IdDriver = '';
+        var DateFrom = '';
+        var DateTo = '';
+        var hourFrom = '';
+        var hourTo = '';
+        var hasParam = '';
+        $(document).ready(function () {
+            loadControl();
+            hideParams();
+            if (validateToken(false, 'etReport.html') == true) {
+                setWelcomeTitle();
+            }
+
+            ListDevices = getLoadDevices();
+            //ListEventCode = getLoadCompaniesDevicesEvents();
+            //ListGeofences = getLoadGeofences();
+            //ListDrivers = getLoadDrivers();
+            /*ddlCreateReport(ListReports);*/
+            ddlCreateDevice(ListDevices);
+            //ddlCreateEventCode(ListEventCode);
+            //ddlCreateGeofences(ListGeofences);
+
+            if (ListDrivers.length > 0) {
+                ddlCreateDrivers(ListDrivers);
+            }
+
+
+            $("#eventLocationMapDlg").kendoPopup({
+                anchor: $("#prueba")
+            });
+
+            function startChange() {
+
+                var startDate = start.value(),
+                    endDate = end.value();
+
+                if (startDate) {
+                    startDate = new Date(startDate);
+                    startDate.setDate(startDate.getDate());
+                    DateFrom = (startDate.getMonth() + 1 + "-" + startDate.getDate() + "-" + startDate.getFullYear()).toString();
+                    hourFrom = startDate.getHours();
+                    end.min(startDate);
+                } else if (endDate) {
+                    start.max(new Date(endDate));
+                } else {
+                    endDate = new Date();
+                    start.max(endDate);
+                    end.min(endDate);
+                }
+            }
+            function endChange() {
+                var endDate = end.value(),
+                    startDate = start.value();
+
+                if (endDate) {
+                    endDate = new Date(endDate);
+                    endDate.setDate(endDate.getDate());
+                    DateTo = (endDate.getMonth() + 1 + "-" + endDate.getDate() + "-" + endDate.getFullYear()).toString();
+                    hourTo = endDate.getHours();
+                    start.max(endDate);
+                } else if (startDate) {
+                    end.min(new Date(startDate));
+                } else {
+                    endDate = new Date();
+                    start.max(endDate);
+                    end.min(endDate);
+                }
+            }
+
+
+            var today = kendo.date.today();
+
+            var start = $("#start").kendoDateTimePicker({
+                value: today,
+                change: startChange,
+                parseFormats: ["MM/dd/yyyy"]
+            }).data("kendoDateTimePicker");
+
+            var end = $("#end").kendoDateTimePicker({
+                value: today,
+                change: endChange,
+                parseFormats: ["MM/dd/yyyy"]
+            }).data("kendoDateTimePicker");
+
+            start.max(end.value());
+            end.min(start.value());
+
+            $("#runReport").kendoButton({
+                imageUrl: "img/source.png",
+                click: onClick
+
+            });
+        });
+
+
+        function onClick(e) {
+
+            var arrayDate = [];
+            var arrS1 = [];
+            var arrS2 = [];
+            var date = null;
+            var date2 = '';
+            var arraySensor = []; // [...new Set(array)];
+            var arrayColumns = [];
+            var jsonFields = [];
+
+            //$('#loading').html('<div id="loading" class="loading"><img src="images/loading.gif" alt="loading" /><br/>Un momento, por favor...</div>');
+
+
+            try {
+                $('#grid').empty();
+                $("#chart").show();
+                array = JSON.parse(runReportNew(IdReport));
+
+                if (IdReport == '28') {
+
+                    array.forEach(function (element) {
+                        arraySensor.push(element.SensorID);
+
+                    });
+                    arraySensor = [...new Set(arraySensor)];
+
+
+                    array.forEach(function (element) {
+                        date = new Date(element.EventDate);
+                        date2 = date.getFullYear().toString().substr(-2) + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate() + " " + date.getUTCHours();	 /*date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":00:00";*/
+
+                        element.EventDate = date2;
+                        element.Temp = (element.Temp * 1.8) + 32;//de grados celsius a fahrenheit
+                        arrayDate.push(date2);
+
+                        if (element.SensorID == arraySensor[0]) {
+                            arrS1.push({ name: arraySensor[0], data: element.Temp, fecha: date2 });
+                        } else if (element.SensorID == arraySensor[1]) {
+                            arrS1.push({ name2: arraySensor[1], data2: element.Temp, fecha2: date2 });
+                        } else if (element.SensorID == arraySensor[2]) {
+                            arrS1.push({ name3: arraySensor[2], data3: element.Temp, fecha3: date2 });
+                        } else {
+                            arrS1.push({ name4: 'sensor4', data4: element.Temp, fecha4: date2 });
+                        }
+                    });
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='HDevicesID'>#: HDevicesID #</div>",
+                        field: "HDevicesID",
+                        title: "HDevicesID",
+                        width: 240
+                    },
+                        { field: "Name", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", width: "200px", height: "5px" },
+                        { field: "SensorID", width: "200px" },
+                        { field: "Temp", title: "Temp °F", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        Name: { type: "string" },
+                        EventDate: { type: "string" },
+                        HDevicesID: { type: "number" },
+                        SensorID: { type: "string" },
+                        Temp: { type: "string" }
+                    }
+                    );
+                    createChart(arrS1, arrayDate, arrS2)
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '20') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "CompanyName", format: "{0:c}", width: "200px" },
+                        { field: "DeviceName", width: "200px" },
+                        { field: "ARBNumber", width: "200px" },
+                        { field: "GeofenceName", width: "200px" },
+                        { field: "GeofenceType", width: "200px" },
+                        { field: "GeoTimeIn", width: "200px" },
+                        { field: "GeoTimeOut", width: "200px" },
+                        { field: "GeoMinutes", width: "200px" },
+                        { field: "DieselInitMinutes", width: "200px" },
+                        { field: "DieselEndMinutes", width: "200px" },
+                        { field: "DieselMinutes", width: "200px" },
+                        { field: "ElectricInitMinutes", width: "200px" },
+                        { field: "ElectricEndMinutes", width: "200px" },
+                        { field: "ElectricMinutes", width: "200px" }
+
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        CompanyName: { type: "string" },
+                        ARBNumber: { type: "number" },
+                        GeofenceName: { type: "string" },
+                        GeofenceType: { type: "string" },
+                        GeoTimeIn: { type: "string" },
+                        GeoTimeOut: { type: "string" },
+                        GeoMinutes: { type: "string" },
+                        DieselInitMinutes: { type: "string" },
+                        DieselEndMinutes: { type: "string" },
+                        DieselMinutes: { type: "string" },
+                        ElectricInitMinutes: { type: "string" },
+                        ElectricEndMinutes: { type: "string" },
+                        ElectricMinutes: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '21') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", width: "200px", height: "5px" },
+                        { field: "DeviceName", width: "200px" },
+                        { field: "Obj", width: "200px", height: "5px" },
+                        { field: "EventType", width: "200px", height: "5px" },
+                        { field: "EventDate", width: "200px", height: "5px" },
+                        { field: "PartialAcumMinutes", width: "200px", height: "5px" },
+                        { field: "AcumMinutes", width: "200px", height: "5px" },
+                        { field: "DieselAcumMinutes", width: "200px", height: "5px" },
+                        { field: "DieselStatus", width: "200px", height: "5px" },
+                        { field: "ElectricAcumMinutes", width: "200px", height: "5px" },
+                        { field: "ElectricStatus", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "number" },
+                        DeviceName: { type: "string" },
+                        Obj: { type: "string" },
+                        EventType: { type: "string" },
+                        EventDate: { type: "string" },
+                        PartialAcumMinutes: { type: "string" },
+                        AcumMinutes: { type: "string" },
+                        DieselAcumMinutes: { type: "string" },
+                        DieselStatus: { type: "string" },
+                        ElectricAcumMinutes: { type: "string" },
+                        ElectricStatus: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '22') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ThisDay", title: "ThisDay", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ThisTime", title: "ThisTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventName", title: "EventName", width: "200px", height: "5px" },
+                        { field: "MaxSpeed", width: "200px" },
+                        { field: "Duration", title: "Duration", width: "200px", height: "5px" },
+                        { field: "Distance", title: "Distance", width: "200px", height: "5px" },
+                        { field: "FullAddress", title: "FullAddress", width: "200px", height: "5px" },
+                        { field: "GeofenceName", title: "GeofenceName", width: "200px", height: "5px" },
+                        { field: "DriverName", title: "DriverName", width: "200px", height: "5px" }
+
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        ThisTime: { type: "string" },
+                        EventName: { type: "string" },
+                        MaxSpeed: { type: "number" },
+                        Duration: { type: "string" },
+                        Distance: { type: "string" },
+                        FullAddress: { type: "string" },
+                        GeofenceName: { type: "string" },
+                        DriverName: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '23') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IgnitionOn", width: "200px", height: "5px" },
+                        { field: "Departed", width: "200px" },
+                        { field: "Arrived", width: "200px", height: "5px" },
+                        { field: "IgnitionOff", width: "200px", height: "5px" },
+                        { field: "DurationMinutes", width: "200px", height: "5px" },
+                        { field: "StoppedMinutes", width: "200px", height: "5px" },
+                        { field: "Miles", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        IgnitionOn: { type: "number" },
+                        Departed: { type: "string" },
+                        Arrived: { type: "string" },
+                        IgnitionOff: { type: "string" },
+                        DurationMinutes: { type: "string" },
+                        StoppedMinutes: { type: "string" },
+                        Miles: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '1' || IdReport == '2' || IdReport == '3') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='EventName'>#: EventName #</div>",
+                        field: "EventName",
+                        title: "EventName",
+                        width: "200px"
+                    },
+                        { field: "EventDate", title: "EventDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Speed", title: "Speed", width: "200px", height: "5px" },
+                        { field: "Heading", width: "200px" },
+                        { field: "FullAddress", title: "At Location", width: "200px", height: "5px" },
+                        { field: "GeofenceID", title: "Geofence	", width: "200px", height: "5px" },
+                        { field: "Latitude", title: "Show", width: "200px", height: "5px" },
+                        {
+                            command: { name: "onabai", text: "&nbsp;", click: prueba, width: "50px", height: "5px" }, title: "", width: "50px"
+                        }
+                        //{ field: "Longitude", title: "Longitude", width: "200px", height: "5px" },
+                        //{ field: "EventName", title: "EventName", width: "200px", height: "5px" }
+
+
+                    );
+
+                    jsonFields.push({
+                        EventName: { type: "string" },
+                        EventDate: { type: "string" },
+                        Speed: { type: "string" },
+                        Heading: { type: "number" },
+                        FullAddress: { type: "string" },
+                        GeofenceID: { type: "string" },
+                        Latitude: { type: "string" },
+                        //Longitude: { type: "string" },
+                        //EventName: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+
+                }
+                else if (IdReport == '4') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ID'>#: ID #</div>",
+                        field: "ID",
+                        title: "ID",
+                        width: "200px"
+                    },
+                        { field: "EventCode", title: "EventCode", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", title: "EventDate", width: "200px", height: "5px" },
+                        { field: "FullAddress", width: "200px" },
+                        { field: "GeofenceName", title: "GeofenceName", width: "200px", height: "5px" },
+                        { field: "Latitude", title: "Latitude", width: "200px", height: "5px" },
+                        { field: "Longitude", title: "Longitude", width: "200px", height: "5px" }
+
+                    );
+
+                    jsonFields.push({
+                        ID: { type: "string" },
+                        EventCode: { type: "string" },
+                        EventDate: { type: "number" },
+                        FullAddress: { type: "string" },
+                        GeofenceName: { type: "string" },
+                        Latitude: { type: "string" },
+                        Longitude: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '5') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px",
+                        tooltip: "ReportName"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "TotalMiles", title: "TotalMiles", width: "200px", height: "5px" },
+                        { field: "TotalTravelTime", width: "200px" },
+                        { field: "TotalIdlingTime", title: "StopMinutes", width: "200px", height: "5px" },
+                        { field: "PorcInTransit", title: "SpeedMinutesAt_0_15MPH", width: "200px", height: "5px" },
+                        { field: "PorcIdle", title: "SpeedMinutesAt_16_35MPH", width: "200px", height: "5px" },
+                        { field: "PorcStopped", title: "SpeedMinutesAt_36_55MPH", width: "200px", height: "5px" },
+                        { field: "Speed00_35", title: "SpeedMinutesAt_56_65MPH", width: "200px", height: "5px" },
+                        { field: "Speed36_65", title: "SpeedMinutesAt_65_75MPH", width: "200px", height: "5px" },
+                        { field: "SpeedOver65", title: "SpeedMinutesAt_76_85MPH", width: "200px", height: "5px" },
+                        { field: "SpeedingAlerts", title: "SpeedMinutesAt_Over85MPH", width: "200px", height: "5px" },
+                        { field: "IdleAlerts", title: "QtySpeedingAlertsEvents", width: "200px", height: "5px" },
+                        { field: "QtyStops", title: "QtyExcessiveIdleAlertsEvents", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        TotalMiles: { type: "string" },
+                        TotalTravelTime: { type: "number" },
+                        TotalIdlingTime: { type: "string" },
+                        PorcInTransit: { type: "string" },
+                        PorcIdle: { type: "string" },
+                        PorcStopped: { type: "string" },
+                        Speed00_35: { type: "string" },
+                        Speed36_65: { type: "string" },
+                        SpeedOver65: { type: "number" },
+                        SpeedingAlerts: { type: "string" },
+                        IdleAlerts: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '6' || IdReport == '24' || IdReport == '26') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", title: "EventDate", width: "200px", height: "5px" },
+                        { field: "StateName", title: "StateName", width: "200px", height: "5px" },
+                        { field: "EventMiles", title: "EventMiles", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        EventDate: { type: "number" },
+                        StateName: { type: "number" },
+                        EventMiles: { type: "number" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '7' || IdReport == '15') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "GeofenceName", title: "GeofenceName", width: "200px", height: "5px" },
+                        { field: "Arrival", title: "Arrival", width: "200px", height: "5px" },
+                        { field: "Departure", title: "Departure", width: "200px", height: "5px" },
+                        { field: "Duration", title: "Duration", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        GeofenceName: { type: "number" },
+                        Arrival: { type: "number" },
+                        Departure: { type: "number" },
+                        Duration: { type: "number" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '10') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StartLocation", title: "StartLocation", width: "200px", height: "5px" },
+                        { field: "StartTime", title: "StartTime", width: "200px", height: "5px" },
+                        { field: "EndLocation", title: "EndLocation", width: "200px", height: "5px" },
+                        { field: "EndTime", title: "EndTime", width: "200px", height: "5px" },
+                        { field: "WorkMinutes", title: "WorkMinutes", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        StartLocation: { type: "number" },
+                        StartTime: { type: "number" },
+                        EndLocation: { type: "number" },
+                        EndTime: { type: "number" },
+                        WorkMinutes: { type: "number" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '11') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", title: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", title: "DateTo", width: "200px", height: "5px" },
+                        { field: "DeviceName", title: "DeviceName", width: "200px", height: "5px" },
+                        { field: "StartTime", title: "StartTime", width: "200px", height: "5px" },
+                        { field: "StartAddress", title: "StartAddress", width: "200px", height: "5px" },
+                        { field: "StartGeofenceID", title: "StartGeofenceID", width: "200px", height: "5px" },
+                        { field: "TripDurationSecs", title: "TripDurationSecs", width: "200px", height: "5px" },
+                        { field: "TripDistanceMeters", title: "TripDistanceMeters", width: "200px", height: "5px" },
+                        { field: "TripMaxSpeed", title: "TripMaxSpeed", width: "200px", height: "5px" },
+                        { field: "StopTime", title: "StopTime", width: "200px", height: "5px" },
+                        { field: "StopAddress", title: "StopAddress", width: "200px", height: "5px" },
+                        { field: "StopGeofenceID", title: "StopGeofenceID", width: "200px", height: "5px" },
+                        { field: "StopDurationSecs", title: "StopDurationSecs", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "string" },
+                        DeviceName: { type: "string" },
+                        StartTime: { type: "string" },
+                        StartAddress: { type: "string" },
+                        StartGeofenceID: { type: "string" },
+                        TripDurationSecs: { type: "string" },
+                        TripDistanceMeters: { type: "string" },
+                        TripMaxSpeed: { type: "string" },
+                        StopTime: { type: "string" },
+                        StopAddress: { type: "string" },
+                        StopGeofenceID: { type: "string" },
+                        StopDurationSecs: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '12') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", width: "200px", height: "5px" },
+                        { field: "DeviceName", width: "200px", height: "5px" },
+                        { field: "StopAddress", width: "200px", height: "5px" },
+                        { field: "TripDistanceMeters", width: "200px", height: "5px" },
+                        { field: "TripMaxSpeed", width: "200px", height: "5px" },
+                        { field: "TripDurationSecs", width: "200px", height: "5px" },
+                        { field: "StopTime", width: "200px", height: "5px" },
+                        { field: "NextStartTime", width: "200px", height: "5px" },
+                        { field: "StopDurationSecs", width: "200px", height: "5px" },
+                        { field: "StopLatitude", width: "200px", height: "5px" },
+                        { field: "StopLongitude", width: "200px", height: "5px" },
+                        { field: "StopGeofenceName", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "string" },
+                        DeviceName: { type: "string" },
+                        StopAddress: { type: "string" },
+                        TripDistanceMeters: { type: "string" },
+                        TripMaxSpeed: { type: "string" },
+                        TripDurationSecs: { type: "string" },
+                        StopTime: { type: "string" },
+                        NextStartTime: { type: "string" },
+                        StopDurationSecs: { type: "string" },
+                        StopLatitude: { type: "string" },
+                        StopLongitude: { type: "string" },
+                        StopGeofenceName: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '13' || IdReport == '25') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", title: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", title: "DateTo", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StateName", title: "StateName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventMiles", title: "EventMiles", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "string" },
+                        DeviceName: { type: "string" },
+                        StateName: { type: "string" },
+                        EventMiles: { type: "string" },
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '14') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", title: "EventDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "TotalMiles", title: "TotalMiles", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "TotalTravelTime", title: "TotalTravelTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "TotalIdlingTime", title: "TotalIdlingTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PorcInTransit", title: "PorcInTransit", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PorcIdle", title: "PorcIdle", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PorcStopped", title: "PorcStopped", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Speed00_35", title: "Speed00_35", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Speed36_65", title: "Speed36_65", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SpeedOver65", title: "SpeedOver65", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "FirstIgnitionON", title: "FirstIgnitionON", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "LastIgnitionOFF", title: "LastIgnitionOFF", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SpeedingAlerts", title: "SpeedingAlerts", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IdleAlerts", title: "IdleAlerts", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "QtyStops", title: "QtyStops", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        EventDate: { type: "string" },
+                        TotalMiles: { type: "string" },
+                        TotalTravelTime: { type: "string" },
+                        TotalIdlingTime: { type: "string" },
+                        PorcInTransit: { type: "string" },
+                        PorcIdle: { type: "string" },
+                        PorcStopped: { type: "string" },
+                        Speed00_35: { type: "string" },
+                        Speed36_65: { type: "string" },
+                        SpeedOver65: { type: "string" },
+                        FirstIgnitionON: { type: "string" },
+                        LastIgnitionOFF: { type: "string" },
+                        SpeedingAlerts: { type: "string" },
+                        IdleAlerts: { type: "string" },
+                        QtyStops: { type: "string" },
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '17') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='DeviceID'>#: DeviceID #</div>",
+                        field: "DeviceID",
+                        title: "DeviceID",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ActivityDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "FirstIgnitionON", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "AddressON", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "LastIgnitionOFF", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "AddressOFF", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "MilesDriven", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "HoursWorked", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        DeviceID: { type: "string" },
+                        DeviceName: { type: "string" },
+                        FirstIgnitionON: { type: "string" },
+                        AddressON: { type: "string" },
+                        LastIgnitionOFF: { type: "string" },
+                        AddressOFF: { type: "string" },
+                        MilesDriven: { type: "string" },
+                        HoursWorked: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '18') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DriverName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "LogInTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "LogOutTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Duration", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DriverName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        LogInTime: { type: "string" },
+                        LogOutTime: { type: "string" },
+                        Duration: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '19') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: 100
+                    },
+                        { field: "DriverName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StatusName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DriverName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        StatusName: { type: "string" },
+                        EventDate: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '27') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DriverFirstName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DriverLastName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "FullAddress", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Speed", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "miliGs", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "string" },
+                        DriverFirstName: { type: "string" },
+                        DriverLastName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        EventName: { type: "string" },
+                        FullAddress: { type: "string" },
+                        EventDate: { type: "string" },
+                        Speed: { type: "string" },
+                        miliGs: { type: "string" },
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '29') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IgnTimer", title: "IgnTimer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW1Timer", title: "SW1Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW2Timer", title: "SW2Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW3Timer", title: "SW3Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW4Timer", title: "SW4Timer", format: "{0:c}", width: "200px", height: "5px" }
+
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        IgnTimer: { type: "string" },
+                        SW1Timer: { type: "string" },
+                        SW2Timer: { type: "string" },
+                        SW3Timer: { type: "string" },
+                        SW4Timer: { type: "string" },
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '30') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ThisDateTime", title: "ThisDateTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IgnTimer", title: "IgnTimer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW1Timer", title: "SW1Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW2Timer", title: "SW2Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW3Timer", title: "SW3Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW4Timer", title: "SW4Timer", format: "{0:c}", width: "200px", height: "5px" }
+
+
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        ThisDateTime: { type: "string" },
+                        IgnTimer: { type: "string" },
+                        SW1Timer: { type: "string" },
+                        SW2Timer: { type: "string" },
+                        SW3Timer: { type: "string" },
+                        SW4Timer: { type: "string" },
+
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '31') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ThisDateTime", title: "ThisDay", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IgnTimer", title: "IgnTimer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW1Timer", title: "SW1Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW2Timer", title: "SW2Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW3Timer", title: "SW3Timer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SW4Timer", title: "SW4Timer", format: "{0:c}", width: "200px", height: "5px" }
+
+
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        ThisDay: { type: "string" },
+                        IgnTimer: { type: "string" },
+                        SW1Timer: { type: "string" },
+                        SW2Timer: { type: "string" },
+                        SW3Timer: { type: "string" },
+                        SW4Timer: { type: "string" },
+
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '32') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", title: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", title: "DateTo", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "FuelDate", title: "FuelDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceOdometer", title: "DeviceOdometer", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Gallons", title: "Gallons", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "TotalCost", title: "TotalCost", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Address", title: "Address", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PostalCode", title: "PostalCode", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StateProv", title: "StateProv", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Comments", title: "Comments", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "string" },
+                        DeviceName: { type: "string" },
+                        FuelDate: { type: "string" },
+                        DeviceOdometer: { type: "string" },
+                        Gallons: { type: "string" },
+                        TotalCost: { type: "string" },
+                        Address: { type: "string" },
+                        PostalCode: { type: "string" },
+                        StateProv: { type: "string" },
+                        Comments: { type: "string" },
+
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '33') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='counter'>#: counter #</div>",
+                        field: "counter",
+                        title: "counter",
+                        width: "200px"
+                    },
+                        { field: "name", title: "name", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "LastUpdatedOn", title: "LastUpdatedOn", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        counter: { type: "string" },
+                        name: { type: "string" },
+                        LastUpdatedOn: { type: "string" },
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '34') { //pendiente terminar
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "GeofenceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Arrival", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Departure", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Duration", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        GeofenceName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        Arrival: { type: "string" },
+                        Departure: { type: "string" },
+                        Duration: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '35') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DeviceID", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceType", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ServerDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Speed", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Heading", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "FullAddress", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SerialNumber", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "GPSStatus", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "GPSAge", format: "{0:c}", width: "200px", height: "5px" }
+
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DeviceID: { type: "string" },
+                        DeviceType: { type: "string" },
+                        DeviceName: { type: "string" },
+                        ServerDate: { type: "string" },
+                        EventDate: { type: "string" },
+                        EventName: { type: "string" },
+                        Speed: { type: "string" },
+                        Heading: { type: "string" },
+                        FullAddress: { type: "string" },
+                        SerialNumber: { type: "string" },
+                        GPSStatus: { type: "string" },
+                        GPSAge: { type: "string" },
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '36') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DriverName", title: "DriverName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", title: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ClockIn", title: "ClockIn", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "ClockOut", title: "ClockOut", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "TotalHours", title: "TotalHours", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DriverName: { type: "string" },
+                        DeviceName: { type: "string" },
+                        ClockIn: { type: "string" },
+                        ClockOut: { type: "string" },
+                        TotalHours: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '37') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='DeviceID'>#: DeviceID #</div>",
+                        field: "DeviceID",
+                        title: "DeviceID",
+                        width: "200px"
+                    },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "SerialNumber", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "LastUpdatedOn", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "NoShowDays", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PowerCut", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "MainPowerRestored", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IllegalPowerUp", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PowerDown", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IgnOffGPS15", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "IgnOffSpeed10", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PowerUp", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "PowerOffBatt", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "TotalEvents", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        DeviceID: { type: "string" },
+                        DeviceName: { type: "string" },
+                        SerialNumber: { type: "string" },
+                        LastUpdatedOn: { type: "string" },
+                        NoShowDays: { type: "string" },
+                        PowerCut: { type: "string" },
+                        MainPowerRestored: { type: "string" },
+                        IllegalPowerUp: { type: "string" },
+                        PowerDown: { type: "string" },
+                        IgnOffGPS15: { type: "string" },
+                        IgnOffSpeed10: { type: "string" },
+                        PowerUp: { type: "string" },
+                        PowerOffBatt: { type: "string" },
+                        TotalEvents: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '38') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StartTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StartAddress", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StartGeofenceID", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StopTime", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StopAddress", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "StopGeofenceID", format: "{0:c}", width: "200px", height: "5px" }
+                    );
+
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "string" },
+                        DeviceName: { type: "string" },
+                        StartTime: { type: "string" },
+                        StartAddress: { type: "string" },
+                        StartGeofenceID: { type: "string" },
+                        StopTime: { type: "string" },
+                        StopAddress: { type: "string" },
+                        StopGeofenceID: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else if (IdReport == '39') {
+                    $("#chart").html('');
+                    $("#chart").hide();
+                    arrayColumns.push({
+                        template: "<div class='customer-photo'" +
+                            "<div class='ReportName'>#: ReportName #</div>",
+                        field: "ReportName",
+                        title: "ReportName",
+                        width: "200px"
+                    },
+                        { field: "DateFrom", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DateTo", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "DeviceName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventDate", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "EventName", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Latitude", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "Longitude", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "FullAddress", format: "{0:c}", width: "200px", height: "5px" },
+                        { field: "GeofenceName", format: "{0:c}", width: "200px", height: "5px" },
+                    );
+                    jsonFields.push({
+                        ReportName: { type: "string" },
+                        DateFrom: { type: "string" },
+                        DateTo: { type: "string" },
+                        DeviceName: { type: "string" },
+                        EventDate: { type: "string" },
+                        EventName: { type: "string" },
+                        Latitude: { type: "string" },
+                        Longitude: { type: "string" },
+                        FullAddress: { type: "string" },
+                        GeofenceName: { type: "string" }
+                    }
+                    );
+                    createGridTempLog(array, jsonFields, arrayColumns);
+                }
+                else {
+                    alert('Reports Not Identificated');
+                }
+
+            }
+            catch (error) {
+                alert('Error: ' + error.message);
+            }
+            /* $('#loading').html('');*/
+            //createGridTempLog(array);
+        }
+        function loadControl() {
+            $("#textbox").kendoTextBox({
+                placeholder: "Search",
+                label: {
+                    content: "Search",
+                    floating: true
+                }
+            });
+        }
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

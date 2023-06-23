@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.Nvidia</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.Nvidia.NvencFormat">
+            <summary>
+            Enum class for NVENC format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.NvencFormat.Value">
+            <summary>
+            Gets the internal integer value representation of this nvenc format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.NvencFormat.Undefined">
+            <summary>
+            Undefined NVENC Format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.NvencFormat.NV12">
+            <summary>
+            NV12 Format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.NvencFormat.YV12">
+            <summary>
+            YV12 Format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.NvencFormat.IYUV">
+            <summary>
+            IYUV Format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.NvencFormat.ARGB">
+            <summary>
+            ARGB Format.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.NvencFormat.ABGR">
+            <summary>
+            ABGR Format.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.NvencFormat.GetNvencFormatFromVideoFormat(FM.LiveSwitch.VideoFormat)">
+            <summary>
+            Get enum type of NVENC format based on video format.
+            </summary>
+            <param name="videoFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Nvidia.Decoder">
+            <summary>
+            An NVDEC-based decoder.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Decoder.NeedsKeyFrame">
+            <summary>
+            Gets a value indicating whether the decoder needs a key frame.
+            </summary>
+            <value>
+              <c>true</c> if [needs key frame]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Decoder.ProfileLevelId">
+            <summary>
+            Gets the profile level identifier.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Decoder.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Decoder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Decoder" /> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Decoder.#ctor(FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Decoder" /> class.
+            </summary>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Decoder.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Decoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Decoder.#ctor(FM.LiveSwitch.IVideoOutput,FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Decoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Decoder.DoProcessFrame(FM.LiveSwitch.VideoFrame,FM.LiveSwitch.VideoBuffer)">
+            <summary>
+            Processes a frame.
+            </summary>
+            <param name="frame">The frame.</param>
+            <param name="inputBuffer">The input buffer.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Decoder.IsKeyFrame(FM.LiveSwitch.DataBuffer)">
+            <summary>
+            Determines whether a data buffer represents a keyframe.
+            </summary>
+            <param name="dataBuffer">The data buffer.</param>
+            
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Decoder.DoDestroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Nvidia.Encoder">
+            <summary>
+            An NVENC-based encoder.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Encoder.ForceKeyFrame">
+            <summary>
+            Gets or sets a value indicating whether a keyframe should be forced.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Encoder.MinCodecBitrate">
+            <summary>
+            Gets the minimum possible codec bitrate, in kbps.
+            Set to 100kbps.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Encoder.MaxCodecBitrate">
+            <summary>
+            Gets the maximum possible codec bitrate, in kbps.
+            Set to 100,000kbps.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Encoder.Quality">
+            <summary>
+            Gets or sets encoder quality by setting intensity of QP adjustment.
+            Quality control is based on Spatial AQ mode adjustment.
+            Spatial AQ mode adjusts the QP values based on spatial characteristics of the frame. 
+            Since the low complexity flat regions are visually more perceptible to quality differences than high complexity detailed regions, 
+            extra bits are allocated to flat regions of the frame at the cost of the regions having high spatial detail.
+            Although spatial AQ improves the perceptible visual quality of the encoded video, 
+            the required bit redistribution results in PSNR drop in most of the cases. Therefore, during PSNR-based evaluation, 
+            this feature should be turned off. 
+            The intensity of QP adjustment can be controlled by setting NV_ENC_INITIALIZE_PARAMS::encodeconfig->rcParams.aqStrength 
+            which ranges from 1 (least aggressive) to 15 (most aggressive). If not set, strength is auto selected by driver..
+            </summary>
+            <value>
+            Quality range from 1 to 15.
+            </value>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Encoder.ProfileLevelId">
+            <summary>
+            Gets the profile level identifier.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Encoder.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Encoder" /> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.#ctor(FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Encoder" /> class with a profile level ID.
+            </summary>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Encoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.#ctor(FM.LiveSwitch.IVideoOutput,FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Encoder"/> class.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.#ctor(FM.LiveSwitch.VideoFormat)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Encoder" /> class.
+            </summary>
+            <param name="inputFormat">The input format.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.#ctor(FM.LiveSwitch.VideoFormat,FM.LiveSwitch.H264.ProfileLevelId)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Encoder" /> class.
+            </summary>
+            <param name="inputFormat">The input format.</param>
+            <param name="profileLevelId">The profile level ID.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.DoDestroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.DoProcessFrame(FM.LiveSwitch.VideoFrame,FM.LiveSwitch.VideoBuffer)">
+            <summary>
+            Processes a frame.
+            </summary>
+            <param name="frame">The frame.</param>
+            <param name="inputBuffer">The input buffer.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Encoder.DoEncode(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Encode video data by using pointer either from CPU or GPU memory. EXPERIMENTAL.
+            </summary>
+            <param name="nativePointer"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="index"></param>
+            <param name="length"></param>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Native.Bitrate">
+            <summary>
+            Gets or sets the bitrate.
+            </summary>
+            <value>
+            The bitrate.
+            </value>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Native.Quality">
+            <summary>
+            Gets or sets the quality(1 - 15).
+            </summary>
+            <value>
+            The bitrate.
+            </value>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Native.NeedsKeyFrame">
+            <summary>
+            Gets or sets a value indicating whether [needs key frame].
+            </summary>
+            <value>
+              <c>true</c> if [needs key frame]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Native.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Native"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Native.#ctor(System.Boolean,FM.LiveSwitch.VideoFormat)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Nvidia.Native"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Native.Destroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Native.Encode(FM.LiveSwitch.VideoBuffer,FM.LiveSwitch.VideoFormat)">
+            <summary>
+            Takes an buffer, encodes and returns a encoded h264 buffer.
+            </summary>
+            <param name="buffer">The buffer.</param>
+            <param name="outputFormat">The output format.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Native.Encode(System.IntPtr,System.Int32,System.Int32,System.Int32,System.Int32,FM.LiveSwitch.VideoFormat)">
+            <summary>
+            
+            </summary>
+            <param name="nativePointer"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="index"></param>
+            <param name="length"></param>
+            <param name="outputFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Nvidia.Native.Decode(FM.LiveSwitch.VideoBuffer,FM.LiveSwitch.VideoFormat)">
+            <summary>
+            Decodes a buffer containing a VPX format to an I420 format.
+            </summary>
+            <param name="encodedFrame">The encoded frame.</param>
+            <param name="outputFormat">The output format.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.Nvidia.Utility">
+            <summary>
+            Nvidia-related utility functions.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Utility.NvencSupported">
+            <summary>
+            Gets whether this platform supports NVENC.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Nvidia.Utility.NvdecSupported">
+            <summary>
+            Gets whether this platform supports NVDEC.
+            </summary>
+        </member>
+    </members>
+</doc>

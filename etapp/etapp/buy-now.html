@@ -1,0 +1,675 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EasiTrack - Buy Now</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/ws.css" rel="stylesheet" type="text/css" />
+
+    <!--    Javascript includes -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" type="text/javascript"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/webForms.js"></script>
+    <script src="Scripts/ccvalidate.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadPrices(1);
+            $("#cbxServices").val("13");
+
+            $("#cbxServices").change(function () {
+                calcForm()
+            });
+            $("#shippingOptions").change(function () {
+                calcForm()
+            });
+            $("#obdConnector").change(function () {
+                calcForm()
+            });
+            $("#postedSpeedLimit").change(function () {
+                calcForm()
+            });
+
+            //if this comes from an internal call...
+            var s = getParameterByName('s');
+            if (s == 1) {
+                var t = getParameterByName('t');
+                if (t != '') {
+                    loadCustomer(t);
+                }
+            }
+            //If there is a previous shopping cart, load it...
+            var editionIndex = getParameterByName('ed');
+            if (editionIndex) {
+                if (editionIndex >= 0) {
+                    var exdate = new Date();
+                    var expiredays = 100;
+                    exdate.setDate(exdate.getDate() + expiredays);
+                    document.cookie = "ETED=" + editionIndex + "; expires=" + exdate.toUTCString();
+                    editionIndex = -1;
+                }
+            }
+            var param = getParameterByName('d');
+            loadForm(param);
+
+            var promo = getParameterByName('promo');
+            if (promo == undefined) {
+                promo = '';
+            }
+            if (promo.length > 0) {
+                $('#promoCode').val(promo);
+                applyPromoCode();
+            }
+            $("#dialog").dialog({
+                autoOpen: false
+            });
+            $("#opener").click(function () {
+                $("#dialog").dialog("open");
+            });
+
+            $("#dialogPostedSpeedLimit").dialog({
+                autoOpen: false
+            });
+            $("#openerPostedSpeedLimit").click(function () {
+                $("#dialogPostedSpeedLimit").dialog("open");
+            });
+
+        });
+    </script>
+
+    <script>
+    window['_fs_debug'] = false;
+    window['_fs_host'] = 'www.fullstory.com';
+    window['_fs_org'] = '13PWT';
+    (function (m, n, e, t, l, o, g, y) {
+        g = m[e] = function (a, b) { g.q ? g.q.push([a, b]) : g._api(a, b); }; g.q = [];
+        o = n.createElement(t); o.async = 1; o.src = 'https://' + _fs_host + '/s/fs.js';
+        y = n.getElementsByTagName(t)[0]; y.parentNode.insertBefore(o, y);
+        g.identify = function (i, v) { g(l, { uid: i }); if (v) g(l, v) }; g.setUserVars = function (v) { FS(l, v) };
+        g.identifyAccount = function (i, v) { o = 'account'; v = v || {}; v.acctId = i; FS(o, v) };
+        g.clearUserCookie = function (d, i) {
+            d = n.domain; while (1) {
+                n.cookie = 'fs_uid=;domain=' + d +
+                ';path=/;expires=' + new Date(0); i = d.indexOf('.'); if (i < 0) break; d = d.slice(i + 1)
+            }
+        }
+    })(window, document, 'FS', 'script', 'user');
+    </script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25669991-1']);
+        _gaq.push(['_setDomainName', '.easitrack.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+</head>
+<body>
+    <div id="headerWS">
+        <div id="topMenuWS">
+            <div id="contactInfo" style="float:right;margin-top:15px;margin-right:20px;">
+
+                <div style="margin-top:5px;text-align:right;">
+                    <span class="tollFreeNumber">Call Now! ( 888 ) 744-6449</span>
+                </div>
+            </div>
+            <div class="logoPositionWS">
+                <img src="images/logo3_silverx60h.png" alt="EasiTrack Logo" />
+            </div>
+        </div>
+    </div>
+    <div id="wsWrapper">
+        <div style="width:1024px; margin:auto;">
+            <div style="width:1024px;height:30px;margin:auto;text-align:center;background-color:#d7fcdd;background-image:url(https://easitrack.net/images/QuoteBanner.jpg); background-repeat:no-repeat; background-position:left;border-top:1px solid #a1a1a1;border-bottom:1px solid #a1a1a1;">
+                <p style="margin-left:20px;margin-top:0px;font-size:14px;font-weight:600;color:#ffffff;line-height:30px;">easiTrack Sales Order Form</p>
+            </div>
+            <div style="width:750px;margin-left:100px;">
+                <table>
+                    <tr style="vertical-align:top;">
+                        <td style="width:100px;border:0px solid black;text-align:right;">
+                            <div style="padding:10px;">
+                                <!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
+                                <script language="JavaScript" type="text/javascript"
+                                        src="//smarticon.geotrust.com/si.js"></script>
+                                <!-- end  GeoTrust Smart Icon tag -->
+                            </div>
+                            <br />
+                            <div style="padding:10px;">
+                                <img src="https://easitrack.net/images/RapidSSL_SEAL-90x50.gif" alt="SSL Seal" />
+                            </div>
+                            <br />
+                            <div style="padding:10px;">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="https://easitrack.net/images/logo_ccVisa.gif" alt="Amex" />
+                                        </td>
+                                        <td>
+                                            <img src="https://easitrack.net/images/logo_ccMC.gif" alt="Amex" />
+                                        </td>
+                                        <td>
+                                            <img src="https://easitrack.net/images/logo_ccAmex.gif" alt="Amex" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br />
+                            <div style="padding:10px;">
+                                <a id="downloadLink" href="https://easitrack.net/docs/PCI_Compliance.pdf" target="_blank" type="application/octet-stream" download="EasiTrack_PCI_Compliance.pdf"><img src="https://easitrack.net/images/PCI-Compliance.png" alt="PCI Compliance Certificate" /></a>
+                            </div>
+                            <br />
+                        </td>
+                        <td>
+                            <fieldset style="margin-left:10px;width:620px;padding:10px;">
+                                <input id="formId" name="formId" type="hidden" value="DDCD27C3-23C5-4660-BCF0-D00692D165D3" />
+                                <div style="width:590px; margin:1px; background-color:#d5edf7; padding:5px;text-align:center;">
+                                    <h1>To order, please fill the form below</h1>
+                                    <!--<h3 style="color:Red;">** This is a secure form - Information is encrypted **</h3>-->
+                                </div>
+                                <table style="background-color:#f1f1f1;width:600px;">
+                                    <tr style="background-color:#c1c1c1;font-weight:600;">
+                                        <td style="padding:5px;width:150px;">
+                                            <span>Product</span>
+                                        </td>
+                                        <td style="text-align:right;padding-right:10px;width:90px;">
+                                            <span>Unit Price</span>
+                                        </td>
+                                        <td style="text-align:right;padding-right:10px;width:100px;">
+                                            <span>Quantity</span>
+                                        </td>
+                                        <td style="text-align:right;padding-right:10px;width:180px;">
+                                            <span>Total</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="orderItem">
+                                        <td style="padding:5px;">
+                                            <span>GPS Tracker</span>
+                                        </td>
+                                        <td style="text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemPrice itm1">149.00</span>
+                                        </td>
+                                        <td style="text-align:right;padding-right:5px;">
+                                            <input type="text" id="qty" name="qty" size="5" class="formField mandatoryField rightAligned" onfocus="onEdit(this)" onkeyup="calcForm()" onblur="onEndEdit(this)" value="0" />
+                                        </td>
+                                        <td style="text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemTotal">0.00</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="orderItem">
+                                        <td style="padding:5px;border-top:1px dotted #a1a1a1;">
+                                            <select id="cbxServices" name="cbxServices">
+                                                <option value="13" selected="selected">Professional Edition</option>
+                                                <option value="17" selected="selected">1st month</option>
+                                            </select>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemPrice itm2">$17.99</span> vehicle/month
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span class="enteredQty">0</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemTotal">0.00</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr id="orderItemFollowingMonths" class="orderItem" style="display:none;">
+                                        <td style="padding:5px;border-top:1px dotted #a1a1a1;">
+                                            <span>FOLLOWING MONTHS</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span>$17.99</span> vehicle
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">                                         
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                        </td>
+                                    </tr>
+
+                                    <tr id="orderItemLastMonth" class="orderItem" style="display:none;">
+                                        <td style="padding:5px;border-top:1px dotted #a1a1a1;">
+                                            <span>Last month</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemPrice itm2_lastMonth">$17.99</span> vehicle
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span class="enteredQty">0</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemTotal">0.00</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="optionalOrderItem">
+                                        <td style="padding:5px;border-top:1px dotted #a1a1a1;">
+                                            <span>
+                                                <input type="checkbox" id="obdConnector" class="optionalCheck" />
+                                                <span style="cursor:pointer;" title="The OBD Connector provides an easier way to connect the device to the vehicle.  Just plug it to the OBD port of your vehicle."><strong>OPTIONAL:</strong> OBD Connector</span>
+                                                <a id="opener" style="font-size:10px;cursor:pointer;">(What is this?)</a>
+                                            </span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemPrice itm4">$15.00</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span class="enteredQty">0</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemTotal">0.00</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="optionalOrderItem">
+                                        <td style="padding:5px;border-top:1px dotted #a1a1a1;">
+                                            <span>
+                                                <input type="checkbox" id="postedSpeedLimit" class="optionalCheck" />
+                                                <span style="cursor:pointer;" title="SpeedGauge's Posted Speed Limit Add-On allows you to monitor TRUE Speeding Incident in Real Time."><strong>OPTIONAL:</strong> SpeedGauge Posted Speed Limit</span>
+                                                <a id="openerPostedSpeedLimit" style="font-size:10px;cursor:pointer;">(What is this?)</a>
+                                            </span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemPrice itm5">$4.00</span> vehicle/month
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span class="enteredQty">0</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemTotal">0.00</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="orderItem">
+                                        <td style="padding:5px;border-top:1px dotted #a1a1a1;">
+                                            <span>Activation</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemPrice itm3">$0</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span class="enteredQty">0</span>
+                                        </td>
+                                        <td style="border-top:1px dotted #a1a1a1;text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="itemTotal">0.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td style="border-top:1px solid #a1a1a1;text-align:right;padding:5px 5px 5px 0px;font-weight:600;">
+                                            <span>Subtotal USD </span>
+                                            <span class="subTotal">0.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="shippingItem">
+                                        <td colspan="2" style="padding:5px;">
+                                            <span>Shipping: </span>
+                                            <select id="shippingOptions" name="shippingOptions">
+                                                <option value="0">Ground - FREE</option>
+                                                <option value="50">Next Day - USD 50</option>
+                                                <option value="15">Second day - $15</option>
+                                                <option value="10">Third Day - $10</option>
+                                            </select>
+                                        </td>
+                                        <td style="text-align:right;padding-right:5px;">
+                                            <span class="enteredQty">0</span>
+                                        </td>
+                                        <td style="text-align:right;padding-right:5px;">
+                                            <span>USD </span>
+                                            <span class="shippingTotal">0.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="padding:5px;">Promo Code: <input id="promoCode" type="text" style="width:50px;" /><button id="applyPromo" style="width:80px;" onclick="applyPromoCode()">Apply Promo</button></td>
+                                        <td style="border-top:1px solid #a1a1a1;text-align:right;padding:5px 5px 5px 0px;font-weight:600;">
+                                            <span>Total USD </span>
+                                            <span class="grandTotal">0.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td colspan="1" style="padding:5px 5px 5px 0px;">
+                                            <span style="font-size:10px;">Your credit card will be charged the total amount above plus any applicable taxes</span>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div style="width:590px; margin:1px; background-color:#d5edf7; padding:5px;">
+                                    <h3 style="margin-left:10px;">Shipping Information:</h3>
+                                </div>
+                                <table style="background-color:#f1f1f1;width:600px;">
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;width:150px;">
+                                            <label for="firstName">First Name</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="firstName" name="firstName" type="text" maxlength="20" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="lastName">Last Name</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="lastName" name="lastName" type="text" maxlength="20" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="email">Email</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="email" name="email" type="text" maxlength="100" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="phone">Phone</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="phone" name="phone" type="text" maxlength="50" size="15" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:top;">
+                                            <label for="phone">Cell Phone</label>
+                                        </td>
+                                        <td style="padding:3px; vertical-align:top;">
+                                            <input id="cellPhone" name="cellPhone" type="text" maxlength="50" size="15" class="formField" />
+                                            <p>Please provide your cell phone if you want us to keep you updated on the progress of this order via text message, including confirmation, shipping, etc.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="company">Company Name</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="company" name="company" type="text" maxlength="50" size="30" class="formField" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="street">Street</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="street" name="street" type="text" maxlength="50" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="city">City</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="city" name="city" type="text" maxlength="20" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="state">State</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="state" name="state" type="text" maxlength="15" size="15" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="postalCode">Postal Code</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="postalCode" name="postalCode" type="text" maxlength="15" size="15" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                                <div style="width:590px; margin:1px; background-color:#d5edf7; padding:5px;">
+                                    <h3 style="margin-left:10px;">Billing Information:</h3>
+                                </div>
+                                <table style="background-color:#f1f1f1;width:600px;">
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <img src="https://easitrack.net/images/logo_ccVisa.gif" alt="Amex" />
+                                                    </td>
+                                                    <td>
+                                                        <img src="https://easitrack.net/images/logo_ccMC.gif" alt="Amex" />
+                                                    </td>
+                                                    <td>
+                                                        <img src="https://easitrack.net/images/logo_ccAmex.gif" alt="Amex" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;width:150px;">
+                                            <label for="ccType">Credit Card Type</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <select id="ccType" class="cc-ddl-type">
+                                                <option value="VISA">Visa</option>
+                                                <option value="MC">MasterCard</option>
+                                                <option value="AMEX">American Express</option>
+                                                <option value="DIS">Discover</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccNumber">Credit Card Number</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccNumber" name="ccNumber" type="text" size="30" maxlength="21" class="formField mandatoryField cc-card-number" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccSecCode">Security Code</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccSecCode" name="ccSecCode" type="text" maxlength="5" size="5" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccExpMonth">Expiration</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <select id="ccExpMonth">
+                                                <option value="0">[Month]</option>
+                                                <option value="1">January</option>
+                                                <option value="2">February</option>
+                                                <option value="3">March</option>
+                                                <option value="4">April</option>
+                                                <option value="5">May</option>
+                                                <option value="6">June</option>
+                                                <option value="7">July</option>
+                                                <option value="8">August</option>
+                                                <option value="9">September</option>
+                                                <option value="10">October</option>
+                                                <option value="11">November</option>
+                                                <option value="12">December</option>
+                                            </select>
+                                            <select id="ccExpYear">
+                                                <option value="0">[Year]</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2020">2021</option>
+                                                <option value="2020">2022</option>
+                                                <option value="2020">2023</option>
+                                                <option value="2020">2024</option>
+                                                <option value="2020">2025</option>
+                                                <option value="2020">2026</option>
+                                                <option value="2020">2027</option>
+                                                <option value="2020">2028</option>
+                                                <option value="2020">2029</option>
+                                                <option value="2020">2030</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;width:150px;">
+                                            &nbsp;
+                                        </td>
+                                        <td style="padding:10px 0px 10px 3px;">
+                                            <a style="padding:3px;background-color:#ff0000;color:#ffffff;cursor:pointer;" onclick="copyShippingInfo()">Click here to copy Shipping Information</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;width:150px;">
+                                            <label for="ccFirstName">Credit Card First Name</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccFirstName" name="ccFirstName" type="text" maxlength="20" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccLastName">Credit Card Last Name</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccLastName" name="ccLastName" type="text" maxlength="20" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccStreet">Credit Card Street</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccStreet" name="ccStreet" type="text" maxlength="50" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccCity">Credit Card City</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccCity" name="ccCity" type="text" maxlength="20" size="30" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccState">Credit Card State</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccState" name="ccState" type="text" maxlength="15" size="15" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:3px;padding-left:30px;vertical-align:middle;">
+                                            <label for="ccPostalCode">Credit Card Postal Code</label>
+                                        </td>
+                                        <td style="padding:3px;">
+                                            <input id="ccPostalCode" name="ccPostalCode" type="text" maxlength="15" size="15" class="formField mandatoryField" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div style="width:590px; margin:1px; background-color:#d5edf7; padding:5px;">
+                                    <h3 style="margin-left:10px;">Special Instructions (optional)</h3>
+                                </div>
+                                <table style="background-color:#f1f1f1;width:600px;">
+                                    <tr>
+                                        <td>
+                                            <textarea id="specialInstructions" rows="5" cols="70"></textarea>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="background-color:#f1f1f1;width:600px;">
+                                    <tr style="text-align:center;">
+                                        <td style="padding:10px;">
+                                            <!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
+                                            <script language="JavaScript" type="text/javascript"
+                                                    src="//smarticon.geotrust.com/si.js"></script>
+                                            <!-- end  GeoTrust Smart Icon tag -->
+                                        </td>
+                                        <td colspan="1" style="padding:10px;">
+                                            <input name="submit" type="button" value="Place My Order" style="width:130px;height:40px;color:#ffffff;font-weight:600;background-color:Red;" onclick="buyNow()" />
+                                        </td>
+                                        <td style="padding:10px;">
+                                            <img src="https://easitrack.net/images/RapidSSL_SEAL-90x50.gif" alt="SSL Seal" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="font-size:10px;">
+            <span style="color:#888888;">Rep.ID:</span><input type="text" id="repId" name="repId" size="5" value="" style="height:15px;width:40px;" />
+        </div>
+
+    </div>
+    <br style="clear:both;" />
+    <div id="footer">
+        <div style="width:100%;text-align:center;margin-top:5px;">
+            <p>Do you have any question or need more information? <a href="http://www.easitrack.com/contact-us.html" style="color:#0000ff;">Please Contact Us</a></p>
+        </div>
+    </div>
+
+    <div id="dialog" title="OBD Connector" style="display:none;">
+        <p>The OBD Connector is a special cable that you can optionally purchase to make an easy installation.</p>
+        <br />
+        <p>This cable makes installation very easy as it just takes pluging one end of the cable to the GPS Tracker and the other end to the OBD2 port of your vehicle.</p>
+        <br />
+        <p>This option only works for vehicles that have an OBD port.  You can check <a href="http://www.easitrack.com/gtd-obd.html" target="_blank">HERE</a> for more information.</p>
+    </div>
+
+    <div id="dialogPostedSpeedLimit" title="Posted Speed Limit" style="display:none;">
+        <p>SpeedGauge Posted Speed Limit is an optional Add-On to your monthly service.</p>
+        <br />
+        <p>With Posted Speed Limit you get true speed limit monitoring in every street of the USA.</p>
+        <br />
+        <p>EasiTrack's special partnership with SpeedGauge allows us to bring this high value feature for a low monthly price.  Regular price: $6.00 to $8.00 vehicle/month.   Our discounted price: $4.00 vehicle/price.</p>
+        <br />
+        <p>With SpeedGauge, you can control speeding on residential streets, in school zones, and in adverse weather conditions.</p>
+        <br />
+        <p><b>Regular price:</b> $6.00 to $8.00 vehicle/month.</p>
+        <br />
+        <p><b>Our discounted price to you:</b> $4.00 vehicle/price.</p>
+        <br />
+        <p>You can check <a href="http://www.easitrack.com/gtd-postedSpeedLimit.html" target="_blank">HERE</a> for more information.</p>
+    </div>
+
+</body>
+</html>

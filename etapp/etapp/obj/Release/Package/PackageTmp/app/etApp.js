@@ -1,0 +1,1 @@
+﻿var etApp = angular.module('etApp', ['ngResource']);

@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Jobs</title>
+    <link href="js/libs/kendoui/styles/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="js/libs/kendoui/styles/kendo.bootstrap.min.css" rel="stylesheet" id="kendotheme" />
+    <link href="js/libs/kendoui/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="js/libs/kendoui/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="js/libs/kendoui/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="js/libs/kendoui/styles/kendo.dataviz.default.min.css" rel="stylesheet" />
+    <link href="js/libs/toast/jquery.toast.min.css" rel="stylesheet" />
+    
+    <link href="js/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="js/libs/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+    if (window.location.href.indexOf('matchpointgps') != -1) {
+        document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+    }
+    if (window.location.href.indexOf('adapco') != -1) {
+        document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+    }
+    if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+        document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+    }
+    </script>
+
+
+    <link href="appFieldService/css/jobs.css" rel="stylesheet" />
+   
+    <script src="js/libs/jquery/jquery.min.js"></script>
+    <script src="js/libs/jquery/jquery.cookies.min.js"></script>
+    <script src="js/libs/jquery/jquery-querystr.js"></script>
+    <script src="js/libs/toast/jquery.toast.min.js"></script>
+    <script src="js/libs/underscore/underscore-min.js"></script>      
+
+    <script src="js/libs/kendoui/js/kendo.all.min.js"></script>
+    <script src="js/libs/bootstrap/js/bootstrap.min.js"></script>  
+    <script src="js/libs/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="js/libs/bootstrap/js/bootstrap-popver.js"></script>
+    <script src="Scripts/authorization_006.js"></script>
+    <script src="Scripts/util.js"></script>
+   
+   <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=true"></script>-->
+
+    <script src="js/maps/maps.js"></script>
+
+    <link href="css/index-kendo.css" rel="stylesheet" />
+
+     <link href="css/app.css" rel="stylesheet" />
+
+     
+      <script src="js/libs/moment/moment.js"></script>
+    <script src="js/libs/daterange/daterangepicker.js"></script>
+    <script src="js/libs/daterange/dateFilter.js"></script>
+
+  <script src="/js/app.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div id="topMenu">
+            <div class="row">
+                <div class="col-md-3">
+                    <span id="dealerBrand" class="logoDesign">eTrack</span>
+                </div>
+                <div class="col-md-6">
+                    <div id="appModules" class="center-block">
+                        <span id="mod1"><input id="rbtTracking" name="panelType"  onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Tracking</span></span>
+                        <span id="mod2"><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Multi-Tracking</span></span>
+                        <span id="mod6"><input id="rbtFieldService" name="panelType" onclick="changePanel(6)" checked="checked" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Jobs</span></span>
+                        <span id="mod3"><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Reports</span></span>
+                        <span id="mod5"><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Maintenance</span></span>
+                        <span id="mod4"><input id="rbtSettings" name="panelType" onclick="changePanel(4)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Settings</span></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div id="welcomeTitle1" class="pull-right" style="padding:3px;">
+                        <span id="welcomeTitle">Welcome!</span>
+                        <input type="hidden" id="userFullName" />
+                        <button class="btn" ng-controller="logoutController" ng-click="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="bodyContent" class="color">
+
+        <div id="ContentModule">
+            <div id="tabstrip">
+                <ul>
+                    <li class="k-state-active">
+                        <label>Board View</label>
+                    </li>
+                    <!--<li>
+              <label>Calendar View</label>
+          </li>-->
+   <!--                 <li>
+                        <label>Map View</label>
+                    </li>-->
+              <!--      <li>
+                        <label>Jobs by User</label>
+                    </li>-->
+               <!--     <li>
+                        <label>Jobs by Type</label>
+                    </li>-->
+                </ul>
+                <div class="dv_tabs jobs_board" style="overflow-y: auto; vertical-align: top;">
+                    <div id="tabboard" class="filters" style="width: 100%;"></div>
+                    <div id="boardGrid" style="width: 100%; height: 100%; font-size: 12px;"></div>
+                </div>
+                <div class="dv_tabs jobs_calendar" style="overflow-y: auto;">
+                    <div id="tabcalendar" class="filters" style="width: 100%;"></div>
+                    <div id="content_panels" style="width: 100%;">
+
+                        <table style="width: 100%;" class="fontapp">
+                            <tr>
+                                <td style="vertical-align: top;">
+                                    <div id="contentUnAssigned" class="dv_ua" style="height: 100%; width: 300px;">
+                                        <div class="color" style="width: 94%; padding: 10px; text-align: center;"><span>UnAssigned</span><span style="margin-left: 3px;" id="lblUnassigned"></span></div>
+                                        <div class="dv_radio" style="padding: 6px;"></div>
+                                        <div class="dv_unassigned" style="border: 1px solid #808080; margin: 2px; overflow: auto;"></div>
+                                    </div>
+                                </td>
+                                <td style="vertical-align: top;">
+
+                                    <style scoped>
+                                        .k-scheduler-layout {
+                                            font-size: 12px;
+                                        }
+
+                                        .k-scheduler-table {
+                                            font-size: 12px;
+                                        }
+                                    </style>
+
+
+                                    <div id="UnAssigned_Container" class="section rightpanel" style="height: 100%; vertical-align: top;">
+                                        <div id="disp_scheduler" class="dv_ua" style="font-size: 11px;">
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+                    </div>
+
+                </div>
+                <div class="dv_tabs jobs_maps" style="overflow-y: auto; vertical-align: top;">
+                    <div id="tabmaps" class="filters" style="width: 100%;"></div>
+                    <div id="content_panels_maps">
+                        <table style="width: 100%;" class="fontapp">
+                            <tr>
+                                <td style="vertical-align: top; width: 300px;">
+
+                                    <div id="contentMaps" class="dv_ua" style="height: 100%; width: 300px;">
+                                        <div class="color" style="width: 94%; padding: 10px; text-align: center;"><span>Jobs</span><span style="margin-left: 3px;" id="lblJobsMaps"></span></div>
+                                        <div class="dv_radio_maps" style="padding: 6px;"></div>
+                                        <div class="dv_jobs_maps" style="border: 1px solid #808080; margin: 2px; overflow: auto;"></div>
+                                    </div>
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <div id="map_container" class="section rightpanel" style="height: 100%; float: left;">
+                                        <div id="map" class="dv_ua" style="height: 100%; margin: 0px; padding: 0px">mapas</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+
+                    </div>
+                </div>
+                <div class="dv_tabs jobs_byUser" style="vertical-align: top;">
+
+                    <div id="tabbyUser" class="filters" style="width: 100%;"></div>
+                    <div class="horizontal">
+                        <table id="tlbByUser" style="border: 1px solid #ccc; overflow: auto;">
+                            <thead id="byUserTableheader" style="height: 30px; font-size: 12px; font-weight: bold;" class="Color">
+                            </thead>
+                            <tbody id="byUserTablebody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="dv_tabs jobs_byType" style="overflow-y: auto; vertical-align: top;">
+                    <div id="tabbyType" class="filters">
+                    </div>
+                    <div class="horizontal">
+                        <table id="tlbByType" style="border: 1px solid #ccc; overflow: auto;">
+                            <thead id="byTypeTableheader" style="height: 30px; font-size: 12px; font-weight: bold;" class="Color">
+                            </thead>
+                            <tbody id="byTypeTablebody" style="overflow-x: auto;">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <footer class=""></footer>
+
+  <script src="modules/jobs/costumerForm.js"></script>
+  <script src="modules/jobs/jobForm.js"></script>
+  <script src="modules/jobs/jobs.js"></script>
+  <script src="js/libs/utils/util.js"></script>
+
+<script id="event-template" type="text/x-kendo-template">
+    <div class="job-template" style="color:#:statusForeColor#;padding:3px;height:100%;width:100%;background:#:statusColor#;" title=" Job Number : #: char ##: jobNumber  # \n Customer : #: custName #  \n Address : #: custAddress #  \n #: moment(start).format("MMM DD YYYY hh:mm A").toUpperCase() # - #: moment(end).format("MMM DD YYYY hh:mm A").toUpperCase() # \n Duration : ( #: durationHHMM # )\n User : #: userName #\n Status : #: statusName #">
+    <span class="mode_agenda" style="height:26px;" >
+          <span style="margin-top:0px;"><b>#: char ##: jobNumber  #</b> - Time : #: durationHHMM #</span>
+          <label> User : </label> ( #: userName # )
+          <label> Status: </label>  #: statusName #
+    </span>  
+    </div>
+</script>
+
+<script id="event-template-tooltip" type="text/x-kendo-template">
+   #var uid = target.attr("data-uid");#
+    #var scheduler = target.closest("[data-role=scheduler]").data("kendoScheduler");#
+    #var model = scheduler.occurrenceByUid(uid);#
+   
+    #if(model) {#
+
+        <strong>event start:</strong> #=kendo.format('{0:d}',model.start)#<br />
+        <strong>event end:</strong> #=kendo.format('{0:d}',model.end)#<br />
+        <strong>event description:</strong> #=model.title#<br />
+    #} else {#
+        <strong>No event data is available</strong>
+    #}#
+</script>
+
+<script id="unassigned-template" type="text/template">
+  <div id="row_<%= job.jobId %>" class="cursorPointer jobUnassigned" onclick="javascript: JobsModule.onUnassigned('<%= job.jobId %>');" style="border:1px solid  <%= job.statusColor %>;margin:1px;font-size:10px;" ondblclick="javascript: JobsModule.ondblclick('<%= job.jobId %>');">
+   <table style="width:99.5%;margin:3px;font-size:10px;">
+       <tr>
+           <td class="fontapp" style="width:12px;background:<%= job.statusColor %>;"></td>
+           <td>  
+               <table style="width:100%;">
+                   <tr><td> <span class="fontapp"><b>Job Number #<%= job.jobNumber %></b></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custName %></span></td></tr>
+                   <tr><td>  <span class="fontapp"><%= job.custAddress %></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custPhone %></span></td></tr>
+                   <tr><td><span class="fontapp"><%=  moment(job.start).format("MMM DD YYYY hh:mm A").toUpperCase() %> ( <%= job.durationHHMM %> )</span></td></tr>
+                   <tr><td>
+                       <table style="width:99.5%;font-size:11px;font-weight:bold;background:#ccc;">
+                           <tr>
+                               <td style="width:40%;text-align:center;"><span><%= job.statusName %></span></td>
+                                <td style="width:30%;text-align:center;"><span style="margin-left:4px;"><%= job.priorityName %></span></td>
+                                <td style="width:30%;text-align:center;"> <span style="margin-left:4px;"><%= job.categoryName %></span></td>
+                           </tr>
+                       </table>
+                        
+                      
+                           
+                           
+                      </td></tr>
+                 
+               </table>      
+           </td>
+       </tr>
+   </table>
+ </div>
+</script>
+
+<script id="dvmap-template" type="text/template">
+  <div id="rowmap_<%= job.jobId %>" class="cursorPointer jobMap" onclick="javascript: JobsModule.onUnassigned('<%= job.jobId %>');" style="border:1px solid  <%= job.statusColor %>;margin:1px;font-size:10px;" ondblclick="javascript: JobsModule.ondblclick('<%= job.jobId %>');">
+   <table style="width:99.5%;margin:3px;font-size:10px;">
+       <tr>
+           <td class="fontapp" style="width:12px;background:<%= job.statusColor %>;"></td>
+           <td>  
+               <table style="width:100%;">
+                   <tr><td> <span class="fontapp"><b>Job Number #<%= job.jobNumber %></b></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custName %></span></td></tr>
+                   <tr><td>  <span class="fontapp"><%= job.custAddress %></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custPhone %></span></td></tr>
+                   <tr><td><span class="fontapp"><%=  moment(job.start).format("MMM DD YYYY hh:mm A").toUpperCase() %> ( <%= job.durationHHMM %> )</span></td></tr>
+                   <tr><td>
+                       <table style="width:99.5%;font-size:11px;font-weight:bold;background:#ccc;">
+                           <tr>
+                               <td style="width:40%;text-align:center;"><span><%= job.statusName %></span></td>
+                                <td style="width:30%;text-align:center;"><span style="margin-left:4px;"><%= job.priorityName %></span></td>
+                                <td style="width:30%;text-align:center;"> <span style="margin-left:4px;"><%= job.categoryName %></span></td>
+                           </tr>
+                       </table>
+                        
+                      
+                           
+                           
+                      </td></tr>
+                 
+               </table>      
+           </td>
+       </tr>
+   </table>
+ </div>
+</script>
+
+<script id="user-template" type="text/template">
+  <div id="user_<%= job.jobId %>" class="cursorPointer jobUser" onclick="javascript: JobsModule.onUnassigned('<%= job.jobId %>');" style="border:1px solid  <%= job.statusColor %>;margin:1px;font-size:10px;" ondblclick="javascript: JobsModule.ondblclick('<%= job.jobId %>');">
+   <table style="width:99.5%;margin:3px;font-size:10px;">
+       <tr>
+           <td class="fontapp" style="width:12px;background:<%= job.statusColor %>;"></td>
+           <td>  
+               <table style="width:100%;">
+                   <tr><td> <span class="fontapp"><b>Job Number #<%= job.jobNumber %></b></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custName %></span></td></tr>
+                   <tr><td>  <span class="fontapp"><%= job.custAddress %></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custPhone %></span></td></tr>
+                   <tr><td><span class="fontapp"><%=  moment(job.start).format("MMM DD YYYY hh:mm A").toUpperCase() %> ( <%= job.durationHHMM %> )</span></td></tr>
+                   <tr><td>
+                       <table style="width:99.5%;font-size:11px;font-weight:bold;background:#ccc;">
+                           <tr>
+                               <td style="width:40%;text-align:center;"><span><%= job.statusName %></span></td>
+                                <td style="width:30%;text-align:center;"><span style="margin-left:4px;"><%= job.priorityName %></span></td>
+                                <td style="width:30%;text-align:center;"> <span style="margin-left:4px;"><%= job.categoryName %></span></td>
+                           </tr>
+                       </table>
+                        
+                      
+                           
+                           
+                      </td></tr>
+                 
+               </table>      
+           </td>
+       </tr>
+   </table>
+ </div>
+</script>
+
+<script id="type-template" type="text/template">
+  <div id="type_<%= job.jobId %>" class="cursorPointer jobType" onclick="javascript: JobsModule.onUnassigned('<%= job.jobId %>');" style="border:1px solid  <%= job.statusColor %>;margin:1px;font-size:10px;" ondblclick="javascript: JobsModule.ondblclick('<%= job.jobId %>');">
+   <table style="width:295px;margin:3px;font-size:10px;">
+       <tr>
+           <td class="fontapp" style="width:12px;background:<%= job.statusColor %>;"></td>
+           <td>  
+               <table style="width:100%;">
+                   <tr><td> <span class="fontapp"><b>Job Number #<%= job.jobNumber %></b></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custName %></span></td></tr>
+                   <tr><td>  <span class="fontapp"><%= job.custAddress %></span></td></tr>
+                   <tr><td><span class="fontapp"><%= job.custPhone %></span></td></tr>
+                   <tr><td><span class="fontapp"><%=  moment(job.start).format("MMM DD YYYY hh:mm A").toUpperCase() %> ( <%= job.durationHHMM %> )</span></td></tr>
+                   <tr><td>
+                       <table style="width:99.5%;font-size:11px;font-weight:bold;background:#ccc;">
+                           <tr>
+                               <td style="width:40%;text-align:center;"><span><%= job.statusName %></span></td>
+                                <td style="width:30%;text-align:center;"><span style="margin-left:4px;"><%= job.priorityName %></span></td>
+                              
+                           </tr>
+                       </table>
+                        
+                      
+                           
+                           
+                      </td></tr>
+                 
+               </table>      
+           </td>
+       </tr>
+   </table>
+ </div>
+</script>
+
+<script id="infowindows-template" type="text/template">
+        <table style="width:400px;font-size:12px;">
+                   <tr>
+                       <td class="right"><label>Job Number :</label></td>
+                        <td style="vertical-align:top;"> 
+                            <table style="font-size:12px;">
+                                <tr>
+                                    <td>
+                                        <span><%= marker.jobNumber %></span>
+
+                                    </td>
+                                    <td>
+                                        <span style="margin-left:3px;">( <%= marker.statusName %> )</span>
+
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;"><div style="margin-top:1px;border:1px solid #e8e8e8;height:13px;width:13px;background:<%= marker.statusColor %>;"></div></td>
+
+                                </tr>
+
+                            </table>
+
+                        </td>
+                   </tr>
+                   <tr>
+                       <td class="right"><label>User :</label></td>
+                        <td style="vertical-align:top;"><span><%= marker.userName %></span></td>
+                   </tr>
+                   <tr>
+                       <td class="right"><label>Priority :</label></td>
+                        <td style="vertical-align:top;"><span><%= marker.priorityName %></span></td>
+                   </tr>
+                   <tr>
+                       <td class="right"><label>Categoty :</label></td>
+                        <td style="vertical-align:top;"><p><%= marker.categoryName %></p></td>
+                   </tr>
+                    <tr>
+                       <td class="right"><label>Customer :</label></td>
+                        <td style="vertical-align:top;"><p><%= marker.custName %></p></td>
+                   </tr>
+                    <tr>
+                       <td class="right"><label>Address :</label></td>
+                        <td style="vertical-align:top;"><p><%= marker.custAddress %></p></td>
+                   </tr>
+                    <tr>
+                       <td class="right"><label>Begin Date :</label></td>
+                        <td style="vertical-align:top;"><%= moment(marker.start).format("MMM DD YYYY hh:mm A").toUpperCase() %></td>
+                   </tr>
+                   <tr>
+                       <td class="right"><label>End Date :</label></td>
+                        <td style="vertical-align:top;"><%= moment(marker.end).format("MMM DD YYYY hh:mm A").toUpperCase() %></td>
+                   </tr>
+                    <tr>
+                       <td class="right"><label>Duration :</label></td>
+                        <td style="vertical-align:top;"><%= marker.durationHHMM %></td>
+                   </tr>
+                 
+                 
+
+               </table>
+</script>
+          
+<script id="template-jobs-filters" type="text/template">
+    <table style="width: 100%; height: 25px; vertical-align: top;font-size:12px;">
+        <tr>
+            <td style="width: 100%; background: #e8e8e8;">
+
+                <table style="font-size:12px;">
+                    <tr>
+                        <td><span style="margin-left: 5px;" class="bold">Date :</span></td>
+                        
+                        <td><span style="margin-left: 5px;" class="bold">Customer :</span></td>
+                       
+                        <td><span style="margin-left: 5px;" class="bold">Priority :</span></td>
+                       
+                        <td><span style="margin-left: 5px;" class="bold">User :</span></td>
+                       
+                        <td><span style="margin-left: 5px;" class="bold">Status :</span></td>
+                         <td><span style="margin-left: 5px;" class="bold">Job Type :</span></td>
+                         <td><span style="margin-left: 5px;" class="bold">Job Number # :</span></td>
+                        
+                    </tr>
+                     <tr>
+                       
+                        <td>
+                            <span id="datepickerFilter<%=tab %>" class="pull-right k-dropdown-wrap" style="background: #fff; cursor: pointer; padding: 0px; border: 1px solid #ccc; width: 250px; vertical-align: middle; margin-top: 4px; font-size: 11px;">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar" style="vertical-align: middle; margin-left: 5px; padding-top: 4px;"></i>
+                                <span style="width: 90%; vertical-align: middle; padding-top: 6px;"></span>
+                                <b class="imgDdl" style="float: right; padding: 0px">Down</b>
+                            </span>
+                        </td>
+                       
+                        <td>
+                            <input  id="ddlCustomers<%=tab %>" style="width:180px;" /></td>
+                    
+                        <td>
+                            <input  id="ddlPriority<%=tab %>" /></td>
+                     
+                        <td>
+                            <input  id="ddlUsers<%=tab %>" style="width:150px;" /></td>
+                     
+                        <td>
+                            <input  id="ddlStatus<%=tab %>" /></td>
+                           <td>
+                            <input  id="ddlCategory<%=tab %>" style="width:180px;" /></td>
+                         <td>
+                            <input  id="tbxJobNumber<%=tab %>" class="k-textbox" /></td>
+                          <td ><span  class="k-icon k-i-search cursorPointer  btnsetSearch">&nbsp;</span></td>
+                    </tr>
+                </table>
+
+            </td>
+            <td style="width: 100px;background: #e8e8e8;padding:5px;">
+                <button class="btn btn-primary btnNewJob" style="padding: 5px;">New Job</button></td>
+        </tr>
+    </table>
+</script>
+
+<script id="template-jobs-radios" type="text/template">
+      <span>
+        <input  type="radio" name="calendar_chk_<%=tab %>" checked="checked" style="margin-left:30px;" value="0" /><label style="margin-left:3px;margin-right:5px;">Customer</label>
+        <input  type="radio" name="calendar_chk_<%=tab %>" value="1" /><label style="margin-left:3px;margin-right:5px;">Priority</label>
+        <input  type="radio" name="calendar_chk_<%=tab %>" value="2"/><label style="margin-left:3px;margin-right:5px;">Date</label>
+      </span>
+</script>
+
+</body>
+</html>

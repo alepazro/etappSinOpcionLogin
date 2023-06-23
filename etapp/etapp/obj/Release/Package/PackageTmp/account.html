@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>Account Details</title>
+
+    <!--    CSS includes -->
+<!--    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/flick-1.9.0/jquery-ui-1.9.0.custom.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/dd.css" rel="stylesheet" type="text/css" />
+
+    <!--    Javascript includes -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="Scripts/underscore-min.js"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/branding.js" type="text/javascript"></script>
+    <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+    <script src="Scripts/account.js" type="text/javascript"></script>
+    <script src="Scripts/creditCardValidate.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getAppFeatures(6, false);
+            getBrand();
+            $(document.getElementById('ctrlPanel')).attr('style', 'height:' + (h - 80) + 'px; width:18%; float:left; overflow:hidden; display:inline-block;');
+            $(document.getElementById('settingsContent')).attr('style', 'height:' + (h - 80) + 'px; width:80%; float:right;overflow:auto;margin-right:2px; overflow:auto; display:inline-block;');
+            if (landingEvent() == false) {
+               location.href = 'http://www.easitrack.com/index.html';
+            }
+        });
+    </script>
+
+    <!-- Start of easitrack Zendesk Widget script -->
+    <script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","easitrack.zendesk.com");
+/*]]>*/</script>
+    <!-- End of easitrack Zendesk Widget script -->
+
+</head>
+<body>
+    <div id="header">
+        <div id="topMenu">
+            <div class="logoPosition">
+                <span id="dealerBrand" class="logoDesign"></span>
+            </div>
+            <div id="welcomeTitleDiv">
+                <span id="welcomeTitleSpan"></span>
+            </div>
+        </div>
+    </div>
+    <div id="wsWrapper">
+        <div id="wrapper">
+            <div id="settingsContent">
+                <div id="companyDiv" style="display:none;width:100%;">
+                    <div style="width:100%;text-align:center;">
+                        <h2>Update Company Information</h2>
+                    </div>
+                    <div style="width:100%;background-color:#e2f1f5;border-bottom:1px solid #a1a1a1; padding:5px;margin-top:20px;">
+                        <h3>Basic Information</h3>
+                    </div>
+                    <table style="width:100%;background-color:#efefef;padding:5px;">
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Company Name:</td><td><input id="companyName" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Phone:</td><td><input id="phone" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Industry:</td><td><input id="industry" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Web Site:</td><td><input id="website" type="text" size="50" /></td>
+                        </tr>
+                    </table>
+                    <div style="width:100%;background-color:#e2f1f5;border-bottom:1px solid #a1a1a1; padding:5px;margin-top:20px;">
+                        <h3>Shipping Information</h3>
+                    </div>
+                    <table style="width:100%;background-color:#efefef;padding:5px;">
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Street:</td><td><input id="street" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">City:</td><td><input id="city" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">State:</td><td><input id="state" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Postal Code:</td><td><input id="postalCode" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Country:</td>
+                            <td>
+                                <select id="cbxCountry" style="width:150px;">
+                                    <option value="US">United States</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="width:100%;text-align:center;padding:10px;">
+                        <button id="btnSaveCompanyInfo" onclick="saveCompanyInfo()">Save</button>
+                        <button id="btnCancelCompanyInfo" onclick="cancelCompanyInfo()">Cancel</button>
+                    </div>
+                </div>
+                <div id="billingDiv" style="display:none;width:100%;">
+                    <div style="width:100%;text-align:center;">
+                        <h2>Update Billing Information</h2>
+                    </div>
+                    <div style="width:100%;background-color:#e2f1f5;border-bottom:1px solid #a1a1a1; padding:5px;margin-top:20px;">
+                        <h3>Billing Contact</h3>
+                    </div>
+                    <table style="width:100%;background-color:#efefef;padding:5px;">
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Billing Contact Name:</td><td><input id="billingContact" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Contact Email:</td><td><input id="billingEmail" type="text" size="50" /></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Contact Phone:</td><td><input id="billingPhone" type="text" size="50" /></td>
+                        </tr>
+                    </table>
+                    <div style="width:100%;background-color:#e2f1f5;border-bottom:1px solid #a1a1a1; padding:5px;margin-top:20px;">
+                        <h3>Credit Card information</h3>
+                    </div>
+                    <table style="width:100%;background-color:#efefef;padding:5px;">
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Credit Card Type:</td>
+                            <td>
+                                <select id="ccType" style="width:150px;">
+                                    <option value="0"></option>
+                                    <option value="VISA">Visa</option>
+                                    <option value="MC">MasterCard</option>
+                                    <option value="AMEX">American Express</option>
+                                    <option value="DIS">Discover</option>
+                                </select>
+                                <label id="err_ccType" class="inputError"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Credit Card Number:</td><td><input id="ccNumber" type="text" size="50" /><label id="err_ccNumber" class="inputError"></label></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Security Code:</td><td><input id="ccSecCode" type="text" size="20" maxlength="4" /><label id="err_ccSecCode" class="inputError"></label></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Exp. Month:</td>
+                            <td>
+                                <select id="ccExpMonth" style="width:150px;">
+                                    <option value="0"></option>
+                                    <option value="1">01 - January</option>
+                                    <option value="2">02 - February</option>
+                                    <option value="3">03 - March</option>
+                                    <option value="4">04 - April</option>
+                                    <option value="5">05 - May</option>
+                                    <option value="6">06 - June</option>
+                                    <option value="7">07 - July</option>
+                                    <option value="8">08 - August</option>
+                                    <option value="9">09 - September</option>
+                                    <option value="10">10 - October</option>
+                                    <option value="11">11 - November</option>
+                                    <option value="12">12 - December</option>
+                                </select>
+                                <label id="err_ccExpMonth" class="inputError"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Exp. Year:</td>
+                            <td>
+                                <select id="ccExpYear" style="width:150px;">
+                                    <option value="0"></option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                    <option value="2030">2030</option>
+                                </select>
+                                <label id="err_ccExpYear" class="inputError"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">CC First Name:</td><td><input id="ccFirstName" type="text" size="50" /><label id="err_ccFirstName" class="inputError"></label></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">CC Last Name:</td><td><input id="ccLastName" type="text" size="50" /><label id="err_ccLastName" class="inputError"></label></td>
+                        </tr>
+                    </table>
+                    <div style="width:100%;background-color:#e2f1f5;border-bottom:1px solid #a1a1a1; padding:5px;margin-top:20px;">
+                        <h3>Credit Card Billing Address (as shown in the credit card statement)</h3>
+                    </div>
+                    <table style="width:100%;background-color:#efefef;padding:5px;">
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Street:</td><td><input id="ccStreet" type="text" size="50" /><label id="err_ccStreet" class="inputError"></label></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">City:</td><td><input id="ccCity" type="text" size="50" /><label id="err_ccCity" class="inputError"></label></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">State:</td><td><input id="ccState" type="text" size="50" /><label id="err_ccState" class="inputError"></label></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Postal Code:</td><td><input id="ccPostalCode" type="text" size="50" /><label id="err_ccPostalCode" class="inputError"></label></td>
+                        </tr>
+                        <tr>
+                            <td style="width:20%;text-align:right;padding:5px;">Country:</td>
+                            <td>
+                                <select id="ccCountry" style="width:150px;">
+                                    <option value="US">United States</option>
+                                </select>
+                                <label id="err_ccCountry" class="inputError"></label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="width:100%;text-align:center;padding:10px;">
+                        <button id="btnSaveCCInfo" onclick="saveBillingInfo()">Save</button>&nbsp;
+                        <button id="btnCancelCCInfo" onclick="cancelBillingInfo()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div id="ctrlPanel">
+                <div id="ctrlPanelContainer">
+                    <div id="ctrlPanelContent">
+                        <div style="width:100%; display:block;">
+                            <p class="panelTitle">Account Settings</p>
+                        </div>
+                        <div style="width:100%; display:block; font-size:11px; margin-top:5px;">
+                            <p class="settingsItem" onclick="showAccountDivs(1)"><span>Company Information</span></p>
+                            <p class="settingsItem" onclick="showAccountDivs(2)"><span>Billing Information</span></p>
+                            <p class="settingsItem" onclick="closePage();return false;"><span style="color:#f00;font-weight:600;">EXIT</span></p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

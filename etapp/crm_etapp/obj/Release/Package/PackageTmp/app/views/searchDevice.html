@@ -1,0 +1,209 @@
+﻿<div class="ContentArea" style="padding:0;margin:0;">
+    <!-- Top Options for current module
+    ================================================== -->
+    <div class="TopOptions">
+        <h4 style="margin-top: 2px;">Search Device</h4>
+    </div>
+
+    <!-- Content Area
+    ================================================== -->
+    <div class="MainContent group" style="padding:0;margin:0;">
+        <div class="row-fluid">
+			<div class="control-group">
+				<label for="companyName" class="control-label">	
+					Device: 
+				</label>
+				<div class="controls">
+                    <select id="cbxSearchKey" class="form-control" ng-model="searchKey">
+                        <option value="1">Serial Number</option>
+                        <option value="2">Device ID</option>
+                    </select>
+                    <input type="text" id="txtSearchKey" ng-model="keyValue" />
+                    <button class="btn btn-primary" ng-click="searchDevice()">Search</button>
+				</div>
+			</div>
+        </div>
+        <form name="deviceForm" class="form-horizontal" style="padding:0;margin:0;">
+            <h4>Device Information</h4>
+            <hr />
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label" for="devCustomerName">Customer name:</label>
+                        <div class="controls">
+                            <a id="devCustomerName" href='crmViewCustomer.html?uid={{dev.customerGUID}}' target="_blank">{{dev.customerName}}</a>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devCustomerName">Move Unit to:</label>
+                        <div class="controls">
+                            <select id="cbxCompanies" class="form-control" ng-model="newCompanyId" ng-options="item.id as item.value for item in companies"></select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devCustomerName"></label>
+                        <div class="controls">
+                            <button type="button" class="btn btn-primary" ng-click="moveDevice()">Move Now</button>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devDeviceID">Device ID:</label>
+                        <div class="controls">
+                            <input type="text" id="txtDeviceId" name="txtDeviceId" class="input-medium" readonly="readonly" ng-model="dev.deviceId"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devDeviceName">Device Name:</label>
+                        <div class="controls">
+                            <input type="text" id="devDeviceName" name="devDeviceName" class="input-medium" readonly="readonly" ng-model="dev.deviceName"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devHistory">Device History:</label>
+                        <div class="controls">
+                            <a id="devHistory" href='crmDeviceData.html?did={{dev.deviceGUID}}' target="_blank">Click here to view history</a>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devSimCarrier">Sim Carrier:</label>
+                        <div class="controls">
+                            <input type="text" id="devSimCarrier" name="devSimCarrier" class="input-medium" readonly="readonly" ng-model="dev.simCarrier"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devSimNo">Sim No:</label>
+                        <div class="controls" >
+                            <input type="text" id="devSimNo" name="devSimNo" class="input-medium" readonly="readonly" ng-model="dev.simNo" style="font-size:12px;"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devSimAreaCode">Sim Area Code:</label>
+                        <div class="controls">
+                            <input type="text" id="devSimAreaCode" name="devSimAreaCode" class="input-medium" readonly="readonly" ng-model="dev.simAreaCode"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devSimPhoneNumber">Sim Phone Number:</label>
+                        <div class="controls">
+                            <input type="text" id="devSimPhoneNumber" name="devSimPhoneNumber" class="input-medium" readonly="readonly" ng-model="dev.simPhoneNumber"/>
+                        </div>
+                    </div>                     
+                </div>
+
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label" for="devSerialNumber">Serial Number:</label>
+                        <div class="controls">
+                            <input type="text" id="devSerialNumber" name="devSerialNumber" class="input-medium" readonly="readonly" ng-model="dev.serialNumber"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devIMEI">IMEI:</label>
+                        <div class="controls">
+                            <input type="text" id="devIMEI" name="devIMEI" class="input-medium" readonly="readonly" ng-model="dev.imei"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="devLastUpdatedOn">Last Updated On:</label>
+                        <div class="controls">
+                            <input type="text" id="devLastUpdatedOn" name="devLastUpdatedOn" class="input-medium" readonly="readonly" ng-model="dev.lastUpdatedOn"/>
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devEventDate">Last Event Date:</label>
+                        <div class="controls">
+                            <input type="text" id="devEventDate" name="devEventDate" class="input-medium" readonly="readonly" ng-model="dev.eventDate"/>
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devEventCode">Last Event Code:</label>
+                        <div class="controls">
+                            <input type="text" id="devEventCode" name="devEventCode" class="input-medium" readonly="readonly" ng-model="dev.eventCode"/>
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devGPSAge">GPS Age:</label>
+                        <div class="controls">
+                            <input type="text" id="devGPSAge" name="devGPSAge" class="input-medium" readonly="readonly" ng-model="dev.gpsAge"/>
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devLastGoodGPSOn">Last Good GPS On:</label>
+                        <div class="controls">
+                            <input type="text" id="devLastGoodGPSOn" name="devLastGoodGPSOn" class="input-medium" readonly="readonly" ng-model="dev.lastGoodGpsOn"/>
+                        </div>
+                    </div>    
+
+                </div>
+
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label" for="devIsNotWorking">Is Not Working:</label>
+                        <div class="controls">
+                            <input type="text" id="devIsNotWorking" name="devIsNotWorking" class="input-medium" readonly="readonly" ng-model="dev.isNotWorking">
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devNotWorkingSince">Not Working Since:</label>
+                        <div class="controls">
+                            <input type="text" id="devNotWorkingSince" name="devNotWorkingSince" class="input-medium" readonly="readonly" ng-model="dev.notWorkingSince">
+                        </div>
+                    </div>                     
+                                         
+                    <div class="control-group">
+                        <label class="control-label" for="devIsInactive">Is Inactive:</label>
+                        <div class="controls">
+                            <input type="text" id="devIsInactive" name="devIsInactive" class="input-medium" readonly="readonly" ng-model="dev.isInactive">
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devInactiveReason">Inactive Reason:</label>
+                        <div class="controls">
+                            <input type="text" id="devInactiveReason" name="devInactiveReason" class="input-medium" readonly="readonly" ng-model="dev.inactiveReason">
+                        </div>
+                    </div>          
+                                   
+                    <div class="control-group">
+                        <label class="control-label" for="devIsRMA">Is RMA:</label>
+                        <div class="controls">
+                            <input type="text" id="devIsRMA" name="devIsRMA" class="input-medium" readonly="readonly" ng-model="dev.isRMA">
+                        </div>
+                    </div>                     
+
+                </div>
+
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label" for="devHasSpeedGauge">Has SpeedGauge:</label>
+                        <div class="controls">
+                            <input type="text" id="devHasSpeedGauge" name="devHasSpeedGauge" class="input-medium" readonly="readonly" ng-model="dev.hasSpeedGauge">
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devSGStatus">SpeedGauge Status:</label>
+                        <div class="controls">
+                            <input type="text" id="devSGStatus" name="devSGStatus" class="input-medium" readonly="readonly" ng-model="dev.sgStatus"/>
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devSGFee">SpeedGauge Fee:</label>
+                        <div class="controls">
+                            <input type="text" id="devSGFee" name="devSGFee" class="input-medium" ng-model="dev.sgFee"/>
+                        </div>
+                    </div>                     
+                    <div class="control-group">
+                        <label class="control-label" for="devSGActivate"></label>
+                        <div class="controls">
+                            <button type="button" class="btn btn-primary" ng-click="activateSG()" ng-show="dev.hasSpeedGauge == false">Activate SpeedGauge</button>
+                            <button type="button" class="btn btn-danger" ng-click="inactivateSG()" ng-show="dev.hasSpeedGauge == true">Deactivate SpeedGauge</button>
+                        </div>
+                    </div>                     
+
+                </div>
+            </div>
+        </form>
+        <div class="text-center">
+            <a class="btn btn-warning cancel" ng-click="closeForm()">Close</a>
+        </div>
+    </div>
+</div>

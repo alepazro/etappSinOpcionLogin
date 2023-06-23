@@ -1,0 +1,7 @@
+﻿<div>
+    <ul class="list-unstyled">
+        <li ng-repeat="itm in fields">
+            <input type="checkbox" id="{{itm.deviceId}}" ng-model="itm.isSelected">&nbsp;{{itm.deviceId}} - {{itm.serialNumber}}
+        </li>
+    </ul>
+</div>

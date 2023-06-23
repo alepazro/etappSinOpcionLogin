@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>Tracking Panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!--    CSS includes -->
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+
+<!--    Javascript includes -->
+    <script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-ui-1.8.15.custom.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.tabSlideOut.v1.3.js" type="text/javascript"></script>
+    <script src="Scripts/juery.topbar.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+    <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+    <script src="Scripts/easiTrack.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.slide-out-div1').tabSlideOut({
+                tabHandle: '.handle1',                     //class of the element that will become your tab
+                pathToTabImage: 'images/Tab_Units.png',   //path to the image for the tab //Optionally can be set using css
+                imageHeight: '120px',                     //height of tab image           //Optionally can be set using css
+                imageWidth: '30px',                       //width of tab image            //Optionally can be set using css
+                tabLocation: 'right',                      //side of screen where tab lives, top, right, bottom, or left
+                speed: 300,                               //speed of animation
+                action: 'click',                          //options: 'click' or 'hover', action to trigger animation
+                topPos: '100px',                          //position from the top/ use if tabLocation is left or right
+                leftPos: '20px',                          //position from left/ use if tabLocation is bottom or top
+                fixedPosition: false                      //options: true makes it stick(fixed position) on scroll
+            });
+        });
+
+        $(function () {
+            $('.slide-out-div2').tabSlideOut({
+                tabHandle: '.handle2',                     //class of the element that will become your tab
+                pathToTabImage: 'images/Tab_Landmarks.png',   //path to the image for the tab //Optionally can be set using css
+                imageHeight: '120px',                     //height of tab image           //Optionally can be set using css
+                imageWidth: '30px',                       //width of tab image            //Optionally can be set using css
+                tabLocation: 'right',                      //side of screen where tab lives, top, right, bottom, or left
+                speed: 300,                               //speed of animation
+                action: 'click',                          //options: 'click' or 'hover', action to trigger animation
+                topPos: '220px',                          //position from the top/ use if tabLocation is left or right
+                leftPos: '20px',                          //position from left/ use if tabLocation is bottom or top
+                fixedPosition: false                      //options: true makes it stick(fixed position) on scroll
+            });
+        });
+
+        $(function () {
+            $('.slide-out-div3').tabSlideOut({
+                tabHandle: '.handle3',                     //class of the element that will become your tab
+                pathToTabImage: 'images/Tab_Alerts.png',   //path to the image for the tab //Optionally can be set using css
+                imageHeight: '120px',                     //height of tab image           //Optionally can be set using css
+                imageWidth: '30px',                       //width of tab image            //Optionally can be set using css
+                tabLocation: 'right',                      //side of screen where tab lives, top, right, bottom, or left
+                speed: 300,                               //speed of animation
+                action: 'click',                          //options: 'click' or 'hover', action to trigger animation
+                topPos: '340px',                          //position from the top/ use if tabLocation is left or right
+                leftPos: '20px',                          //position from left/ use if tabLocation is bottom or top
+                fixedPosition: false                      //options: true makes it stick(fixed position) on scroll
+            });
+        });
+
+        function showNotification() {
+            $('#demo01-body').showTopbarMessage({ close: 5000 });
+        }
+
+        $(document).ready(function () {
+            if (validateToken() == true) {
+                $('#ctrlPanel').hide();
+                document.getElementById('map_canvas').setAttribute('style', 'height:' + (h - 70) + 'px;');
+                initialize();
+                reloadDevices();
+            }
+        });
+    </script>
+
+    <style type="text/css">
+      
+          .slide-out-div1 {
+              padding: 20px;
+              width: 250px;
+              height:440px;
+              background: #ccc;
+              border: 1px solid #29216d;
+          }      
+          .slide-out-div2 {
+              padding: 20px;
+              width: 250px;
+              height:320px;
+              background: #ccc;
+              border: 1px solid #29216d;
+          }      
+          .slide-out-div3 {
+              padding: 20px;
+              width: 250px;
+              height:200px;
+              background: #ccc;
+              border: 1px solid #29216d;
+          }      
+        .k_float{
+	        z-index:9999999;
+	        position:fixed !important;
+	        position:absolute;
+	        cursor:pointer;
+        }
+        .k_bottom{
+	        bottom:0px;
+	        _top:expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? document.documentElement.scrollTop + (document.documentElement.clientHeight-this.clientHeight) - 1 :document.body.scrollTop + (document.body.clientHeight-this.clientHeight) - 1);
+        }        
+        .k_bottom_sl{
+	        bottom:15px;
+	        _top:expression(eval(document.compatMode && document.compatMode=='CSS1Compat') ? document.documentElement.scrollTop + (document.documentElement.clientHeight-this.clientHeight) - 16 :document.body.scrollTop + (document.body.clientHeight-this.clientHeight) - 16 );
+        }
+        .k_right{
+	        right:0px;
+        }
+        #k_slogan{
+	        font-family:'Trebuchet MS',Arial,Helvetica,sans-serif;
+	        font-size:9px;
+	        color:#666;
+	        margin-left:2px;
+	        margin-right:2px;
+	        cursor:default;
+        }
+        #k_slogan a{
+	        font-family:'Trebuchet MS',Arial,Helvetica,sans-serif;
+	        font-size:9px;
+	        color:#666;
+	        text-decoration: none;
+	        cursor:default;
+        }
+    </style>
+
+    <script type="text/javascript"><!--
+        setInterval("reloadDevices()", 1 * 30 * 1000);
+//        setInterval("showNotification()", 1 * 10 * 1000);
+    //--></script>
+</head>
+<body>
+    <div id="header">
+        <div id="topMenu">
+            <div id="logoutDiv" class="loginDivClass">
+                <span><a href="#" onclick="logout()" class="logoutLinkDiv">Logout</a></span>
+            </div>
+            <div class="logoPosition">
+                <span class="logoDesign">easiTrack</span>
+            </div>
+            <div id="panelTypes">
+                <span id="mod1"><input id="rbtTracking" name="panelType" onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Tracking</span></span>
+                <span id="mod2"><input id="rbtMultiTracking" name="panelType" onclick="changePanel(4)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Multi-Tracking</span></span>
+                <span id="mod3"><input id="rbtReports" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Reports</span></span>
+                <span id="mod5"><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Maintenance</span></span>
+                <span id="mod4"><input id="rbtSettings" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Settings</span></span>
+            </div>
+        </div>
+        <div id="middleMenu">
+            <ul id="mainMenu">
+                <li>
+                    <div class="mainMenuOption" onclick="mainMenuClick(vehiclesCtrlPanel);">
+                        <p>Fleet Manager</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="mainMenuOption" onclick="mainMenuClick(DispatchingCtrlPanel);">
+                        <p>Dispatching</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="mainMenuOption" onclick="mainMenuClick(SharedTrackingCtrlPanel);">
+                        <p>Alerts</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div id="ctrlPanel" style="float:left;width:250px;border:1px solid gray;">
+            <div id="closeCtrlPanelDiv" style="width:100%;height:18px;cursor:pointer;vertical-align:middle; text-align:right;">
+                <img src="images/RedCloseX.bmp" alt="Close Control Panel" onclick="closeCtrlPanel()" />
+            </div>
+            <div id="ctrlPanelContent">
+                <p>Groups</p>
+                <select id="devicesGroups">
+                    <option>[All Devices]</option>
+                    <option>Group 1</option>
+                    <option>Group 2</option>
+                    <option>Group 3</option>
+                </select>
+
+            </div>
+        </div>
+        <div id="map_canvas"></div>
+    </div>
+
+
+
+
+<!--    DIVS para los right-side slide-panels -->
+    <div class="slide-out-div1">
+        <a class="handle1" href="https://link-for-non-js-users.html">Content</a>
+        <h3>Units</h3>
+        <p>Thanks for checking out my jQuery plugin, I hope you find this useful.
+        </p>
+        <p>This can be a form to submit feedback, or contact info</p>
+    </div>
+    <div class="slide-out-div2">
+        <a class="handle2" href="https://link-for-non-js-users.html">Content</a>
+        <h3>Landmarks</h3>
+        <p>Thanks for checking out my jQuery plugin, I hope you find this useful.
+        </p>
+        <p>This can be a form to submit feedback, or contact info</p>
+    </div>
+    <div class="slide-out-div3">
+        <a class="handle3" href="https://link-for-non-js-users.html">Content</a>
+        <h3>Alerts</h3>
+        <p>Thanks for checking out my jQuery plugin, I hope you find this useful.
+        </p>
+        <p>This can be a form to submit feedback, or contact info</p>
+    </div>
+
+	<div id="demo01-body" style="display:none;">
+		This is a simple demo
+		<span style="font-size: small">(click to close)</span>
+	</div>
+
+
+<!--    DIV para el feedback en la esquina inferior derecha -->
+    <div>
+        <a href='#' id='kampylink' class='k_float k_bottom_sl k_right' onclick="javascript:k_button.open_ff('site_code=1822635&amp;lang=en&amp;form_id=64380');return false;">
+            <img src="https://cf.kampyle.com/buttons/en/orange/en-orange-corner-low-right.gif" alt="Feedback Form" border="0"/>
+        </a>
+    </div>
+    <div id='k_slogan' class='k_float k_bottom k_right'>
+        <a href='https://www.kampyle.com/solutions/customer-feedback-form' target='_blank'>Customer Feedback</a>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿<configuration>
+
+  <configSections>
+    <section name="websync" type="FM.WebSync.Server.Config, FM.WebSync.Server"/>
+  </configSections>
+
+  <!--
+    WEBSYNC NOTES:
+    
+    IIS in Classic mode and the Visual Studio web server require the path for
+    WebSync to be defined in <system.web/httpHandlers>.
+    
+    IIS in Integrated mode requires the path for WebSync to be defined in
+    <system.webServer/handlers>.
+    
+    MVC can use routes instead of HTTP handler definitions in web.config (see
+    WebSyncServer.AddRoute).
+  -->
+  <websync>
+    <server />
+  </websync>
+
+  <appSettings>
+    <!-- Required for WebSockets. -->
+    <add key="aspnet:UseTaskFriendlySynchronizationContext" value="true" />
+  </appSettings>
+  
+  <system.web>
+    <httpHandlers>
+      <add path="websync.ashx" verb="*" type="FM.WebSync.Server.RequestHandler" />
+    </httpHandlers>
+  </system.web>
+
+  <system.webServer>
+    <validation validateIntegratedModeConfiguration="false" />
+    <handlers>
+      <add path="websync.ashx" verb="*" type="FM.WebSync.Server.RequestHandler" name="WebSync Request Handler" preCondition="integratedMode" />
+    </handlers>
+  </system.webServer>
+
+</configuration>

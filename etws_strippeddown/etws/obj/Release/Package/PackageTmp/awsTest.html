@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>AWS Test</title>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function processAWSBounce() {
+            var data = $('#awsJson').val();
+            var jsonData = JSON.parse(data);
+            data = JSON.stringify(jsonData);
+
+            var url = 'https://pre.etrack.ws/etrest.svc/awsBouncesPOST';
+            //var url = 'https://etwsv2.elasticbeanstalk.com/etrest.svc/awsBouncesPOST';
+            //var url = 'etrest.svc/awsBouncesPOST';
+
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    contentType: 'application/json; charset=UTF-8',
+                    crossDomain : true,
+                    data: data,
+                    dataType: "json",
+                    processData: false,
+                    success: function (a, b, c) {
+                        var d = 1;
+                        alert("Success");
+                    },
+                    error: function (a, b, c) {
+                        var e = 1;
+                        alert("Failure: " + c);
+                    },
+                    async: true
+                });
+            }
+            catch (err) {
+                alert('processAWSBounce: ' + err.description);
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+    <h1 style="text-align:center;">AWS API Test Page</h1>
+    <h3>AWS Bounce Service</h3>
+    <p>This option tests whether we are receiving the json from AWS or not for email bounces or complaints..</p>
+    <br />
+    <textarea id="awsJson" rows="5" cols="300">{ "Type": "SubscriptionConfirmation" }</textarea>
+    <br />
+    <button id="processAWSBounce" onclick="processAWSBounce()">Process AWS Json for Bounce</button>
+
+</body>
+</html>

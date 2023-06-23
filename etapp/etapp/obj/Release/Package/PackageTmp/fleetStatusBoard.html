@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fleet Status Board</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+    <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="Styles/common.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="Styles/app.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="Styles/logo.css" rel="stylesheet" type="text/css" /> -->
+    <link href="Styles/fleetStatusBoard.css" rel="stylesheet" type="text/css" />
+
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/toggleSwitches.css" rel="stylesheet" type="text/css" />
+    <!--<link href="vendors/kendo-2013.3.1119/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.default.min.css" rel="stylesheet" />-->
+
+    <!-----custome files----------->
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">    
+    <script type="text/javascript">
+        if (window.location.href.indexOf('matchpointgps') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+        }
+        if (window.location.href.indexOf('adapco') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+        }
+        if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+        }
+    </script>
+    <!---------custome files--------->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section class="header-easytrack" id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="topstrip" id="topMenu">
+                    <nav class="navbar navbar-expand-md navbar-dark" id="toggle">
+                        <a href="#"><img src="images/Logo3.png" height="50"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown" id="mod1">
+                                    <!--  <a class="nav-link" id="rbtTracking">Tracking</a> -->
+                                    <label><input id="rbtTracking" name="panelType" checked="checked" onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Tracking">Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod2">
+                                    <!--  <a class="nav-link" id="rbtMultiTracking">Multi-Tracking</a> -->
+                                    <label><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Multi-Tracking">Multi-Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod3">
+                                    <!--  <a class="nav-link" id="rbtReports">Reports</a> -->
+                                    <label><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Reports">Reports</span></label>
+                                </li>
+                                <li class="nav-item" id="mod5">
+                                    <!--     <a class="nav-link" id="rbtMaintenance">Maintenance</a> -->
+                                    <label><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Maintenance">Maintenance</span></label>
+                                </li>
+                                <li class="nav-item" id="mod13">
+                                    <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                    <label><input id="rbtELOG" name="panelType" onclick="changePanel(13)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="E-LOG">E-LOG</span></label>
+                                </li>
+                                <li class="nav-item" id="mod4">
+                                    <!--   <a class="nav-link" id="rbtSettings">Settings</a> -->
+                                    <label><input id="rbtSettings" name="panelType" onclick="changePanel(4)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Settings">Settings</span></label>
+                                </li>
+
+                                <li class="mobiletext"><a id="trackingFleetLocation" href="#" class="mainMenuOption linkmobilenew lang" onclick="mainMenuClick('fleetLocationDiv')" key="FleetLocation">FleetLocation</a></li>
+                                <li class="mobiletext"><a id="trackingFleetStatusBoard" href="fleetStatusBoard.html" class="mainMenuOption linkmobilenew lang" key="FleetStatusBoard">Fleet Status Board</a></li>
+                                <li class="mobiletext"><a id="trackingHotSpots" href="hotSpots.html" class="mainMenuOption linkmobilenew lang" key="HotSpots">Hot Spots</a></li>
+
+                                <li class="linkmobilenew mobiletext">
+                                    <a href="#" onclick="logout()" class="loginDivClass lang" key="Logout">Logout</a>
+                                </li>
+                                <!-- <li class="linkmobilenew mobiletext">
+                                   <a id="feedback" class="dropdown-item" href="#">
+                                        <span style="font-weight:600;">Feedback</span>
+                                    </a>
+                                </li>-->
+
+                            </ul>
+                        </div>
+                        <div class="login-content-right">
+                            <ul>
+                                <li>
+                                    <div id="welcomeTitleDiv">
+                                        <span id="welcomeTitleSpan" style="color:white;font:bold"></span>
+                                    </div>
+                                </li>
+                                <li style="color:white;font:bold">
+                                    <a href="#" onclick="logout()" class="lang" key="Logout">Logout</a>
+                                </li>
+                                <!-- <li class="linkmobilenew mobiletext">
+                                   <a id="feedback" class="dropdown-item" href="#">
+                                        <span style="font-weight:600;">Feedback</span>
+                                    </a>
+                                </li>-->
+                                <li class="cart-icon" id="buyNowDiv">
+                                    <a href="#" onclick="buyNow()"><img src="images/cart-header.png"></a>
+                                </li>
+                                <li>
+                                    <select id="language" class="form-control" onchange="selectLanguage()" style="width:auto">
+                                        <option value="-1">Language</option>
+                                        <option value="es">ES</option>
+                                        <option value="en">EN</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="second-strip" id="middleMenu">
+        <div class="container-fluid">
+            <ul id="mainMenu">
+                <li><a id="trackingFleetLocation" href="#" class="mainMenuOption lang" onclick="mainMenuClick('fleetLocationDiv',1)" style="font-size:14px;font-weight:bold" key="FleetLocation">Fleet Location</a></li>
+                <li><a id="trackingQuickDispatch" href="#" class="mainMenuOption lang" onclick="mainMenuClick('dispatchingDiv',1)" style="font-size:14px;font-weight:bold" key="QuickDispatching">Quick Dispatching</a></li>
+                <li><a id="trackingBreadcrumbTrail" href="#" class="mainMenuOption lang" onclick="mainMenuClick('breadcrumbDiv',1)" style="font-size:14px;font-weight:bold" key="BreadcrumbTrail">Breadcrumb Trail</a></li>
+                <li><a id="trackingFleetStatusBoard" href="fleetStatusBoard.html" class="mainMenuOption lang" style="font-size:14px;font-weight:bold" key="FleetStatusBoard">Fleet Status Board</a></li>
+                <li><a id="trackingHotSpots" href="hotSpots.html" class="mainMenuOption lang" style="font-size:14px;font-weight:bold" key="HotSpots">Hot Spots</a></li>
+                <li><a id="trackingnumber" href="trakingnumberPanel.html" class="mainMenuOption lang" style="font-size:14px;font-weight:bold" key="TrakingNumber">Traking Number</a></li>
+                <li id="li_brokerorderpanel"><a id="brokerorderpanel" href="brokerorderpanel.html" class="mainMenuOption lang" style="font-size: 14px; font-weight: bold" key="brokerorderpanel">Broker Order</a></li>
+
+            </ul>
+        </div>
+    </section>
+    <div id="wrapper" class="content-wrap-custome everypages-all">
+        <!--<h3 class="text-center">Fleet Status Board</h3>-->
+        <div class="heading-content">
+            <div class="headnew-graph">
+                <h2 class="heading-custome-pages-new lang" key="FleetStatusBoard">Fleet Status Board</h2>
+            </div>
+            <div class="headnew-graph right">
+                <div class="form-inline">
+                    <label class="control-label lang" for="devPerPanel" key="Devicesperpanel">Devices per panel:</label>
+                    <input type="text" id="devPerPanel" name="devPerPanel" class="input-small" placeholder="All" value="" />
+                    <button class="btn lang" onclick="setPanels()" key="setPanels">Set Panels</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="boardPanels">
+            <ul id="tabsUl">
+                <li><a href="#tabs-1" class="lang" key="Panel1">Panel 1</a></li>
+            </ul>
+            <div id="tabs-1" class="table-responsive">
+                <table id="fleetBoard-1" class="table table-striped table-bordered table-hover table-condensed"></table>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="eventLocationMapDlg" title="Event Location">
+        <div id="mapCanvas" style="width:400px;height:400px;"></div>
+    </div>
+
+    <script id="device-template" type="text/template">
+        <thead>
+            <tr>
+                <th style="width:40px;" class="lang" key="Icon">Icon</th>
+                <th style="width:120px;" class="lang" key="Device">Device</th>
+                <th style="width:80px;" class="lang" key="Status">Status</th>
+                <th style="width:130px;" class="lang" key="EventDate">Event Date</th>
+                <th class="lang" key="Location">Location</th>
+                <th class="lang" key="Driver">Driver</th>
+                <th style="width:60px;" class="lang" key="Speed">Speed</th>
+                <th style="width:60px;" class="lang" key="Heading">Heading</th>
+                <th style="width:180px;">
+                    <table style="width:100%;">
+                        <tr>
+                            <td colspan="12" style="text-align:center;" class="lang" key="PTOStatus">PTO Status</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px; background-color:#F4F6F7;">1</td>
+                            <td style="width: 20px;">2</td>
+                            <td style="width: 20px; background-color: #F4F6F7;">3</td>
+                            <td style="width: 20px;">4</td>
+                            <!--<td style="width:15px;">5</td>
+                            <td style="width:15px;">6</td>
+                            <td style="width:15px;">7</td>
+                            <td style="width:15px;">8</td>-->
+                            <!--<td style="width:15px;">9</td>
+                            <td style="width:15px;">10</td>
+                            <td style="width:15px;">11</td>
+                            <td style="width:15px;">12</td>-->
+                        </tr>
+                    </table>
+                </th>
+                <th style="text-align:center;width:140px;">
+                    <table style="width:100%;">
+                        <tr>
+                            <td colspan="4" style="text-align:center;" class="lang" key="TempStatus">Temp. Status</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px; background-color: #F4F6F7;" title="">1</td>
+                            <td style="width: 20px; ">2</td>
+                            <td style="width: 20px; background-color: #F4F6F7;">3</td>
+                            <td style="width: 20px; ">4</td>
+                        </tr>
+                    </table>
+                </th>
+                <th style="text-align:center;width:140px;">
+                    <table style="width:100%;">
+                        <tr>
+                            <td colspan="4" style="text-align:center;" class="lang" key="Outputs(Relays)">Outputs (Relays)</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 20px; background-color: #F4F6F7;">1</td>
+                            <td style="width: 20px;">2</td>
+                            <td style="width: 20px; background-color: #F4F6F7;">3</td>
+                            <td style="width: 20px;">4</td>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="fleetBoardBody">
+            <% _.each(devices, function(device){ %>
+            <tr id="<%= device.id%>">
+                <td><img src="<%= device.iconUrl%>" alt="" height="36" width="36" /></td>
+                <td><%= device.name%></td>
+                <td style="background-color:<%=eventColor(device.eventCode) %>;"><%= device.eventName%></td>
+                <td><%= device.eventDate%></td>
+                <td><span style="text-decoration:underline;color:#0000ff;cursor:pointer;" onclick="showLocationInMap('mapCanvas', <%=device.latitude %>, <%=device.longitude %>)"><%= device.address%></span></td>
+                <td><%= device.driverName%></td>
+                <td class="text-center" style="background-color:<%=speedingColor(device.speed) %>;"><%= device.speed%></td>
+                <td class="text-center"><%= device.heading%></td>
+                <td style="width:180px;">
+                    <table style="width:100%;">
+                        <tr style="width:100%;">
+                            <!--<td style="width:15px;"><img src="<%= device.sw1%>" width="15" height="15" alt="Sensor 1" /></td>
+                            <td style="width:15px;"><img src="<%= device.sw2%>" width="15" height="15" alt="" /></td>
+                            <td style="width:15px;"><img src="<%= device.sw3%>" width="15" height="15" alt="" /></td>
+                            <td style="width:15px;"><img src="<%= device.sw4%>" width="15" height="15" alt="" /></td>-->
+                            <td style="width: 20px; background-color: #F4F6F7;"><img src="<%= device.pto1%>" alt="" /></td>
+                            <td style="width:20px;"><img src="<%= device.pto2%>" alt="" /></td>
+                            <td style="width: 20px; background-color: #F4F6F7;"><img src="<%= device.pto3%>" alt="" /></td>
+                            <td style="width:20px;"><img src="<%= device.pto4%>" alt="" /></td>
+                            <!--<td style="width:15px;"><img src="<%= device.pto5%>" width="15" height="15" alt="" /></td>
+                            <td style="width:15px;"><img src="<%= device.pto6%>" width="15" height="15" alt="" /></td>
+                            <td style="width:15px;"><img src="<%= device.pto7%>" width="15" height="15" alt="" /></td>
+                            <td style="width:15px;"><img src="<%= device.pto8%>" width="15" height="15" alt="" /></td>-->
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width: 20px; background-color:#F4F6F7;" title="<%=device.NameSensor1%>"><%=device.temp1%></td>
+                            <td style="width: 20px;" title="<%=device.NameSensor2%>"><%=device.temp2%></td>
+                            <td style="width: 20px; background-color: #F4F6F7;" title="<%=device.NameSensor3%>"><%=device.temp3%></td>
+                            <td style="width: 20px;" title="<%=device.NameSensor4%>"><%=device.temp4%></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width: 20px; background-color:#F4F6F7;"><%=device.relay1%></td>
+                            <td style="width: 20px;" class="text-center"><%=device.relay2%></td>
+                            <td style="width: 20px; background-color:#F4F6F7;"><%=device.relay3%></td>
+                            <td style="width: 20px;" class="text-center"><%=device.relay4%></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </script>
+
+    <script id="devRow-template" type="text/template">
+        <tr id="<%=id%>">
+            <td><img src="<%=iconUrl%>" alt="" height="36" width="36" /></td>
+            <td><%=name%></td>
+            <td style="background-color:<%=eventColor(eventCode) %>;"><%=eventName%></td>
+            <td><%=eventDate%></td>
+            <td><span style="text-decoration:underline;color:#0000ff;cursor:pointer;" onclick="showLocationInMap('mapCanvas', <%=latitude %>, <%=longitude %>)"><%=address%></span></td>
+            <td><%= driverName%></td>
+            <td class="text-center" style="background-color:<%=speedingColor(speed) %>;"><%=speed%></td>
+            <td class="text-center"><%=heading%></td>
+            <td style="width:180px;">
+                <table style="width:100%;">
+                    <tr style="width:100%;">
+                        <!--<td style="width:15px;"><img src="<%=sw1%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=sw2%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=sw3%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=sw4%>" width="15" height="15" alt="" /></td>-->
+                        <td style="width:15px;"><img src="<%=pto1%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=pto2%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=pto3%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=pto4%>" width="15" height="15" alt="" /></td>
+                        <!--<td style="width:15px;"><img src="<%=pto5%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=pto6%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=pto7%>" width="15" height="15" alt="" /></td>
+                        <td style="width:15px;"><img src="<%=pto8%>" width="15" height="15" alt="" /></td>-->
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table style="width:140px;">
+                    <tr>
+                        <td style="width:35px;" class="text-center" title="<%=NameSensor1%>"><%=temp1%></td>
+                        <td style="width:35px;" class="text-center" title="<%=NameSensor2%>"><%=temp2%></td>
+                        <td style="width:35px;" class="text-center" title="<%=NameSensor3%>"><%=temp3%></td>
+                        <td style="width:35px;" class="text-center" title="<%=NameSensor4%>"><%=temp4%></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table style="width:140px;">
+                    <tr>
+                        <td style="width:35px;" class="text-center"><%=relay1%></td>
+                        <td style="width:35px;" class="text-center"><%=relay2%></td>
+                        <td style="width:35px;" class="text-center"><%=relay3%></td>
+                        <td style="width:35px;" class="text-center"><%=relay4%></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+    <!--<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>-->
+    <script src="Scripts/underscore-min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.tools.min.js" type="text/javascript"></script>
+    <!--<script src="Scripts/date.format.js" type="text/javascript"></script>-->
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/branding.js" type="text/javascript"></script>
+    <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+    <script src="Scripts/fleetStatusBoard.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh4usXj1g6YjObXSwU0_tCnxfe511JLzA&sensor=false&libraries=geometry"></script>
+    <script src="Scripts/pageEngagement.js"></script>
+    <script src="PruebaMultiIdioma/js/script.js" charset="utf-8"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getAppFeatures(7);
+            getBrand();
+            setupEventLocationMapDlg();
+            $("#boardPanels").tabs();
+            setLastFetchOn();
+            $(document.getElementById('ctrlPanel')).attr('style', 'max-height:' + (h - 90) + 'px;');
+            if (validateToken(false, 'fleetStatusBoard.html') == true) {
+                setWelcomeTitle();
+                applyAccessRights();
+                loadFleetBoard();
+                setLiveChat();
+                setWebEngage();
+                pageEngagement();
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        setInterval("refreshFleetStatusBoard()", 1 * 10 * 1000);
+    </script>
+    <script>
+        $('.second-strip #mainMenu li').click(function () {
+            $('#mainMenu li.active').removeClass('active');
+            $(this).closest('li').addClass('active');
+        });
+
+        $('.form-dispatchnew legend label').click(function () {
+            $('legend label.active').removeClass('active');
+            $(this).closest('label').addClass('active');
+        });
+
+        // menu toggle
+        $(document).ready(function () {
+            $('#toggle .navbar-toggler').on('click', function () {
+                $('.navbar-collapse').toggleClass('open');
+            });
+        });
+    </script>
+</body>
+</html>

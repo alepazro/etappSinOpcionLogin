@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/devicesWS.js"></script>
+    <script type="text/javascript" src="Scripts/geofencesAPI.js"></script>
+    <script type="text/javascript" src="Scripts/eTrackUtilLib.js"></script>
+
+</head>
+<body>
+    <div>
+        <label for="txtLogin">Login:</label>
+        <input type="text" id="txtLogin" />
+
+        <label for="txtPassword">Password:</label>
+        <input type="password" id="txtPassword" />
+
+        <button id="btn1" onclick="auth()">Log In</button>
+        <button id="btn2" onclick="getList()">Get List</button>
+        <button id="btn3" onclick="getDeviceInfo()">Get One Unit</button>
+        <button id="btn4" onclick="getTrail()">Get Trail</button>
+
+        <br />
+
+        <button id="Button1" onclick="auth2()">Log In</button>
+        <button id="Button2" onclick="getList2()">Get List</button>
+        <button id="Button3" onclick="getDeviceInfo2()">Get One Unit</button>
+        <button id="Button4" onclick="getTrail2()">Get Trail</button>
+    </div>
+    <br />
+    <div>
+        <button id="dev1" onclick="getDevicesAPI()">Get All Devices - API</button>
+        <button id="geo1" onclick="postGeofence()">Post Geofence</button>
+    </div>
+
+    <div>
+        <button id="testSMSReply" onclick="smsReplyTest()">Test SMS Reply</button>
+    </div>
+
+    <div>
+        <button id="testFDTContact" onclick="fdtContact()">Test FDT Contact</button>
+        <button id="testQuickContact" onclick="quickContact()">Test Quick Contact</button>
+    </div>
+
+    <div>
+        <h2>Send command to device</h2>
+        <label>DeviceID: </label><input id="txtDeviceId" />
+        <label>Command:</label><input id="txtCommand"/>
+        <button onclick="sendCommandToDevice()">Send</button>
+    </div>
+
+
+</body>
+</html>

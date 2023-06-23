@@ -1,0 +1,9 @@
+- Alert on change of state border (FROM FL TO GA)
+- PDF or Excel attachments on reports
+- Hacer una pantalla mas permanente de Street-View
+- Mobile ET: Una pantalla para que el driver actualice Fueling y Maintenance desde su smartphone.
+- Agregar Alertas por voz (IVR)
+- Speed limit a nivel de geocerca
+- Poder ver las unidades en un momento del tiempo: Seleccionas una fecha y hora exacta y se muestran en el mapa donde estaban las unidades en ese momento.
+- Cuando se detecte una instalacion, enviar un SMS ofreciendo ayuda
+- Cuando se despache una unidad, enviar SMS con nro telefono de soporte

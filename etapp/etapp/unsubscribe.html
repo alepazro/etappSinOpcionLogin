@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>EasiTrack - Unsubscribe</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+    <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/ws.css" rel="stylesheet" type="text/css" />
+
+    <!--    Javascript includes -->
+    <script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/webForms.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            loadUnsubscribeInfo();
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25669991-1']);
+        _gaq.push(['_setDomainName', '.easitrack.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://secure' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+    <div id="headerWS">
+        <div id="topMenuWS">
+            <div id="customerLogin">
+                <a href="login.html" class="customerLoginText">Customer Login</a>
+            </div>
+            <!--<a href="login.html" class="loginDivClass">Login</a>-->
+            <div id="contactInfo" style="float:right;margin-top:15px;margin-right:20px;">
+
+                <div style="margin-top:5px;text-align:right;">
+                    <span class="tollFreeNumber">Call Now! ( 888 ) 713-8548</span>
+                </div>
+
+                <!--<span style="color:#ffffff;font-size:12px;font-weight:600;">Call Toll Free: (888) 713-8548</span>
+                <br />
+                <span style="color:#ffffff;font-size:11px;">email: sales@easiTrack.com</span>-->
+
+            </div>
+            <div class="logoPositionWS">
+                <img src="images/logo3_silverx60h.png" alt="EasiTrack Logo"/>
+            </div>
+        </div>
+    </div>
+    <div id="wsWrapper">
+        <div style="width:1024px; margin:auto;">
+            <div style="width:1024px;height:30px;margin:auto;text-align:center;background-color:#d7fcdd;background-image:url(../images/QuoteBanner.jpg); background-repeat:no-repeat; background-position:left;border-top:1px solid #a1a1a1;border-bottom:1px solid #a1a1a1;">
+                <p style="margin-left:20px;margin-top:0px;font-size:14px;font-weight:600;color:#ffffff;line-height:30px;">easiTrack Unsubscribe Page</p>
+            </div>
+            <div style="width:1024px;text-align:center;padding:20px;">
+                <h1>Hi <span id="contactName"></span></h1>
+                <h2 style="padding:10px;">You've been removed from the easiTrack mailing list.</h2>
+                <p>Please read our Farewell Quote below:</p>
+                <h4 style="padding:30px;"><span id="quote">"Don't cry because it's over.  Smile because it happened.  ~Theodor Seuss Geisel, attributed"</span></h4>
+                <a style="cursor:pointer;color:#0000ff;" onclick="getFamousQuote()">Next quote</a>
+            </div>
+        </div>
+    </div>
+    <br style="clear:both;" />
+    <div id="footer">
+        <div style="width:100%;text-align:center;margin-top:5px;">
+            <p>Do you have any question or need more information? <a href="contact-us.html" style="color:#0000ff;">Please Contact Us</a></p>
+        </div>
+    </div>
+</body>
+</html>

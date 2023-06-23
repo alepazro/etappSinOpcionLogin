@@ -1,0 +1,33 @@
+﻿.logoPosition
+{
+    float:left;
+    padding-left:20px;
+    padding-top:3px;
+    width:250px;
+}
+.logoPositionWS
+{
+    float:left;
+    padding-left:20px;
+    padding-top:10px;
+}
+.logoDesign
+{
+    color: #ffffff; 
+    font-weight: bold; 
+    font-family: 'Franklin Gothic Heavy', 'lucida grande', tahoma, verdana, arial, sans-serif; 
+    vertical-align: middle; 
+    font-size: 32px; 
+    letter-spacing: -0.01em; 
+    text-align: left;
+}
+.logoDesignWS
+{
+    color: #ffffff; 
+    font-weight: bold; 
+    font-family: 'Franklin Gothic Heavy', 'lucida grande', tahoma, verdana, arial, sans-serif; 
+    vertical-align: middle; 
+    font-size: 54px; 
+    letter-spacing: -0.0em; 
+    text-align: left;
+}

@@ -1,0 +1,262 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>View Customer</title>
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/redmond/jquery-ui-1.9.0.custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="jquery.jqGrid-4.4.1/css/ui.jqgrid.css" rel="stylesheet" type="text/css" />
+    <link href="jquery.jqGrid-4.4.1/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <!--<link href="scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet" />-->
+    <!--<link href="Styles/common.css" rel="stylesheet" type="text/css" />-->
+    <!--<link href="Styles/app.css" rel="stylesheet" type="text/css" />-->
+</head>
+<body>
+    <div class="container-md" style="background-color: #E6E6E6" id="grid">
+        <header>
+            <div id="welcomeTitleDiv" class="row">
+                <span id="welcomeTitleSpan"></span>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #5c9ccc">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item" style="margin:5px">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="panelType" id="rbtCustomers" onclick="changePanel(1)">
+                                    <label class="form-check-label" for="rbtCustomers">
+                                        Customers
+                                    </label>
+                                </div>
+                                <!--<input id="rbtCustomers" aria-current="page" name="panelType" checked="checked" type="radio" class="nav-link active" /><span>Customers</span>-->
+                            </li>
+                            <li class="nav-item" style="margin:5px">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="panelType" id="rbtCases" onclick="changePanel(2)">
+                                    <label class="form-check-label" for="rbtCases">
+                                        Cases
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="nav-item" style="margin:5px">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="panelType" id="rbtOnBoarding" onclick="changePanel(4)">
+                                    <label class="form-check-label" for="rbtOnBoarding">
+                                        OnBoarding
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="nav-item" style="margin:5px">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="panelType" id="rbtOnlineSupport" onclick="changePanel(5)">
+                                    <label class="form-check-label" for="rbtOnlineSupport">
+                                        Engagement Metrics
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="nav-item" style="margin:5px">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="panelType" id="rbtReports" onclick="changePanel(6)">
+                                    <label class="form-check-label" for="rbtReports">
+                                        Reports
+                                    </label>
+                                </div>
+                            </li>
+                            <li class="nav-item" style="margin:5px">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="panelType" id="rbtTools" onclick="changePanel(7)">
+                                    <label class="form-check-label" for="rbtTools">
+                                        Tools
+                                    </label>
+                                </div>
+                            </li>
+
+                        </ul>
+                        <a class="d-flex" href="#" onclick="crmLogout()">Logout</a>
+                        <!--<form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>-->
+                    </div>
+                </div>
+            </nav>
+            <!--<div id="divNarBar" class="row"></div>-->
+
+        </header>
+        <main>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Move Unit</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Move Company</button>
+                    <button class="nav-link" id="nav-Accelerometer-tab" data-bs-toggle="tab" data-bs-target="#nav-Accelerometer" type="button" role="tab" aria-controls="nav-Accelerometer" aria-selected="false">Set Accelerometer</button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div id="moveDealers" name="moveDealers">
+                        <p style="background-color: #5c9ccc">
+                            Move unit to another dealer
+                        </p>
+                        <div class="row" style="padding-bottom:10px">
+                            <div class="col-md-6 col-sm-12">
+                                <input type="text" class="form-control" placeholder="Search Devices" aria-label="Devices" aria-describedby="basic-addon1" id="inputDevices">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12" style="padding-bottom:10px">
+                                <button class="btn btn-light" style="padding-top:5px" onclick="getCrmDevices()">Search</button>
+                                <button class="btn btn-light" style="padding-top:5px" onclick="clearGrid1()">Clear Search</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4" style="padding-bottom:5px">
+                                <p style="margin-bottom: 0px;">List Dealers</p>
+                                <select id="cmbDealers" class="form-control">
+                                    <option value="" selected>select a dealer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <table id="tbldevices"></table>
+                        <div id="tbldevicesPager"></div>
+                        <br style="clear:both;" />
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12" style="padding-bottom:10px">
+                                <button class="btn btn-light" style="padding-top:5px" onclick="assignDealers()">assign dealers</button>
+                                <button class="btn btn-light" style="padding-top:5px" onclick="clearGrid1()">Clear Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div id="moveCompany" name="moveCompany">
+                        <p style="background-color: #5c9ccc">
+                            Move Company to another dealer
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6" style="padding-bottom:5px">
+                                <input type="search" id="inputSearch" class="form-control" placeholder="Search Company" onkeyup="searchCompany('inputSearch','tblcompanys')" />
+                            </div>
+                        </div>
+                        <label>Select Dealer</label>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4" style="padding-bottom:5px">
+                                <select id="cmbDealersCompany" class="form-control">
+                                    <option value="" selected></option>
+                                </select>
+                            </div>
+                        </div>
+                        <label>Select Company</label>
+                        <table id="tblcompanys"></table>
+                        <div id="tblcompanysPager"></div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12" style="padding-bottom:10px">
+                                <button class="btn btn-light" style="padding-top:5px" onclick="moveCompany()">Move Company</button>
+                                <button class="btn btn-light" style="padding-top:5px" onclick="clearGrid2()">Clear Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-Accelerometer" role="tabpanel" aria-labelledby="nav-Accelerometer-tab">
+                    <div id="Accelerometer" name="Accelerometer">
+                        <p style="background-color: #5c9ccc">
+                            Set Accelerometer
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6" style="padding-bottom:5px">
+                                <input type="search" id="inputSearchAcel" class="form-control" placeholder="Search Company" onkeyup="searchCompany('inputSearchAcel','tblcompanys_acel')" />
+                            </div>
+                        </div>                       
+                        <label>Select Company</label>
+                        <table id="tblcompanys_acel"></table>
+                        <div id="tblcompanys_acelPager"></div>
+                        <lavel>Set Accelerometer</lavel>
+                        <table id="tblDevices_acel"></table>
+                        <div id="tblDevices_acelPager"></div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12" style="padding-bottom:10px">
+                                <button class="btn btn-light" style="padding-top:5px" onclick="clearGrid('tblDevices_acel','inputSearchAcel')">Clear Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <br>
+        <br>
+        <footer>
+            <p style="text-align:center; background-color: #5c9ccc">All Rights Reserved - 2021</p>
+        </footer>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="jquery.jqGrid-4.4.1/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+    <script src="jquery.jqGrid-4.4.1/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+    <script src="jquery.jqGrid-4.4.1/plugins/ui.multiselect.js" type="text/javascript"></script>
+    <script src="jquery.jqGrid-4.4.1/plugins/jquery.tablednd.js" type="text/javascript"></script>
+    <script src="jquery.jqGrid-4.4.1/plugins/jquery.searchFilter.js" type="text/javascript"></script>
+    <script src="vendors/underscore-1.7/underscore-min.js"></script>
+    <script src="scripts/angular.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!--<script src="scripts/bootstrap/js/bootstrap.min.js"></script>-->
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+
+    <script src="Scripts/crmCommon.js" type="text/javascript"></script>
+    <script src="Scripts/crmdb.js" type="text/javascript"></script>
+    <script src="Scripts/crmAuthorization.js" type="text/javascript"></script>
+    <!--<script src="Scripts/crmViewCustomer.js" type="text/javascript"></script>-->
+    <script src="Scripts/crmViewTools.js" type="text/javascript"></script>
+    <script src="Scripts/crmCases.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        
+        /*$("#divNarBar").load("/Layouts/NavBar.html");*/
+        $(window).resize(function () {
+            var outerwidth = $('#grid').width();
+            $('#tbldevices').setGridWidth(outerwidth); // setGridWidth method sets a new width to the grid dynamically
+            $('#tblcompanys').setGridWidth(outerwidth); // setGridWidth method sets a new width to the grid dynamically
+        });
+        $(window).unbind('resize.myEvents').bind('resize.myEvents', function () {
+            var outerwidth = $('#grid').width();
+            $('#tbldevices').setGridWidth(outerwidth);
+            $('#tblcompanys').setGridWidth(outerwidth);
+        });
+        
+        $(document).ready(function () {
+            var comandid;
+            var deviceid;
+            if (crmValidateToken() == true) {
+                
+                if (idUser == 39 || idUser == 44 || idDealer == '1') {
+                    setWelcomeTitle();
+                    getDevices_AccelConfiguration();
+                    getCrmDealers();
+                    createDevicesGrid();
+                    createDevicesAcelGrid();
+                    createCompanyGrid("tblcompanys","tblcompanysPager");
+                    createCompanyGrid("tblcompanys_acel","tblcompanys_acelPager");
+                    getCrmDealersCompany();
+                    
+                    $("#rbtTools").prop("checked", true);
+
+                } else {
+                    alert('access denied page tools')
+                    location.href = 'crmMainPanel.html';
+                }
+            }
+
+
+            //loadBillingControls();
+            //loadCustomer();
+            //getNotes();
+        });
+    </script>
+</body>
+</html>

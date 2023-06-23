@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="Styles/jquery.jqplot.css" />
+    <link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.min.css" />
+    <link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shThemejqPlot.min.css" />
+
+<!-- Don't touch this! -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter/scripts/shCore.min.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+    <script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+<!-- End Don't touch this! -->
+
+<!-- Additional plugins go here -->
+
+    <script language="javascript" type="text/javascript" src="Scripts/jqplot.barRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="Scripts/jqplot.pieRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="Scripts/jqplot.categoryAxisRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="Scripts/jqplot.pointLabels.min.js"></script>
+
+<!-- End additional plugins -->
+
+    <script type="text/javascript" src="Scripts/jqplot.logAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="Scripts/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="Scripts/jqplot.canvasAxisLabelRenderer.min.js"></script>
+    <script type="text/javascript" src="Scripts/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script type="text/javascript" src="Scripts/jqplot.dateAxisRenderer.min.js"></script>
+
+<!-- Activity Charts -->
+
+    <script type="text/javascript">      
+    $(document).ready(function () {
+            $.jqplot.config.enablePlugins = true;
+            var s1 = [2900.38, 2581.13, 2577.83, 2431.47, 2390.91, 2277.79, 1812.78, 1735.01, 1666.27, 1663.83];
+            var ticks = ['120', '114', '130', '122','119','104','112','116','101','105'];
+
+            plot1 = $.jqplot('chart0', [s1], {
+                // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                animate: !$.jqplot.use_excanvas,
+                seriesDefaults: {
+                    renderer: $.jqplot.BarRenderer,
+                    rendererOptions: { varyBarColor: true },
+                    pointLabels: { show: true }
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    }
+                },
+                highlighter: { show: false }
+            });
+
+            $('#chart1').bind('jqplotDataClick',
+            function (ev, seriesIndex, pointIndex, data) {
+                $('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+            }
+        );
+        });
+    </script>
+
+    <script type="text/javascript">      
+        $(document).ready(function () {
+            var s1 = [3681, 3377, 3191, 3124, 3091, 2817, 2517, 2382, 2254, 2008];
+            var s2 = [2268, 7517, 3630, 3065, 1499, 1093, 6166, 6143, 1597, 1594];
+            var ticks = ['120', '122', '130', '119', '114', '104', '112', '103', '107', '116'];
+
+
+            plot2 = $.jqplot('chart00', [s1, s2], {
+                seriesDefaults: {
+                    renderer: $.jqplot.BarRenderer,
+                    pointLabels: { show: true }
+                },
+                series: [
+                { label: 'Driving time' },
+                { label: 'Idling time' }
+                ],
+                legend: {
+                    show: true,
+                    location: 'e',
+                    placement: 'outsideGrid'
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    }
+                }
+            });
+
+            $('#chart2').bind('jqplotDataHighlight',
+            function (ev, seriesIndex, pointIndex, data) {
+                $('#info2').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+            }
+        );
+
+            $('#chart2').bind('jqplotDataUnhighlight',
+            function (ev) {
+                $('#info2').html('Nothing');
+            }
+        );
+        });</script>
+
+    <script type="text/javascript">
+
+    //    var s1 = [3681, 3377, 3191, 3124, 3091, 2817, 2517, 2382, 2254, 2008];
+    //    var s2 = [2268, 7517, 3630, 3065, 1499, 1093, 6166, 6143, 1597, 1594];
+    //    var ticks = ['120', '122', '130', '119', '114', '104', '112', '103', '107', '116'];
+
+ 
+    $(document).ready(function () {
+        // For horizontal bar charts, x an y values must will be "flipped"
+        // from their vertical bar counterpart.
+        var plot2 = $.jqplot('chart000', [
+        [[3681, '120'], [3377, '122'], [3191, '130'], [3124, '119']],
+        [[2268, '120'], [7517, '122'], [3630, '130'], [3065, '119']]], {
+            seriesDefaults: {
+                renderer: $.jqplot.BarRenderer,
+                // Show point labels to the right ('e'ast) of each bar.
+                // edgeTolerance of -15 allows labels flow outside the grid
+                // up to 15 pixels.  If they flow out more than that, they 
+                // will be hidden.
+                pointLabels: { show: true, location: 'e', edgeTolerance: -15 },
+                // Rotate the bar shadow as if bar is lit from top right.
+                shadowAngle: 135,
+                // Here's where we tell the chart it is oriented horizontally.
+                rendererOptions: {
+                    barDirection: 'horizontal'
+                }
+            },
+            series: [
+                { label: 'Driving time' },
+                { label: 'Idling time' }
+                ],
+            legend: {
+                show: true,
+                location: 'e',
+                placement: 'outsideGrid'
+            },
+            axes: {
+                yaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer
+                }
+            }
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            plot4 = $.jqplot('chart0000', [
+                    [[2, 1], [6, 2], [7, 3], [10, 4]],
+                    [[7, 1], [5, 2], [3, 3], [2, 4]],
+                    [[14, 1], [9, 2], [9, 3], [8, 4]]
+                ], {
+                stackSeries: true,
+                captureRightClick: true,
+                seriesDefaults: {
+                    renderer: $.jqplot.BarRenderer,
+                    shadowAngle: 135,
+                    rendererOptions: {
+                        barDirection: 'horizontal',
+                        highlightMouseDown: true
+                    },
+                    pointLabels: { show: true, formatString: '%d' }
+                },
+                // Custom labels for the series are specified with the "label"
+                // option on the series option.  Here a series option object
+                // is specified for each series.
+                series: [
+                { label: 'Stop' },
+                { label: 'Idle' },
+                { label: 'In Transit' }
+                ],
+                legend: {
+                    show: true,
+                    location: 'e',
+                    placement: 'outsideGrid'
+                },
+                axes: {
+                    yaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var data = [
+            ['Drive', 1007], ['Idle', 2023], ['Stop', 8225]
+          ];
+            var plot1 = jQuery.jqplot('chart00000', [data],
+            {
+                seriesDefaults: {
+                    // Make this a pie chart.
+                    renderer: jQuery.jqplot.PieRenderer,
+                    rendererOptions: {
+                        // Put data labels on the pie slices.
+                        // By default, labels show the percentage of the slice.
+                        showDataLabels: true
+                    }
+                },
+                legend: { show: true, location: 'e' }
+            }
+          );
+        });
+
+    </script>
+
+<!-- Behavioral Charts -->
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            var data = [
+            ['Under 15', 13425], ['Under35', 16316], ['Under55', 11119], ['Under65', 16712], ['Under75', 2802], ['Under85', 79], ['Over85', 5]
+          ];
+            var plot1 = jQuery.jqplot('chart1', [data],
+            {
+                seriesDefaults: {
+                    // Make this a pie chart.
+                    renderer: jQuery.jqplot.PieRenderer,
+                    rendererOptions: {
+                        // Put data labels on the pie slices.
+                        // By default, labels show the percentage of the slice.
+                        showDataLabels: true
+                    }
+                },
+                legend: { show: true, location: 'e' }
+            }
+          );
+        });
+
+    </script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.jqplot.config.enablePlugins = true;
+            var s1 = [36.00, 13.00, 10.00, 10.00, 5.00, 3.00, 2.00, 2.00, 1.00, 1.00];
+            var ticks = ['106', '117', '112', '114', '130', '128', '101', '116', '110', '123'];
+
+            plot1 = $.jqplot('chart11', [s1], {
+                // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                animate: !$.jqplot.use_excanvas,
+                seriesDefaults: {
+                    renderer: $.jqplot.BarRenderer,
+                    rendererOptions: { varyBarColor: true },
+                    pointLabels: { show: true }
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    }
+                },
+                highlighter: { show: false }
+            });
+
+            $('#chart1').bind('jqplotDataClick',
+            function (ev, seriesIndex, pointIndex, data) {
+                $('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+            }
+        );
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.jqplot.config.enablePlugins = true;
+            var s1 = [13, 9, 4, 4, 3, 2, 1, 1, 1, 0];
+            var ticks = [117, 114, 111, 112, 110, 116, 113, 128, 183, 109];
+
+            plot1 = $.jqplot('chart111', [s1], {
+                // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                animate: !$.jqplot.use_excanvas,
+                seriesDefaults: {
+                    renderer: $.jqplot.BarRenderer,
+                    rendererOptions: { varyBarColor: true },
+                    pointLabels: { show: true }
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    }
+                },
+                highlighter: { show: false }
+            });
+
+            $('#chart1').bind('jqplotDataClick',
+            function (ev, seriesIndex, pointIndex, data) {
+                $('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+            }
+        );
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.jqplot.config.enablePlugins = true;
+            var s1 = [86, 71, 24, 24, 23, 21, 20, 20, 17, 16];
+            var ticks = [180, 181, 106, 122, 125, 100, 117, 129, 109, 126];
+
+            plot1 = $.jqplot('chart1111', [s1], {
+                // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                animate: !$.jqplot.use_excanvas,
+                seriesDefaults: {
+                    renderer: $.jqplot.BarRenderer,
+                    rendererOptions: { varyBarColor: true },
+                    pointLabels: { show: true }
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    }
+                },
+                highlighter: { show: false }
+            });
+
+            $('#chart1').bind('jqplotDataClick',
+            function (ev, seriesIndex, pointIndex, data) {
+                $('#info1').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+            }
+        );
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var line = [['123', 0], ['122', 24], ['100', 21],
+                        ['112', 14], ['103', 15]];
+
+            var line2 = [['123', 8865], ['122', 8239], ['100', 7023], ['112', 6639],
+                        ['103', 6595]];
+
+            var plot4 = $.jqplot('chart11111', [line, line2], {
+                title: 'Idle Times vs. Idle Alerts',
+                series: [{ renderer: $.jqplot.BarRenderer }, { xaxis: 'x2axis', yaxis: 'y2axis'}],
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        label: 'Idle Alerts',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                        tickOptions: {
+                            angle: 30
+                        }
+                    },
+                    x2axis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        label: 'Idle Time',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                        tickOptions: {
+                            angle: 30
+                        }
+                    },
+                    yaxis: {
+                        autoscale: true,
+                        label: 'Qty Alerts',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                        tickOptions: {
+                            angle: 30
+                        }
+                    },
+                    y2axis: {
+                        autoscale: true,
+                        label: 'Minutes',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                        tickOptions: {
+                            angle: 30
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <h1>Fleet Management Dashboard</h1>
+    <h2>ACTIVITY CHARTS</h2>
+    <p>Activity Charts will show information about miles driven, drive / idle / stop times.</p>
+
+    <h3>Miles driven from 5/1/2012 to 5/13/2012</h3>
+    <div id="chart0" style="height:300px;width:600px; "></div>
+
+    <h3>Active/Inactive</h3>
+    <div id="chart00" style="height:300px;width:600px; "></div>
+
+    <h3>Active/Inactive - version 2</h3>
+    <div id="chart000" style="height:300px;width:600px; "></div>
+
+    <h3>Stop-Idle-Drive</h3>
+    <div id="chart0000" style="height:300px;width:600px; "></div>
+
+    <h3>Fleet Activity Distribution Pie Chart</h3>
+    <div id="chart00000" style="height:300px;width:600px; "></div>
+
+    <h2>BEHAVIORAL CHARTS</h2>
+    <p>Behavioral charts will show information about Speeding habits and Idles, Speeding alerts, Idle alerts</p>
+
+    <h3>Fleet Speed composition</h3>
+    <div id="chart1" style="height:300px;width:600px; "></div>
+
+    <h3>Devices with speeds over 75MPH</h3>
+    <p>Data shown is minutes above 75MPH in the time frame</p>
+    <div id="chart11" style="height:300px;width:600px; "></div>
+
+    <h3>Devices with the most Speeding alerts</h3>
+    <p>Data shows number of Speeding Alerts events in the time frame</p>
+    <div id="chart111" style="height:300px;width:600px; "></div>
+
+    <h3>Devices with the most Excessive Idling alerts</h3>
+    <p>Data shows number of Idle Alerts events in the time frame</p>
+    <div id="chart1111" style="height:300px;width:600px; "></div>
+
+    <h3>Idle time versus Idle alerts</h3>
+    <div id="chart11111" style="height:500px;width:600px; "></div>
+
+    <h2>PRODUCTIVITY CHARTS</h2>
+    <p>Productivity charts will show information about hours worked (from 1st Ignition ON to last Ignition OFF), short trips, geofences visited, engine hours</p>
+
+    <h2>Testing canvas</h2>
+    <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcwAAAFACAYAAAAxqUwlAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAEghSURBVHhe7Z0JfFTHned/3a1bQhJISAiDcWyIEzt2QrBjJ3aIg20mxyaxw9i7G5LMzkwmeK/szg67m0x2JszOzGYnYXaSnewMECd2YmPHB74T29jBjnyCkTkE4hCYU7e6W2dLfW/9q/s1LYHoB+puvX7vVx/ep1F39XtV36p+v/ev+te/XHGVwEQCJEACJEACJHBeAm7yIQESIAESIAESyEyAgpmZEXOQAAmQAAmQACiY7AQkQAIkQAIkYIIABdMEJGYhARIgARIgAZc4/WzZsgVbt27VNFavXo3ly5fr/zc3N2Pz5s0pSitXrsSqVatIjQRIgARIgAQcR8Dd3t6Ovr4+bNy4UYtlukBu27ZNv2d8Zoiq4yixwiRAAiRAAo4n4F6yZAnuueceDcKwLEVE5ejq6kq9l/6Z46kRAAmQAAmQgOMITJjDlCHYpqYmiIiKWDKRAAmQAAmQAAkkCOg5TPmPzGO2trZi3bp1+gMRTxmSNf6W99asWTNhjvN8EB988EEEAgFyJgESIAESKDAClZWVuPvuu1FcXFxgJc9tcVMWpjjzyHyliKIMx0o6l5UpFujktGnTJkw+KJa5bTienQRIgARyRWB0dBSDg4OQV6YzBFIWpvHWhg0bMHfuXFx77bVYv369dvgxkojp2rVr9ZBtegoGg+js7IS8GkksVElf/+pdKCsrI/MpCLTsasOypVeRTwYC5JS5i5BRZkaSg5zOz2nTvQ/oDLfddhtKSkowZ84cVFRUmINr81xuETYZjjXSrl27tGAaomgIX/r85mQmpaWlaGhoQH19feow8sRiDFVr8z7E6pEACdiQQCwWw9DQEHw+3wRjyIZVNV0lt+H9KtajHLLW0nhP/i/LTOR9eV2xYsWUJ5Yx73MJZkVFuenCMCMJkAAJkIA1CITDYRh7c0QiEWsUaoZLcdaQbLbKI3Oakr75ja9l65S2PA+Hh8w1Kzll5kRGmRlJDnI6PydjSFYMp2g0ipqaGtTW1qKqqsocYBvnYmg8Gzcuq0YCJEACJJA9AhTM7LHkmUiABEiABGxMgIJp48Zl1UiABEiABLJHgIKZPZY8EwmQAAmQgI0JUDBt3LisGgmQAAmQQPYIUDCzx5JnIgESIAESsDEBCqaNG5dVIwESIAESyB4BCmb2WPJMJEACJEACNiZAwbRx47JqJEACJEAC2SNAwcweS56JBEiABEjAxgQomDZuXFaNBEiABEggewQomNljyTORAAmQAAnYmAAF08aNy6qRAAmQAAlkjwAFM3sseSYSIAESIAEbE6Bg2rhxWTUSIAESIIHsEaBgZo8lz0QCJEACJGBjAhRMGzcuq0YCJEACJJA9Ao4SzHBoDOHgaPbo8UwkQAIkQAKOIeAowQyM9GHnK/+EQ7uexqDvpGMamRUlARIgARKYPgFHCabgisdj8HYfxP7tD2Pv2w+h89g7GBvxTp8kz0ACJEACJGBrAo4TzPTWHPGfwvGD27B/52M4um8rBvqP2bqxWTkSIAESIIGLJ+BowTSwhcYG0XNqF9qUcO7f8Si6T+5CcGzo4qnymyRAAiRAArYjQMFMb9J4HIPeY3hv/1bsf+dRHDuwDUO+U7ZrdFaIBEiABEjgwglQMKdgNj7qRdfxd7TVeWDnE+jtaFUetoELJ8xvkAAJkAAJ2IIABTNDM8aiYfj72nFk72+U1fkIThx+DSMDXbZofFaCBEiABEjAPAEKpnlWCAz3ouPom2h9+0EcaHmCTkIXwI5ZnUNA1jvLiMyhXU/hWNtL6nfT75zKs6a2JkDBvIjmlaUp/t52tKl5zr1vbUbHe9u5NOUiOPIr9iEw7O/Qv4ODLVuw67VNekTG230IXSfexZ4371e/lcfRc3ovQuMj9qk0a+I4AhTMaTb5yMBpnDj0KvbteARHWl9QQnpUrfWMT/Os/DoJWJtANBJUUxXv4eThZuzb/pAaddmsfwe+3iOIhMYnFD4ei6rRmKM42vq8ntY4dvBViMAykUChEdCCuWbNmtTR3NycqsOGDRsmfCZ/M52bQDg4jN7Te9RQ7eN6aUrn8RaMBwaIiwRsQyA0Poz+rgN4Tw2zikgeUA5xp4++lfQkN/eQODbSj65j27UX+sF3n0Zf535EwhMF1jbAWBHbEXCLQK5cuRIbN27E2rVrsXnz5gmVND6Tz++55x7bAchFhYZ8x3H8wMtaOI/uf1mF4TuRi8vwnCSQcwIy/9hzag/a9zyH1u2bcXj3M+hWw6yjQ73TunYsGoKv56A+r4zOnGx/HaODPdM6J79MArkm4F6+fDlWrVqlr7NkyRL92t7enuvrOuL8wTE/ek62oG3HY2p5yhY1h7OHwd8d0fKFXckh/2k1H/m2siAf1w5uR/e9oC3BYGAwJxULDHXj9JE3sE8N1x7e82slpIcRi0Vyci2elASmQ2DCHKYxHGsIp5x469atqWFZCunFoY7H1RxO3xE1h/OCvikcP/g7zuFcHEp+KwcEJs9H7tPzkb9Tc5RHIZ/lK0XDY+jv3KeGap9UozOPKdHegbFRX74uz+uQQEYCEwRz27Zteng2PckwrQzHLl269Kzh2oxnZ4azCIwN96mA72+r+LWJOZzYeIeaw8nfTYlNQgJCIDUfqaJa7VNDrRPnI2ee0bD/pBLtVxLTGirOs59xnme+UVgCuJRHp56t37JlC1pbW7Fu3bpzYhHrU+Y3RTwnp02bNk2JctmyZZbBHAt5Efa9aZnypApSVAtPWSPcpeoorrFe+VgiWxCIR4YQC/n0EQ/7EY8WUuQqF1Bcr34n8/RvxeUpt0WbWLESLS0tulgyXReNRlFTU4Pa2lpUVVVZsbh5LZMWTBlqXb9+PVavXq0hnSuJYIoFei5BDQaD6OzshLwayRje/fpX70JZWVleKzXVxWQPTNnWy6qpqKQCs+sXo65pCWbPvRwuF1f9GG3VsqsNy5ZeZdWms0S5zsVoyHcaw2rpk7wOqd15opGQJco6nUKUVdap38cVqGtcjOo5Cy/4VOxL50e26d4HKJhTINJ3ZLEcZch1sljKMhJj3rKtrQ3z5s0752lKS0vR0NCA+vr61GFkjMXMuZtfcK+34RcioYByrtirF3/v3/4oOmSvTs7h2LClc1clEUSZe5Q5SBlqlePMfGThi6WQS8R53qGCIag4zy1Pqt/MPrX2cyx3UHlmEkgS8KxYsWLdm2++ie7ubjz33HP66OjowHXXXadNcbE85T2Xy6WXnUyVSkpKUFFRkToMs/7GG6wzJBtU23j1dewriMYPjg9iUM3b+HqOYizgh9vtRlnF7IIoey4K2dXdh/lNc3Nx6oI/p/RrEUlv1z74OlvUGuCdyqnstO23qJOIWyKevp52+NRvJTw+Co+nGCVls87bpuxL5+/yLe/u1RkWLVqkg7DICKEcco93ekrNYWYbhDGv+c1vfC3bp77o81l9SPZ8FZPh2eq6y9Qw1BLMabgi403hoiFZ9IscRpvYMKNDfROGWsWJhwnwFJehtu5y1KtpjVo1reHxnH2TZ186f0/hkOzUfDhJViB3GXmaHux/T+3V+aJe6H3swCvaimByDgHZm7VDRdYRj1YZapV9W/u72rTHK1OCQFRFDfJ2t6nA709rD1tZT8rg7+wd2SJAwcwWyTyex5jD2W/M4ahhZoYXy2MD5OlS0qYT5yMfUtvLNesYrvlcH5mn6mb9MiMDHXr+VuLX6jjPihsTCUyHAAVzOvRm+LsSXszfexjte3+trM5fqUDYaq/Owe4ZLhUvPx0CEk1Houoc3fdiYhs5FW1HrCTxcmW6OALh4EgizrNY5m8/gmjgOOM8XxxKx3+LgmmTLhAY6lGBsN9UIfgeVfE+n4O35xBk82sm6xOQuKzdJ9/VcVolXqvEV+05tZtbxuWg6Yb8xxEZatXDte+1/ZZxnnPA2M6npGDarHXFvb6/az8OvfuUGopSu0lwr04LtnBc7/AhO30k5iMfUvORL+mdQDgfmZ/mkjjP3Sd24oDap1PHeVYB5sPB0fxcnFcpWAIUzIJtuswFH1YL1U+qPQplK6UjrS9yDiczspzlkD0iZa/I42ovSInVKiIpe0lyPjJnyE2dWIK86zjPKsC8Eed5ZKDT1HeZyXkEKJgOaPPQ+JCaw9mtAiI8rm7Uj6BLbc80nqOdJxyA03QVZT9UWVQvN2MZapWAFJ1qL8ghbp5smmE+M6biPKsHzEO7ntEeyIzznM8WsP61KJjWb6OslVAWIctencfUBsBidSbmcE5m7fw8EfQ+kbJfpMxHihXZrrarkuE+2TiZqTAIiAeyt/uAasNntYftqfY3pr3/Z2HUnKXMRICCmYmQTT8PBnx6DkeHF9v5BHo7WhFWofmYLoyAXh+rHjrE4eqAegjR6yPVAwnnIy+Mo1Vzjw524dSR1xPOdHt+o4bV21X0m6hVi8ty5ZgAI/3kGHAhnV6Cvzcu+IiKkLLIcsU+3H4C719inXLFY1E9/yjrJMdH/ZbjxQLljoAEf29atAwNl1wNT5H9wsUx0s/UfYeCmbvfFc9MAiRgYwIl5bU6TKUctfXvs01NKZhTNyWHZG3TzVkREiCBfBIIjQ2oaY0WNVz7uFrX+Zieqw4yTGE+myDv16Jg5h05L0gCJGArAjKP7X1Pe0PvV3GeZekQIzPZqoVTlaFg2rNdWSsSIIEZICBxnmXpUJsKSHFQBQ+RMIeM8zwDDZGjS1IwcwSWpyUBEnAuAYnz7FPhKSXM4b7tKs5z++tqaUqPc4HYpOYUTJs0JKtBAiRgTQKBYRXn+cgberj2kMR57macZ2u2VOZSUTAzM2IOEiABEpg2gUh4DF6J87zrKRWGT/bq3M6AFtOmmt8TUDDzy5tXIwESIAGMqM3fT6g4z7tfvx8D3g4SKRACFMwCaSgWkwRIwH4EJGrQ8fcOIRBglK1CaF0KZiG0EstIAiRgWwI+nx9Hjx6jaBZAC1MwC6CRWEQSIAF7ExgfH4fX67N3JW1QOwqmDRqRVSABEiABEsg9AQpm7hnzCiRAAiRAAjYgQMG0QSOyCiRAAiRAArknQMHMPWNegQRIgARIwAYEKJg2aERWgQRIgARIIPcEKJi5Z8wrkAAJkAAJ2ICAFsw1a9akjubm5lS15P/pn23ZssUGVWYVSIAESIAESODCCbhFFFeuXImNGzdi7dq12Lx5c+os27Ztw+rVq/Vn8rp169YLvwK/QQIkQAIkQAI2IOBevnw5Vq1apauyZMkS/dre3q6Prq4uyOeSjFd5n4kESIAESIAEnEZgwhymMRwrwiliyUQCJEACJEACJJAgMEEwZQhWhmeN1NTUdBYnCim7DgmQAAmQgBMJuOIqScXFoae1tRXr1q3THMTalPlMmb80kjgAyTynMXRrvL9p06Yp2S1btswyXGMhL8K+Ny1THhaEBEjA2QTGg8Dx7mIUz7oUdXV1aGxsnHEgLS0tugwyDReNRlFTU4Pa2lpUVVXNeNlmugBaMGVecv369dqxJ32uUt4zI5jBYBCdnZ2QVyMZw7tf/+pdKCsrm+l66usP+k5i//aHLVEWFoIESMC5BCKxUgS6DmL4WDOqP/ot1F32MTQ2NGDhwgUzDmXTvQ9QMKdoBT0kK5bk0qVLU2Ip7xlWpCF88ipDtJOtS8lbWlqKBtXY9fX1qcO4XiymDVgmEiABEnA8gUjUg6GeLvTteADhk6+iWtkS7mgALpe6Fbscj8fyAPSyEpmX3LVrV2rN5YYNG3TBZT5TxFSGYuV1xYoVU1aosrLynIJZUVFueQgsIAmQAAnkkoAI5XBvD7zvPorQey+gyhNATYVHHW4UuZVREY+pfzQuctkG2Th3ag4zGydLP4cxr/nNb3wt26e+6PNxSPai0fGLJEACF0EgEi3CuL8LoyfehCfkQ2mRC2UlbpQWu/RRWeaGt+kPUTTvk5g3r5FDshfBOJ9fYWi8fNLmtUiABBxBQIRyRG0I7d37DMYOP4fyqD9hUVZ6UK2syjlVHtTN8qBWved2cSy2UDoFBbNQWorlJAESsDyBSKwIAd8AfK2/xtihp1Ee7j23UCrhLFeWJrXS8k06oYAUzMJqL5aWBEjAggSisWIEBoaUUL6IkQNPojTUlRJKmacUa1KsSrEwKZQWbECTRaJgmgTFbCRAAiQwmUA0rizKwRF497+Ekf1bUBo8pUTRjVoljCKUIpJzlFiKUFaUutXwKxkWMgEKZiG3HstOAiQwIwRiSaH0t72C4X2PoXTseEooZV5ShHJ20qKkUM5IE+XkohTMnGDlSUmABOxIIK6EcmwoAN/BZi2UxaNHlTXp1hakOPWISBpCKR6wHt5hbdUN2Jy2ak5WhgRIIBcExKIcGxmD9/AbGGp9BEVDh1FdfkYo9dCrWJRqGJZCmYsWsMY5KZjWaAeWggRIwIIERCjHR0Pwt2/H4O5foWjgQEooZZ5ythxpQlnk4SSlBZsxa0WiYGYNJU9EAiRgFwLxuEcJZRgDR1swsGsz3P5WzEpalCKUZ5x53KhSQ68USru0/PnrQcF0RjuzliRAAiYIxKGEMhCB/9huJZQPwuXdlRBKNdSqrUk1X5mYo0wIZTEtShNU7ZOFgmmftmRNSIAELpJAXG0NHBqLYeC9vRh4V+3W0duiBdEQSsOirFViKQJKobxI0AX+NQpmgTcgi08CJDAdAkoox5VQHm+Db+f9iPe+o4VSPF8Nj1fD65VCOR3O9vguBdMe7chakAAJXBABF4JKKP0nD8H3jhLK7rdRVa5iuyaF0pinlFeJ/VqigqYzkQAFk32ABEjAQQRcGBoMYfDUES2UsY7XJwhlYi1lwrqkUDqoW5isKgXTJChmIwESKGwCoZALgx3HMbr3QURONyeFMmFVVieFUoexU/+nRVnYbZ2r0lMwc0WW5yUBErAEgVDIjaHOU/DuuB+Rk9tSQikerwmhNIIOUCgt0WAWLgQF08KNw6KRAAlcPIFIxIPhrg5433kQ4RMvK2ceaOuxVs1JGkKp96RU85SymTMTCWQiQMHMRIifkwAJFBQB2Wpr8NRR9L75UwSPb0VVSeiMUCqrUoZdZZmIVYQy5i4vKL5OLiwF08mtr+oeUxFNQmGX3qJo4FgbOrc/Dl97i3q/yOFkWP1CIyB9dqi7E91v/AzBk83aihSLUgKjz5LAA0oo66qKtFCWlVjLonRxJ+mC6G4UzIJopuwUUm4o4vgQGBzVzg99+19D12s/hW/7zzHW9hhcfTtQ7RlFxcg+BN/7HYIq4gkTCVidQCTqwUh/n4o1sAVjR19ETXlcR+IRL1e9PESEUoZelXhaTSiFrTs2ZnXELF+SAAXTpl0hhiJEwm61FdEYhrpOof/Am+h+/Wfw7fg5Am2PIn76VZQFjmqHB70b/Kwi/Tq32oP66iI0uY9jTucjGPf309q0aR8p9GpFokUY9frg3fM0xg4/h4qYX3u8SoCBOUlLUvq0hLQrL3HDykZcPB4v9OZwRPkpmDZo5rgSx7ASx/GRcT0k5T20Az1vPoD+7T/D6P5fIXrytygdOaxuJkC9ftpOiKMIY70WSCWUNXIU6aOxNvE6f04R3h96GfGeVoSVZcpEAlYgEIkpofQNwNf6a4wefBplkf7U0KtYlHoXEbWWUvo4nXms0GL2KQMFs8DaUoJDh5X3n2w5NNTbA9+RXeje/jC8ShyH9z6M6ImtKB5sQ3VpSN8w0sUxIZJnxLFBiaJxyFO4hASTG4w7TRvl7yVFe1HV8wJCaj9AuT4TCcwEAXHmCQwMwb/vRYweeBKloS4tjnJIzFdjT0oZghWLkokEsk2AvSrbRLN4PhEnGXaS3RNkjsb/Xit63tkC71s/xfCezYi89zyKfHswyxNIimNieNWwHGV4VQ4RRbEgxXKUz0QcZdhK5nPMBJGWXeMvrRzAfP+TiHhPqDJRNLPYzDxVBgJRNfceGByGd/9LGN6/BSXjp/Qc5QShlIADql9XlLonPPARLglkkwAFM5s0p3UutxZHCQQ96vOp7YXa0Pvus+h/cxOGdj2A0JFfw92vdlBwDabmG7UFqQRQxFD+r4VR/d1Qm/i/fCZzlCKO8sQt4jideRwR2sXR11HU/Zbe2YGJBHJJQJzUAkOj8LW9guF9j6N07Lieo0wIZSLggBEYXYRSHuyYSCCXBNjFckl3ynMrcVTzMKEg0NfRgwEVALpn9wvoU+I40PILjB96Gm7lsVoZ69Ou8DKMaliOCaccsRyN4VTDgkyIo3gGijhKaK/0odVsVVPOu7jsGOp6Hkdo0I+YqgcTCWSTQFwJ5fhwAL6DzRja+yiKR46iOrl5syGUxjrKSjWNQKHMJn2e63wEKJg57x8u7WUaCkHNv4xg8PRR9LW+jL43NsG/8z64T/4GLmWxVUS6Uu7vMmxqeKzKHKSIo3bKkeHV5LCqzNOIOMqTda7EcSo0YqXOq45j0egLiPXtRyTCbpTzbuSAC4jz2tjwGLyH38DAnkdQNHRYz03KHpTakUc78yTmKymUDugQFqwi73RZbhQRx3AyEMBg5wn0729G92ub1HKO+zB24DHEO15DWfCU/uFrj9XJ4qiGUsWCTMw7JqxIIyC03CREHK3yRC1OQu/37EZF10sIaocgetJmuTs54nRxFGNMObH5Dm/H4J5fwTNwQD8MypykIZTyG5DhWOlzRWpqgYkEZoLABMFct24d2tvbU+XYsGED1qxZkzrkb6YzBGStY1hZV/JUPNzdodY6vqXCcd2nPFZlraMSx1OvoDS51nGyOMoNQC/j0F6rCWGU/xuxLUUcxUPVKuI4VbtL+RZV9mO+90mEvB2IRovZRUjAFAGJMjU+Gob/yDsY3LUZbn+rnm9PiWRqjpJCaQooM+WcQEowRRi7urrOuuDKlSuxceNGfdxzzz05L5BVL5DyWB0JYrinSz0N71RrHR+E92211nHfrxA58ZJa63hIzbXEzlrraIijthxljaOyKhvFKScZ+NlYzlHIT85Sx8XhZnh6t2vHJSYSmIqA/JbE83vw2G4M7HoQ6N+tLUcZatXDrslNnMUTVgTUjCc3aZNAPghowRTLUgSRKUEgrp58w2rphDz9DvfJWsfd6Nr+KPplOcfehxA5/iKKBvZhVklwwlrHM2seJ651TCznSMzByI1BlnMUsjhO1U+kXleUtGNO91MIDg6qIVo6BPE3dYZAHCq4xlhUCWWrcm77JeK9yutb/R5kqFWceNK9XimU7DlWJJASzKkKt3Xr1tSQbPpwrRUrczFlSliOHgTVD3mkrx8+Weu480l41U4Hw3vUtkBHn4fHt1vFWB1JrXWUH7c45hiOOMZaR1nOcbFrHS+m7Fb8jnjmNlWHsWjkN4j2HtRBFpicTUCEUkYdBo63YWDnLxDt3p7ck1JZlIZDT/JV5i65ebOz+4uVa5/R6Wft2rXa+ly6dCk2b95s5bpkLFs8GkJpaSWK3cXaAvIe3Y/ud55Uax1/isF3f4ngkWfh0Wsd/RPWOhriaKx11NFxcrTWMWMlCiSDWAiLXTtRfvo3CAXU+hkmRxIIheLwH21Ve1Lej1jXW1ooDUtSB0ZPWpYUSkd2j4KrtEsF/U1F/ZV5TBHIJUuWnFWR5uZmLZjnGrrdtGnTlBVftmyZZaCUjh5ATfvfoG8ogv6hKKIxZV8qk6hYjRzKPIn8X4ZKi9RjRLHyRpX39N/KSEq85mZto2UA5agg/tEojrpvRkn9QpSX0sMxR5gtddqhoSDGeo8i2vm2dl4rV8ufStVvSv9frROWfmCsF7ZUwWegMG+MfQ7D5R9BXV0dGhsbZ6AEEy/Z0tKi31i+fLly4ouipqYGtbW1qKqqmvGyzXQBLkgwt23bpuc7J6dgMIjOzk7Iq5FEYCV9/at3oaxMbXVugRTq2YnBl7+JsVAMXiWY4ahyaFc/4iJDKJUwynCQCON0o+JYoLqWKkJU+QG1h65EtO7DKKFoWqptslkY2T5urO84Ro+qgP9KHEuKE0IpXt9l6u9SNc8t85Z05DlD/b2aP4C78WbMm9eIhQsXZLM5Lupcm+59gII5BbnzDsnKMhJj3rKtrU016Lxznqa0tBQNDQ2or69PHUbGmLLirJbkybYuudZRhlcNpxwZIjICAUwnhJzV6muF8sjykw+UHcLs7mcRHBrmlmFWaJQsliEUcmOw8xS8O+5H5OS21PKQWh14IOEBK785cXyjWGYRPE+VVwLnFcxbb70V69ev104/3d3d511WUllZeU7BrKgoz2uFzF5MRNMIBEBxNEtt+vnmzxrDpUPPqQhB7XQImj7OGT9DRDl1yRpk707lIHfiZVSVqs2bVZxXeficJTuISGhHFa1K5i0plDPeXCzANAlMEEyZn0yfv5T/G2swzzUUO81r8+sOJSAOHotd21He8zsEAyG1/ISp0AiIZ/mQWo/cv/NhBI9tRVVxCLVKKCU6jwilxECuS27izD0pC611Wd6pCGT0kiU6EsgFAbE23lfegXm9jyPs70M0zghBueCc7XNqi1Ltw+p991EEj76ACncgtXlzukUp4inrcplIwE4EKJh2as0CrIsEdLg8+DLcPbt0gHomaxKQredG+vtVUJ4nMX7kNyiPDyc2b07ukCPLQ3TkqqRQcprDmu3IUk2PgKMEkz/i6XWWXH1b5pOvKNqP6tNbEBoeQdzFCEG5Yn2h543GyzDq9aLvnYcQOPQsymO+lEUpQ+spoVTiKe3I35h5whF3GXrdl8MfqzP/JeacUQKOEswzK05nlDkvfg4C4kW7sDaCBYPPICLr95RFwzRzBKJqn9NR3wD69zyN0YPP6KFXbVHK5s3JUHYiljJnSaHM3E4hdy163EuwO/5xPBr4DL7nvRt3H/sqvnH8MzgVmwNu9JOZoRVyOEowrQCcZTg/AfGwXBx/C8XdryE8HiWuPBOQoddR/yB8+17E6IEnURbq0gKphTJpUerNm9UhS7BysUl5nquc9cuF3bO05bg3/jE8E1yJHw7cjT869fv4k+O343ud1+OhoQ9gb3QhUDkHxdU1CLo8cLsZQjLrDZGDE1IwcwCVp5weAQkecXnZScztVo4lfi/XbE4Pp6lvx5TTVWBwGP4DL2Ok7QmUjJ9KCaXMS6YHRqdQnkEacVeg37UI+7EMz4dux4+G7sKa03dpy/EvOm/Az/1X4c3QQgRK56CkphYlSiBLqtVrzWyU1M5GqXr1FJcgpiLquDiebaqvzmQmCuZM0ue1pyQg94651W5cPr5V7WrRiuHhMGnlgIAWyqEAfAdewfC+x1ESOK4tSRlqFWs/Pe6rrFu2+v6sOUCUOmVMzTn63QtxCEvxUngF/mloFb7V9S/xRyc+jz/v+AQ2eq/C78YWYqCkTluOWhhnJcVRiWVp7Zwzx+w5KFNH6Ww1f+lJTD+kRSnNZTV47mkQoGBOAx6/mnsCYs0s8ezF7P6XERoNqDWbHLrKBnXZem18ZAy+g80Y2vsIioaPqL1cE0KZHhRdxNOJQhl3FWPQMx9HXB/GK+FbcO/onfhTJY5/cPwL+K+nb8JP+q7BS2OL0OVOE8dqZTWK5agOEUdtQYooqteyOXVaQItnVaOoohKeklK4kkKZjfbkOfJDYEIs2Wxe0gjI/s1vfC2bp53WuYxYstM6Cb88YwQGVBD3zvJPwT1nkbJ0IjNWjkK+cEIoRxDobEW4d5+O71qiDnkwkZiv8irrJ+V9O+7Zeq62iyuPmxF3I/rideiM1OHoeC32BWpwMFAFl5pbdHnU4VYewOrVXVSsjqLk3+pVv6de1eGWfEoEdX45XObskc8XjeC6ORWMJVsAPywKZgE0Eot4hkAoEsfJ6BUIzl6GEjVEyGSOQExtih4KjCmh3IdQzx4dGN3YOUTEUQumehWxtHsIu4HYbAx55iXEMViLttEa7A3MUiJoCGFC8EQc9ashgEo83cXynhJHtYWRzi+fyf9NiuO5WouCaa4PWyEXBdMKrcAyXBABWR7UN+xG35zb1BDXXHWzorU5FcC4EsrgWBCBLiWUXbsSO4gkLcmERSkimbAq7SiU4+458GIuupKW48HxGuwerkZUi2PSEtSieMZKVC6rib8N0RQL0siTtDYvqMNmyEzBzCbN3J6Lj+i55cuz54CAOAQ1VMdw2cgLiPe1qSDu7MaTMctcb3AsioH39mLgXbVdU99uva2WzEnKjiGz1VIRcejRsV/V3KUdxDLorkG3awl2xW/AE+Ofwff9as7xxCr82xO34a+7rsPDQ1did2Q+3OKIoz1VE0dp6jU5/6gccbSDjnqVz4srq1BUVp6wLpWYMjmXAFvfuW1f8DUXZ5QrXO+isuslBEfHVX3YndUdHUG1fnXg2D74d/5CPVC8o4WyNhlsQBx6DKGUSD1ibRZiCruq9FrHVrXW8dnQSqxXax2/qdY6fvPE7VinlnP8cuAD2BFegHCFEkHxWE0u6RAHnGIllvJqeK2WJL1XtThWzUqIY0kJxbEQO0aOy8wh2RwD5unzQ8AvDkEVt8Bde6lyVnHeEK04rgwOBIChkxg/8YbeGL1Ubd4sQ67yWq6GXCUijwy9FppIRtzlGFTDqj2xBpwI1eLwmHLKGZ2Fnkh5mkNOYojVXZw+1JoYSvVoyzA5/JrmnJOfnpn5KhySzczIKjn4SG6VlmA5pkVAhhkXR5pR0rcDoWBsWucqtC+HQnEMnmrHWOvDiHa8iarytEADei1lYvi1ECzKmKtUrXVcoNc6vqzWOm4Y/jL+U+e/xB8e/xf49ukb1VrHq/Hq+KXwltSfWeuYWs6RFhBAW41qOYda1sHlHIXWo61bXlqY1m0bluwiCMSUQ1DvSCm8s1egaNYcFbrNvtZmKORCoPcYxo5t01ZjiViUyoJMeLsmrMsy9Z5V96OUIPtDrrlqOcdcnA7NwVFlPe4bqcaR8cqk5ZjwUNVOOMpK1I446Y4601zOcRHdKydfoYWZE6w5OSkFMydYedKZJjA6HsOp4o8hNnuJGp60l8UZDrsR6DuO0aPb1NrJ+FlCaQy/WkoolafWsKsB3ng9OiJKHINzsF8Nq7bp5Rwm1zoanqvGWsdpLueY6T5qXJ+CaZWWyFwORw3JMlRj5g5hlxziELQY72BWx7MIjUVUhKDCdG5Jb49wtBRDHcfQv/0+RE78Vnm3uhI7iCjnHdm8WYZddWB09Z4VxHLcPRvbYzfh/tEv4d92/gG+cuxOfOvkp/GD7qV4YuhyHMY8FTou4ZAjnqraEUdHykl6sRrRcuRV3lfOO+Kx6ikrS3isTmPto5X6eZnLXg90VmKb7bI4SjC5vVe2u4+1zyeRahbOGsH8vkcR8XcjGiu2doGnKF1EWZTD3V3o2/4LhE6+iqrSuI7zmhJKtXFzXVWRZYRSqtGmgpF/v++z+NuOj+Cp4cvRXVSfjKuaEMaESKa/SjDyZKzV5PtOWc4xHpd9RAv/ga4gf1wXWGhHCeYFsmF2mxAQy+uK0Ctw9+5EOFQ4lYpEPBju7Ubfu2rXlmMvYFbxuBLJ5NpJsSgNoVTviferFVLAPRcvhm7Dd45fhz2hudoiLFHxU3Vs1dSax7RYq8n3JyznkHlLhyUGXi+MBqdgFkY7sZTTJCBDlIuLD6K2+zmEVSxVialq1SR7Uo7098G7ewvGjzyPSteItih1kIHknpR1SixFPEUorWKcnHZ9APcNLMf/67kS7vJKFWRcLfjXR6UeTk0EAlDrIGWtY3lFMgC588TRqv2O5cpMgIKZmRFz2ISAbHY8v2oUCwaeRaTvsOUiBGmh9HrRv+cpjB1+DuWxgcQcZXJJiMxPilCKcMqaSqsIZURte7Uj9gn8r64bsXX4EjXHWI4iiY6jhFLEsbiqGp7SMgYCsMnvyMnVoGA6ufUdWndZj7gEO1De+5oKSC77bM7scGYkVoSAzw/f3ucwdugZlEf6UxallFXWmIpYGkIpwm+V5HNfiidGb8XfnP4IOjFbCWVSJJVgaktS/S0OOkwkYAcCFEw7tCLrcMEEJHbq+8pOY17fYwj5+xCN53+INipC6R+Er/V5jBx4CqXh7oQzj2zenAxlp71e1SG7iVhJKAW4BBf4Sf9NeND7Pm1VynxlsViVlSKUysJUw6528WS94A7GL9iSAAXTls3KSpklIEOclwdfUg5Bu/PmEBSNF2N0YAi+fVsx0vYESoMdWiC1UCaXh4hVKRalFYVyzDMHv1VReL574nq0jDckRVIt91ACWaTEslhZlbJBMhMJ2I2AowSzo2gRXpz7LRyqvB1+z2WQMFxMJCDzgVd49qOmcwtCI6M5cwiKxUsRGBxVzjxPY2T/FpSMn0wJpTjwiDevHCKcso7UY8Ff55C7CX/d/Vn8uPuDiJYpi1LPVSaGX0vUXKX8LftFMpknwHWY5lnNdE4L/iRzh2QEZXg4eA3+59hn8cc9d+PfdP0Rfjj0r/B08DPYE78ePWr3g5BrVu4KwDNbloCI0yXVESwceAaR/mOIKgecbKWYGnodGwrAd/AVDO97VA299mpLUixIYwhWhl3lPasKpTxctsRvxF90/R72h+oSjj16+PWMaEpAAaYLJ8B1mBfObKa+4SjBFMiyn52sCytvnIdgbRPe8VyJX44txbr+T2FNxxfw73q+gh8P3Y3fhG7Hvvgy9LsvQ9hdMVPtw+vmmYA42SyOvYGSnjfUfpLTi0MbU0tXxkfG4Tv8Ogb3PoKiocOoVntPilDqbbaSW23J1luyBZcEWrBiGlDB0J8MrMC6k0txIl6bEkoRTC2a6vdEx57ptRzXYU6PX76+PSGW7Lp167B69WosWbJEX7+5uRmbN29OlWXlypVYtWqVqbJt2rRJ5/vmN75mKn8+MrV6h/Gdt4+kLhWPxRCPRBCLRfVrNBRELBRCPCr/DyGmVrnH1PuXFAdwdZkf71fHwmIfGjxe1MR64YnLHoxMdiQgUaF8o3F016xUu2I0KOcV8+IpazyDo6MY7WhFuLdVBUBPBEQvV447pSpIusxLJgKkuyy/cXM7rsXj/g/irdG5el5SHHncyVexKDlXOf3ez1iy02eYrzOkLMw1a9agq6trwnW3bdumBXTjxo36devWrfkqV16uI9ambBQrG8bKHEzZnHqUz21UxzxUzJuPiqZLUNHYhP6qBfid+2q11dD1+E7vCvzhyTvwX/q+gp+O3IlXIp/GEXwYA+5L1Jwo3efz0nB5uIiscayrcuHysRcRV6IXUuHpMiURyvHRMPxHdmJg10Nw+/fpLbUMi1JC2SU2b1axX5WlKZ66Vk3jrlq8GrkF3zt1I94em6eFUsdxlVdZW0nHHqs2HcuVQwL6LiCWpYhiempvb9cCunz5cv228Srv2znJhrNaRNWNQQJDl9XNRUVDE8qUkGoBnZcQ0a7KRdga/xB+MnQD1navwB+cWoVv96/GfaNfxGuRT+GY60MY8TQpB5LMN1o78yz0uolD0GLPXtT0vIjgyJga0z87Mk0cHowHIhh4b5cSygfh8u7WgpgIjC5Dr0kPWInUY3GhlPbqci/B5uFb8H86r0KgWOYpE3OVslREi6UahqVjT6H3bJb/YgikBHPylydbmxdzcrt8R+/anhyGkhBfZfUNSkTnqXnQJm2JVjYtQLn6+3j5ZfhN7MP40dCN+NOu27H65F34T94/Ubs13Im3ojfjtOv9CLsq7YLFMfUQh6AFFT7lEPQkot37J3jRyp6U/XtfwsC7DyhLtEXPReqlIXqe0rAoC2PzZmnQvbHr8N2OW/HM4KUJa1Kvp0ysrdTrK9VojGVCDDmmB7KiViFwXvOnqanprHJSSBNI5Albi6jEyVRBpctFRJWAinCKFVqprFH5f3dZE34d+xDWD96E/9D1Odx1+o/x33x/hAcDd2Bn7OM4GV6AiIvehVb5QZyvHOLRerlrN0qPP4Ox4TH0H3gL/W//DJ7AST30KgJpbK9VW5WwKuV92dzZ6kke5B4evxPfPXkdfK4zHrCGVSmvdOyxeiuyfLkmMMHpR+Yx165dq51+DIef9KHa9M/TC2Y4+JyrsMuWLct1HUyf/3gwhvu8EgotT0l5jsSUA1E8qpyK1GssrJyJguPqNazfFwejWCSEsmgQHyzpw+ISHy4r8uGSEj/mKseiSvdIngrKy1wIAXEIGgxEcbIvrKxNoETNRcpyEMORR4ZxC0EkjTrvH38/nhq6GtvHm7RVKcIo1qQ8EGrHHhUHlil3BD6qljEtUZuc19XVobGxMXcXMnnmlpYWnVOm4aLq3lVTU4Pa2lpUVVWZPIN9s00pmDJXuX79+glzm1MJZjAYRGdnJ+TVSCK4kr7+1btQZpH1WZO9ZGeqWQ3xTIhmUIloMOGZK165SS/dGlcQ15QP4MoyHxaVDGCepx+18V6UxCmiM9Vuk68bisTRPxTVIetKlcerDMda2ZFncvmDrmrsCC/Fvd2LMaAsTE9pwgtW1ljKPL7MVzK0Xe57G71kc884W1eYckg2fWmJXEwEUIZojffTC1CqfmgNDQ2or69PHcbnsZg8gzOlE9DDueohQuaHZMsjGcrVc6HzFiTmQxvnY7x2PnYUXYn7x5bhe/3L8Senv4B/3/0V/N/hu/FC+Hbs12tEF6k5UTWnxDQjBMSKbJpdhPrqxJrKQhJLCdLxq5Fb8MPOqzFYpCL0KOtBB0tPxoIVhzeK5Yx0K17UwgTOO4cp6y5lHaZYlvK6YsWKKatSqTzpziWYFRW8oWdsf7WGISWiahG4Xt6iPHMTy1vUfKh45ipBHapZiNfdH1TLWa7D/+i7BX98+g78597V+OfhVXg5fKsKhv0R+N0LEWXIv4zIs5VBlp9YNeDAueoYd7nRGv8Y/qH7E3hiYNEExx49XylDsRYZEcpWG/E8JJAtAhOGZLN1UjlPIQQuyGZ983GuxFxoNDH/GVHzoGooV4ZxVeQFPayr31Pzo5eXjqhACwNYXO7DAo8KtODuR5UKtOCG+cX3+agPr5FfAsPuefjd2LXY2H15Yn6ytFzPT4pAGkOxsjaZKb8EOCSbX97TuRp/HdOhl+fvnrVGVC9vOXuNaEfFpXgxfjX+cfBGtUb0Vnzt1O/j296v4heBL+H16HK1RvRqjKib50zvA5lnfI6+3HFcjXv9y7Gp9/16mYjsKpJaV5kciqVYOrqLsPImCFAwTUCycpZzrhGV5S3nWCP6XPRa/MPgx9Ua0ZVYfepu/IX/63go8AW8HbsZJ10fRMAz18pVZdkugkBIOfO8oR6S/rrzBrw6IhF7EvtWGpF7ZINnesFeBFh+xZEEnCWY1l8Ol5VOaHaN6KGS9+GJyIfxA98n8C21C8W/Pvmv8a3ef4PngrdDtnFiKmwC4+7Z+JH/8/i7jg/B665RFqVYlsmIPWquXP52FzGc40y3Mrf3mukWMH99ZwmmUx12DaciNV+VCLQwWwdakB1bxEO3cn4i5F/53AZ0V16G+4M34I97v4L7AnfioGsZgu5a8z2KOS1BYD+W4W96P4fXh+cm9qsUhx7xgNWh7ZRoqqUj9IK1RFOB23tZox3MlMJZgmmGiFPyKBEV60KG4+SGWlo7R3vmVsxTh3otnbcQL5Z8DN/1rcQPBu9Ac/TTykq51Cl0Craeo+4GPB+6Dd8+cT32hesT4ezU2kp9qP/LJs+yxpLJWgS4vZe12mOq0lAwC6Od8lbK1PIWZYmIFVq1YBEO1l6Ln4RuwZ/1fxm/Gv8Sjriu5R6heWsR8xc6HLwCPx9Yjn/uuVJZkEogxZI0rEo1BCtWJuPAmufJnCQwmQAFk33ivAQkTJosYq9QwRSiTVfg6eKP4797P6cCzH8Z22M3YdA9nwRnmIAEr5C2+EHfzXh5eL6O1KPnKpNiSceeGW4gXt42BCiYtmnK3FZElhzIsJ5sdyZW5+5ZS/H3Y7fjz7134KnQ53DSfRX3A81tE5zz7D7PZdgyeiv+9vSH0V80RzvyJParTEbuoWPPDLQKL2lXAhRMu7ZsDuslc2CyQ4uOPtR4JX7luhl/2v9F/NPIl/Fu/EaMuLg8JYf4U6c+gI/ix7034iHfZdqqTHfs0RamesChY08+WoLXcAoBCqZTWjoH9ZQ1oDJPJnOdlQsuxZuV1+H7I7fjr/x3qHi3K/VGxEzZJxBw12FreAW+qxx7dgcbE96vSiD1/pVJL1iJ5MNEAiSQXQIUzOzydObZlMet3KDF07Zy/gJ01V+N++PL8e/77sS9gVXYj+sw5prtTDZZrvUp1wfwy8FP4SfdH0S8LCGUetmIEkrxgJX/y4MMEwmQQPYJUDCzz9TRZxQvW7l5l81t1HOd28pvwPcGfw/fH7oTr0RXqB1W3udoPhdb+ajaZHxn7BP4OxWx5/mhBWc79iihZND0i6XL75GAOQIUTHOcmOsCCcjcmazxlO3LKi9ZiKO1H8KG8C1qrvNObB77ItrVziphNzekNYN1QO1A8+TYp/FXpz6M08pST2zBlQxGIHFgxbFHeTMzkQAJ5JYABTO3fHl2RUACJMjSFAmMgPmX47nSm/Dtgc/i75XVKXFO/e4F5DQFgcPqweIn/Tfhl/1XJOO/JveslOFXOvaw35BAXglQMPOK29kX00tTlDen7PdZdckitFYvxY/HV6h1nV/CE8F/geNqF5WYu8zZkJK1H3fPwbbwp/EXp67HO+ONqWDpKcceCZpOxx72FRLIKwEKZl5x82IGAR0QoVoFRFBLU8bmfQCPeW7Cn3m/gH9US1N2xj8B2bvRqanTtQS/HPoUftT1QQSLZeg1OQSbdOyR4ViZK2YiARLILwEKZn5582qTCOilKWkBEXZUfhR/N3Ir/tL3JTwX+j10KK9QqPlQJ6SYq1ivY/1h9yfw60Hl2CPLRPSwqwimDMXSsccJ/YB1tC4BZ9yJrMufJTMISDB4HRBhtl6a0t9wFR7EcvxHFRBhU+D3sT1wLQJqmNKuacB9CZ4euxXfO7kUx+Li2HPGqUe8jmW+ko49dm191qtQCFAwC6WlHFROGW4UwShT241VLbwMr5Zdhx9Gvoi/9X8ZL0duQ6/nClvROIJrsdF3M+7rW5zYVSQVND3p2KO8YmX+l4kESGBmCfBXOLP8efXzENBLUyQggixNUVbniboP4aeRT6lNru/AL8buxCHXRxFyVRcsw6Da1Pl3kVuw7vQNeHP0jGOPiGYiHiwdewq2cVlwWxKgYNqyWe1XKVmaIiJS3jAPJZdcjhfLPo4/9/8efjh0B15TIurzFNZend2uxXho+Bb8fedVGCmSSD2JQ4Zei2UrLrEq6dhjv47MGhU0AQpmQTef8wovQ5MS0UasTlma0lb7Efxj6NP4r/134NHgF3DUdQ3CKiqOVVMcHuzFx/D3vR/HUwOXnuXYo5171NIb7ltp1RZkuZxMgILp5NYv8Lqn79UZmrcETxbdhP/m/Tx+PPxl7IjdjCGPCpRgoTTkmY9ng7epoOkfRXtEbcUl3q9pmzzTscdCjcWikMA5CFAw2S0KnsDkpSm7Zi3D+rHb8D98d+KZ0GchActjmNl1i8dcav7VexPu7V2iLEjl2KOXiST3rhQvWDr2FHw/ZAXsT4CCaf82dlQNz+zV2QT/3CvxkOuT+M9qk+sNo1/G7vgNamlKfvfqDLlm4fXoJ/E/O25A82iTsirVvpUikOLYI3OVat5SYu4ykQAJWJ8ABdP6bcQSXgQBY2mKsVfn65XX429HVqq9Or+EF8O3oVtF08l16nVfjkdGP40fdFyj4uXKEpHKRPxXOvbkGj3PTwI5IUDBzAlWntQyBNL26qxougQdamnKz2O3qIAId+C+sVVowzKMu2uzWtw4XNiH6/Gjno/jMZ9y7FFOPHp3EWMIVuYt6diTVeY8GQnkg0BGwVyzZg3Sj+bm5nyUi9cggawTOLM0pRHlCy7DS2U34C8HP4P/PXAnXo1+Gv2uRdO+5oi7Ec+HbsN3TixDW6ReO/UkwtrJfKUsF1ERe1REIyYSIIHCI5BRMKVKa9euxcaNG/WxfPnywqslS0wCaQQm7NU5fyHaZ1+Df1Y7g6z1fRkPB7+II65r1dKUygtmdsJ9NX7m/yQ29Lw/4diT5gGr5y312krPBZ+XXyABErAGAVOCaY2ishQkkH0CxtIU2asz2nQFnin6BP677/P4P8N34q3YJ+F3XZLxomF3Jd6K3oy/Of0xbBuZr4dg9VxlcghW5i7p2JMRIzOQgOUJmBLM9evX62HZdevWWb5CLCAJXAyB1F6ddXNRtWAR9s5ain9QwdC/ozxsnwx9DmI9xlxnD6XKMO7jyrHn+x3Xok/NhYo4JsLaJSL2yN8yFMxEAiRQ+AQyCmZTU1NqOLarqwtbtmwp3Fq7CrfoLHn+CGirs6ZW79U5Ou9KPOL+JP5L/xfwl/7V2BW7EZHkJtfH1IbXf3bqNjzsvexsx55kxB4Z/mUigfMRKHPFCKhACLjiKpkt64YNG3TWe+65Z8JXNm3aNOUpli1bZvb0Oc93PBTDff3hnF+HF7AZAfUTiYXDCAdGEBkdhWfUhw+7TuH1kQY91Coer57S0sT/KyrUaznnKm3WBXJZnRt623FZiRt1dXVobGzM5aVMnbulpUXnE3+VaDSKmpoa1NbWokqtGXZ6umDBnDt3LlatWjWBWzAYRGdnJ+TVSIY37de/ehfKVOxPK6RW7zC+8/YRKxSFZShQAvFoBFHVz8OjIwiPDANKTBPBB0Q0y3ScWyYSuBACny8awfV1lUosG7Bw4YIL+WpO8m669wEK5hRkM44Xpc9b7tq1CyKYk1OperpuaGhAfX196jDyxGKmDdicND5PSgLZJJAIiFCJ8rmNKvj7pSirV1am8oiV+UqKZTZJO+tcFzDQ5ywwFqttRsG85pprUuswV65cOeWykkrl3HAuwayoUDsvMJGADQnoMHzVNfrgBs82bGBWiQQmEcgomDL8aqzBnDwUS5okQAIkQAIk4BQCGQXTKSBYTxIgARIgARI4HwEKJvsHCZAACZAACZggQME0AYlZSIAESIAESICCyT5AAiRAAiRAAiYIUDBNQGIWEiABEiABEqBgsg+QAAmQAAmQgAkCFEwTkJiFBEiABEiABCiY7AMkQAIkQAIkYIIABdMEJGYhARIgARIgAQom+wAJkAAJkAAJmCBAwTQBiVlIgARIgARIgILJPkACJEACJEACJghQME1AYhYSIAESIAESoGCyD5AACZAACZCACQIUTBOQmIUESIAESIAEKJjsAyRAAiRAAiRgggAF0wQkZiEBEiABEiABCib7AAmQAAmQAAmYIEDBNAGJWUiABEiABEiAgsk+QAIkQAIkQAImCFAwTUBiFhIgARIgARKgYLIPkAAJkAAJkIAJAhRME5CYhQRIgARIgAQomOwDJEACJEACJGCCAAXTBCRmIQESIAESIAEKJvsACZAACZAACZggQME0AYlZSIAESIAESICCyT5AAiRAAiRAAiYIZBTMDRs2YM2aNamjvb3dxGmZhQRIgARIgATsReC8giniuGvXLmzcuFEfS5cuxW9/+1t7EWBtSIAESIAESMAEgfMK5t69e7VIGumqq65Cd3e3idMyCwmQAAmQAAnYi8B5BbOvr89etWVtSIAESIAESOAiCbjiKk31XZm/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" width="460" height="320"></p>
+</body>
+</html>

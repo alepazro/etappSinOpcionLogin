@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.NAudio</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.NAudio.LoopbackSource">
+            <summary>
+            An NAudio-based source to capture sound being sent to a sound card (for playback).
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.LoopbackSource.#ctor(FM.LiveSwitch.AudioConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.NAudio.Source" /> class.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="P:FM.LiveSwitch.NAudio.LoopbackSource.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.LoopbackSource.GetInputs">
+            <summary>
+            Gets the available inputs (system outputs).
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.LoopbackSource.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.LoopbackSource.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.NAudio.Sink">
+            <summary>
+            An NAudio-based sink.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.GetOutputs">
+            <summary>
+            Gets the available outputs.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.NAudio.Sink.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.NAudio.Sink" /> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.#ctor(FM.LiveSwitch.AudioConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.NAudio.Sink" /> class.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.#ctor(FM.LiveSwitch.IAudioOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.NAudio.Sink" /> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.#ctor(FM.LiveSwitch.IAudioOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.NAudio.Sink" /> class.
+            </summary>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.Initialize(FM.LiveSwitch.AudioFormat)">
+            <summary>
+            Initializes the specified format.
+            </summary>
+            <param name="format">The format.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.DoDestroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.DoProcessFrame(FM.LiveSwitch.AudioFrame,FM.LiveSwitch.AudioBuffer)">
+            <summary>
+            Processes a frame.
+            </summary>
+            <param name="frame">The frame.</param>
+            <param name="inputBuffer">The input buffer.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Sink.GetBufferDelay(FM.LiveSwitch.AudioConfig)">
+            <summary>
+            Get Buffer Delay.
+            </summary>
+            <param name="config">The Config.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.NAudio.Source">
+            <summary>
+            An NAudio-based source to capture sound from a microphone.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.NAudio.Source.NameSelector">
+            <summary>
+            Gets or sets the audio-name-based selector function.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.GetInputs">
+            <summary>
+            Gets the available inputs.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FM.LiveSwitch.NAudio.Source.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.#ctor(FM.LiveSwitch.AudioConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.NAudio.Source" /> class.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.NAudio.Source.WasapiInBuffer">
+            <summary>
+            Pre-allocated temporary buffer for raising audio frames.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.NAudio.Source.WasapiOutBuffer">
+            <summary>
+            Pre-allocated temporary buffer for raising audio frames.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.ConvertFloatDataToShortData(System.Byte[],System.Int32,FM.LiveSwitch.DataBuffer,System.Int32,System.Int32)">
+            <summary>
+            Converts 32-bit float data to 16-bit PCM data.
+            </summary>
+            <param name="floatData">The 32-bit float buffer.</param>
+            <param name="floatIndex">The 32-bit float buffer index.</param>
+            <param name="shortData">The 16-bit PCM buffer.</param>
+            <param name="shortIndex">The 16-bit PCM buffer index.</param>
+            <param name="sampleCount">The number of samples to convert.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.GetBufferDelay(FM.LiveSwitch.AudioConfig)">
+            <summary>
+            Get buffer delay.
+            </summary>
+            <param name="config">The config.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.ConvertToValidBuffer(System.Int32,System.Int32,System.Byte[],System.Int32,System.Byte[]@,System.Int32@)">
+            <summary>
+            Convert a captured buffer to 16 bit samples, stereo or mono, so it can be processed by NAudio.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.Source.ConvertMultiChannelToStereo(System.Int32,System.Byte[],System.Int32,System.Byte[]@)">
+            <summary>
+            NAudio only supports converting mono or stereo data, so if a multi-channel
+            surround source (4, 6, or 8 channels, for example) is received, it must be combined into a
+            stereo stream.  If the source is already mono or stereo, then this method returns the same buffer.
+            
+            Buffer must contain PCM data with a bits per sample of 16.
+            </summary>
+            <returns>Length of the convertedBuffer.</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.NAudio.WaveFileSource">
+            <summary>
+            A wave file source.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.WaveFileSource.GetAudioConfig(System.String)">
+            <summary>
+            Gets the audio configuration for a given filename.
+            </summary>
+            <param name="filePath">The file path.</param>
+            
+        </member>
+        <member name="P:FM.LiveSwitch.NAudio.WaveFileSource.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.WaveFileSource.#ctor(System.String)">
+            
+             <summary>
+             Initializes a new instance of the <see cref="T:FM.LiveSwitch.NAudio.WaveFileSource" /> class.
+             </summary>
+             <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.WaveFileSource.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.NAudio.WaveFileSource.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+    </members>
+</doc>

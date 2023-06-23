@@ -1,0 +1,632 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker Orders</title>
+
+    <!--    CSS includes -->
+    <!-- <link href="Styles/common.css" rel="stylesheet" type="text/css" /> --->
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/toggleSwitches.css" rel="stylesheet" type="text/css" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.default.min.css" rel="stylesheet" />
+    <!--<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <!-----custome files----------->
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        #suggestions {
+            box-shadow: 2px 2px 8px 0 rgba(0,0,0,.2);
+            height: auto;
+            position: absolute;
+            top: 45px;
+            z-index: 9999;
+            width: 206px;
+        }
+
+            #suggestions .suggest-element {
+                background-color: #EEEEEE;
+                border-top: 1px solid #d6d4d4;
+                cursor: pointer;
+                padding: 8px;
+                width: 100%;
+                float: left;
+            }
+
+        #suggestions2 {
+            box-shadow: 2px 2px 8px 0 rgba(0,0,0,.2);
+            height: auto;
+            position: absolute;
+            top: 45px;
+            z-index: 9999;
+            width: 206px;
+        }
+
+            #suggestions2 .suggest2-element {
+                background-color: #EEEEEE;
+                border-top: 1px solid #d6d4d4;
+                cursor: pointer;
+                padding: 8px;
+                width: 100%;
+                float: left;
+            }
+    </style>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+    </style>
+</head>
+<body>
+    <section class="header-easytrack" id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="topstrip" id="topMenu">
+                    <nav class="navbar navbar-expand-md navbar-dark" id="toggle">
+                        <a href="#"><img src="images/Logo3.png" height="50"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown" id="mod1">
+                                    <!--  <a class="nav-link" id="rbtTracking">Tracking</a> -->
+                                    <label><input id="rbtTracking" name="panelType" checked="checked" onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Tracking">Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod2">
+                                    <!--  <a class="nav-link" id="rbtMultiTracking">Multi-Tracking</a> -->
+                                    <label><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Multi-Tracking">Multi-Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod3">
+                                    <!--  <a class="nav-link" id="rbtReports">Reports</a> -->
+                                    <label><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Reports">Reports</span></label>
+                                </li>
+                                <li class="nav-item" id="mod5">
+                                    <!--     <a class="nav-link" id="rbtMaintenance">Maintenance</a> -->
+                                    <label><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Maintenance">Maintenance</span></label>
+                                </li>
+                                <li class="nav-item" id="mod13">
+                                    <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                    <label><input id="rbtELOG" name="panelType" onclick="changePanel(13)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="E-LOG">E-LOG</span></label>
+                                </li>
+                                <!--<li class="nav-item" id="mod6">-->
+                                <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                <!--<label><input id="rbtVideo" name="panelType" onclick="changePanel(14)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Video">Video</span></label>
+                                </li>-->
+                                <li class="nav-item" id="mod6">
+                                    <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                    <label><input id="rbtFieldService" name="panelType" onclick="changePanel(6)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="FieldService">Field Service</span></label>
+                                </li>
+                                <li class="nav-item" id="mod4">
+                                    <!--   <a class="nav-link" id="rbtSettings">Settings</a> -->
+                                    <label><input id="rbtSettings" name="panelType" onclick="changePanel(4)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Settings">Settings</span></label>
+                                </li>
+                                <li class="nav-item dropdown" id="mod1">
+                                    <!--  <a class="nav-link" id="rbtTracking">Tracking</a> -->
+                                    <label><input id="rbtVideo" name="panelType" checked="checked" onclick="changePanel(17)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Video">Video</span></label>
+                                </li>
+                                <li id="mod6">
+                                    <img id="feedback" src="icons/feedback.png" style="width:40px;height:40px;" title="Send Feedback" data-toggle="modal" data-target="#myModal1" />
+                                </li>
+                                <li class="mobiletext"><a id="trackingFleetLocation" href="#" class="mainMenuOption linkmobilenew lang" onclick="mainMenuClick('fleetLocationDiv',1)" key="FleetLocation">FleetLocation</a></li>
+                                <li class="mobiletext"><a id="trackingQuickDispatch" href="#" class="mainMenuOption linkmobilenew lang" onclick="mainMenuClick('dispatchingDiv',1)" key="QuickDispatching">Quick Dispatching</a></li>
+                                <li class="mobiletext"><a id="trackingBreadcrumbTrail" href="#" class="mainMenuOption linkmobilenew lang" onclick="mainMenuClick('breadcrumbDiv',1)" key="BreadcrumbTrail">Breadcrumb Trail</a></li>
+                                <li class="mobiletext"><a id="trackingFleetStatusBoard" href="fleetStatusBoard.html" class="mainMenuOption linkmobilenew lang" key="FleetStatusBoard">Fleet Status Board</a></li>
+                                <li class="mobiletext"><a id="trackingHotSpots" href="hotSpots.html" class="mainMenuOption linkmobilenew lang" key="HotSpots">Hot Spots</a></li>
+                                <li class="mobiletext"><a id="trakingnumberpanel" href="trakingnumberPanel.html" class="mainMenuOption linkmobilenew lang" key="trakingnumberPanel">Traking Number</a></li>
+                                <li class="mobiletext"><a id="brokerorderpanel" href="brokerorderpanel.html" class="mainMenuOption linkmobilenew lang" key="brokerorderpanel">Broker Order</a></li>
+                                <li class="linkmobilenew mobiletext">
+                                    <a href="#" onclick="logout()" class="loginDivClass lang" key="Logout">Logout</a>
+                                </li>
+
+                                <!-- <li class="linkmobilenew mobiletext">
+                                   <a id="feedback" class="dropdown-item" href="#">
+                                        <span style="font-weight:600;">Feedback</span>
+                                    </a>
+                                </li>-->
+
+                            </ul>
+
+                        </div>
+                        <div class="login-content-right">
+                            <ul>
+                                <li>
+                                    <div id="welcomeTitleDiv">
+                                        <span id="welcomeTitleSpan" style="color:white;font:bold"></span>
+                                    </div>
+                                </li>
+                                <li style="color:white;font:bold">
+                                    <a href="#" onclick="logout()" class="lang" key="Logout">Logout</a>
+                                </li>
+                                <!-- <li class="linkmobilenew mobiletext">
+                                   <a id="feedback" class="dropdown-item" href="#">
+                                        <span style="font-weight:600;">Feedback</span>
+                                    </a>
+                                </li>-->
+                                <li class="cart-icon" id="buyNowDiv">
+                                    <a href="#" onclick="buyNow()"><img src="images/cart-header.png"></a>
+                                </li>
+                                <li>
+                                    <select id="language" class="form-control" onchange="selectLanguage(this.value)" style="width:auto">
+                                        <option value="-1">Language</option>
+                                        <option value="es">ES</option>
+                                        <option value="en">EN</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="second-strip" id="middleMenu">
+        <div class="container-fluid">
+            <ul id="mainMenu">
+                <li><a id="trackingFleetLocation" href="#" class="mainMenuOption lang" onclick="mainMenuClick('fleetLocationDiv',1)" style="font-size:14px;font-weight:bold" key="FleetLocation">Fleet Location</a></li>
+                <li><a id="trackingQuickDispatch" href="#" class="mainMenuOption lang" onclick="mainMenuClick('dispatchingDiv',1)" style="font-size:14px;font-weight:bold" key="QuickDispatching">Quick Dispatching</a></li>
+                <li><a id="trackingBreadcrumbTrail" href="#" class="mainMenuOption lang" onclick="mainMenuClick('breadcrumbDiv',1)" style="font-size:14px;font-weight:bold" key="BreadcrumbTrail">Breadcrumb Trail</a></li>
+                <li><a id="trackingFleetStatusBoard" href="fleetStatusBoard.html" class="mainMenuOption lang" style="font-size:14px;font-weight:bold" key="FleetStatusBoard">Fleet Status Board</a></li>
+                <li><a id="trackingHotSpots" href="hotSpots.html" class="mainMenuOption lang" style="font-size:14px;font-weight:bold" key="HotSpots">Hot Spots</a></li>
+                <li><a id="trackingnumber" href="trakingnumberPanel.html" class="mainMenuOption lang" style="font-size:14px;font-weight:bold" key="TrakingNumber">Traking Number</a></li>
+                <li><a id="brokerorderpanel" href="brokerorderpanel.html" class="mainMenuOption lang" style="font-size:14px;font-weight:bold" key="brokerorderpanel">Broker Order</a></li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <!--<div id="wrapper" class="content-wrap-custome">-->
+        <div id="traking" class="container-fluid">
+            <br /><h1 id="h1_brokerorder">Broker Orders</h1><hr />
+            <div class="row">
+                <br />
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <input class="form-control" id="myInput2" type="text" placeholder="Search..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="brokersdiv">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-6" style="width:100%; height:300px; overflow: scroll;">
+                                <table class="table table-striped" id="brokerlist">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <!--<th scope="col">Device</th>-->
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Order Number</th>
+                                            <th scope="col">Pickup Address</th>
+                                            <th scope="col">Pickup Detetime</th>
+                                            <th scope="col">Delivery Address</th>
+                                            <th scope="col">Delivery Date Time</th>
+                                            <!--<th scope="col">CreateOn</th>
+    <th scope="col">TrackingWasSent</th>
+    <th scope="col">TrackingWasSentDate</th>
+    <th scope="col">SendTo</th>
+    <th scope="col">DriverName</th>
+    <th scope="col">TrackingNumber</th>
+    <th scope="col">TrackingStatus</th>-->
+                                            <th scope="col">Stops Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody_brokerlist">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--</div>-->
+
+    </section>
+    <section>
+        <hr style="height: 10px; background-color:#326DB4" />
+        <div class="container-fluid">
+            <h2>
+                Order Detail <span id="det_brokerHead"></span>
+            </h2>
+            <div class="row">
+                <div class="col-3">
+                    <label for="det_Name" class="form-label">Broker Name</label>
+                    <input type="text" class="form-control" id="det_Name" placeholder="..." disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_BrokerNumber" class="form-label">Order Number</label>
+                    <input type="text" class="form-control" id="det_BrokerNumber" placeholder="..." disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_PickupAddress" class="form-label">Pickup Address</label>
+                    <input type="text" class="form-control" id="det_PickupAddress" placeholder="..." disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_Pickupdetetime" class="form-label">Pickup Detetime</label>
+                    <input type="text" class="form-control" id="det_Pickupdetetime" placeholder="..." disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="det_DeliveryAddress" class="form-label">Delivery Address</label>
+                    <input type="text" class="form-control" id="det_DeliveryAddress" placeholder="..." disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_Deliverydatetime" class="form-label">Delivery Datetime</label>
+                    <input type="text" class="form-control" id="det_Deliverydatetime" placeholder="..." disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_CreateOn" class="form-label">Create On</label>
+                    <input type="text" class="form-control" id="det_CreateOn" placeholder="...m" disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_SendTraking" class="form-label">
+                        Tracking Was Sent
+                    </label>
+                    <input type="text" class="form-control" id="det_SendTraking" placeholder="..." disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="det_SendTo" class="form-label">Send To</label>
+                    <input type="text" class="form-control" id="det_SendTo" placeholder="..." disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_TrackingStatus" class="form-label">Tracking Status</label>
+                    <input type="text" class="form-control" id="det_TrackingStatus" placeholder="..." disabled>
+                </div>
+                <div class="col-3">
+                    <label for="det_DriverName" class="form-label">Driver Name</label>
+                    <input type="text" class="form-control" id="det_DriverName" placeholder="..." disabled>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <!--<label for="det_ViewMap" class="form-label">View Map</label>-->
+                    <span>click here to go to the map</span><br />
+                    <a id="det_ViewMap" href="" target="_blank"><img src="https://img.icons8.com/dusk/128/null/google-maps.png" /></a>
+                </div>                
+                <div class="col-6">
+                    <label for="det_Observaciones" class="form-label">Observations</label>
+                    <textarea class="form-control" id="det_Observaciones" rows="6" disabled></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <hr style="height: 10px; background-color:#326DB4" />
+        <div class="container-fluid">
+            <h2>
+                Order Stops <span id="det_brokerHeadStops"></span>
+            </h2>
+            <div class="row">
+                <div class="col-md-12 col-sm-6">
+                    <table class="table table-striped" id="brokerStops">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Delivery Address</th>
+                                <th scope="col">Delivery Datetime</th>
+                                <th scope="col">Observations</th>                                
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_brokerStops">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <!-- Modal post -->
+            <div class="modal fade" id="sendEmails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span>
+                                Send Email
+                            </span>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="hidden" id="email_brokerid">
+                                <input type="hidden" id="email_deviceid">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Emails  <span style="font-size:12px;color:red">separate emails with semicolons (;)</span></label>
+                                    <input type="email" class="form-control" id="emails" placeholder="em1@em1.com;em2@em2.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <span id="msg" style="color:red"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="postemail()">Send message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-12">
+                <div id="brokerStop">
+                    <div class="row">
+                        <!-- Modal post -->
+                        <div class="modal fade" id="formbrokerStop" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <span>
+                                           Create Stop
+                                        </span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <!--<div class="row">
+                                                <input type="hidden" id="brokerid" />
+                                            </div>-->                                           
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label>Stop Address</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input id="stopaddress" type="text" class="form-control" placeholder="..." required>
+                                                <div class="col-6">
+                                                            <div id="suggestions"></div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label>Date</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <!--<input id="StopDatetime" type="datetime-local" class="form-control" placeholder="..." required>-->
+                                                    <input id="StopDatetime" type="text" class="form-control" placeholder="..." required>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label>Observations</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input id="StopObservations" type="text" class="form-control" placeholder="...">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="row">
+                                            <span id="stopmsg" style="color:red"></span>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="stopAdd()">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+                <div class="row">
+            <!-- Modal post -->
+            <div class="modal fade" id="sendsms" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span>
+                                Send SMS
+                            </span>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="hidden" id="sms_brokerid">
+                                <input type="hidden" id="sms_deviceid">
+                                <div class="mb-3">
+                                    <label for="sms" class="col-form-label">Phone <span style="font-size:10px;color:red">USA CANADA ONLY.AREACODE + PHONE NUMBER. SEPARATE WITH SEMICOLON (;)</span></label>
+                                    <input type="text" class="form-control" id="smsPhone" placeholder="phone1;phone2;phone3...">
+                                </div>
+                                <div class="mb-3" style="display:none">
+                                    <label for="smsMessage" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="smsMessage"></textarea>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <span id="smsmsg" style="color:red"></span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="PostsendSms()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <footer>
+        <br />
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">var seJY41 = document.createElement("script"); seJY41.type = "text/javascript"; var seJY41s = (location.protocol.indexOf("https") == 0 ? "https" : "http") + "://image.providesupport.com/js/0325vm2g5aj6809q0cspkf44yw/safe-standard.js?ps_h=JY41&ps_t=" + new Date().getTime(); setTimeout("seJY41.src=seJY41s;document.getElementById('sdJY41').appendChild(seJY41)", 1)</script><noscript><div style="display:inline"><a href="http://vm.providesupport.com/0325vm2g5aj6809q0cspkf44yw">Customer Support Chat</a></div></noscript>
+        <!-- END ProvideSupport.com Graphics Chat Button Code -->
+        <!--    Javascript includes -->
+        <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.tools.min.js" type="text/javascript"></script>
+        <script src="Scripts/date.format.js" type="text/javascript"></script>
+        <script src="Scripts/db_v002.js" type="text/javascript"></script>
+        <script src="Scripts/brokerorderPanel.js" type="text/javascript"></script>
+        <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAekGGZACHuofFJ65TxBQFAlYvhw2GjM6U&v=3.17&sensor=false"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="PruebaMultiIdioma/js/script.js" charset="utf-8"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $("#myInput2").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#tbody_brokerlist tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+                $("#stopaddress").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    var htmlresult = "";
+                    if (value.length > 5) {
+
+                        $.ajax({
+                            method: "GET",
+                            url: "https://geocode.search.hereapi.com/v1/geocode?q=" + value + "&apiKey=cjWEwjRUaQbpq1NcmdAfKYEtn2NUccsg61T2SsecOp8"
+                        }).done(function (data) {
+                            data.items.forEach(function (data, index) {
+                                console.log(data);
+                                htmlresult += "<div><a class='suggest-element' address=" + "'" + data.address.label + "'" + "coordinates=" + "'" + data.position.lat + "," + data.position.lng + "'" + ">" + data.address.label + "</a></div>";
+                            });
+                            $("#suggestions").fadeIn(1000).html(htmlresult);
+                            $('.suggest-element').on('click', function () {
+
+                                var address = $(this).attr('address');
+                                var coordinates = $(this).attr('coordinates');
+                                BrokerStop.PickupAddress = address;
+                                BrokerStop.PickupAddresscoordinatesLat = (coordinates.split(","))[0];
+                                BrokerStop.PickupAddresscoordinatesLng = (coordinates.split(","))[1];
+
+                                $('#stopaddress').val(address);
+                                $('#suggestions').fadeOut(1000);
+                                return false;
+                            });
+
+                        }).fail(function () {
+                            alert("Algo salió mal");
+                        }).always(function () {
+                            //alert("Siempre se ejecuta")
+                        });
+                    } else {
+                        $('#suggestions').fadeOut(1000);
+                    }
+
+                });
+                $(function () {
+                    $("#StopDatetime").datepicker(
+                        {
+                            dateFormat: 'mm-dd-yy'
+                        }
+                    );
+                });
+
+                if (validateToken(false, 'brokerorders.html') == true) {
+                    
+                    setWelcomeTitle();
+
+                    setLastFetchOn();
+                    const queryString = window.location.search;
+                    const urlParams = new URLSearchParams(queryString);
+                    deviceid = urlParams.get('Deviceid')
+                    if (deviceid != undefined && deviceid > 0) {
+                        loadbrokerOrders(0, deviceid);
+
+                    } else {
+                        loadbrokerOrders(0, 0);
+                    }
+
+                }
+            });
+        </script>
+    </footer>
+</body>
+</html>

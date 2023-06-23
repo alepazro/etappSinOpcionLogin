@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="VB" Debug="true" Service="etws.qbonline" CodeBehind="qbonline.svc.vb" %>

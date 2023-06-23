@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>eTrack Daily Report</title>
+</head>
+<body>
+    <div style="width:100%;">
+        <table style="width:960px;">
+            <tr>
+                <td>
+                    <table style="border:1px solid #a1a1a1;width:100%;">
+                        <tr style="height:20px;font-weight:600;font-size:12px;background-color:#f6f6f6;">
+                            <td>Total Idling</td>
+                            <td>Total Driving</td>
+                            <td>Total Standing</td>
+                            <td>Total Distance</td>
+                        </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table style="border:1px solid #a1a1a1;">
+                        <tr style="height:20px;font-size:12px;background-color:#f6f6f6;">
+                            <td colspan="1" style="font-weight:600;">Vehicle:</td>
+                            <td colspan="2">{DEVICE0NAME}</td>
+                            <td colspan="1" style="font-weight:600;">Driver Name:</td>
+                            <td colspan="4">{DRIVER0NAME}</td>
+                        </tr>
+                        <tr style="height:20px;font-size:11px;font-weight:600;padding:3px;background-color:#0000ff;color:#ffffff;">
+                            <td style="width:100px;">Date</td>
+                            <td style="width:100px;">Ign On</td>
+                            <td style="width:200px;">Departed</td>
+                            <td style="width:200px;">Arrived</td>
+                            <td style="width:100px;">Ign Off</td>
+                            <td style="width:80px;">Duration</td>
+                            <td style="width:80px;">Stopped</td>
+                            <td style="width:80px;">Miles</td>
+                        </tr>
+                        <tr style="background-color:#ffffff;">
+                            <td style="padding:3px;font-size:11px;">{ThisDay}</td>
+                            <td style="padding:3px;font-size:11px;">{StartTime}</td>
+                            <td style="padding:3px;font-size:11px;">{Departed}</td>
+                            <td style="padding:3px;font-size:11px;">{Arrival}</td>
+                            <td style="padding:3px;font-size:11px;">{StopTime}</td>
+                            <td style="padding:3px;font-size:11px;">{Duration}</td>
+                            <td style="padding:3px;font-size:11px;">{Stopped}</td>
+                            <td style="padding:3px;font-size:11px;">{Miles}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <table style="width:100%;">
+                                    <tr style="height:20px;font-size:12px;background-color:#ccffff;">
+                                        <td><strong>Total Vehicle:</strong></td>
+                                        <td><strong>Idling: </strong>{Idling}</td>
+                                        <td><strong>Engine On: </strong>{EngineOn}</td>
+                                        <td><strong>Stop Time: </strong>{StopTime}</td>
+                                        <td><strong>Total Distance: </strong>{TotalDistance}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,2486 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.Dmo</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.Dmo.AecProcessor">
+            <summary>
+            Dummy AEC processor (does nothing).
+            For use with the Dmo.VoiceCaptureSource.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecProcessor.Label">
+            <summary>
+            Gets the label.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.AecProcessor.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Dmo.AecProcessor" /> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.AecProcessor.#ctor(FM.LiveSwitch.AudioConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Dmo.AecProcessor"/> class.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.AecProcessor.DoProcessFrame(FM.LiveSwitch.AudioFrame,FM.LiveSwitch.AudioBuffer)">
+            <summary>
+            Processes a frame.
+            </summary>
+            <param name="frame">The frame.</param>
+            <param name="inputBuffer">The input buffer.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.AecProcessor.ProcessSpeakerFrame(FM.LiveSwitch.AudioFrame)">
+            <summary>
+            Processes a speaker frame.
+            </summary>
+            <param name="frame">The frame.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.AecProcessor.IsSupported">
+            <summary>
+            Gets a value that indicates whether DMO is supported on this system.
+            This is an alias for <see cref="P:FM.LiveSwitch.Dmo.Utility.IsSupported"/>.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecProcessor.DefaultConfig">
+            <summary>
+            Gets the default configuration.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.AecQualityMetrics">
+            <summary>
+            Class contain details on the Aec metrics from the Voice Capture DMO.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.i64Timestamp">
+            <summary>
+            Gets the timestamp when the quality metrics are collected.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.ConvergenceFlag">
+            <summary>
+            Gets the AEC convergence flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.MicClippedFlag">
+            <summary>
+            Gets the mic input signal clipped flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.MicSilenceFlag">
+            <summary>
+            Gets the mic input too quiet or silent flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.PstvFeadbackFlag">
+            <summary>
+            Gets the positive feadbacks causing chirping sound flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.SpkClippedFlag">
+            <summary>
+            Gets the speaker input signal clipped flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.SpkMuteFlag">
+            <summary>
+            Gets the speaker muted or too quiet flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.GlitchFlag">
+            <summary>
+            Gets the glitch flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.DoubleTalkFlag">
+            <summary>
+            Gets the double talk flag.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.uGlitchCount">
+            <summary>
+            Gets the glich count.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.uMicClipCount">
+            <summary>
+            Gets the mic clipping count.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.fDuration">
+            <summary>
+            Gets the AEC running duration.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.fTSVariance">
+            <summary>
+            Gets the timestamp variance (long-term average)
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.fTSDriftRate">
+            <summary>
+            Gets the timestamp drifting rate (long-term average).
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.fVoiceLevel">
+            <summary>
+            Gets the near-end voice level after AEC (short-term smoothed).
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.fNoiseLevel">
+            <summary>
+            Gets the noise level of mic input signals (long-term smoothed).
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.fERLE">
+            <summary>
+            Gets the echo return loss enhancement (short-term smoothed).
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.AecQualityMetrics.fAvgERLE">
+            <summary>
+            Gets the echo return loss enhancement (short-term smoothed).
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.AecQualityMetrics.ToString">
+            <summary>
+            Returns all the properties in a loggable format.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow">
+            <summary>
+            The EDataFlow enumeration defines constants that indicate the direction 
+            in which audio data flows between an audio endpoint device and an application
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow.Render">
+            <summary>
+            Audio rendering stream. 
+            Audio data flows from the application to the audio endpoint device, which renders the stream.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow.Capture">
+            <summary>
+            Audio capture stream. Audio data flows from the audio endpoint device that captures the stream, 
+            to the application
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow.All">
+            <summary>
+            Audio rendering or capture stream. Audio data can flow either from the application to the audio 
+            endpoint device, or from the audio endpoint device to the application.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState">
+            <summary>
+            Device State
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState.Active">
+            <summary>
+            DEVICE_STATE_ACTIVE
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState.Disabled">
+            <summary>
+            DEVICE_STATE_DISABLED
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState.NotPresent">
+            <summary>
+            DEVICE_STATE_NOTPRESENT 
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState.Unplugged">
+            <summary>
+            DEVICE_STATE_UNPLUGGED
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState.All">
+            <summary>
+            DEVICE_STATEMASK_ALL
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.ClsCtx">
+            <summary>
+            is defined in WTypes.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMEndpoint">
+            <summary>
+            defined in MMDeviceAPI.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient">
+            <summary>
+            IMMNotificationClient
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient.OnDeviceStateChanged(System.String,FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState)">
+            <summary>
+            Device State Changed
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient.OnDeviceAdded(System.String)">
+            <summary>
+            Device Added
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient.OnDeviceRemoved(System.String)">
+            <summary>
+            Device Removed
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient.OnDefaultDeviceChanged(FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow,FM.LiveSwitch.Dmo.DeviceRole,System.String)">
+            <summary>
+            Default Device Changed
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient.OnPropertyValueChanged(System.String,FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKey)">
+            <summary>
+            Property Value Changed
+            </summary>
+            <param name="pwstrDeviceId"></param>
+            <param name="key"></param>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IPropertyStore">
+            <summary>
+            is defined in propsys.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.MMDeviceEnumeratorComObject">
+            <summary>
+            implements IMMDeviceEnumerator
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant">
+            <summary>
+            from Propidl.h.
+            http://msdn.microsoft.com/en-us/library/aa380072(VS.85).aspx
+            contains a union so we have to do an explicit layout
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.FromLong(System.Int64)">
+            <summary>
+            Creates a new PropVariant containing a long value
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.FromInt(System.Int32)">
+            <summary>
+            Creates a new PropVariant containing a long value
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.GetBlob">
+            <summary>
+            Helper method to gets blob data
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.GetBlobAsArrayOf``1">
+            <summary>
+            Interprets a blob as an array of structs
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.DataType">
+            <summary>
+            Gets the type of data in this PropVariant
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.Value">
+            <summary>
+            Property value
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.Clear">
+            <summary>
+            allows freeing up memory, might turn this into a Dispose method?
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.PropVariant.Clear(System.IntPtr)">
+            <summary>
+            Clears with a known pointer
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.StorageAccessMode">
+            <summary>
+            MMDevice STGM enumeration
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice">
+            <summary>
+            MM Device
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.Properties">
+            <summary>
+            Properties
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.FriendlyName">
+            <summary>
+            Friendly name for the endpoint
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.DeviceFriendlyName">
+            <summary>
+            Friendly name of device
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.IconPath">
+            <summary>
+            Icon path of device
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.ID">
+            <summary>
+            Device ID
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.DataFlow">
+            <summary>
+            Data Flow
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.State">
+            <summary>
+            Device State
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDevice.ToString">
+            <summary>
+            To string
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceCollection">
+            <summary>
+            Multimedia Device Collection
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceCollection.Count">
+            <summary>
+            Device count
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceCollection.Item(System.Int32)">
+            <summary>
+            Get device by index
+            </summary>
+            <param name="index">Device index</param>
+            <returns>Device at the specified index</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceCollection.GetEnumerator">
+            <summary>
+            Get Enumerator
+            </summary>
+            <returns>Device enumerator</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator">
+            <summary>
+            MM Device Enumerator
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.#ctor">
+            <summary>
+            Creates a new MM Device Enumerator
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.EnumerateAudioEndPoints(FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow,FM.LiveSwitch.Dmo.CoreAudioApi.DeviceState)">
+            <summary>
+            Enumerate Audio Endpoints
+            </summary>
+            <param name="dataFlow">Desired DataFlow</param>
+            <param name="dwStateMask">State Mask</param>
+            <returns>Device Collection</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.GetDefaultAudioEndpoint(FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow,FM.LiveSwitch.Dmo.DeviceRole)">
+            <summary>
+            Get Default Endpoint
+            </summary>
+            <param name="dataFlow">Data Flow</param>
+            <param name="role">Role</param>
+            <returns>Device</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.HasDefaultAudioEndpoint(FM.LiveSwitch.Dmo.CoreAudioApi.DataFlow,FM.LiveSwitch.Dmo.DeviceRole)">
+            <summary>
+            Check to see if a default audio end point exists without needing an exception.
+            </summary>
+            <param name="dataFlow">Data Flow</param>
+            <param name="role">Role</param>
+            <returns>True if one exists, and false if one does not exist.</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.GetDevice(System.String)">
+            <summary>
+            Get device by ID
+            </summary>
+            <param name="id">Device ID</param>
+            <returns>Device</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.RegisterEndpointNotificationCallback(FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient)">
+            <summary>
+            Registers a call back for Device Events
+            </summary>
+            <param name="client">Object implementing IMMNotificationClient type casted as IMMNotificationClient interface</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.UnregisterEndpointNotificationCallback(FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IMMNotificationClient)">
+            <summary>
+            Unregisters a call back for Device Events
+            </summary>
+            <param name="client">Object implementing IMMNotificationClient type casted as IMMNotificationClient interface </param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.MMDeviceEnumerator.Dispose(System.Boolean)">
+            <summary>
+            Called to dispose/finalize contained objects.
+            </summary>
+            <param name="disposing">True if disposing, false if called from a finalizer.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKey">
+            <summary>
+            PROPERTYKEY is defined in wtypes.h
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKey.formatId">
+            <summary>
+            Format ID
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKey.propertyId">
+            <summary>
+            Property ID
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKey.#ctor(System.Guid,System.Int32)">
+            <summary>
+            <param name="formatId"></param>
+            <param name="propertyId"></param>
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys">
+            <summary>
+            Property Keys
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_DeviceInterface_FriendlyName">
+            <summary>
+            PKEY_DeviceInterface_FriendlyName
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_FormFactor">
+            <summary>
+            PKEY_AudioEndpoint_FormFactor
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_ControlPanelPageProvider">
+            <summary>
+            PKEY_AudioEndpoint_ControlPanelPageProvider
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_Association">
+            <summary>
+            PKEY_AudioEndpoint_Association
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_PhysicalSpeakers">
+            <summary>
+            PKEY_AudioEndpoint_PhysicalSpeakers
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_GUID">
+            <summary>
+            PKEY_AudioEndpoint_GUID
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_Disable_SysFx">
+            <summary>
+            PKEY_AudioEndpoint_Disable_SysFx 
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_FullRangeSpeakers">
+            <summary>
+            PKEY_AudioEndpoint_FullRangeSpeakers 
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_Supports_EventDriven_Mode">
+            <summary>
+            PKEY_AudioEndpoint_Supports_EventDriven_Mode 
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEndpoint_JackSubType">
+            <summary>
+            PKEY_AudioEndpoint_JackSubType
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEngine_DeviceFormat">
+            <summary>
+            PKEY_AudioEngine_DeviceFormat 
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_AudioEngine_OEMFormat">
+            <summary>
+            PKEY_AudioEngine_OEMFormat
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_Device_FriendlyName">
+            <summary>
+            PKEY _Devie_FriendlyName
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKeys.PKEY_Device_IconPath">
+            <summary>
+            PKEY _Device_IconPath
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore">
+            <summary>
+            Property Store class, only supports reading properties at the moment.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore.Count">
+            <summary>
+            Property Count
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore.Item(System.Int32)">
+            <summary>
+            Gets property by index
+            </summary>
+            <param name="index">Property index</param>
+            <returns>The property</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore.Contains(FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKey)">
+            <summary>
+            Contains property guid
+            </summary>
+            <param name="key">Looks for a specific key</param>
+            <returns>True if found</returns>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore.Item(FM.LiveSwitch.Dmo.CoreAudioApi.PropertyKey)">
+            <summary>
+            Indexer by guid
+            </summary>
+            <param name="key">Property Key</param>
+            <returns>Property or null if not found</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore.Get(System.Int32)">
+            <summary>
+            Gets property key at sepecified index
+            </summary>
+            <param name="index">Index</param>
+            <returns>Property key</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore.GetValue(System.Int32)">
+            <summary>
+            Gets property value at specified index
+            </summary>
+            <param name="index">Index</param>
+            <returns>Property value</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStore.#ctor(FM.LiveSwitch.Dmo.CoreAudioApi.Interfaces.IPropertyStore)">
+            <summary>
+            Creates a new property store
+            </summary>
+            <param name="store">IPropertyStore COM interface</param>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStoreProperty">
+            <summary>
+            Property Store Property
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStoreProperty.Key">
+            <summary>
+            Property Key
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreAudioApi.PropertyStoreProperty.Value">
+            <summary>
+            Property Value
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.DeviceRole">
+            <summary>
+            The device role.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.DeviceRole.Console">
+            <summary>
+            Indicates the console role (games, system notifications).
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.DeviceRole.Multimedia">
+            <summary>
+            Indicates the multimedia role (music, movies).
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.DeviceRole.Communications">
+            <summary>
+            Indicates the communications role (chat, VoIP).
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utility">
+            <summary>
+            DMO-related utility functions.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.Utility.Disabled">
+            <summary>
+            Gets or sets a value indicating whether DMO should be disabled.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.Utility.IsSupported">
+            <summary>
+            Gets a value that indicates whether DMO is supported on this system.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.VoiceActivityMode">
+            <summary>
+            The Voice Capture DMO Voice Activity Mode.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.VoiceActivityMode.NonSpeech">
+            <summary>
+            No speech detected.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.VoiceActivityMode.VoicedSpeech">
+            <summary>
+            Voiced speech detected.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.VoiceActivityMode.UnvoicedSpeech">
+            <summary>
+            Unvoiced speech detected.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.VoiceActivityMode.Mixture">
+            <summary>
+            A mixture of voiced and unvoiced speech detected.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.VoiceCaptureSource">
+            <summary>
+            An Dmo-based source.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.DefaultDeviceRole">
+            <summary>
+            Gets or sets the default role.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.AutomaticGainControl">
+            <summary>
+            Gets or sets a boolean to turn automatic gain control off or on.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.NoiseSuppression">
+            <summary>
+            Gets or sets a boolean to turn noise suppression off or on.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.CenterClip">
+            <summary>
+            Gets or sets a boolean to turn center clipping off or on.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.NoiseFill">
+            <summary>
+            Gets or sets a boolean to turn noise filling off or on.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.VoiceDetection">
+            <summary>
+            Gets or sets a boolean to turn voice detection off or on.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.EchoSuppressionRuns">
+            <summary>
+            Gets or sets the number of echo suppression runs to do. This runs after regular echo cancellation.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.EchoLength">
+            <summary>
+            Gets or sets the echo length.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.GainBounder">
+            <summary>
+            Gets or sets whether the Voice Capture DSP applies microphone gain bounding.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.VoiceDetected">
+            <summary>
+            Gets if voice is detected.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.RenderDevice">
+            <summary>
+            Gets or sets the selected render device.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.GetInputs">
+            <summary>
+            Gets the available inputs.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.GetRenderDevices">
+            <summary>
+            Gets the available render devices.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Dmo.VoiceCaptureSource" /> class.
+            </summary>
+            <param name="aec">True to enable AEC; false to disable.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.#ctor(FM.LiveSwitch.AudioConfig,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.Dmo.VoiceCaptureSource" /> class.
+            </summary>
+            <param name="config">The configuration.</param>
+            <param name="aec">True to enable AEC; false to disable.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.GetMetrics">
+            <summary>
+            Gets the current Aec metrics.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.VoiceCaptureSource.DefaultConfig">
+            <summary>
+            Gets the default configuration.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.VoiceCaptureSource.IsSupported">
+            <summary>
+            Gets a value that indicates whether DMO is supported on this system.
+            This is an alias for <see cref="P:FM.LiveSwitch.Dmo.Utility.IsSupported"/>.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoDescriptor">
+            <summary>
+            Contains the name and CLSID of a DirectX Media Object
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoDescriptor.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoDescriptor.Clsid">
+            <summary>
+            CLSID
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoDescriptor.#ctor(System.String,System.Guid)">
+            <summary>
+            Initializes a new instance of DmoDescriptor
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoEnumerator">
+            <summary>
+            DirectX Media Object Enumerator
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoEnumerator.GetAudioEffectNames">
+            <summary>
+            Get audio effect names
+            </summary>
+            <returns>Audio effect names</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoEnumerator.GetAudioEncoderNames">
+            <summary>
+            Get audio encoder names
+            </summary>
+            <returns>Audio encoder names</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoEnumerator.GetAudioDecoderNames">
+            <summary>
+            Get audio decoder names
+            </summary>
+            <returns>Audio decoder names</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoGuids">
+            <summary>
+            DMO Guids for use with DMOEnum
+            dmoreg.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoHResults">
+            <summary>
+            MediaErr.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoInputDataBufferFlags">
+            <summary>
+            DMO Input Data Buffer Flags
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoInputDataBufferFlags.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoInputDataBufferFlags.SyncPoint">
+            <summary>
+            DMO_INPUT_DATA_BUFFERF_SYNCPOINT
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoInputDataBufferFlags.Time">
+            <summary>
+            DMO_INPUT_DATA_BUFFERF_TIME
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoInputDataBufferFlags.TimeLength">
+            <summary>
+            DMO_INPUT_DATA_BUFFERF_TIMELENGTH
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType">
+            <summary>
+            http://msdn.microsoft.com/en-us/library/aa929922.aspx
+            DMO_MEDIA_TYPE 
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.MajorType">
+            <summary>
+            Major type
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.MajorTypeName">
+            <summary>
+            Major type name
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.SubType">
+            <summary>
+            Subtype
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.SubTypeName">
+            <summary>
+            Subtype name
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.FixedSizeSamples">
+            <summary>
+            Fixed size samples
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.SampleSize">
+            <summary>
+            Sample size
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.FormatType">
+            <summary>
+            Format type
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.FormatTypeName">
+            <summary>
+            Format type name
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.GetWaveFormat">
+            <summary>
+            Gets the structure as a Wave format (if it is one)
+            </summary>        
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType.SetWaveFormat(FM.LiveSwitch.Dmo.WaveFormats.WaveFormat)">
+            <summary>
+            Sets this object up to point to a wave format
+            </summary>
+            <param name="waveFormat">Wave format structure</param>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer">
+            <summary>
+            DMO Output Data Buffer
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.#ctor(System.Int32)">
+            <summary>
+            Creates a new DMO Output Data Buffer structure
+            </summary>
+            <param name="maxBufferSize">Maximum buffer size</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.MediaBuffer">
+            <summary>
+            Media Buffer
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.Length">
+            <summary>
+            Length of data in buffer
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.StatusFlags">
+            <summary>
+            Status Flags
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.Duration">
+            <summary>
+            Duration
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.RetrieveData(System.Byte[],System.Int32)">
+            <summary>
+            Retrives the data in this buffer
+            </summary>
+            <param name="data">Buffer to receive data</param>
+            <param name="offset">Offset into buffer</param>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer.MoreDataAvailable">
+            <summary>
+            Is more data available
+            If true, ProcessOuput should be called again
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBufferFlags">
+            <summary>
+            DMO Output Data Buffer Flags
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBufferFlags.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBufferFlags.SyncPoint">
+            <summary>
+            DMO_OUTPUT_DATA_BUFFERF_SYNCPOINT
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBufferFlags.Time">
+            <summary>
+            DMO_OUTPUT_DATA_BUFFERF_TIME
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBufferFlags.TimeLength">
+            <summary>
+            DMO_OUTPUT_DATA_BUFFERF_TIMELENGTH
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBufferFlags.Incomplete">
+            <summary>
+            DMO_OUTPUT_DATA_BUFFERF_INCOMPLETE
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoPartialMediaType">
+            <summary>
+            DMO_PARTIAL_MEDIATYPE
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.DmoProcessOutputFlags">
+            <summary>
+            DMO Process Output Flags
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoProcessOutputFlags.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.DmoProcessOutputFlags.DiscardWhenNoBuffer">
+            <summary>
+            DMO_PROCESS_OUTPUT_DISCARD_WHEN_NO_BUFFER
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.IMediaBuffer">
+            <summary>
+            IMediaBuffer Interface
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.IMediaBuffer.SetLength(System.Int32)">
+            <summary>
+            Set Length
+            </summary>
+            <param name="length">Length</param>
+            <returns>HRESULT</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.IMediaBuffer.GetMaxLength(System.Int32@)">
+            <summary>
+            Get Max Length
+            </summary>
+            <param name="maxLength">Max Length</param>
+            <returns>HRESULT</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.IMediaBuffer.GetBufferAndLength(System.IntPtr,System.IntPtr)">
+            <summary>
+            Get Buffer and Length
+            </summary>
+            <param name="bufferPointerPointer">Pointer to variable into which to write the Buffer Pointer </param>
+            <param name="validDataLengthPointer">Pointer to variable into which to write the Valid Data Length</param>
+            <returns>HRESULT</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.IMediaObject">
+            <summary>
+            defined in mediaobj.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.IMediaParamInfo">
+            <summary>
+            defined in Medparam.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer">
+            <summary>
+            Attempting to implement the COM IMediaBuffer interface as a .NET object
+            Not sure what will happen when I pass this to an unmanaged object
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.#ctor(System.Int32)">
+            <summary>
+            Creates a new Media Buffer
+            </summary>
+            <param name="maxLength">Maximum length in bytes</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.Dispose">
+            <summary>
+            Dispose and free memory for buffer
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.Finalize">
+            <summary>
+            Finalizer
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.FM#LiveSwitch#Dmo#CoreDmo#IMediaBuffer#SetLength(System.Int32)">
+            <summary>
+            Set length of valid data in the buffer
+            </summary>
+            <param name="length">length</param>
+            <returns>HRESULT</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.FM#LiveSwitch#Dmo#CoreDmo#IMediaBuffer#GetMaxLength(System.Int32@)">
+            <summary>
+            Gets the maximum length of the buffer
+            </summary>
+            <param name="maxLength">Max length (output parameter)</param>
+            <returns>HRESULT</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.FM#LiveSwitch#Dmo#CoreDmo#IMediaBuffer#GetBufferAndLength(System.IntPtr,System.IntPtr)">
+            <summary>
+            Gets buffer and / or length
+            </summary>
+            <param name="bufferPointerPointer">Pointer to variable into which buffer pointer should be written</param>
+            <param name="validDataLengthPointer">Pointer to variable into which valid data length should be written</param>
+            <returns>HRESULT</returns>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.Length">
+            <summary>
+            Length of data in the media buffer
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.LoadData(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Loads data into this buffer
+            </summary>
+            <param name="data">Data to load</param>
+            <param name="index">The index to start the load.</param>
+            <param name="bytes">Number of bytes to load</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaBuffer.RetrieveData(System.Byte[],System.Int32)">
+            <summary>
+            Retrieves the data in the output buffer
+            </summary>
+            <param name="data">buffer to retrieve into</param>
+            <param name="offset">offset within that buffer</param>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.MediaObject">
+            <summary>
+            Media Object
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.#ctor(FM.LiveSwitch.Dmo.CoreDmo.IMediaObject)">
+            <summary>
+            Creates a new Media Object
+            </summary>
+            <param name="mediaObject">Media Object COM interface</param>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.InputStreamCount">
+            <summary>
+            Number of input streams
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.OutputStreamCount">
+            <summary>
+            Number of output streams
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetInputType(System.Int32,System.Int32)">
+            <summary>
+            Gets the input media type for the specified input stream
+            </summary>
+            <param name="inputStream">Input stream index</param>
+            <param name="inputTypeIndex">Input type index</param>
+            <returns>DMO Media Type or null if there are no more input types</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetOutputType(System.Int32,System.Int32)">
+            <summary>
+            Gets the DMO Media Output type
+            </summary>
+            <param name="outputStream">The output stream</param>
+            <param name="outputTypeIndex">Output type index</param>
+            <returns>DMO Media Type or null if no more available</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetOutputCurrentType(System.Int32)">
+            <summary>
+            retrieves the media type that was set for an output stream, if any
+            </summary>
+            <param name="outputStreamIndex">Output stream index</param>
+            <returns>DMO Media Type or null if no more available</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetInputTypes(System.Int32)">
+            <summary>
+            Enumerates the supported input types
+            </summary>
+            <param name="inputStreamIndex">Input stream index</param>
+            <returns>Enumeration of input types</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetOutputTypes(System.Int32)">
+            <summary>
+            Enumerates the output types
+            </summary>
+            <param name="outputStreamIndex">Output stream index</param>
+            <returns>Enumeration of supported output types</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SupportsInputType(System.Int32,FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType)">
+            <summary>
+            Querys whether a specified input type is supported
+            </summary>
+            <param name="inputStreamIndex">Input stream index</param>
+            <param name="mediaType">Media type to check</param>
+            <returns>true if supports</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SetInputType(System.Int32,FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType,FM.LiveSwitch.Dmo.CoreDmo.DmoSetTypeFlags)">
+            <summary>
+            Sets the input type helper method
+            </summary>
+            <param name="inputStreamIndex">Input stream index</param>
+            <param name="mediaType">Media type</param>
+            <param name="flags">Flags (can be used to test rather than set)</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SetInputType(System.Int32,FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType)">
+            <summary>
+            Sets the input type
+            </summary>
+            <param name="inputStreamIndex">Input stream index</param>
+            <param name="mediaType">Media Type</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SetInputWaveFormat(System.Int32,FM.LiveSwitch.Dmo.WaveFormats.WaveFormat)">
+            <summary>
+            Sets the input type to the specified Wave format
+            </summary>
+            <param name="inputStreamIndex">Input stream index</param>
+            <param name="waveFormat">Wave format</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SupportsInputWaveFormat(System.Int32,FM.LiveSwitch.Dmo.WaveFormats.WaveFormat)">
+            <summary>
+            Requests whether the specified Wave format is supported as an input
+            </summary>
+            <param name="inputStreamIndex">Input stream index</param>
+            <param name="waveFormat">Wave format</param>
+            <returns>true if supported</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.CreateDmoMediaTypeForWaveFormat(FM.LiveSwitch.Dmo.WaveFormats.WaveFormat)">
+            <summary>
+            Helper function to make a DMO Media Type to represent a particular WaveFormat
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SupportsOutputType(System.Int32,FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType)">
+            <summary>
+            Checks if a specified output type is supported
+            n.b. you may need to set the input type first
+            </summary>
+            <param name="outputStreamIndex">Output stream index</param>
+            <param name="mediaType">Media type</param>
+            <returns>True if supported</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SupportsOutputWaveFormat(System.Int32,FM.LiveSwitch.Dmo.WaveFormats.WaveFormat)">
+            <summary>
+            Tests if the specified Wave Format is supported for output
+            n.b. may need to set the input type first
+            </summary>
+            <param name="outputStreamIndex">Output stream index</param>
+            <param name="waveFormat">Wave format</param>
+            <returns>True if supported</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SetOutputType(System.Int32,FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType,FM.LiveSwitch.Dmo.CoreDmo.DmoSetTypeFlags)">
+            <summary>
+            Helper method to call SetOutputType
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SetOutputType(System.Int32,FM.LiveSwitch.Dmo.CoreDmo.DmoMediaType)">
+            <summary>
+            Sets the output type
+            n.b. may need to set the input type first
+            </summary>
+            <param name="outputStreamIndex">Output stream index</param>
+            <param name="mediaType">Media type to set</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.SetOutputWaveFormat(System.Int32,FM.LiveSwitch.Dmo.WaveFormats.WaveFormat)">
+            <summary>
+            Set output type to the specified wave format
+            n.b. may need to set input type first
+            </summary>
+            <param name="outputStreamIndex">Output stream index</param>
+            <param name="waveFormat">Wave format</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetInputSizeInfo(System.Int32)">
+            <summary>
+            Get Input Size Info
+            </summary>
+            <param name="inputStreamIndex">Input Stream Index</param>
+            <returns>Input Size Info</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetOutputSizeInfo(System.Int32)">
+            <summary>
+            Get Output Size Info
+            </summary>
+            <param name="outputStreamIndex">Output Stream Index</param>
+            <returns>Output Size Info</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.ProcessInput(System.Int32,FM.LiveSwitch.Dmo.CoreDmo.IMediaBuffer,FM.LiveSwitch.Dmo.CoreDmo.DmoInputDataBufferFlags,System.Int64,System.Int64)">
+            <summary>
+            Process Input
+            </summary>
+            <param name="inputStreamIndex">Input Stream index</param>
+            <param name="mediaBuffer">Media Buffer</param>
+            <param name="flags">Flags</param>
+            <param name="timestamp">Timestamp</param>
+            <param name="duration">Duration</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.ProcessOutput(FM.LiveSwitch.Dmo.CoreDmo.DmoProcessOutputFlags,System.Int32,FM.LiveSwitch.Dmo.CoreDmo.DmoOutputDataBuffer[])">
+            <summary>
+            Process Output
+            </summary>
+            <param name="flags">Flags</param>
+            <param name="outputBufferCount">Output buffer count</param>
+            <param name="outputBuffers">Output buffers</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.AllocateStreamingResources">
+            <summary>
+            Gives the DMO a chance to allocate any resources needed for streaming
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.FreeStreamingResources">
+            <summary>
+            Tells the DMO to free any resources needed for streaming
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.GetInputMaxLatency(System.Int32)">
+            <summary>
+            Gets maximum input latency
+            </summary>
+            <param name="inputStreamIndex">input stream index</param>
+            <returns>Maximum input latency as a ref-time</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.Flush">
+            <summary>
+            Flushes all buffered data
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.Discontinuity(System.Int32)">
+            <summary>
+            Report a discontinuity on the specified input stream
+            </summary>
+            <param name="inputStreamIndex">Input Stream index</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.IsAcceptingData(System.Int32)">
+            <summary>
+            Is this input stream accepting data?
+            </summary>
+            <param name="inputStreamIndex">Input Stream index</param>
+            <returns>true if accepting data</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObject.Dispose">
+            <summary>
+            Experimental code, not currently being called
+            Not sure if it is necessary anyway
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.MediaObjectSizeInfo">
+            <summary>
+            Media Object Size Info
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.MediaObjectSizeInfo.Size">
+            <summary>
+            Minimum Buffer Size, in bytes
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.MediaObjectSizeInfo.MaxLookahead">
+            <summary>
+            Max Lookahead
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.CoreDmo.MediaObjectSizeInfo.Alignment">
+            <summary>
+            Alignment
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObjectSizeInfo.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Media Object Size Info
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.CoreDmo.MediaObjectSizeInfo.ToString">
+            <summary>
+            ToString
+            </summary>        
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.MediaParamInfo">
+            <summary>
+            MP_PARAMINFO
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.MediaParamType">
+            <summary>
+            MP_TYPE
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.MediaParamType.Int">
+            <summary>
+            MPT_INT
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.MediaParamType.Float">
+            <summary>
+            MPT_FLOAT
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.MediaParamType.Bool">
+            <summary>
+            MPT_BOOL
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.MediaParamType.Enum">
+            <summary>
+            MPT_ENUM
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.CoreDmo.MediaParamType.Max">
+            <summary>
+            MPT_MAX
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.MediaParamCurveType">
+            <summary>
+            MP_CURVE_TYPE
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.CoreDmo.MediaTypes">
+            <summary>
+            uuids.h, ksuuids.h
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.BufferHelpers">
+            <summary>
+            Helper methods for working with audio buffers
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.BufferHelpers.Ensure(System.Byte[],System.Int32)">
+            <summary>
+            Ensures the buffer is big enough
+            </summary>
+            <param name="buffer"></param>
+            <param name="bytesRequired"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.BufferHelpers.Ensure(System.Single[],System.Int32)">
+            <summary>
+            Ensures the buffer is big enough
+            </summary>
+            <param name="buffer"></param>
+            <param name="samplesRequired"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.ByteArrayExtensions">
+            <summary>
+            these will become extension methods once we move to .NET 3.5
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteArrayExtensions.IsEntirelyNull(System.Byte[])">
+            <summary>
+            Checks if the buffer passed in is entirely full of nulls
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteArrayExtensions.DescribeAsHex(System.Byte[],System.String,System.Int32)">
+            <summary>
+            Converts to a string containing the buffer described in hex
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteArrayExtensions.DecodeAsString(System.Byte[],System.Int32,System.Int32,System.Text.Encoding)">
+            <summary>
+            Decodes the buffer using the specified encoding, stopping at the first null
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteArrayExtensions.Concat(System.Byte[][])">
+            <summary>
+            Concatenates the given arrays into a single array.
+            </summary>
+            <param name="byteArrays">The arrays to concatenate</param>
+            <returns>The concatenated resulting array.</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.ByteEncoding">
+            <summary>
+            An encoding for use with file types that have one byte per character
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.Utils.ByteEncoding.Instance">
+            <summary>
+            The one and only instance of this class
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)">
+            <summary>
+            <see cref="M:System.Text.Encoding.GetByteCount(System.Char[],System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteEncoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            <see cref="M:System.Text.Encoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            <see cref="M:System.Text.Encoding.GetCharCount(System.Byte[],System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteEncoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)">
+            <summary>
+            <see cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteEncoding.GetMaxCharCount(System.Int32)">
+            <summary>
+            <see cref="M:System.Text.Encoding.GetMaxCharCount(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ByteEncoding.GetMaxByteCount(System.Int32)">
+            <summary>
+            <see cref="M:System.Text.Encoding.GetMaxByteCount(System.Int32)"/>
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.ChunkIdentifier">
+            <summary>
+            Chunk Identifier helpers
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.ChunkIdentifier.ChunkIdentifierToInt32(System.String)">
+            <summary>
+            Chunk identifier to Int32 (replaces mmioStringToFOURCC)
+            </summary>
+            <param name="s">four character chunk identifier</param>
+            <returns>Chunk identifier as int 32</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.CircularBuffer">
+            <summary>
+            A very basic circular buffer implementation
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.CircularBuffer.#ctor(System.Int32)">
+            <summary>
+            Create a new circular buffer
+            </summary>
+            <param name="size">Max buffer size in bytes</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.CircularBuffer.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Write data to the buffer
+            </summary>
+            <param name="data">Data to write</param>
+            <param name="offset">Offset into data</param>
+            <param name="count">Number of bytes to write</param>
+            <returns>number of bytes written</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.CircularBuffer.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Read from the buffer
+            </summary>
+            <param name="data">Buffer to read into</param>
+            <param name="offset">Offset into read buffer</param>
+            <param name="count">Bytes to read</param>
+            <returns>Number of bytes actually read</returns>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.Utils.CircularBuffer.MaxLength">
+            <summary>
+            Maximum length of this circular buffer
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.Utils.CircularBuffer.Count">
+            <summary>
+            Number of bytes currently stored in the circular buffer
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.CircularBuffer.Reset">
+            <summary>
+            Resets the buffer
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.CircularBuffer.Advance(System.Int32)">
+            <summary>
+            Advances the buffer, discarding bytes
+            </summary>
+            <param name="count">Bytes to advance</param>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.Decibels">
+            <summary>
+            A util class for conversions
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.Decibels.LinearToDecibels(System.Double)">
+            <summary>
+            linear to dB conversion
+            </summary>
+            <param name="lin">linear value</param>
+            <returns>decibel value</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.Decibels.DecibelsToLinear(System.Double)">
+            <summary>
+            dB to linear conversion
+            </summary>
+            <param name="dB">decibel value</param>
+            <returns>linear value</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.FieldDescriptionAttribute">
+            <summary>
+            Allows us to add descriptions to interop members
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.Utils.FieldDescriptionAttribute.Description">
+            <summary>
+            The description
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.FieldDescriptionAttribute.#ctor(System.String)">
+            <summary>
+            Field description
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.FieldDescriptionAttribute.ToString">
+            <summary>
+            String representation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.FieldDescriptionHelper">
+            <summary>
+            Helper to get descriptions
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.FieldDescriptionHelper.Describe(System.Type,System.Guid)">
+            <summary>
+            Describes the Guid  by looking for a FieldDescription attribute on the specified class
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.HResult">
+            <summary>
+            HResult
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.Utils.HResult.S_OK">
+            <summary>
+            S_OK
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.Utils.HResult.S_FALSE">
+            <summary>
+            S_FALSE
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.Utils.HResult.E_INVALIDARG">
+            <summary>
+            E_INVALIDARG (from winerror.h)
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.HResult.MAKE_HRESULT(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            MAKE_HRESULT macro
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.HResult.GetHResult(System.Runtime.InteropServices.COMException)">
+            <summary>
+            Helper to deal with the fact that in Win Store apps,
+            the HResult property name has changed
+            </summary>
+            <param name="exception">COM Exception</param>
+            <returns>The HResult</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.IEEE">
+            <summary>
+            Methods for converting between IEEE 80-bit extended double precision
+            and standard C# double precision.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.IEEE.ConvertToIeeeExtended(System.Double)">
+            <summary>
+            Converts a C# double precision number to an 80-bit
+            IEEE extended double precision number (occupying 10 bytes).
+            </summary>
+            <param name="num">The double precision number to convert to IEEE extended.</param>
+            <returns>An array of 10 bytes containing the IEEE extended number.</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.IEEE.ConvertFromIeeeExtended(System.Byte[])">
+            <summary>
+            Converts an IEEE 80-bit extended precision number to a
+            C# double precision number.
+            </summary>
+            <param name="bytes">The 80-bit IEEE extended number (as an array of 10 bytes).</param>
+            <returns>A C# double precision number that is a close representation of the IEEE extended number.</returns>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.Utils.MarshalHelpers">
+            <summary>
+            Support for Marshal Methods in both UWP and .NET 3.5
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.MarshalHelpers.SizeOf``1">
+            <summary>
+            SizeOf a structure
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.MarshalHelpers.OffsetOf``1(System.String)">
+            <summary>
+            Offset of a field in a structure
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.Utils.MarshalHelpers.PtrToStructure``1(System.IntPtr)">
+            <summary>
+            Pointer to Structure
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat">
+            <summary>
+            Represents a Wave file format
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.waveFormatTag">
+            <summary>format type</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.channels">
+            <summary>number of channels</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.sampleRate">
+            <summary>sample rate</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.averageBytesPerSecond">
+            <summary>for buffer estimation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.blockAlign">
+            <summary>block size of data</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.bitsPerSample">
+            <summary>number of bits per sample of mono data</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.extraSize">
+            <summary>number of following bytes</summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.#ctor">
+            <summary>
+            Creates a new PCM 44.1Khz stereo 16 bit format
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates a new 16 bit wave format with the specified sample
+            rate and channel count
+            </summary>
+            <param name="sampleRate">Sample Rate</param>
+            <param name="channels">Number of channels</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.ConvertLatencyToByteSize(System.Int32)">
+            <summary>
+            Gets the size of a wave buffer equivalent to the latency in milliseconds.
+            </summary>
+            <param name="milliseconds">The milliseconds.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.CreateCustomFormat(FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a WaveFormat with custom members
+            </summary>
+            <param name="tag">The encoding</param>
+            <param name="sampleRate">Sample Rate</param>
+            <param name="channels">Number of channels</param>
+            <param name="averageBytesPerSecond">Average Bytes Per Second</param>
+            <param name="blockAlign">Block Align</param>
+            <param name="bitsPerSample">Bits Per Sample</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.CreateALawFormat(System.Int32,System.Int32)">
+            <summary>
+            Creates an A-law wave format
+            </summary>
+            <param name="sampleRate">Sample Rate</param>
+            <param name="channels">Number of Channels</param>
+            <returns>Wave Format</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.CreateMuLawFormat(System.Int32,System.Int32)">
+            <summary>
+            Creates a Mu-law wave format
+            </summary>
+            <param name="sampleRate">Sample Rate</param>
+            <param name="channels">Number of Channels</param>
+            <returns>Wave Format</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new PCM format with the specified sample rate, bit depth and channels
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.CreateIeeeFloatWaveFormat(System.Int32,System.Int32)">
+            <summary>
+            Creates a new 32 bit IEEE floating point wave format
+            </summary>
+            <param name="sampleRate">sample rate</param>
+            <param name="channels">number of channels</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.MarshalFromPtr(System.IntPtr)">
+            <summary>
+            Helper function to retrieve a WaveFormat structure from a pointer
+            </summary>
+            <param name="pointer">WaveFormat structure</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.MarshalToPtr(FM.LiveSwitch.Dmo.WaveFormats.WaveFormat)">
+            <summary>
+            Helper function to marshal WaveFormat to an IntPtr
+            </summary>
+            <param name="format">WaveFormat</param>
+            <returns>IntPtr to WaveFormat structure (needs to be freed by callee)</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.FromFormatChunk(System.IO.BinaryReader,System.Int32)">
+            <summary>
+            Reads in a WaveFormat (with extra data) from a fmt chunk (chunk identifier and
+            length should already have been read)
+            </summary>
+            <param name="br">Binary reader</param>
+            <param name="formatChunkLength">Format chunk length</param>
+            <returns>A WaveFormatExtraData</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.#ctor(System.IO.BinaryReader)">
+            <summary>
+            Reads a new WaveFormat object from a stream
+            </summary>
+            <param name="br">A binary reader that wraps the stream</param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.ToString">
+            <summary>
+            Reports this WaveFormat as a string
+            </summary>
+            <returns>String describing the wave format</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.Equals(System.Object)">
+            <summary>
+            Compares with another WaveFormat object
+            </summary>
+            <param name="obj">Object to compare to</param>
+            <returns>True if the objects are the same</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.GetHashCode">
+            <summary>
+            Provides a Hashcode for this WaveFormat
+            </summary>
+            <returns>A hashcode</returns>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.Encoding">
+            <summary>
+            Returns the encoding type used
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Writes this WaveFormat object to a stream
+            </summary>
+            <param name="writer">the output stream</param>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.Channels">
+            <summary>
+            Returns the number of channels (1=mono,2=stereo etc)
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.SampleRate">
+            <summary>
+            Returns the sample rate (samples per second)
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.AverageBytesPerSecond">
+            <summary>
+            Returns the average number of bytes used per second
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.BlockAlign">
+            <summary>
+            Returns the block alignment
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.BitsPerSample">
+            <summary>
+            Returns the number of bits per sample (usually 16 or 32, sometimes 24 or 8)
+            Can be 0 for some codecs
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormat.ExtraSize">
+            <summary>
+            Returns the number of extra bytes used by this waveformat. Often 0,
+            except for compressed formats which store extra data after the WAVEFORMATEX header
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatCustomMarshaler">
+            <summary>
+            Custom marshaller for WaveFormat structures
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatCustomMarshaler.GetInstance(System.String)">
+            <summary>
+            Gets the instance of this marshaller
+            </summary>
+            <param name="cookie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatCustomMarshaler.CleanUpManagedData(System.Object)">
+            <summary>
+            Clean up managed data
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatCustomMarshaler.CleanUpNativeData(System.IntPtr)">
+            <summary>
+            Clean up native data
+            </summary>
+            <param name="pNativeData"></param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatCustomMarshaler.GetNativeDataSize">
+            <summary>
+            Get native data size
+            </summary>        
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatCustomMarshaler.MarshalManagedToNative(System.Object)">
+            <summary>
+            Marshal managed to native
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatCustomMarshaler.MarshalNativeToManaged(System.IntPtr)">
+            <summary>
+            Marshal Native to Managed
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding">
+            <summary>
+            Summary description for WaveFormatEncoding.
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Unknown">
+            <summary>WAVE_FORMAT_UNKNOWN,	Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Pcm">
+            <summary>WAVE_FORMAT_PCM		Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Adpcm">
+            <summary>WAVE_FORMAT_ADPCM		Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.IeeeFloat">
+            <summary>WAVE_FORMAT_IEEE_FLOAT Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Vselp">
+            <summary>WAVE_FORMAT_VSELP		Compaq Computer Corp.</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.IbmCvsd">
+            <summary>WAVE_FORMAT_IBM_CVSD	IBM Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.ALaw">
+            <summary>WAVE_FORMAT_ALAW		Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MuLaw">
+            <summary>WAVE_FORMAT_MULAW		Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Dts">
+            <summary>WAVE_FORMAT_DTS		Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Drm">
+            <summary>WAVE_FORMAT_DRM		Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WmaVoice9">
+            <summary>WAVE_FORMAT_WMAVOICE9 </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.OkiAdpcm">
+            <summary>WAVE_FORMAT_OKI_ADPCM	OKI</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DviAdpcm">
+            <summary>WAVE_FORMAT_DVI_ADPCM	Intel Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.ImaAdpcm">
+            <summary>WAVE_FORMAT_IMA_ADPCM  Intel Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MediaspaceAdpcm">
+            <summary>WAVE_FORMAT_MEDIASPACE_ADPCM Videologic</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.SierraAdpcm">
+            <summary>WAVE_FORMAT_SIERRA_ADPCM Sierra Semiconductor Corp </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.G723Adpcm">
+            <summary>WAVE_FORMAT_G723_ADPCM Antex Electronics Corporation </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DigiStd">
+            <summary>WAVE_FORMAT_DIGISTD DSP Solutions, Inc.</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DigiFix">
+            <summary>WAVE_FORMAT_DIGIFIX DSP Solutions, Inc.</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DialogicOkiAdpcm">
+            <summary>WAVE_FORMAT_DIALOGIC_OKI_ADPCM Dialogic Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MediaVisionAdpcm">
+            <summary>WAVE_FORMAT_MEDIAVISION_ADPCM Media Vision, Inc.</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.CUCodec">
+            <summary>WAVE_FORMAT_CU_CODEC Hewlett-Packard Company </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.YamahaAdpcm">
+            <summary>WAVE_FORMAT_YAMAHA_ADPCM Yamaha Corporation of America</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.SonarC">
+            <summary>WAVE_FORMAT_SONARC Speech Compression</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DspGroupTrueSpeech">
+            <summary>WAVE_FORMAT_DSPGROUP_TRUESPEECH DSP Group, Inc </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.EchoSpeechCorporation1">
+            <summary>WAVE_FORMAT_ECHOSC1 Echo Speech Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.AudioFileAf36">
+            <summary>WAVE_FORMAT_AUDIOFILE_AF36, Virtual Music, Inc.</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Aptx">
+            <summary>WAVE_FORMAT_APTX Audio Processing Technology</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.AudioFileAf10">
+            <summary>WAVE_FORMAT_AUDIOFILE_AF10, Virtual Music, Inc.</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Prosody1612">
+            <summary>WAVE_FORMAT_PROSODY_1612, Aculab plc</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Lrc">
+            <summary>WAVE_FORMAT_LRC, Merging Technologies S.A. </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DolbyAc2">
+            <summary>WAVE_FORMAT_DOLBY_AC2, Dolby Laboratories</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Gsm610">
+            <summary>WAVE_FORMAT_GSM610, Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MsnAudio">
+            <summary>WAVE_FORMAT_MSNAUDIO, Microsoft Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.AntexAdpcme">
+            <summary>WAVE_FORMAT_ANTEX_ADPCME, Antex Electronics Corporation</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.ControlResVqlpc">
+            <summary>WAVE_FORMAT_CONTROL_RES_VQLPC, Control Resources Limited </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DigiReal">
+            <summary>WAVE_FORMAT_DIGIREAL, DSP Solutions, Inc. </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.DigiAdpcm">
+            <summary>WAVE_FORMAT_DIGIADPCM, DSP Solutions, Inc.</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.ControlResCr10">
+            <summary>WAVE_FORMAT_CONTROL_RES_CR10, Control Resources Limited</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_NMS_VBXADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_CS_IMAADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ECHOSC3">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ROCKWELL_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ROCKWELL_DIGITALK">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_XEBEC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_G721_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_G728_CELP">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_MSG723">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Mpeg">
+            <summary>WAVE_FORMAT_MPEG, Microsoft Corporation </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_RT24">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_PAC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MpegLayer3">
+            <summary>WAVE_FORMAT_MPEGLAYER3, ISO/MPEG Layer3 Format Tag </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_LUCENT_G723">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_CIRRUS">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ESPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_CANOPUS_ATRAC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_G726_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_G722_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_DSAT_DISPLAY">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_BYTE_ALIGNED">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_AC8">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_AC10">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_AC16">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_AC20">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_RT24">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_RT29">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_RT29HW">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_VR12">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_VR18">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_TQ40">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SOFTSOUND">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VOXWARE_TQ60">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_MSRT24">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_G729A">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_MVI_MVI2">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_DF_G726">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_DF_GSM610">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ISIAUDIO">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ONLIVE">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SBC24">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_DOLBY_AC3_SPDIF">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_MEDIASONIC_G723">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_PROSODY_8KBPS">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ZYXEL_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_PHILIPS_LPCBB">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_PACKED">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_MALDEN_PHONYTALK">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Gsm">
+            <summary>WAVE_FORMAT_GSM</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.G729">
+            <summary>WAVE_FORMAT_G729</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.G723">
+            <summary>WAVE_FORMAT_G723</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Acelp">
+            <summary>WAVE_FORMAT_ACELP</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.RawAac">
+            <summary>
+            WAVE_FORMAT_RAW_AAC1
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_RHETOREX_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_IRAT">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VIVO_G723">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VIVO_SIREN">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_DIGITAL_G723">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SANYO_LD_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SIPROLAB_ACEPLNET">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SIPROLAB_ACELP4800">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SIPROLAB_ACELP8V3">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SIPROLAB_G729">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SIPROLAB_G729A">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SIPROLAB_KELVIN">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_G726ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_QUALCOMM_PUREVOICE">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_QUALCOMM_HALFRATE">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_TUBGSM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_MSAUDIO1">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WindowsMediaAudio">
+            <summary>
+            Windows Media Audio, WAVE_FORMAT_WMAUDIO2, Microsoft Corporation
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WindowsMediaAudioProfessional">
+            <summary>
+            Windows Media Audio Professional WAVE_FORMAT_WMAUDIO3, Microsoft Corporation
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WindowsMediaAudioLosseless">
+            <summary>
+            Windows Media Audio Lossless, WAVE_FORMAT_WMAUDIO_LOSSLESS
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WindowsMediaAudioSpdif">
+            <summary>
+            Windows Media Audio Professional over SPDIF WAVE_FORMAT_WMASPDIF (0x0164)
+            </summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_UNISYS_NAP_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_UNISYS_NAP_ULAW">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_UNISYS_NAP_ALAW">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_UNISYS_NAP_16K">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_CREATIVE_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_CREATIVE_FASTSPEECH8">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_CREATIVE_FASTSPEECH10">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_UHER_ADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_QUARTERDECK">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ILINK_VC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_RAW_SPORT">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_ESST_AC3">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_IPI_HSX">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_IPI_RPELP">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_CS2">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SONY_SCX">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_FM_TOWNS_SND">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_BTV_DIGITAL">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_QDESIGN_MUSIC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_VME_VMPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_TPC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_OLIGSM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_OLIADPCM">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_OLICELP">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_OLISBC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_OLIOPR">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_LH_CODEC">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_NORRIS">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_SOUNDSPACE_MUSICOMPRESS">
+            <summary></summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MPEG_ADTS_AAC">
+            <summary>
+            Advanced Audio Coding (AAC) audio in Audio Data Transport Stream (ADTS) format.
+            The format block is a WAVEFORMATEX structure with wFormatTag equal to WAVE_FORMAT_MPEG_ADTS_AAC.
+            </summary>
+            <remarks>
+            The WAVEFORMATEX structure specifies the core AAC-LC sample rate and number of channels, 
+            prior to applying spectral band replication (SBR) or parametric stereo (PS) tools, if present.
+            No additional data is required after the WAVEFORMATEX structure.
+            </remarks>
+            <see>http://msdn.microsoft.com/en-us/library/dd317599%28VS.85%29.aspx</see>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MPEG_RAW_AAC">
+            <summary></summary>
+            <remarks>Source wmCodec.h</remarks>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MPEG_LOAS">
+            <summary>
+            MPEG-4 audio transport stream with a synchronization layer (LOAS) and a multiplex layer (LATM).
+            The format block is a WAVEFORMATEX structure with wFormatTag equal to WAVE_FORMAT_MPEG_LOAS.
+            </summary>
+            <remarks>
+            The WAVEFORMATEX structure specifies the core AAC-LC sample rate and number of channels, 
+            prior to applying spectral SBR or PS tools, if present.
+            No additional data is required after the WAVEFORMATEX structure.
+            </remarks>
+            <see>http://msdn.microsoft.com/en-us/library/dd317599%28VS.85%29.aspx</see>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.NOKIA_MPEG_ADTS_AAC">
+            <summary>NOKIA_MPEG_ADTS_AAC</summary>
+            <remarks>Source wmCodec.h</remarks>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.NOKIA_MPEG_RAW_AAC">
+            <summary>NOKIA_MPEG_RAW_AAC</summary>
+            <remarks>Source wmCodec.h</remarks>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.VODAFONE_MPEG_ADTS_AAC">
+            <summary>VODAFONE_MPEG_ADTS_AAC</summary>
+            <remarks>Source wmCodec.h</remarks>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.VODAFONE_MPEG_RAW_AAC">
+            <summary>VODAFONE_MPEG_RAW_AAC</summary>
+            <remarks>Source wmCodec.h</remarks>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.MPEG_HEAAC">
+            <summary>
+            High-Efficiency Advanced Audio Coding (HE-AAC) stream.
+            The format block is an HEAACWAVEFORMAT structure.
+            </summary>
+            <see>http://msdn.microsoft.com/en-us/library/dd317599%28VS.85%29.aspx</see>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_DVM">
+            <summary>WAVE_FORMAT_DVM</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Vorbis1">
+            <summary>WAVE_FORMAT_VORBIS1 "Og" Original stream compatible</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Vorbis2">
+            <summary>WAVE_FORMAT_VORBIS2 "Pg" Have independent header</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Vorbis3">
+            <summary>WAVE_FORMAT_VORBIS3 "Qg" Have no codebook header</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Vorbis1P">
+            <summary>WAVE_FORMAT_VORBIS1P "og" Original stream compatible</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Vorbis2P">
+            <summary>WAVE_FORMAT_VORBIS2P "pg" Have independent headere</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Vorbis3P">
+            <summary>WAVE_FORMAT_VORBIS3P "qg" Have no codebook header</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.Extensible">
+            <summary>WAVE_FORMAT_EXTENSIBLE</summary>
+        </member>
+        <member name="F:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatEncoding.WAVE_FORMAT_DEVELOPMENT">
+            <summary></summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtensible">
+            <summary>
+            WaveFormatExtensible
+            http://www.microsoft.com/whdc/device/audio/multichaud.mspx
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtensible.#ctor">
+            <summary>
+            Parameterless constructor for marshalling
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtensible.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new WaveFormatExtensible for PCM or IEEE
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtensible.ToStandardWaveFormat">
+            <summary>
+            WaveFormatExtensible for PCM or floating point can be awkward to work with
+            This creates a regular WaveFormat structure representing the same audio format
+            Returns the WaveFormat unchanged for non PCM or IEEE float
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtensible.SubFormat">
+            <summary>
+            SubFormat (may be one of AudioMediaSubtypes)
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtensible.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Serialize
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtensible.ToString">
+            <summary>
+            String representation
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtraData">
+            <summary>
+            This class used for marshalling from unmanaged code
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtraData.ExtraData">
+            <summary>
+            Allows the extra data to be read
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtraData.#ctor">
+            <summary>
+            parameterless constructor for marshalling
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtraData.#ctor(System.IO.BinaryReader)">
+            <summary>
+            Reads this structure from a BinaryReader
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.Dmo.WaveFormats.WaveFormatExtraData.Serialize(System.IO.BinaryWriter)">
+            <summary>
+            Writes this structure to a BinaryWriter
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,528 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>Reports Module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+
+    <link href="vendors/kendoui-2016Q1/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendors/kendoui-2016Q1/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+
+    <!-- <link href="Styles/common.css" rel="stylesheet" type="text/css" /> -->
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+
+    <!-----custome files----------->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <section class="header-easytrack" id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="topstrip" id="topMenu">
+                    <nav class="navbar navbar-expand-md navbar-dark" id="toggle">
+                        <a href="#"><img src="images/Logo3.png" height="50"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown" id="mod1">
+                                    <!--  <a class="nav-link" id="rbtTracking">Tracking</a> -->
+                                    <label><input id="rbtTracking" name="panelType" checked="checked" onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Tracking">Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod2">
+                                    <!--  <a class="nav-link" id="rbtMultiTracking">Multi-Tracking</a> -->
+                                    <label><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Multi-Tracking">Multi-Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod3">
+                                    <!--  <a class="nav-link" id="rbtReports">Reports</a> -->
+                                    <label><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Reports">Reports</span></label>
+                                </li>
+                                <li class="nav-item" id="mod5">
+                                    <!--     <a class="nav-link" id="rbtMaintenance">Maintenance</a> -->
+                                    <label><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Maintenance">Maintenance</span></label>
+                                </li>
+                                <li class="nav-item" id="mod13">
+                                    <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                    <label><input id="rbtELOG" name="panelType" onclick="changePanel(13)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="E-LOG">E-LOG</span></label>
+                                </li>
+                                <!--<li class="nav-item" id="mod6">-->
+                                <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                <!--<label><input id="rbtVideo" name="panelType" onclick="changePanel(14)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Video">Video</span></label>
+                                </li>-->
+                                <li class="nav-item" id="mod6">
+                                    <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                    <label><input id="rbtFieldService" name="panelType" onclick="changePanel(6)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="FieldService">Field Service</span></label>
+                                </li>
+                                <li class="nav-item" id="mod4">
+                                    <!--   <a class="nav-link" id="rbtSettings">Settings</a> -->
+                                    <label><input id="rbtSettings" name="panelType" onclick="changePanel(4)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Settings">Settings</span></label>
+                                </li>
+                                <li class="nav-item dropdown" id="mod1">
+                                    <!--  <a class="nav-link" id="rbtTracking">Tracking</a> -->
+                                    <label><input id="rbtVideo" name="panelType" checked="checked" onclick="changePanel(17)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Video">Video</span></label>
+                                </li>
+                                <li id="mod6">
+                                    <img id="feedbackr" src="icons/feedback.png" style="width:40px;height:40px;" title="Send Feedback" data-toggle="modal" data-target="#myModal1" />
+                                </li>
+                                <li class="linkmobilenew mobiletext">
+                                    <a href="#" onclick="logout()" class="loginDivClass lang" key="Logout">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="login-content-right">
+                            <ul>
+                                <li>
+                                    <div id="welcomeTitleDiv">
+                                        <span id="welcomeTitleSpan" style="color:white;font:bold"></span>
+                                    </div>
+                                </li>
+                                <li style="color:white;font:bold">
+                                    <a href="#" onclick="logout()" class="lang" key="Logout">Logout</a>
+                                </li>
+                                <li class="cart-icon" id="buyNowDiv">
+                                    <a href="#" onclick="buyNow()"><img src="images/cart-header.png"></a>
+                                </li>
+                                <li>
+                                    <select id="language" class="form-control" onchange="selectLanguage(this.value)" style="width:auto">
+                                        <option value="-1">Language</option>
+                                        <option value="es">ES</option>
+                                        <option value="en">EN</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="wrapper" class="reportnew-page-custome content-wrap-custome">
+        <button class="toggleBtn arrow-sidebarnew"><img src="icons/arrow-sidbar.png" alt="side-bar-arrow"></button>
+        <div id="ctrlPanel" style="display:none; width:20%;float:left;">
+            <div id="ctrlPanelContainer" class="reports-sidebars">
+                <div id="ctrlPanelContent">
+                    <!-- <div style="width:100%; display:block;">
+                        <p class="panelTitle">Report Parameters</p>
+                    </div> -->
+                    <div style="width:100%; display:block; font-size:20px;">
+                        <div class="geeks" style="background-color:#F4F6F6;">
+                            <a href="EtReport.html" target="_black" style="font:bold"><span style="padding:10px;">Beta Reports</span><img src="icons/bewReports.png" style="width: 30px; height: 30px" /></a>
+                        </div>
+                        <fieldset>
+                            <legend class="lang" key="Selectthereport">Select the report parameters</legend>
+                            <table class="reports-table-fields">
+                                <tr class="reports-newss">
+                                    <td style="width:50px;" class="lang" key="Reports">Report</td>
+                                    <td>
+                                        <select id="cboReports" onchange="changeReports(this);" style="font-size:11px; width:145px;">
+                                            <option style="font-size:11px;">[There are no reports]</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr id="paramEventCode">
+                                    <td class="lang" key="Event">Event</td>
+                                    <td>
+                                        <select id="pEvents" style="font-size:11px; width:145px;">
+                                            <option style="font-size:11px;">[No Events Loaded]</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr id="paramSpeedLimit">
+                                    <td class="lang" key="SpeedLimit">Speed Limit</td>
+                                    <td>
+                                        <input id="pSpeedLimit" type="text" style="font-size:11px; width:60px; text-align:center;" value="" /> mph
+                                    </td>
+                                </tr>
+
+                                <tr id="paramIdleLimit">
+                                    <td class="lang" key="IdleLimit">Idle Limit</td>
+                                    <td>
+                                        <input id="pIdleLimit" type="text" style="font-size:11px; width:60px; text-align:center;" value="" /> <span class="lang" key="minutes">minutes</span>
+                                    </td>
+                                </tr>
+
+                                <tr id="paramMinTime">
+                                    <td class="lang" key="MinTime">Min.Time</td>
+                                    <td>
+                                        <input id="pMinTime" type="text" style="font-size:11px; width:60px; text-align:center;" value="" /> <span class="lang" key="minutes">minutes</span>
+                                    </td>
+                                </tr>
+
+                                <tr id="paramDriverID">
+                                    <td class="lang" key="Drivers">Drivers</td>
+                                    <td>
+                                        <select id="pDrivers" style="font-size:11px; width:145px;">
+                                            <option style="font-size:11px;">[No Drivers Loaded]</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr id="paramGeofenceID">
+                                    <td class="lang" key="Geofences">Geofences</td>
+                                    <td>
+                                        <select id="pGeofences" style="font-size:11px; width:145px;">
+                                            <option style="font-size:11px;">[No Geofences Loaded]</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr id="paramDeviceID">
+                                    <td class="lang" key="Device">Device</td>
+                                    <td>
+                                        <select id="cboDevices" onchange="changeDevices(this);" style="font-size:11px; width:145px;">
+                                            <option style="font-size:11px;">[There are no devices]</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr id="paramRetroGeo">
+                                    <td colspan="2">
+                                        <table style="width:100%;">
+                                            <tr>
+                                                <td class="lang" key="Address">Address</td>
+                                                <td><textarea id="retroGeoAddress" cols="20" rows="5"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="lang" key="Latitude">Latitude</td>
+                                                <td><input id="retroGeoLatitude" type="text" style="font-size:11px; width:90px;" value="" /> (Optional)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="lang" key="Longitude">Longitude</td>
+                                                <td><input id="retroGeoLongitude" type="text" style="font-size:11px; width:90px;" value="" /> (Optional)</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="lang" key="Radius">Radius</td>
+                                                <td><input id="retroGeoRadius" type="text" style="font-size:11px; width:60px; text-align:center;" value="250" /> Feet</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="lang" key="MinTime">Min.Time</td>
+                                                <td><input id="retroGeoMinTime" type="text" style="font-size:11px; width:60px; text-align:center;" value="1" /> mins.</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class="date-coordination">
+                                    <td colspan="2">
+                                        <table>
+                                            <tr class="paramDates">
+                                                <td>
+                                                    <label class="lang" key="DateFrom">Date From:</label>
+                                                    <input id="dtpFrom" type="text" style="font-size:11px; width:65px;" value="" /><img src="icons/date.png">
+                                                </td>
+                                                <td class="paramDateTo">
+                                                    <label class="lang" key="DateTo">Date To</label>
+                                                    <input id="dtpTo" type="text" style="font-size:11px; width:65px;" value="" /><img src="icons/date.png">
+                                                </td>
+                                            </tr>
+                                            <tr id="paramHours">
+                                                <td>
+                                                    <label class="lang" key="HourFrom">Time From:</label>
+                                                    <select id="cboHourFrom" style="font-size:11px; width:70px;">
+                                                        <option style="font-size:11px;">12:00 AM</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <label class="lang" key="HourTo">Time To:</label>
+                                                    <select id="cboHourTo" style="font-size:11px; width:70px;">
+                                                        <option style="font-size:11px;">12:00 PM</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </fieldset>
+                        <div class="export-footer-new">
+                            <div class="export-desing">
+                                <button style="font-size:12px; margin:5px;" onclick="runReport()">Execute</button>
+                            </div>
+                            <button style="font-size:12px; margin:5px;" onclick="printReport()"><img src="icons/download.png"></button> |
+                            <a href="#" class="deviceAction" id="exportReportLink" onclick="exportReport()"><img src="icons/print.png"></a>
+                            <!--   <button style="font-size:12px; margin:5px;" onclick="runReport()"><img src="icons/print.png"></button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="reportContent" class="reports-pages"></div>
+    </div>
+    <div id="waitingSpinner" style="display:none;"><p><img src="images/loading.gif" alt="Loading Spinner" width="100" height="100" /></p></div>
+    <div id="eventLocationMapDlg" title="Event Location">
+        <div id="mapCanvas" style="width:400px;height:400px;"></div>
+    </div>
+    <div id="activitySummaryContainer" style="display:none;"></div>
+
+    <div id="geofenceForm" title="Create new Geofence" style="display:none;">
+        <p class="validateTips"></p>
+        <table style="margin:5px;">
+            <tr>
+                <td class="lang" key="GeofenceName">Geofence Name*</td>
+                <td><input type="text" name="geoFormName" id="geoFormName" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td class="lang" key="Street">Street*</td>
+                <td><input type="text" name="geoFormStreet" id="geoFormStreet" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td class="lang" key="City">City*</td>
+                <td><input type="text" name="geoFormCity" id="geoFormCity" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td class="lang" key="State">State*</td>
+                <td><input type="text" name="geoFormState" id="geoFormState" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td class="lang" key="PostalCode">Postal Code*</td>
+                <td><input type="text" name="geoFormPostalCode" id="geoFormPostalCode" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td class="lang" key="Latitude(optional)">Latitude (optional)</td>
+                <td><input type="text" name="geoFormLatitude" id="geoFormLatitude" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td class="lang" key="Longitude(optional)">Longitude (optional)</td>
+                <td><input type="text" name="geoFormLongitude" id="geoFormLongitude" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td class="lang" key="Radius(Feet)">Radius (Feet):</td>
+                <td><input type="text" name="geoFormRadius" id="geoFormRadius" class="text ui-widget-content ui-corner-all" style="width:50px;" /></td>
+            </tr>
+        </table>
+    </div>
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Feedback</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <label>
+                        You can send us an observation, comment, suggestion or report an error of the new EasiTrack platform
+                    </label><br />
+                    <form class="form was-validated">
+                        <div class="form-group">
+                            <label for="Type">Select Type</label>
+                            <select id="Type" class="form-control">
+                                <option value="-1">Select</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Type">Description</label>
+                            <textarea class="form-control" rows="5" id="comment" required></textarea>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">the description cannot be empty</div>
+                        </div>
+                    </form>
+                    <span id="confirmation" style="display:none"></span>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="sendFeedBack()">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="asItemTemplate">
+        <div class="activitySummaryItem" style="font-size:12px; font-family:Arial; padding:10px;">
+            <table style="width:900px;border:1px solid #000000;" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="width:344px; vertical-align:top;">
+                        <table style="width:100%;" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td style="width:131px;font-size:16px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="DeviceName">Device Name:</td>
+                                <td style="font-size:16px;border:1px solid #999999; padding:3px;"><span class="asDevName"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="ActivityDate">Activity Date:</td>
+                                <td style="border:1px solid #999999; padding:3px;"><span class="asDate"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="FirstIgnON">First Ign.ON:</td>
+                                <td style="border:1px solid #999999; padding:3px;"><span class="asIgnOn"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="At">At:</td>
+                                <td style="border:1px solid #999999; padding:3px;"><span class="asIgnOnAddress"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="LastIgnOFF">Last Ign.OFF:</td>
+                                <td style="border:1px solid #999999; padding:3px;"><span class="asIgnOff"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="At">At:</td>
+                                <td style="border:1px solid #999999; padding:3px;"><span class="asIgnOffAddress"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="HoursWorked">Hours Worked:</td>
+                                <td style="border:1px solid #999999; padding:3px;"><span class="asHours"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" class="lang" key="TotalMilesDriven">Total Miles Driven:</td>
+                                <td style="border:1px solid #999999; padding:3px;"><span class="asMiles"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;font-weight:600; border:1px solid #999999;padding:3px;" colspan="2" class="lang" key="VisitedGeofences">Visited Geofences:</td>
+                            </tr>
+                            <tr>
+                                <td style="width:131px;border:0px; padding:3px;" colspan="2"><table class="asGeofencesList" style="width:100%;"></table></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width:556px;border:1px solid #000000;vertical-align:top;"><img src="" width="556" height="343" class="asTrail" alt="" /></td>
+                </tr>
+            </table>
+        </div>
+    </script>
+    <script type="text/javascript">
+        if (window.location.href.indexOf('matchpointgps') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+        }
+        if (window.location.href.indexOf('adapco') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+        }
+        if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+        }
+    </script>
+
+    <!--    Javascript includes -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="vendors/underscore-min.js"></script>
+    <script src="Scripts/date.format.js" type="text/javascript"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/branding.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+    <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+    <script src="Scripts/reports_v003.js" type="text/javascript"></script>
+    <script src="Scripts/rptActivitySummary.js" type="text/javascript"></script>
+    <script src="Scripts/geofenceFromPoint.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh4usXj1g6YjObXSwU0_tCnxfe511JLzA&sensor=false&libraries=geometry"></script>
+    <script src="Scripts/pageEngagement.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            traductor();
+            loadFeedBackType();
+            getAppFeatures(3);
+            getBrand();
+            setupEventLocationMapDlg();
+            hideParams();
+            $("#waitingSpinner").attr('style', 'display:none;width:100px;height:100px;right:' + (w / 2) + 'px;top:' + (h / 2) + 'px;position:fixed;z-index:999;');
+            $(document.getElementById('ctrlPanel')).attr('style', 'height:' + (h - 80) + 'px;');
+            $(document.getElementById('reportContent')).attr('style', 'height:' + (h - 80) + 'px;width:auto; overflow:auto;margin-right:0px;');
+            if (validateToken(false, 'reports.html') == true) {
+
+                initializeDates();
+                loadReports();
+                loadDevices();
+                setWelcomeTitle();
+                setLiveChat();
+                setWebEngage();
+                pageEngagement();
+            }
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!---------custome files--------->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>  -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="js/slick.min.js"></script>  -->
+    <!-- Start of easitrack Zendesk Widget script -->
+
+    <script src="vendors/kendoui-2016Q1/js/kendo.all.min.js" type="text/javascript"></script>
+    <script src="vendors/kendoui-2016Q1/js/jszip.min.js" type="text/javascript"></script>
+    <script src="PruebaMultiIdioma/js/script.js" charset="utf-8"></script>
+
+    <script id="_webengage_script_tag" type="text/javascript">
+        window.webengageWidgetInit = window.webengageWidgetInit || function () {
+            webengage.init({
+                licenseCode: "~10a5cbb2c"
+            }).onReady(function () {
+                webengage.render();
+            });
+        };
+
+        (function (d) {
+            var _we = d.createElement('script');
+            _we.type = 'text/javascript';
+            _we.async = true;
+            _we.src = (d.location.protocol == 'https:' ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-3.0.js";
+            var _sNode = d.getElementById('_webengage_script_tag');
+            _sNode.parentNode.insertBefore(_we, _sNode);
+        })(document);
+    </script>
+
+    <!-- BEGIN ProvideSupport.com Graphics Chat Button Code -->
+    <div id="ciJY41" style="z-index:100;position:fixed"></div>
+    <div id="scJY41" style="display:inline"></div>
+    <div id="sdJY41" style="display:none"></div>
+    <script type="text/javascript">var seJY41 = document.createElement("script"); seJY41.type = "text/javascript"; var seJY41s = (location.protocol.indexOf("https") == 0 ? "https" : "http") + "://image.providesupport.com/js/0325vm2g5aj6809q0cspkf44yw/safe-standard.js?ps_h=JY41&ps_t=" + new Date().getTime(); setTimeout("seJY41.src=seJY41s;document.getElementById('sdJY41').appendChild(seJY41)", 1)</script>
+    <noscript><div style="display:inline"><a href="http://vm.providesupport.com/0325vm2g5aj6809q0cspkf44yw">Customer Support Chat</a></div></noscript>
+    <!-- END ProvideSupport.com Graphics Chat Button Code -->
+
+
+
+    <script>
+
+        $('.second-strip #mainMenu li').click(function () {
+            $('#mainMenu li.active').removeClass('active');
+            $(this).closest('li').addClass('active');
+        });
+
+        $('.form-dispatchnew legend label').click(function () {
+            $('legend label.active').removeClass('active');
+            $(this).closest('label').addClass('active');
+        });
+
+        // toggle button sidebar
+        $(document).ready(function () {
+            $(".toggleBtn").click(function () {
+                $("#ctrlPanel").toggle();
+            });
+        });
+
+
+        $('.header-easytrack .navbar-nav li').click(function () {
+            $('.navbar-nav li.current').removeClass('current');
+            $(this).closest('li').addClass('current');
+        });
+
+
+        // menu toggle
+        $(document).ready(function () {
+            $('#toggle .navbar-toggler').on('click', function () {
+                $('.navbar-collapse').toggleClass('open');
+            });
+        });
+
+    </script>
+
+</body>
+</html>

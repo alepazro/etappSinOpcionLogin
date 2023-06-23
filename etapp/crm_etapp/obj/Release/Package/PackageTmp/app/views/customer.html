@@ -1,0 +1,187 @@
+﻿<div class="ContentArea">
+    <!-- Top Options for current module
+    ================================================== -->
+    <div class="TopOptions">
+        <h4 style="margin-top: 2px;">Customer Update</h4>
+    </div>
+
+        <!-- Content Area
+    ================================================== -->
+    <div class="MainContent group" style="padding:5px;">
+        <form name="accountForm">
+            <h4>Basic Information</h4>
+            <hr />
+            <div>
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div id="basic1Form" class="form-horizontal">
+
+			                <div class="control-group">
+				                <label for="companyName" class="control-label">	
+					                Company Name
+				                </label>
+				                <div class="controls"><input name="companyName" placeholder="Company Name" type="text" value="" id="companyName" ng-model="customer.companyName">
+				                </div>
+			                </div>
+
+			                <div class="control-group">
+				                <label for="firstName" class="control-label">	
+					                First Name*
+				                </label>
+				                <div class="controls"><input name="firstName" placeholder="First Name" type="text" value="" id="firstName" ng-model="customer.firstName" required>
+				                </div>
+			                </div>
+
+			                <div class="control-group">
+				                <label for="lastName" class="control-label">	
+					                Last Name*
+				                </label>
+				                <div class="controls"><input name="lastName" placeholder="Last Name" type="text" value="" id="lastName" ng-model="customer.lastName" required>
+				                </div>
+			                </div>
+
+                        </div>
+                    </div>
+
+                    <div class="span6">
+                        <div id="basic2Form" class="form-horizontal">
+			                <div class="control-group">
+				                <label for="email" class="control-label">	
+					                Email*
+				                </label>
+				                <div class="controls"><input name="email" placeholder="Email" type="text" value="" id="Text1" ng-model="customer.email" required>
+				                </div>
+			                </div>
+
+			                <div class="control-group">
+				                <label for="phone" class="control-label">	
+					                Phone*
+				                </label>
+				                <div class="controls"><input name="phone" placeholder="Phone" type="text" value="" id="phone" ng-model="customer.phone" required>
+				                </div>
+			                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>Addresses Information</h4>
+            <hr />
+            <div>
+                <div class="row-fluid">
+                    <div class="span5">
+
+		                <div id="shippingForm" class="form-horizontal">
+
+                            <h5>Shipping Address</h5>
+			                <div class="control-group">
+				                <label for="shippingAddress" class="control-label">	
+					                Street Address
+				                </label>
+				                <div class="controls"><input name="shippingAddress" placeholder="W 123 Street" type="text" value="" id="shippingAddress" ng-model="customer.street">
+				                </div>
+			                </div>
+ 
+			                <div class="control-group">
+				                <label for="shippingCity" class="control-label">	
+					                City
+				                </label>
+				                <div class="controls">
+                                    <input name="shippingCity" type="text" value="" id="shippingCity" ng-model="customer.city">
+				                </div>
+			                </div>
+
+                            <div class="control-group">
+                                <label for="shippingState" class="control-label">
+                                    State
+                                </label>
+                                <div class="controls">
+                                    <input name="shippingState" type="text" value="" id="shippingState" ng-model="customer.state">
+                                </div>
+                            </div>
+                         
+			                <div class="control-group">
+				                <label for="shippingPostalCode" class="control-label">	
+					                Postal Code
+				                </label>
+				                <div class="controls">
+                                    <input name="shippingPostalCode" type="text" value="" id="shippingPostalCode" ng-model="customer.postalCode">
+				                </div>
+			                </div>
+		                </div>
+
+                    </div>
+                    <div class="span2">
+                        <button ng-click="copyShipping2Billing()">Copy >></button>
+                    </div>
+                    <div class="span5">
+		                <div id="billingForm" class="form-horizontal">
+
+                            <h5>Billing Information</h5>
+
+			                <div class="control-group">
+				                <label for="billingContact" class="control-label">	
+					               Contact Name
+				                </label>
+				                <div class="controls"><input name="billingContact" type="text" value="" id="billingContact" ng-model="customer.billingContact">
+				                </div>
+			                </div>
+ 
+			                <div class="control-group">
+				                <label for="billingEmail" class="control-label">	
+					                Email
+				                </label>
+				                <div class="controls"><input name="billingEmail" type="text" value="" id="billingEmail" ng-model="customer.billingEmail">
+				                </div>
+			                </div>
+ 
+			                <div class="control-group">
+				                <label for="billingPhone" class="control-label">	
+					                Phone
+				                </label>
+				                <div class="controls"><input name="billingPhone" type="text" value="" id="billingPhone" ng-model="customer.billingPhone">
+				                </div>
+			                </div>
+ 
+			                <div class="control-group">
+				                <label for="billingAddress" class="control-label">	
+					                Street Address
+				                </label>
+				                <div class="controls"><input name="billingAddress" placeholder="W 123 Street" type="text" value="" id="billingAddress" ng-model="customer.billingStreet">
+				                </div>
+			                </div>
+ 
+			                <div class="control-group">
+				                <label for="billingCity" class="control-label">	
+					                City
+				                </label>
+				                <div class="controls"><input name="billingCity" type="text" value="" id="billingCity" ng-model="customer.billingCity">
+				                </div>
+			                </div>
+
+                            <div class="control-group">
+                                <label for="billingState" class="control-label">
+                                    State
+                                </label>
+				                <div class="controls">
+                                    <input name="billingState" type="text" value="" id="billingState" ng-model="customer.billingState">
+                                </div>
+                            </div>
+                         
+			                <div class="control-group">
+				                <label for="billingPostalCode" class="control-label">	
+					                Postal Code
+				                </label>
+				                <div class="controls"><input name="billingPostalCode" type="text" value="" id="billingPostalCode" ng-model="customer.billingPostalCode">
+				                </div>
+			                </div>
+		                </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="text-center">
+            <a class="btn btn-success" ng-click="save()" ng-disabled="accountForm.$invalid">Save</a>
+            <a class="btn btn-warning cancel" ng-click="cancel()">Cancel</a>
+        </div>
+    </div>
+</div>  

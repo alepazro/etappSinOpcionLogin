@@ -1,0 +1,406 @@
+﻿
+.tableDefaultStyle
+{
+    padding:1px;
+    border:0px;
+    margin:0px;
+}
+#panelTypes {
+    margin: auto;
+    /*    width:600px;
+*/
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #252525;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#map_canvas  
+{
+    border:1px solid gray;
+}
+#ctrlPanel
+{
+    float:left;
+	width:20%;
+	margin-right:5px;
+	border:1px solid gray;
+	overflow:auto;
+}
+
+#closeCtrlPanelDiv
+{
+	width:16px;
+	height:16px;
+	cursor:pointer;
+    float:right;
+    margin-top:1px;
+}
+
+#ctrlPanelContent
+{
+    margin: 4px;
+}
+
+#ctrlPanelContainer
+{
+    width:97.6%;
+    background-color:#f4f3f3;
+    margin-top:3px;
+    margin-left:3px;
+    float:left;
+    border-bottom:3px solid white;
+}
+.panelTitle
+{
+    font-size:14px;
+    font-weight:600;
+    padding:2px;
+}
+.panelSubTitle
+{
+    font-size:11px;
+    font-weight:600;
+    padding:2px;
+    padding-top:4px;
+}
+
+#welcomeTitleDiv
+{
+    float:right; 
+    padding-right:30px;
+    margin-top:10px; 
+    font-size:13px; 
+    font-style:italic; 
+    font-weight:600;
+    width:150px;
+    text-align:right;
+}
+#welcomeTitleSpan
+{
+    color:#ffffff;
+}
+
+#settingsContent
+{
+    float:right;
+    width:75%;
+}
+
+/* Reports */
+#reportContent
+{
+    width:78%;
+    float:right;
+}
+
+/* Styles for the fleet list elements */
+.devicesListClass
+{
+     list-style-type:none; 
+}  
+
+.devicesListClass li
+{
+    display:block; 
+    color:#000; 
+    border:1px solid gray;
+    margin:1px; 
+    padding:2px;
+}
+.deviceInfo
+{
+    width:100%;
+}
+.deviceInfoDet
+{
+    padding:2px; 
+    font-size:10px;
+    color:Gray;
+}
+.deviceName
+{
+    padding-left:2px;
+    line-height:25px; 
+    font-size:11px; 
+    color:#000;
+}
+.deviceName:hover
+{
+    font-weight:600;
+}
+.deviceActions
+{
+    width:100%;
+    text-align:right;
+}
+.deviceAction
+{
+    font-size:10px;
+    color:Blue;
+}
+.deviceAction:hover
+{
+    font-weight:600;
+}
+.trailInfo
+{
+    width:100%;
+    cursor:pointer;
+}
+.trailInfoDet
+{
+    padding:2px; 
+    font-size:10px;
+    color:#000000;
+}
+#lastKnownLocation
+{
+    width:100%; 
+    height:15px; 
+    border:1px solid gray; 
+    text-align:center;
+}
+
+#lastKnownLocation a
+{
+    background-color:#373737; 
+    color:#fff; 
+    line-height:15px; 
+    display:block; 
+    cursor:pointer;
+    font-size:12px; 
+}
+#lastKnownLocation a:hover {
+    font-weight:600;
+}
+#fleetSelectors
+{
+    padding:2px;
+}
+#fleetSelectors ul
+{
+     list-style-type:none;
+}
+#fleetSelectors li
+{
+    float:left;
+}
+#fleetSelectors a
+{
+    font-size:10px; 
+    color:Blue;
+}
+#fleetSelectors a:hover {
+    font-weight:600;
+}
+.elbl {background-color:#ffffff;font-weight:bold;border:2px #006699 solid;}
+
+.settingsItem
+{
+    margin-left:10px;
+    padding:3px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:500;
+}
+.newGeofenceResultItem
+{
+    cursor:pointer;
+    padding:2px;
+}
+.newGeofenceResultItemSelected
+{
+    background-color:#f1f1f1;
+}
+.geofencesListTD
+{
+    border:0px solid #e1e1e1;
+}
+.geofencesListCenteredTD
+{
+    text-align:center;
+}
+.geofencesListOddTR
+{
+   background-color: #f1f1f1;
+}
+.usersListTD
+{
+    border:0px solid #e1e1e1;
+}
+.usersListCenteredTD
+{
+    text-align:center;
+}
+.usersListOddTR
+{
+   background-color: #f1f1f1;
+}
+.devicesListTD
+{
+    border:0px solid #e1e1e1;
+}
+.devicesListCenteredTD
+{
+    text-align:center;
+}
+.devicesListRightTD
+{
+    text-align:right;
+    padding-right:5px;
+}
+.devicesListOddTR
+{
+   background-color: #f1f1f1;
+}
+.usersListTD
+{
+    border:0px solid #e1e1e1;
+}
+.usersListCenteredTD
+{
+    text-align:center;
+}
+.usersListOddTR
+{
+   background-color: #f1f1f1;
+}
+.alertsListTD
+{
+    border:0px solid #e1e1e1;
+}
+.alertsListCenteredTD
+{
+    text-align:center;
+}
+.alertsListRightTD
+{
+    text-align:right;
+}
+.alertsListOddTR
+{
+   background-color: #f1f1f1;
+}
+.cellpading
+{
+    padding:2px;
+}
+.rowListOddTR
+{
+   background-color: #f1f1f1;
+}
+
+/* Styles for the fleet list elements */
+.newAlertListClass
+{
+     list-style-type:none; 
+}  
+
+.newAlertListClass li
+{
+    display:block; 
+    color:#000; 
+    margin:1px; 
+    padding:2px;
+}
+.newAlertSelectors
+{
+    padding:2px;
+}
+.newAlertSelectors ul
+{
+     list-style-type:none;
+}
+.newAlertSelectors li
+{
+    float:left;
+}
+.newAlertSelectors a
+{
+    font-size:10px; 
+    color:Blue;
+}
+.newAlertSelectors a:hover {
+    font-weight:600;
+}
+.deviceLabel {
+    color: red;
+    background-color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 40px;     
+    border: 2px solid black;
+    white-space: nowrap;
+}
+.geoLabel {
+    color: red;
+    background-color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid black;
+    white-space: nowrap;
+    white-space: normal;
+}
+.geoPolyLabel{
+
+}
+.tooltip
+{
+    display:none;
+    border:1px solid #a1a1a1;
+    background-color:#ffffff;
+    width:200px;
+    padding:5px;
+}
+.newDevGroupSelectors
+{
+    padding:2px;
+}
+.newDevGroupSelectors ul
+{
+     list-style-type:none;
+}
+.newDevGroupSelectors li
+{
+    float:left;
+}
+.newDevGroupSelectors a
+{
+    font-size:10px; 
+    color:Blue;
+}
+.newDevGroupSelectors a:hover {
+    font-weight:600;
+}
+.newDevGroupListClass
+{
+     list-style-type:none; 
+}  
+
+.newDevGroupListClass li
+{
+    display:block; 
+    color:#000; 
+    margin:1px; 
+    padding:2px;
+}
+.eventTimer
+{
+    width:80px;
+    line-height:20px;
+    font-size:10px;
+    text-align:center;
+}
+
+.companyNote{
+    border:1px solid #e1e1e1;
+    padding:5px;
+    width:95%;
+}

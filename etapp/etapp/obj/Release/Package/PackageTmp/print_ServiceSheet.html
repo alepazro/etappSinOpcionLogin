@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>EasiTrack Service Sheet Print Out</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = getParameterByName('data');
+
+            var jsonData = jQuery.parseJSON(data);
+            var jsonDet = jQuery.parseJSON(jsonData.serviceDet);
+
+            $('#deviceName').html(jsonData.deviceName);
+            $('#serviceDate').html(jsonData.serviceDate);
+            $('#odometer').html(jsonData.odometer);
+
+            for (var ind = 0; ind < jsonDet.length; ind++) {
+                $("#maintServiceLogTbl").last().append("<tr><td>" + jsonDet[ind].serviceType + "</td><td>" + jsonDet[ind].description + "</td><td>" + jsonDet[ind].cost + "</td><td>" + jsonDet[ind].comments + "</td></tr>");
+            }
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <button onclick="window.print()"><img src="images/printPage.gif" alt="Print Service Sheet"/></button>
+    </div>
+    <div id="printArea">
+        <!--<img src="https://easitrack.net/images/logo3.png" alt="" />-->
+        <h1>Vehicle Maintenance System</h1>
+        <h3>Service Sheet</h3>
+        <table id="regServiceTbl" style="padding:10px;border:1px solid #a1a1a1; border-bottom: 2px solid #a1a1a1;border-right: 2px solid #a1a1a1; background-color:#f4f3f3;">
+            <tr>
+                <td style="padding:3px;">Vehicle/Asset:</td>
+                <td style="padding:3px;"><span id="deviceName"></span></td>
+            </tr>
+            <tr>
+                <td style="padding:3px;">Service Date:</td>
+                <td style="padding:3px;"><span id="serviceDate"></span></td>
+            </tr>
+            <tr>
+                <td style="padding:3px;">Odometer on day of service:</td>
+                <td style="padding:3px;"><span id="odometer"></span></td>
+            </tr>
+        </table>
+        <br />
+        <table id="maintServiceLogTbl" style="width:600px;padding:3px;">
+            <tr id="maintServiceLogTblTitle" style="background-color:#0000ff;color:#ffffff;height:20px;">
+                <td style="width:100px; padding:0px 2px;">Type</td>
+                <td style="width:200px; padding:0px 2px;">Description</td>
+                <td style="width:100px; padding:0px 2px;">Cost</td>
+                <td style="width:200px; padding:0px 2px;">Comments</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

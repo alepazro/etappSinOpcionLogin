@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>EasiTrack - Snooze this report</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+        <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+        <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/ws.css" rel="stylesheet" type="text/css" />
+        <link href="vendors/bootstrap-3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+
+        <script type="text/javascript">
+            if (window.location.href.indexOf('matchpointgps') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+            }
+            if (window.location.href.indexOf('adapco') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+            }
+            if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+                document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+            }
+        </script>
+
+    <!--    Javascript includes -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+        <script src="vendors/bootstrap-3.0.3/js/bootstrap.min.js"></script>
+        <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+        <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+        <script src="Scripts/db_v002.js" type="text/javascript"></script>
+        <script src="Scripts/branding.js" type="text/javascript"></script>
+        <script src="Scripts/snoozeReport.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                getBrand();
+                rpt = getParameterByName('rpt');
+                usr = getParameterByName('usr');
+
+                if (window.location.href.indexOf('matchpointgps') != -1) {
+                    $('#eTrackNotice').hide();
+                }
+                if (window.location.href.indexOf('adapco') != -1) {
+                    $('#eTrackNotice').hide();
+                }
+
+            });
+        </script>
+
+</head>
+<body>
+    <div id="headerWS">
+        <div id="topMenuWS">
+            <div class="logoPosition">
+                <span id="dealerBrand" class="logoDesign"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Snooze this report</h1>
+        <p>By snoozing this report you will stop receiving this information for the period you select below.</p>
+        <div class="well">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Select Snooze Period</label>
+                <select id="snoozeTimes" name="snoozeTimes" class="form-control">
+                  <option value="1">1 Week</option>
+                  <option value="2">2 Weeks</option>
+                  <option value="3">3 Weeks</option>
+                  <option value="4">4 Weeks</option>
+                  <option value="999">Never send again</option>
+                </select>
+             </div>
+            <button type="button" class="btn btn-lg btn-danger" onclick="snoozeNow()">Snooze Now</button>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.JsonNet</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.JsonNet.JsonProvider">
+            <summary>
+            An implementation of a JSON provider that uses Json.NET.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.JsonNet.JsonProvider.SerializeSettings">
+            <summary>
+            Gets or sets the Json.NET serialize settings.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.JsonNet.JsonProvider.DeserializeSettings">
+            <summary>
+            Gets or sets the Json.NET deserialize settings.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.JsonNet.JsonProvider.Serialize``1(``0)">
+            <summary>
+            Serializes a value to a JSON string.
+            </summary>
+            <typeparam name="T">The type the value to serialize.</typeparam>
+            <param name="value">The value to serialize.</param>
+            <returns>The serialized JSON string.</returns>
+        </member>
+        <member name="M:FM.LiveSwitch.JsonNet.JsonProvider.Deserialize``1(System.String)">
+            <summary>
+            Deserializes a value from a JSON string.
+            </summary>
+            <typeparam name="T">The type the value to deserialize.</typeparam>
+            <param name="valueJson">The JSON string to deserialize.</param>
+            <returns>The deserialized value.</returns>
+        </member>
+    </members>
+</doc>

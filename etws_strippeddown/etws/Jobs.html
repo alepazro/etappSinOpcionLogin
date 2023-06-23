@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>Jobs API Test</title>
+
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="Scripts/underscore-min.js"></script>
+    <script src="Scripts/jobs.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tabs").tabs();
+            $("#FSJobDueDate").datepicker();
+
+        });
+    </script>
+
+</head>
+<body>
+    <h1 style="text-align:center;">Jobs API Test Page</h1>
+
+    <div id="tabs">
+        <div id="tabs-10">
+            <div class="panel-group" id="tab10">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#tab10" href="#FSPostJobsPanel">
+                                Create / Update Jobs
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="FSPostJobsPanel" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-horizontal">
+                                <fieldset>
+                                    <legend>Create/Update Job</legend>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobNumber">Token</label>
+                                        <div class="controls">
+                                            <input type="text" id="token" placeholder="Token"/>
+                                            <p>Demo: A138ED95-3479-480F-AC98-61D0F93C373D, Demo1: 711D38AC-427B-473F-BE17-4C66C41D0520</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobID">Job ID</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobID" placeholder="Job ID"/>
+                                            <button id="btnFSJobID" onclick="generateRandomString('FSJobID', 10)">Get random ID for new job</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobNumber">Job Number</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobNumber" placeholder="Job Number"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobCustID">Customer ID</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobCustID" placeholder="Customer ID"/>
+                                            <p>ACME Industries: QD2YdhiXcI, ABC Storage, Inc.: T22fbRR8vN, ABC Stores: 2mNZWItSdd</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobContactName">Contact Name</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobContactName" placeholder="Contact Name"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobContactAddress">Address</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobContactAddress" placeholder="Address"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobContactPhone">Phone</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobContactPhone" placeholder="Phone"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobContactEmail">Email</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobContactEmail" placeholder="Email"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobAssignTo">Assign To</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobAssignTo" placeholder="Assign To"/>
+                                            <p>Demo: 6CE1DED4-EE38-4F1B-A414-939F4DB5B4AB  or  Demo1: 1DC7E8C7-0A98-48B6-9223-9FEAF52A9B72</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobDueDate">Due Date</label>
+                                            <div class="controls">
+                                                <input type="text" id="FSJobDueDate" placeholder="Due Date"/>
+                                            </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="FSJobName">Job Description</label>
+                                        <div class="controls">
+                                            <input type="text" id="FSJobName" placeholder="Job Description"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button id="btnPostJob" onclick="postJob()">POST Job</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#tab10" href="#JobBasicTables">
+                                Get Jobs Basic Tables
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="JobBasicTables" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <label>User Token:</label>
+                                    <input id="jobUserToken" />
+                                    <button id="btnPostJob" onclick="jobSupportTables()">Get Job Support Tables</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#tab10" href="#JobCustIdName">
+                                Get Customers Id-Name
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="JobCustIdName" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <label>User Token:</label>
+                                    <input id="jobUserToken2" />
+                                    <button id="btnGetCustIdName" onclick="JobCustIdName()">Get Customers Id-Name</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#tab10" href="#JobGetCust">
+                                Get/Post Customer
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="JobGetCust" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h3>Token</h3>
+                            <label>User Token:</label>
+                            <input id="jobUserToken3" />
+                            <h4>Get Customer</h4>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <label>Cust. ID:</label>
+                                    <input id="jobCustId" />
+                                    <button id="btnJobGetCust" onclick="jobGetCust()">Get Customer</button>
+                                </div>
+                            </div>
+                            <h4>Post Customer</h4>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <label>Cust. Name:</label>
+                                    <input id="jobName" />
+                                    <button id="btnJobPostCust" onclick="postJobCustomer()">Post Customer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

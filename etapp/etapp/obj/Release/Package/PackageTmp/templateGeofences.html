@@ -1,0 +1,203 @@
+﻿<div id="geofenceTemplateDlgs">
+    <div id="newGeofenceDlg" title="Geofence Settings" style="display:none;">
+        <table class="table table-condensed">
+            <tr>
+                <td>Geofence Name*</td>
+                <td>
+                    <input type="text" class="input-xlarge" id="newGeofenceName" />
+                </td>               
+            </tr> 
+            <tr>
+                <td>
+                    <div class="form-inline">
+                        <strong>
+                            <label>
+                                ¿Is it a stop for a job??
+                            </label>
+                        </strong>
+                        <input id="isStop" type="checkbox" style="padding-left: 5px;left: 5px;">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Geofence Icon*</td>
+                <td><select id="cbxGeofencesTypes" onchange="changeIcon()"><option value="0">[Select Icon]</option></select>
+                <img id="imgGeoIcons" src="icons/990033.png" />
+                </td>               
+            </tr>
+            <tr>
+                <td>Geofence Address*</td>
+                <td>
+                    <div class="form-inline">
+                        <input type="text" class="input-xxlarge" id="newGeofenceAddress" />
+                        <button class="btn btn-info" id="btnSearchAddress" onclick="searchNewGeofenceAddress()">Search</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Contact Info</td>
+                <td>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td>Name</td>
+                            <td><input type="text" id="newGeofenceContactName" placeholder="Name"></td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>
+                                <div class="form-inline">
+                                    <input type="text" id="newGeofencePhone" placeholder="Phone">
+                                    <label class="checkbox">
+                                        <input id="geoContactSMSAlert" type="checkbox"> Phone Alert
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <div class="form-inline">
+                                    <input type="text" id="newGeofenceContactEmail" placeholder="Email">
+                                    <label class="checkbox">
+                                        <input id="geoContactEmailAlert" type="checkbox"> Email Alert
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alert Contact</td>
+                            <td>
+                                <select id="geoContactAlertType"><option value="0">Never</option></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="span2">
+                                        <span>Arrival message:</span>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="form-inline">
+                                            <label class="radio">
+                                                <input id="contAlertArrNew" type="radio" name="contAlertMsgArrival" checked="checked" onclick="setContactMsgArrival()" />New
+                                            </label>
+                                            <label class="radio">
+                                                <input id="contAlertArrExisting" type="radio" name="contAlertMsgArrival" onclick="setContactMsgArrival()" />Existing
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="span5">
+                                        <input id="txtContAlertArr" type="text" class="input-block-level" />
+                                        <select id="cbxContAlertArr" class="input-block-level" style="display:none;"></select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="span2">
+                                        <span>Departure message:</span>
+                                    </div>
+                                    <div class="span2">
+                                        <div class="form-inline">
+                                            <label class="radio">
+                                                <input id="contAlertDepNew" type="radio" name="contAlertMsgDeparture" checked="checked" onclick="setContactMsgDeparture()" />New
+                                            </label>
+                                            <label class="radio">
+                                                <input id="contAlertDepExisting" type="radio" name="contAlertMsgDeparture" onclick="setContactMsgDeparture()" />Existing
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="span5">
+                                        <input id="txtContAlertDep" type="text" class="input-block-level" />
+                                        <select id="cbxContAlertDep" class="input-block-level" style="display:none;"></select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>Alert Me</td>
+                <td>
+                    <div class="form-inline">
+                        <select id="cbxGeofencesAlertsTypes"><option value="0">Never</option></select>
+                        <span style="font-size:10px;">(Event that will trigger an email notification)</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Geofence Style</td>
+                <td>
+                    <div class="form-inline">
+                        <label class="radio">
+                            <input type="radio" id="geoTypeCircle" name="geoType" value="circle" checked="checked" onclick="setGeoType()" /> Circle
+                        </label>
+                        <label class="radio">
+                            <input type="radio" id="geoTypePoly" name="geoType" value="poly" onclick="setGeoType()" /> Polygon
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr id="newGeoDlgCircle">
+                <td></td>
+                <td>
+                    <div class="form-inline">
+                        <span>Radius (Feet)</span>
+                        <input type="text" class="input-small" id="newGeofenceRadius" />
+                        <button class="btn btn-warning" id="newGeoDrawCircle" onclick="newGeoDrawCircle()">Enter radius and click here to draw circle</button>
+                        <span style="font-size:10px;">Tip: You can drag the center of the circle.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr id="newGeoDlgPoly" style="display:none;">
+                <td></td>
+                <td>
+                    <div class="form-inline">
+                        <button class="btn btn-warning" id="btnNewGeoPolyStart" onclick="startPolygon()">Click Here And Start Drawing Polygon in map</button>
+                        <span style="font-size:10px;">Tip: You can drag around the vertices to fine-tune the shape.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Speed Limit Inside Geofence</td>
+                <td>
+                    <div class="form-inline">
+                        <label class="checkbox">
+                            <input type="checkbox" id="newGeofenceIsSpeedLimit" /> Yes.
+                        </label>
+                        <input type="text" class="input-small" id="newGeofenceSpeedLimit" />
+                        <span style="font-size:10px;color:#a1a1a1;">Control speed limit inside geofence</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Notes</td>
+                <td>
+                    <textarea class="input-block-level" rows="2" id="newGeofenceComments"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="alert alert-error">
+                        IMPORTANT NOTE: When drawing the Geofence you will see a shaded area within the geofence.  Make sure the Geofence's shaded area covers all the places where the vehicle(s) could possible be within the geofence.  The system will only check arrivals/departures within the geofence's shaded area.
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:70%;border:1px solid #a1a1a1;"><div id="newGeofenceMap1" style="height:400px;"></div></td>
+                            <td style="width:30%;border:1px solid #a1a1a1;vertical-align:top;">
+                                <div id="newGeofenceResults"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="geofenceRemoveDlg" title="Remove Geofence" style="display:none;">
+        <p>Are you sure you want to remove <span id="geofenceRemoveName"></span> geofence?</p>
+    </div>
+</div>
+

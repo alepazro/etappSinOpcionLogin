@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title>eTrack Job</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div id="header">
+        <div id="topMenu">
+            <div id="welcomeTitleDiv">
+                <span id="welcomeTitleSpan"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <!-------->
+        <div id="content">
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                <li class="active"><a href="#jobDetails" data-toggle="tab">Job Details</a></li>
+                <li><a href="#jobNotes" data-toggle="tab">Notes</a></li>
+                <li><a href="#jobPictures" data-toggle="tab">Pictures</a></li>
+                <li><a href="#jobSignature" data-toggle="tab">Signature</a></li>
+            </ul>
+            <div id="my-tab-content" class="tab-content">
+                <div class="tab-pane active" id="jobDetails">
+                    <h3>Job <span id="jobNumber">000000</span></h3>
+                    <div class="panel panel-default panel-info">
+                        <div class="panel-heading">Customer Details</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Customer</label>
+                                        <input type="text" class="form-control" id="custName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Contact</label>
+                                        <input type="text" class="form-control" id="custContact" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Phone</label>
+                                        <input type="text" class="form-control" id="custPhone" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Email</label>
+                                        <input type="email" class="form-control" id="custEmail" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="custName">Address</label>
+                                        <input type="text" class="form-control" id="custAddress" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-success">
+                        <div class="panel-heading">Job Description</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="custName">Due Date</label>
+                                        <input type="email" class="form-control" id="dueDate" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="custName">Est.Duration</label>
+                                        <input type="email" class="form-control" id="estDuration" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="custName">Actual Duration</label>
+                                        <input type="email" class="form-control" id="durationHHMM" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea id="jobDescription" rows="10" style="width:100%;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-warning">
+                        <div class="panel-heading">Job Status</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Category</label>
+                                        <input type="text" class="form-control" id="categoryName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Status</label>
+                                        <input type="text" class="form-control" id="statusName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Priority</label>
+                                        <input type="text" class="form-control" id="priorityName" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="custName">Assigned To</label>
+                                        <input type="text" class="form-control" id="userName" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="jobNotes">
+                    <h4 id="noNotesTitle" style="display: none;">No Notes Captured</h4>
+                    <div id="notesDiv">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h3>Date</h3>
+                            </div>
+                            <div class="col-md-10">
+                                <h3>Note</h3>
+                            </div>
+                        </div>
+                        <div id="notesCollection"></div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="jobPictures">
+                    <h3>Pictures</h3>
+                    <h4 id="noPicsTitle" style="display: none;">No Pictures Captured</h4>
+                    <div class="row">
+                        <div id="picsCollection" class="col-md-6"></div>
+                        <div id="picContainer" class="col-md-6">
+                            <img id="jobImg" src="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="jobSignature">
+                    <h3>Signature</h3>
+                    <h4 id="noSignatureTitle" style="display: none;">No Signature Captured</h4>
+                    <div id="signatureDiv">
+                        <div class="row">
+                            <div class="col-md-2">Signed By:</div>
+                            <div class="col-md-10"><span id="signedBy"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">Signed On:</div>
+                            <div class="col-md-10"><span id="signedOn"></span></div>
+                        </div>
+                        <button id="btnShowSignature" data-imageId="" onclick="showSignature(this)">Show Signature</button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img id="imgJobSignature" src="" style="height:500px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script id="__jobNoteTmpl" type="text/x-jQuery-tmpl">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-2">
+                    ${eventDate}
+                </div>
+                <div class="col-md-10">
+                    ${note}
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="__jobPicTmpl" type="text/x-jQuery-tmpl">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-1">
+                    <button id="btn_${imageId}" data-imageid="${imageId}" onclick="showImage(this)">View</button>
+                </div>
+                <div class="col-md-2">
+                    ${eventDate}
+                </div>
+                <div class="col-md-9">
+                    ${imgName}
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.tools.min.js" type="text/javascript"></script>
+    <script src="vendors/jQuery-Template/jQuery.tmpl.min.js"></script>
+
+    <script src="vendors/kendo-2013.3.1119/js/kendo.web.min.js"></script>
+    <script src="vendors/xdate.js"></script>
+
+    <script src="appFieldService/db.js"></script>
+    <script src="Scripts/authorization_006.js"></script>
+    <script src="Scripts/util.js"></script>
+    <script src="Scripts/utilities_002.js"></script>
+    <script src="appFieldService/job.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabs').tab();
+
+            if (validateToken(false, 'jobs.html') == true) {
+                
+                setWelcomeTitle();
+                loadJob();
+            }
+        });
+    </script>
+
+
+</body>
+</html>

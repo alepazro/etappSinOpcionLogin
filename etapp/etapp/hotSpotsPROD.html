@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" href="images/img/easitrack.ico">
+    <title>EasiTrack Hot Spots</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!--    CSS includes -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/common.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+    if (window.location.href.indexOf('matchpointgps') != -1) {
+        document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+    }
+    if (window.location.href.indexOf('adapco') != -1) {
+        document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+    }
+    if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+        document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+    }
+    </script>
+
+
+</head>
+<body>
+    <div id="header" >
+        <div id="topMenu" style="">
+            <div id="feedback" style="float:right;height:15px;margin:7px 3px;padding:5px;background-color:#ffffff; vertical-align:middle;cursor:pointer;">
+                <div><span style="font-weight:600;">Feedback</span></div>
+            </div>
+            <div style="float:right;height:15px;margin:7px 3px;padding:5px;background-color:#ffffff; vertical-align:middle;">
+                <!-- BEGIN ProvideSupport.com Text Chat Link Code -->
+                <div id="ciWtVh" style="z-index:100;position:absolute"></div><div id="scWtVh" style="display:inline"></div><div id="sdWtVh" style="display:none"></div>
+                <noscript><div style="display:inline"><a href="https://www.providesupport.com?messenger=0325vm2g5aj6809q0cspkf44yw">Customer Support Chat</a></div></noscript>
+                <!-- END ProvideSupport.com Text Chat Link Code -->
+            </div>
+
+            <a href="#" onclick="logout()" class="loginDivClass">Logout</a>
+            <div class="logoPosition">
+                <span id="dealerBrand" class="logoDesign"></span>
+            </div>
+            <div id="welcomeTitleDiv">
+                <span id="welcomeTitleSpan"></span>
+                <input type="hidden" id="userFullName" />
+            </div>
+            <div id="panelTypes" style="padding-top:5px;">
+                <span id="mod1" style="vertical-align:middle;"><input id="rbtTracking" name="panelType" checked="checked" type="radio" style="" /><span style="padding:0px 5px;color:#ffffff;">Tracking</span></span>
+                <span id="mod2" style="vertical-align:middle;"><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" /><span style="padding:0px 5px;color:#ffffff;">Multi-Tracking</span></span>
+                <span id="mod3" style="vertical-align:middle;"><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" /><span style="padding:0px 5px;color:#ffffff;">Reports</span></span>
+                <span id="mod5" style="vertical-align:middle;"><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" /><span style="padding:0px 5px;color:#ffffff;">Maintenance</span></span>
+                <span id="mod4" style="vertical-align:middle;"><input id="rbtSettings" name="panelType" onclick="changePanel(4)" type="radio" /><span style="padding:0px 5px;color:#ffffff;">Settings</span></span>
+            </div>
+        </div>
+    </div>
+    <div id="middleMenu">
+        <ul id="mainMenu" style="margin:0px;">
+            <li><a href="tracking.html" class="mainMenuOption">Tracking Map</a></li>
+            <li><a href="fleetStatusBoard.html" class="mainMenuOption">Fleet Status Board</a></li>
+            <li><a href="#" class="mainMenuOption">Hot Spots</a></li>
+        </ul>
+    </div>
+
+    <div id="mainContent" class="container-fluid">
+        <div class="row-fluid">
+            <div id="leftContent" class="span2">
+                <div class="form-search">
+                  <fieldset>
+                    <legend>Hot Spots Analysis</legend>
+                    <label>Device</label>
+                    <select id="cbxDevices"></select>
+                    <span class="help-block">Select a device and pess the button below to retrieve the Hot Spots analytical report.</span>
+                    <button type="button"" onclick="getHotSpots()" class="btn">Get Hot Spots</button>
+                  </fieldset>
+                </div>
+                <br class="clearfix" />
+                <div id="hotSpotsDet"></div>
+            </div>
+            <div class="span10">
+                <div id="map_controls" style="height:35px;">
+                    <p><strong>HotSpots</strong> are places where your drivers go with a certain frequency, that are not created as geofences.  With <strong>HotSpots</strong> you can pin-point any place that is being visited by your drivers with or without your knowledge. HotSpots is based on a very complex analytical algorithm that extracts <strong>intelligent data</strong> from the behavior of your fleet, to give you an <strong>insight</strong> that otherwise would be nearly impossible to acquire.</p>
+                </div>
+                <br class="clearfix" />
+                <div id="map_canvas"></div>
+            </div>
+        </div>
+    </div>
+
+     <script id="noDataFound-template" type="text/template">
+        <div class="alert alert-block alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Attention!</strong> No Hot Spots found for the selected device.
+        </div>
+     </script>
+     <script id="hotSpotEvents-template" type="text/template">
+        <h5>Hot Spots Report</h5>
+        <% _.each(spots, function(spot){ %>
+            <div style="width:100%;border:1px solid #a1a1a1;padding:1px;">
+                <table>
+                    <tr><td style="font-weight:600;padding:3px"><%=spot.address%></td></tr>
+                    <tr><td style="font-weight:600;padding:3px">Times Visited last 30 days:</td></tr>
+                    <tr><td style="padding:0px"><%=spot.qty%> times</td></tr>
+                    <tr><td style="font-weight:600;padding:3px">Last Visited on: </td></tr>
+                    <tr><td style="padding:0px"><%=spot.lastVisitOn%></td></tr>
+                </table>
+            </div>
+        <% }); %>
+     </script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="Scripts/underscore-min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.tools.min.js" type="text/javascript"></script>
+    <script src="Scripts/date.format.js" type="text/javascript"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/branding.js" type="text/javascript"></script>
+    <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyB0_pMfDu2y89AelDFNjgdImcB4wT8jQas&sensor=false"></script>
+    <script src="Scripts/hotSpots.js" type="text/javascript"></script>
+    <script src="Scripts/pageEngagement.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getAppFeatures(8);
+            getBrand();
+            setupEventLocationMapDlg();
+            $(document.getElementById('mainContent')).attr('style', 'max-height:' + (h - 90) + 'px;border:0px solid green;');
+            $(document.getElementById('leftContent')).attr('style', 'max-height:' + (h - 90) + 'px;border:0px solid red;');
+            $(document.getElementById('hotSpotsDet')).attr('style', 'height:' + (h - 320) + 'px;overflow:auto;border:0px solid blue;');
+            $(document.getElementById('map_canvas')).attr('style', 'height:' + (h - 90 - 60) + 'px;');
+            if (validateToken(false, 'hotspots.html') == true) {
+                setWelcomeTitle();
+                getHotSpotsDevices();
+                initMap("map_canvas");
+                setLiveChat();
+                setWebEngage();
+                pageEngagement();
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,253 @@
+﻿*
+{
+    margin:0px;
+    padding:0px;
+}
+body   
+{
+    width:100%;
+    font-family:Arial, Sans-Serif;
+    /*font-size:12px;*/
+}
+#header
+{
+    /*width:100%;*/
+    height:45px;
+    margin-top:4px;
+    margin-bottom:4px;
+    border:1px solid gray;
+}
+#headerWS
+{
+    width:100%;
+    height:80px;
+    margin-top:4px;
+    margin-bottom:4px;
+    border:1px solid gray;
+    /*background-color:#2e69b3;*/
+    background-color:#023f6e;
+}
+#wrapper
+{
+    width:100%;
+    margin-top:0px;
+    float:left;
+    border:0px solid gray;
+}
+#wsWrapper
+{
+    width:1024px;
+    margin:auto;
+}
+#topMenu
+{
+    height:40px;
+    margin-top:3px;
+    width:100%;
+    background-color:#2e69b3;
+    /*background-color:#023f6e;*/
+    /*background-color:#060080;*/
+    /*background-color:#009ad8;*/
+    /*background-color:#f4f3f3;*/
+    display:block;
+}
+
+#topMenuWS
+{
+    height:75px;
+    margin:0px auto;
+    margin-top:3px;
+    width:980px;
+    background-color:#2e69b3;
+    /*background-color:#023f6e;*/
+    /*background-color:#060080;*/
+    /*background-color:#009ad8;*/
+    /*background-color:#f4f3f3;*/
+    display:block;
+}
+.topMenuOption {
+    margin-right: 5px;
+    /*color:#ffffff;*/
+    color: #000000;
+}
+
+#middleMenu
+{
+    height:20px;
+    width:100%;
+    border:1px solid gray;
+    margin-top:5px;
+    margin-bottom:5px;
+	background-image:url(https://easitrack.net/images/MenuBack.png); background-position:top; background-repeat:repeat-x;
+}
+#mainMenu
+{
+    list-style-type:none;
+    width:1024px;
+    margin:auto;
+}
+#mainMenu li
+{
+    float:left;
+}
+.mainMenuOption
+{
+    background-image: url(https://easitrack.net/images/MenuBackDivider.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    line-height:20px;
+    display:block;
+    text-decoration:none;
+    padding-left:15px;
+    padding-right:15px;
+    cursor:pointer;
+    /*font-size:13px;*/
+    color:#ffffff;
+}
+#mainMenu a:hover {
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:600;
+}
+#mainMenu a:visited {
+    color:#ffffff;
+    text-decoration:none;
+}
+.mainMenuOptionSelected
+{
+    font-weight:600; 
+    color:Yellow;
+}
+.recoverCredentialsTitle {
+    color:#ffffff;
+    text-decoration:none;
+}
+
+/*------------------- Login Classes -----------------*/
+/* =============================================== *
+   New Customer Login
+   =============================================== */
+#customerLogin
+{
+    height:30px;
+    width:125px;
+    margin:3px;
+    margin-top:20px;
+    padding:5px;
+    float:right;
+    text-align:center;
+    background-image: url(https://easitrack.net/images/LoginBtnBgnd.png);
+    background-repeat:repeat-x;
+}
+.customerLoginText
+{
+    color:#ffffff;
+    /*font-size:15px;*/
+    font-weight:600;
+    text-decoration:none;
+}
+#customerLogin a:hover
+{
+    color:#ffffff;
+    /*font-size:15px;*/
+    font-weight:600;
+    text-decoration:underline;
+}
+.loginLabels
+{
+    /*font-size:12px;*/
+    font-weight:600;
+    color:#000000;
+}
+.loginDivClass {
+    float: right;
+    padding: 5px;
+    margin-top: 5px;
+    margin-right: 10px;
+    /*font-size:13px;*/ header font-family:Arial, Sans-Serif;
+    background-color: #373737;
+    color: #ffffff;
+    display: block;
+    height: 18px;
+    width: 50px;
+}
+.loginDivClass:hover
+{
+    color:#ffffff;
+    font-weight:600;
+}
+
+.loginDivClass2
+{
+    float:right; 
+    padding-top:8px;
+    padding-left:20px;
+    padding-right:20px;
+    height:30px;
+    margin-left:1px;
+    font-family:Arial, Sans-Serif;
+    background-color:#373737;
+    color:#ffffff;
+}
+/* =============================================== *
+   Toll Free number
+   =============================================== */
+.tollFreeNumber
+{
+    font-size:24px;
+    font-weight:600;
+    color:#ffffff;
+}
+/* =============================================== *
+   Utilities
+   =============================================== */
+
+.leftAligned
+{
+    text-align:left;
+}
+.rightAligned
+{
+    text-align:right;
+}
+.watermarkClass
+{
+    color:#a1a1a1;
+    border:0px;
+    border-bottom:1px solid #000000;
+}
+.inputError
+{
+    color:Red;
+}
+.isMatched {
+    background-color:#3cf506;
+}
+
+/* =============================================== *
+   Tracking Page
+   =============================================== */
+.inputsIcons{
+    width:100%;
+    height:20px;
+}
+.inputIcon{
+    width:16px;
+    height:16px;
+    float:right;
+    padding-top:3px;
+    font-size:8px;
+    text-align:center;
+    color:#ffffff;
+    background-color:#f5f5f5;
+    border-style:dotted;
+    border-width:1px;
+}
+.inputsTitle{
+    height:16px;
+    float:right;
+    font-size:10px;
+    padding-top:3px;
+    padding-left:3px;
+    padding-right:3px;
+}

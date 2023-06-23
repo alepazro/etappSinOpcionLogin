@@ -1,0 +1,931 @@
+﻿
+var map = false;
+var day, hour, minute, second;
+var Job = {} ;
+let liststophistory = [];
+var JobID = 0;
+var token = getTokenCookie('ETTK');
+var arrayjobNotes = [];
+var pStopNumber = 0;
+function newJob() {
+    try {
+        window.open('job.html?' + 'id=0', target = "_blank");
+    }
+    catch (err) {
+    }
+}
+function editJob(jobId) {
+    try {
+        
+        JobID = 0;        
+        JobID = jobId;
+        $('#jobDlg').dialog("open");
+        loadJobNew(JobID);
+        
+        map.getViewPort().resize();
+        //window.open('job.html?' + 'id=' + jobId, target = "_blank");
+    }
+    catch (err) {
+
+    }
+}
+function getGeofences_All() {
+    try {
+        
+        if (jsonGeofences == undefined) {
+            data = 't=' + getTokenCookie('ETTK');
+            jsonGeofences = dbReadWrite('getGeofences_All', data, true, false);
+        }
+        
+
+        if (jsonGeofences) {
+            if (jsonGeofences) {
+                if (jsonGeofences.length > 0) {
+                    var cbx = document.getElementById('ListGeofence');
+                    if (cbx.length <= 1) {
+                        loadComboBox(jsonGeofences, cbx, 'Select a Geofence');
+                    }
+                }
+            }
+        }
+    }
+    catch (err) {
+        alert('getGeofences: ' + err.description);
+    }
+}
+function cboDispatchGeofencesChange(selObj) {
+    
+    clearJobs(2);
+    $('#GeofenceDetail').show();
+    try {
+        var id = getComboBoxSelectedOption(selObj);
+
+        var data = 't=' + getTokenCookie('ETTK') + '&id=' + id;
+        //var jsonGeo = getJsonRecord(jsonGeofences.geofences, id);
+        var geo = dbReadWrite('getGeofence', data, true, false);
+        
+        var jsonGeo = eval('(' + geo.geofence + ')');
+
+        if (jsonGeo) {
+            $('#geof_name').text(jsonGeo.name);
+            $('#geof_phone').text(jsonGeo.phone);
+            $('#geof_street').text(jsonGeo.street);
+            $('#geof_city').text(jsonGeo.city);
+            $('#geof_state').text(jsonGeo.state);
+            $('#geof_postalCode').text(jsonGeo.postalCode);
+            $('#geof_latitude').val(jsonGeo.latitude);
+            $('#geof_longitude').val(jsonGeo.longitude);
+
+            dispatchLastAddress = buildAddress(jsonGeo.street, jsonGeo.city, jsonGeo.state, jsonGeo.postalCode);
+            position = { lat: parseFloat($('#geof_latitude').val()), lng: parseFloat($('#geof_longitude').val()) }
+            dispatchLastLoc = addMarker(position);
+            findClosestDevice(dispatchLastLoc);
+            
+
+            //enableDriversList();
+
+            //var prueba = "hol";
+        }
+
+    }
+    catch (err) {
+        alert('cboDispatchGeofencesChange: ' + err.description);
+    }
+}
+function findClosestDevice(destinationLoc) {
+    let array = [];
+    
+    try {
+        /*$('#dispatchFleetListDiv').show();*/
+
+        if (destinationLoc == undefined) {
+            destinationLoc = dispatchLastLoc;
+        }
+        if (destinationLoc) {
+            var d = null;
+            var deviceLoc = null;
+            var devices = [];
+            var ind = 0;
+
+            getDevicesGroupNew(3);
+            if (jsonDevicesGroupsNew.envelope) {
+                var env = eval('(' + jsonDevicesGroupsNew.envelope + ')');
+                lastRefreshOn = env.lastFetchOn;
+            }
+
+            array = deleteDuplicates(jsonDevicesGroupsNew.myDevices);
+            
+            for (ind = 0; ind < array.length; ind++) {
+                jsonDevice = array[ind]; /*eval('(' + array[ind] + ')');*/
+                deviceLoc = new H.map.Marker({ lat: jsonDevice.latitude, lng: jsonDevice.longitude });
+                    //new google.maps.LatLng(jsonDevice.latitude, jsonDevice.longitude);
+                d = distanceTo(destinationLoc, deviceLoc);
+                devices.push({ "deviceId": jsonDevice.deviceId, "name": jsonDevice.name, "driverId": jsonDevice.driverId, "driverName": jsonDevice.driverName, "driverPhone": jsonDevice.driverPhone, "eventCode": jsonDevice.eventCode, "distanceTo": d, "latitude": jsonDevice.latitude, "longitude": jsonDevice.longitude, "infoTable": jsonDevice.infoTable });
+            }
+
+            //Sort the array (see www.javascriptkit.com/javatutors/arraysort2.shtml)
+            devices.sort(function (a, b) { return a.distanceTo - b.distanceTo });
+
+            var jsonDevice = false;
+            var ul = document.getElementById('ListDevices');
+            removeAllChildNodes(ul);
+
+            //addAllDevicesToMap();
+            //autoCenter();
+            var select1 = document.getElementById('ListDevices');
+            var option1 = document.createElement('option');
+            option1.innerHTML = 'Select Vehicle..';
+            select1.appendChild(option1);
+            for (ind = 0; ind < devices.length; ind++) {
+                addDeviceToDispatchList(devices[ind], 'ListDevices');
+            }
+        }
+    }
+    catch (err) {
+        alert('findClosestDevice: ' + err.description);
+    }
+}
+function deleteDuplicates(array) {
+    let arrayDevices = [];
+    let jsonDevice;
+    let jsonDevice2;
+    let ind = 0;
+
+    try {
+        for (ind = 0; ind < array.length; ind++) {
+            jsonDevice = eval('(' + array[ind] + ')');
+            arrayDevices.push(jsonDevice);
+
+            for (ind2 = ind; ind2 < array.length; ind2++) {
+                jsonDevice2 = eval('(' + array[ind2] + ')');
+                if (jsonDevice2.deviceId != jsonDevice.deviceId) {
+                    ind = ind2 - 1;
+                    ind2 = array.length;
+                }
+            }
+        }
+        return arrayDevices;
+    }
+    catch (error) {
+        alert('error: ' + error.description)
+        return;
+    }
+}
+function addDeviceToDispatchList(jsonDevice, listName) {
+    
+    try {
+       
+        
+        //var ul = document.getElementById('devicesByDistanceList');
+        var select = document.getElementById(listName);        
+        //<li>
+        var option = document.createElement('option');
+        /*$(option).attr('id', 'dispatchDeviceId' + jsonDevice.deviceId);*/
+        $(option).attr('data-deviceId',jsonDevice.deviceId);
+        //$(option).attr('data-driverId', jsonDevice.driverId);
+        /*$(option).attr('data-driverName', jsonDevice.driverName);*/
+        $(option).attr('data-latitud', jsonDevice.latitude);
+        $(option).attr('data-longitud', jsonDevice.longitude);
+        $(option).attr('value',jsonDevice.deviceId);      
+
+        option.innerHTML = jsonDevice.name + ' -> ' + jsonDevice.distanceTo + 'miles';
+        select.appendChild(option);       
+
+    }
+    catch (err) {
+        alert('addDeviceToDispatchList: ' + err.description);
+    }
+}
+function getInterval() {
+    
+    $("#jobDate").show();
+    $("#timeJob").text("");   
+    try {
+        startDate = new Date($("#date1").val());
+        endDate = new Date($("#date2").val());
+        if (endDate != null || endDate != "") {
+            // El número de milisegundos entre las dos fechas
+            var interval = endDate - startDate;
+            // Defina el número de días, horas, minutos, segundos
+            
+            interval /= 1000;
+            day = Math.round(interval / 60 / 60 / 24);
+            hour = Math.round(interval / 60 / 60 % 24);
+            minute = Math.round(interval / 60 % 60);
+            second = Math.round(interval % 60);
+            if (day > 0) {
+                $("#timeJob").text('Duration Job :' + day + ' Day- ' + hour + ' Hour -' + minute + ' Minute');
+            } else if (hour>0) {
+                $("#timeJob").text('Duration Job : ' + hour + ' Hours -' + minute + ' Minutes');
+            }else {
+                $("#timeJob").text('Duration Job :'+minute + ' Minutes');
+            }
+            //$("#job_hour").text(hour);
+            //$("#job_minute").text(minute);
+            //return {
+            //    day: day,
+            //    hour: hour,
+            //    minute: minute,
+            //    second: second
+            //}
+
+        }
+
+    } catch (error) {
+        alert("error: " + error.message);
+    }
+
+}
+function saveJob(via) {
+    try {
+        
+        let jobObj = {};
+        let dueDate;
+        let StartOn
+        if (validateInformation()) {
+            var JobNumber = $("#GuideNumber").val();  
+            let jobpriority = $("#jobpriority option:selected").val();
+            let jobcategories = $("#jobcategories option:selected").val();
+            dueDate = $("#date2").val();
+            StartOn = $("#date1").val();
+            let job_description = $("#txtaDescription").val() == "" ? $("#dispatchJobDescription").text() : $("#txtaDescription").val();
+            let geof_Id = $('option:selected', "#ListGeofence").attr('data-id');
+            let jobdriver = $("#ListDrivers option:selected").val();
+            let deviceId = $('option:selected', "#ListDevices").attr('data-deviceId');
+            let geof_latitud = $('#geof_latitude').val();
+            let geof_longitud = $('#geof_longitude').val();
+            //let radiusFeet = Math.floor(50 * 3.281) //convert meters to feet
+
+            if ((StartOn > dueDate)) {
+                toastr.error('the job start date cannot be greater than the job end date.');
+                return;
+            }
+            if (day > 0) {
+                if (hour > 0) {
+                    hour = hour + (day * 24);
+                } else {
+                    hour = day * 24;
+                }
+            } 
+            Job.JobNumber = JobNumber;
+            Job.jobpriority = jobpriority;
+            Job.jobcategories = jobcategories;
+            Job.dueDate = dueDate;
+            Job.StartOn = StartOn;
+            Job.job_description = job_description;
+            Job.geof_Id = geof_Id;
+            Job.driverId = jobdriver;
+            Job.deviceId = deviceId;
+            Job.geof_latitud = geof_latitud;
+            Job.geof_longitud = geof_longitud;           
+            Job.hour = hour;
+            Job.minute = minute;
+            
+            arrayjobstop.forEach(function (obj, index) {
+                
+                if (obj.uniqueKey.indexOf("ns") != -1) {
+                    obj.uniqueKey = null;
+                }
+            });
+            
+            Job.jobstoplist = arrayjobstop;
+            Job.notes = arrayjobNotes;
+            //Job.RadiusFeet = radiusFeet;
+            Job.UpdateFrom = 2;//from web site
+            Job.StatusID = 20;
+            
+            //if (postDbJob("postjob", JSON.stringify(Job))) {
+            if (postDbJob("postjob", JSON.stringify(Job))) {
+                toastr.success('job created successfully');
+                loadstopexisting('reload');
+            } else {
+                toastr.success('ERROR create job');
+            }
+        }
+    }
+    catch (err) {
+        console.log(err);
+        alert('dispatchDriver: ' + err.description);
+    }
+}
+function showLocationInMap1(canvas, lat, lng, source,pzoom) {
+    
+    //alert('canvas')
+    try {
+        var cntr = false;
+        map = false;
+        if (map == false) {
+            cntr = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: pzoom,
+                center: cntr,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById(canvas), myOptions);
+        }
+        else {
+            cntr = new google.maps.LatLng(lat, lng);
+            map.setCenter(cntr);
+            map.setZoom(pzoom);
+        }
+        marker = false;
+        if (marker == false) {
+            marker = new google.maps.Marker({ position: cntr, map: map });
+        }
+        else {
+            marker.setPosition(cntr);
+        }
+
+        if (source != "1") {
+            $(source).dialog('open');
+        }
+        
+        //if (source != null && source > 0) {
+        //    $("#eventLocationMapDlg").data("kendoPopup").toggle();
+        //} else {
+        //    $("#jobDlgViewMap").dialog('open');
+        //}
+
+
+
+    }
+    catch (err) {
+        alert('source: '+source+' ' + err.description);
+    }
+}
+//function showmap_jobLocation() {
+//    if ($("#map_jobLocation").is(':visible')) {
+//        $('#map_jobLocation').hide();
+//        $("#ViewMap").text('View Map');
+//    } else {
+//        $('#map_jobLocation').show();
+//        $("#ViewMap").text('Hide Map');
+//    }
+//}
+function JobSupport() {
+    try {
+        
+        clearJobs(3);
+        resetSelect();
+        var jobs = GetJobSupport();
+        
+        $('#jobpriority').append($('<option>', {
+            value: "-1",
+            text: "Select"
+        }));
+        $.each(jobs.priorities, function (i, job) {
+            
+            $('#jobpriority').append($('<option>', {
+                value: job.value,
+                text: job.text
+            }));
+        });
+        $('#jobcategories').append($('<option>', {
+            value: "-1",
+            text: "Select"
+        }));
+        $.each(jobs.categories, function (i, job) {            
+            $('#jobcategories').append($('<option>', {
+                value: job.value,
+                text: job.text
+            }));
+        });
+        $('#ListDrivers').append($('<option>', {
+            value: "-1",
+            text: "Select Drivers"
+        }));
+
+        $.each(jobs.drivers, function (i, driver) {
+            $('#ListDrivers').append($('<option>', {
+                value: driver.ID,
+                text: driver.Name
+            }));
+        });        
+
+    } catch (error) {
+        alert('error: ' + error.message);
+
+    }
+}
+function clearJobs(source) {
+    if (source == 1) {
+        $("#GuideNumber").val('');
+        $("#jobpriority option[value='-1']").attr("selected", true);
+        $("#jobcategories option[value='-1']").attr("selected", true);
+        $("#ListDrivers option[value='-1']").attr("selected", true);
+        $("#date2").val('');
+        $("#date1").val('');
+        $("#dispatchJobDescription").val('');
+        $("#timeJob").text('');
+    }else
+    if (source == 2) {
+        $("#ListGeofence option[value='0']").attr("selected", true);
+        $("#geof_name").text('');
+        $("#geof_phone").text('');
+        $("#geof_street").text('');
+        $("#geof_city").text('');
+        $("#geof_state").text('');
+        $("#geof_postalCode").text('');
+        //$("#txtaDescription").val('');
+        //--
+        $("#dispatchName").val('');
+        $("#dispatchJobPhone").val('');
+        $("#dispatchStreet").text('');
+        $("#dispatchCity").text('');
+        $("#dispatchState").text('');
+        $("#dispatchPostalCode").text('');
+        $('#geof_latitude').val('');
+        $('#geof_longitude').val('');
+        $('#GeofenceDetail').hide();
+
+    }else
+    if (source == 3) {
+        $("#GuideNumber").val('');
+        $("#jobpriority option[value='-1']").attr("selected", true);
+        $("#jobcategories option[value='-1']").attr("selected", true);
+        $("#ListDrivers option[value='-1']").attr("selected", true);        
+        $("#date2").val('');
+        $("#date1").val('');
+        $("#dispatchJobDescription").val('');
+        $("#ListGeofence option[value='0']").attr("selected", true);
+        $("#geof_name").text('');
+        $("#geof_phone").text('');
+        $("#geof_street").text('');
+        $("#geof_city").text('');
+        $("#geof_state").text('');
+        $("#geof_postalCode").text('');
+        $("#txtaDescription").val('');
+
+        $("#dispatchName").val('');
+        $("#dispatchJobPhone").val('');
+        $("#dispatchStreet").text('');
+        $("#dispatchCity").text('');
+        $("#dispatchState").text('');
+        $("#dispatchPostalCode").text('');
+        $('#geof_latitude').val('');
+        $('#geof_longitude').val('');
+        $("#timeJob").text('');
+        $("#jobStopTables tr").detach();
+        arrayjobstop = [];
+
+    }else 
+    if (source == 4) {
+        $("#jstName").val('');
+        $("#jstPhone").val(''),
+        $("#jstStreet").val('');
+        $("#jstCity").val('');
+        $("#jstState").val('');
+        $("#jstPostalCode").val('');
+        $('#stop_latitude').val('');
+        $('#stop_longitude').val('');
+        $('#jstDescription').val('');
+        
+    }else 
+    if (source == 5) {
+        $("#jnoteDescription").val(''); 
+    }
+}
+function resetSelect() {
+    
+    $("#jobpriority").empty();
+    $("#jobcategories").empty();
+    $("#ListDrivers").empty();
+}
+function validateInformation() {
+    
+    let status = true;
+    
+    if ($("#GuideNumber").val() == "") {
+        status = false;
+        toastr.error('please add a job number');
+    }
+    if ($("#jobpriority option:selected").val() == "-1") {
+        status = false;
+        toastr.error('please select a priority');
+    }
+    if ($("#jobcategories option:selected").val() == "-1") {
+        status = false;
+        toastr.error('please select a category');
+    }
+    if ($("#date1").val() == "") {
+        status = false;
+        toastr.error('please add a job start date');
+    }
+    if ($("#date2").val() == "") {
+        status = false;
+        toastr.error('please add a job end date');
+    }
+    if ($('input:radio[name=flexRadioDefault]:checked').val() == 'rbGeofence') {
+        if ($("#ListGeofence option:selected").val() == "0") {
+            status = false;
+            toastr.error('please select a geofence');
+        }
+    }
+    
+    if ($('option:selected', "#ListDevices").attr('data-deviceId') == undefined) {
+        status = false;
+        toastr.error('select vehicle');
+    }
+    if ($('option:selected',"#ListDrivers").val() == '-1') {
+        status = false;
+        toastr.error('select drivers');
+    }
+    if ($('input:radio[name=flexRadioDefault]:checked').val() == 'rbDirection') {
+        if ($("#dispatchName").val() == "") {
+            status = false;
+            toastr.error('please enter a name for the geofence');
+        }
+        if ($("#dispatchJobPhone").val() == "") {
+            status = false;
+            toastr.error('please enter a phone for the geofence');
+        }
+        if ($("#dispatchStreet").val() == "") {
+            status = false;
+            toastr.error('please enter a street for the geofence');
+        }
+        if ($("#dispatchCity").val() == "") {
+            status = false;
+            toastr.error('please enter a city for the geofence');
+        }
+        if ($("#dispatchState").val() == "") {
+            status = false;
+            toastr.error('please enter a state for the geofence');
+        }
+        if ($("#geof_latitude").val() == "" || $("#geof_longitude").val() == "") {
+            status = false;
+            toastr.error('location not found.Enter a new address and press the Find Location button');
+        }     
+        
+        }
+    return status;
+        
+}
+function viewRoute() {
+    
+    let deviceLat = $('option:selected', "#ListDevices").attr('data-latitud');
+    let deviceLng = $('option:selected', "#ListDevices").attr('data-longitud');
+    calculateRouteFromAtoB(deviceLat, deviceLng,position.lat,position.lng);
+
+
+    //showLocationInMapHere("mapGeoRoute", deviceLat, deviceLng, 16)
+}
+function loadJobNew(id) {
+    try {
+        //let token = getTokenCookie('ETTK');
+        let dispatchLastLoc2;
+        //var id = getParameterByName('id');
+        if (id != '') {
+            
+            var data = 'token=' + token + '&id=' + escape(id);
+            Job = getDbNEW('jobs.svc', 'getJob', data, false);//jQuery.parseJSON('[' + getDbNEW('jobs.svc', 'getJob', data, false) + ']');
+            //data = "";
+            //data = 'token=' + token + '&JobUniqueKey=' + Job.UniqueKey
+            //Job.picturesList = getDbNEW('jobs.svc', 'getImagesnew', data, false);
+            jobsImage(Job.picturesList);
+            Job.jobstoplist = JobStops(Job.UniqueKey, false);
+            arrayjobNotes = Job.notes;
+            jobsNotes(arrayjobNotes);
+            dispatchLastLoc2 = new H.map.Marker({ lat: parseFloat(Job.geof_latitud), lng: parseFloat(Job.geof_longitud) });
+            findClosestDevice(dispatchLastLoc2);
+            $('#GeofenceDetail').show();
+            
+            //document.title = 'Job ' + job.jobNumber;            
+            $('#GuideNumber').val(Job.JobNumber);
+            $("#date1").val(Job.StartOn);
+            $("#date2").val(Job.dueDate);
+            $("#txtaDescription").val(Job.job_description);
+            $("#jobpriority option[value=" + Job.jobpriority + "]").attr("selected", true);
+            $("#jobcategories option[value=" + Job.jobcategories + "]").attr("selected", true);
+            $("#rbGeofence").prop("checked", true);
+            $("#divselectGeofence").show();
+            $("#ListGeofence option[value=" + Job.geof_Id + "]").attr("selected", true);
+            $("#ListDevices option[value=" + Job.deviceId + "]").attr("selected", true);
+            $("#ListDrivers option[value=" + Job.driverId + "]").attr("selected", true); 
+            $("registeredVehicle").text();              
+            $('#geof_name').text(Job.geof_name);
+            $('#geof_phone').text(Job.geof_phone);
+            $('#geof_street').text(Job.geof_street);
+            $('#geof_city').text(Job.geof_city);
+            $('#geof_state').text(Job.geof_state);
+            $('#geof_postalCode').text(Job.geof_postalCode);
+            $('#geof_latitude').val(Job.geof_latitud);
+            $('#geof_longitude').val(Job.geof_longitud);
+            
+            
+            
+            //$('#dueDate').val(job.dueDate);
+            //$('#estDuration').val(job.estDuration);
+            //$('#durationHHMM').val(job.durationHHMM);
+            //$('#jobDescription').val(job.jobDescription);
+            //$('#categoryName').val(job.categoryName);
+            //$('#statusName').val(job.statusName);
+            //$('#priorityName').val(job.priorityName);
+            //$('#userName').val(job.userName);
+
+            if (!_.isNull(Job.notes)) {
+                if (Job.notes.length > 0) {
+                    for (i = 0; i < Job.notes.length; i++) {
+                        $("#__jobNoteTmpl").tmpl(Job.notes[i]).appendTo("#notesCollection");
+                    }
+                }
+                else {
+                    $('#noNotesTitle').show();
+                    $('#notesDiv').hide();
+                }
+            }
+            else {
+                $('#noNotesTitle').show();
+                $('#notesDiv').hide();
+            }
+            if (!_.isNull(Job.picturesList)) {
+                if (Job.picturesList.length > 0) {
+                    for (i = 0; i < Job.picturesList.length; i++) {
+                        $("#__jobPicTmpl").tmpl(Job.picturesList[i]).appendTo("#picsCollection");
+                    }
+                }
+                else {
+                    $('#noPicsTitle').show();
+                }
+            }
+            else {
+                $('#noPicsTitle').show();
+            }
+            if (!_.isNull(job.signature)) {
+                $('#signedBy').text(Job.signature.imgName);
+                $('#signedOn').text(Job.signature.eventDate);
+                $('#btnShowSignature').attr('data-imageId', Job.signature.imageId)
+            }
+            else {
+                $('#noSignatureTitle').show();
+                $('#signatureDiv').hide();
+            }
+        }
+    }
+    catch (err) {
+        load
+    }
+}
+function JobStops(id,tmp) {
+    var row = "";
+    if (arrayjobstop.length == 0 || arrayjobstop == null || tmp == false) {
+        arrayjobstop = [];
+        arrayjobstop = GetJobStops(id)
+    }
+    addrowstopjob();
+}
+function delJobStop(uid) {
+    toastr.warning("<br /><br /><button type='button' id='confirmationButtonYes' class='btn clear'>Yes</button>", '¿Are you sure you want to remove the Job stop?',
+        {
+            closeButton: false,
+            allowHtml: true,
+            onShown: function (toast) {
+                $("#confirmationButtonYes").click(function () {                    
+                    let obj = { ID: 0, JobID: 0, CompanyID: 0, DeviceID: 0, DriverId: 0, Name: "", Latitude: 0.0, Longitude: 0.0, Street: "", FullAddress: "", City: "", State: "", PostalCode: "", DueDate: "1999-01-01 00:00:00", CompletedOn: "1999-01-01 00:00:00", StartOn: "1999-01-01 00:00:00", CreatedON: "1999-01-01 00:00:00", CreatedBy: 0, Status: 0, LastUpdate: "1999-01-01 00:00:00", uniqueKey: uid, UpdateFrom: 2 };
+                    if (uid.indexOf("ns") > -1) {
+                        /*$('#'+ uid).remove();*/
+                        toastr.success('successful process');
+                        deleteitemarray(uid, arrayjobstop);
+                        JobStops(JobID,true);
+                    } else {
+                        var response = delJobStopDB(obj);
+                        if (response.isOk) {
+                            toastr.success('successful process');                            
+                        }
+                        JobStops(JobID,false);
+                    }
+                });
+            }
+        });    
+}
+function savejobstop() {
+    
+    let geofenceGUID = null;
+    if (validatejobstop()) {
+        let isGeofence = $('#stopexisting').is(":checked")
+        if (isGeofence) {
+            geofenceGUID = $('option:selected', "#ListexistingStop").attr('data-geofencesGUID');
+        }
+        pStopNumber = pStopNumber + 1;
+        jstop = { uniqueKey: null, Name: $("#jstName").val(), Phone: $("#jstPhone").val(), Street: $("#jstStreet").val(), City: $("#jstCity").val(), State: $("#jstState").val(), PostalCode: $("#jstPostalCode").val(), Latitude: $('#stop_latitude').val(), Longitude: $('#stop_longitude').val(), Description: $('#jstDescription').val(), IsGeofence: isGeofence, GeofenceGUID: geofenceGUID, UpdateFrom: 2, StopNumber: pStopNumber };
+        addjobstoparray(jstop);
+    }
+}
+function validatejobstop() {
+    let status = true;
+    if ($("#jstStreet").val() == "") {
+        status = false;
+        toastr.error('no location on the map');
+    }
+    if ($("#jstName").val() == "") {
+        status = false;
+        toastr.error('enter the name of the stop');
+    }
+    if ($("#jstPhone").val() == "") {
+        status = false;
+        toastr.error('enter the phone number of the stop');
+    }
+    
+    return status;
+}
+function addrowstopjob() {
+    let row = "";
+    $("#jobStopTables tr").detach();
+    $.each(arrayjobstop, function (key, value) {        
+        if (value.uniqueKey == null) {
+            row = "<tr id=ns" + key + "><td>" + value.Name + "</td><td>" + value.Phone + "</td><td>" + value.Street + "</td><td>" + value.City + "</td><td>" + value.State + "</td><td>" + value.Description + "</td><td><button class='btn btn-danger btn-sm' onclick=delJobStop('ns" + key + "')><i class=bi bi - shield - fill - x>x</i></button ><img src='icons/warning-16.png' title='pending storage'/></td></tr>";
+        } else {
+            row = "<tr id=" + value.uniqueKey + "><td>" + value.Name + "</td><td>" + value.Phone + "</td><td>" + value.Street + "</td><td>" + value.City + "</td><td>" + value.State + "</td><td>" + value.Description + "</td><td><button class='btn btn-danger btn-sm' onclick=delJobStop('" + value.uniqueKey + "')><i class=bi bi - shield - fill - x>x</i></button ></td></tr>";
+        }
+        $("#jobStopTables").append(row);
+    });
+    clearJobs(4);    
+} 
+function showhide(div,button) {
+    addMarker(position);
+    if ($("#"+div).is(":visible")) {
+        $("#" + div).hide();
+        /*marker.draggable = false;*/
+        $("#" + button).text('new')
+        
+    } else {
+        $("#" + div).show();
+        /*marker.draggable = true;*/
+        $("#" + button).text('close');        
+        addDraggableMarker();
+    }
+     
+}
+function existingStop() {
+    
+    if ($('#stopexisting').is(":checked")) {
+        $('#jstName').attr('readonly', true);
+        $('#jstPhone').attr('readonly', true);
+        $('#findstop').attr('disabled', true);
+        $('#divexistingstop').show();
+        loadstopexisting();
+
+    } else {
+        $('#jstName').attr('readonly', false);
+        $('#jstPhone').attr('readonly', false);
+        $('#findstop').attr('disabled', false);
+        $('#divexistingstop').hide();
+    }
+}
+function getexistingstop() {
+    
+    let result = getDbJob('getstopcompanies', null);
+    liststophistory = JSON.parse(JSON.parse(result));
+}
+function loadstopexisting(source) {
+    let cbx = document.getElementById('ListexistingStop');
+    let opt0;
+    let opt0TXT
+    if (liststophistory == null || liststophistory.length == 0 && source==null) {
+        getexistingstop();
+    }
+    if (source = 'reload') {        
+        getexistingstop();
+    }
+    removeAllChildNodes(cbx);
+    $.each(liststophistory.ListResponse, function (key, value) {
+        
+        opt0 = document.createElement('option');
+        $(opt0).attr('data-Name', value.Name);
+        $(opt0).attr('data-Street', value.Street);
+        $(opt0).attr('data-FullAddress', value.FullAddress);
+        $(opt0).attr('data-City', value.City);
+        $(opt0).attr('data-State', value.State);
+        $(opt0).attr('data-PostalCode', value.PostalCode);
+        $(opt0).attr('data-geofencesGUID', value.GeofenceGUID);
+        $(opt0).attr('data-Phone', value.Phone);
+        $(opt0).attr('data-Latitude', value.Latitude);
+        $(opt0).attr('data-Longitude', value.Longitude);
+        cbx.appendChild(opt0);
+        opt0TXT = document.createTextNode(value.Name);
+        opt0.appendChild(opt0TXT);        
+    });
+}
+function changeStopExisting() {
+    clearJobs(4);
+    
+    $("#jstName").val($('option:selected', "#ListexistingStop").attr('data-Name'));
+    $("#jstPhone").val($('option:selected', "#ListexistingStop").attr('data-Phone'));
+    $("#jstStreet").val($('option:selected', "#ListexistingStop").attr('data-Street'));
+    $("#jstCity").val($('option:selected', "#ListexistingStop").attr('data-City'));
+    $("#jstState").val($('option:selected', "#ListexistingStop").attr('data-State'));
+    $("#jstPostalCode").val($('option:selected', "#ListexistingStop").attr('data-PostalCode'));
+    $('#stop_latitude').val($('option:selected', "#ListexistingStop").attr('data-Latitude'));
+    $('#stop_longitude').val($('option:selected', "#ListexistingStop").attr('data-Longitude'));
+    
+}
+function deleteitemarray(puniquekey,array) {   
+
+    const indexOfObject = array.findIndex(object => {
+        return object.uniqueKey === puniquekey;
+    });
+    
+    array.splice(indexOfObject, 1);
+}
+function getDrivers() {
+    
+    let t = getTokenCookie('ETTK');
+    let data = 'token=' + t;
+    var drivers = getDbNEW('jobs.svc', 'drivers', data, false)
+}
+function jobsImage(arrayImage = []) { 
+    
+    let row = "";
+    $("#jobimg tr").detach();
+    $.each(arrayImage, function (key, value) {
+        row = "<tr id=img" + key + "><td>" + value.fileName + "</td><td>" + value.eventDate + "</td><td><a href=" + value.UrlImagen + ">View</<a></td><td><button class='btn btn-danger btn-sm' onclick=deleteImage('" + value.imageId + "')><i class=bi bi - shield - fill - x>x</i></button></td></tr>";
+        $("#jobimg").append(row);
+    });
+   
+}
+function deleteImage(uid) {
+    
+    toastr.warning("<br /><br /><button type='button' id='confirmationButtonYes' class='btn clear'>Yes</button>", '¿Are you sure you want to remove the image?',
+        {
+            closeButton: false,
+            allowHtml: true,
+            onShown: function (toast) {
+                $("#confirmationButtonYes").click(function () {
+                    
+                    let obj = { token: token, jobId: JobID, GUID: uid, Status: 0, UpdateFrom:2}
+                    postDbJob("ImageNew", JSON.stringify(obj))
+                    var data = 'token=' + token + '&JobUniqueKey=' + escape(JobID);
+                    Job.picturesList = getDbNEW('jobs.svc', 'getImagesnew', data, false);
+                    jobsImage(Job.picturesList)
+                });
+            }
+        });
+}
+function jobsNotes(parrayNotes = []) {
+    
+    let row = "";
+    $("#jobnotes tr").detach();
+    $.each(parrayNotes, function (key, value) {
+        
+        if (value.uniqueKey == null) {
+            row = "<tr id=note" + key + "><td>" + value.note + "</td><td>" + value.eventDate + "</td><td><button class='btn btn-danger btn-sm' onclick=deleteNote('note" + key + "')><i class=bi bi - shield - fill - x>x</i></button></td></tr>";
+
+        } else {
+            row = "<tr id=note" + key + "><td>" + value.note + "</td><td>" + value.eventDate + "</td><td><button class='btn btn-danger btn-sm' onclick=deleteNote('" + value.uniqueKey + "')><i class=bi bi - shield - fill - x>x</i></button></td></tr>";
+        }
+        $("#jobnotes").append(row);
+    });
+    clearJobs(5);
+}
+
+function deleteNote(uid) {
+    toastr.warning("<br /><br /><button type='button' id='confirmationButtonYes' class='btn clear'>Yes</button>", '¿Are you sure you want to remove the Job Note?',
+        {
+            closeButton: false,
+            allowHtml: true,
+            onShown: function (toast) {
+                $("#confirmationButtonYes").click(function () {
+                    
+                    let obj = { token: token, jobId: JobID, uniqueKey: uid, Status: 0, UpdateFrom: 2, action: 4 }
+                    if (uid.indexOf("note") > -1) {                        
+                        deleteitemarray(uid, arrayjobNotes);
+                        
+                        jobsNotes(arrayjobNotes);
+                        toastr.success('successful process');
+                    } else {
+                        let obj = { token: token, jobId: JobID, uniqueKey: uid, Status: 0, UpdateFrom: 2, action: 4 }
+                        var response=postDbJob("jobNote", JSON.stringify(obj))
+                        var data = 'token=' + token + '&jobUniquekey=' + escape(JobID) + '&action=' + escape(2);
+                        arrayjobNotes = getDbNEW('jobs.svc', 'GetJobNotes', data, false);
+                        //arrayjobNotes = Job.notes;
+                        jobsNotes(arrayjobNotes);
+                        if (response.isOk) {
+                            toastr.success('successful process');
+                        }                        
+                    }
+                });
+            }
+        });    
+}
+function savejobnote() {
+    
+    if (validatejobnote()) { 
+        jnote = { uniqueKey: null, note: $("#jnoteDescription").val(), UpdateFrom: 2, action: 1,status: 1}        
+        addjobnotearray(jnote);
+    }
+    
+    
+}
+function validatejobnote() {
+    let status = true;
+    if ($("#jnoteDescription").val() == "") {
+        status = false;
+        toastr.error('enter a description');
+    }
+    return status;
+}
+function addjobnotearray(p_object) {
+    let index = arrayjobNotes.length;
+    p_object.uniqueKey = "note" + index;
+    arrayjobNotes.push(p_object);
+    jobsNotes(arrayjobNotes)
+}

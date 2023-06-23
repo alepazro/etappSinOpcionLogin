@@ -1,0 +1,31 @@
+﻿.schedConfigHeader
+{
+    width:60px;
+    padding:1px;
+    text-align:center;
+    background-color:#000000;
+    color:#ffffff;
+    font-weight:600;
+}
+.schedConfigHeader a
+{
+    color:#ffffff;
+}
+.schedConfigTime
+{
+    font-size:11px;
+    text-align:right;
+}
+.schedConfigDay
+{
+    cursor:pointer;
+    height:20px;
+}
+.schedConfigUnselected
+{
+    background-color:Red;
+}
+.schedConfigSelected
+{
+    background-color:Green;
+}

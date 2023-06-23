@@ -1,0 +1,818 @@
+﻿<!DOCTYPE html>
+<html ng-app="etApp">
+<head>
+    <title>Field Service Module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">-->
+
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <link href="vendors/jquery-ui-1.10.3.custom/css/redmond/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" />
+    <link href="appFieldService/css/jobs.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <!--<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.default.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+   /*     #mapGeo {
+            height: 100%;
+        }
+
+        #mapGeoRoute {
+            height: 100%;
+        }*/
+
+        #map_jobLocation {
+            height: 100%;
+        }
+
+        .textJobs {
+            color: #165BB8
+        }
+
+        .textJobs2 {
+            color: #2C5489
+        }
+
+        #div_stopJobForm {
+            border-top-color: #CC0000;
+            border-right-color: blue;
+            border-bottom-color: #00FF00;
+            border-left-color: #CCC;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+    </style>
+</head>
+<body ng-cloak>
+    <div id="header">
+        <div id="topMenu">
+            <div class="row">
+                <div class="col-md-3">
+                    <span id="dealerBrand" class="logoDesign">eTrack</span>
+                </div>
+                <div class="col-md-6">
+                    <div id="appModules" class="center-block">
+                        <span id="mod1"><input id="rbtTracking" name="panelType" onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Tracking</span></span>
+                        <span id="mod2"><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Multi-Tracking</span></span>
+                        <span id="mod3"><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Reports</span></span>
+                        <span id="mod5"><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Maintenance</span></span>
+                        <span id="mod5"><input id="rbtELOG" name="panelType" onclick="changePanel(13)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">E-LOG</span></span>
+                        <!--<span id="mod5"><input id="rbtVideo" name="panelType" onclick="changePanel(14)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Video</span></span>-->
+                        <span id="mod6"><input id="rbtFieldService" name="panelType" onclick="changePanel(6)" checked="checked" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Field Service</span></span>
+                        <span id="mod4"><input id="rbtSettings" name="panelType" onclick="changePanel(4)" type="radio" style="margin-top:10px;" /><span class="topMenuOption">Settings</span></span>
+                        <span id="mod4" style="margin-right:200px"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div id="welcomeTitle1" class="pull-right" style="padding:3px;">
+                        <span id="welcomeTitleSpan" style="color:#fff;font-weight:500;font-size:16px;"></span>
+                        <input type="hidden" id="userFullName" />
+                        <button class="btn" ng-controller="logoutController" ng-click="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tabs" ng-controller="jobsController">
+        <ul>
+            <li><a href="#tabs-1">Jobs</a></li>
+        </ul>
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-success float-right" style="margin:5px" id="btnNewJob1" data-role="button" ng-click="newJob()">New Job</button>
+            </div>
+        </div>
+        <div id="tabs-1">
+            <div class="MiddleContentArea">
+                <div id="jobsMain" style="width:100%;">
+                    <div id="main-pane">
+                        <div class="pane-content">
+                            <div id="jobsData">
+                                <div id="jobsFiltersPane">
+                                    <div class="pane-content">
+                                        <div id="jobFilters" class="k-content" style="padding:10px;">
+                                            <input type="text" id="filterJobNumber" value="" ng-model="filterJobNumber" class="form-control" style="border-radius:40px;">
+                                            <input type="text" id="filterCustomerName" value="" ng-model="filterCustomerName" class="form-control" style="border-radius:40px;">
+                                            <button type="button" id="filterSearch" data-role="button" ng-click="loadJobs()">Search</button>
+                                            <button type="button" id="filterClear" data-role="button" ng-click="clearFilters()">Clear Filters</button>
+                                            <!--<button type="button" id="btnNewJob" data-role="button" ng-click="newJob()">New Job</button>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="jobsPane">
+                                    <div class="pane-content">
+                                        <div id="jobsDb">
+                                            <div id="jobsGrid" kendo-grid k-data-source="dsJobs" k-options="jobsGridOptions"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="jobDlg" title="New Job" style="display:none;margin:5px">
+                <div class="k-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-small  btn-danger lang" ng-click="cancelEntry()">Cancel</button>
+                                <button type="button" class="btn btn-mini  btn-success lang" onclick="saveJob(3)" key="eTrackFieldapp"><img src="images/save.png" height="20" width="20" />save job</button>
+
+                                <!--<button type="button" class="btn btn-mini  btn-success" ng-click="saveAndMore()">Save and new</button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Job Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Customer Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#jobStop" role="tab" aria-controls="contact" aria-selected="false">Additional Stops</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#images" role="tab" aria-controls="contact" aria-selected="false">Images</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="contact" aria-selected="false">Notes</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="tab-content" id="myTabContent" style="width:100%">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <form>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="GuideNumber" class="textJobs">Job Number</label>
+                                                <input type="text" class="form-control" style="border-radius:20px;" id="GuideNumber">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="jobpriority" class="textJobs">Priority</label>
+                                                <select class="form-control" id="jobpriority" style="border-radius:20px;">
+                                                    <option value="-1">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="jobcategories" class="textJobs">Categories</label>
+                                                <select class="form-control" id="jobcategories" style="border-radius:20px;">
+                                                    <option value="-1">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="date1" class="textJobs2">Start date</label>
+                                                <input id="date1" type="text" class="form-control" style="border-radius:20px;" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="date2" class="textJobs2">End date</label>
+                                                <input id="date2" type="text" class="form-control" style="border-radius:20px;" />
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="jobStatus" class="textJobs">Status</label>
+                                                <select class="form-control" id="jobstatus" style="border-radius:20px;">
+                                                    <option value="-1">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="jobDate" style="background-color:antiquewhite;display:none;margin:5px">
+                                                    <span id="timeJob"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <textarea class="form-control" id="txtaDescription" style="border-radius:20px;margin-left:30px" placeholder="...Description (Optional)"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><br />
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <form>
+                                            <div class="form-group">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="rbGeofence" value="rbGeofence" onchange="cboView(this);">
+                                                    <label class="form-check-label textJobs" for="rbGeofence">
+                                                        Existing Location
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="rbDirection" value="rbDirection" onchange="cboView(this);">
+                                                    <label class="form-check-label textJobs" for="rbDirection">
+                                                        New Location
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" id="divselectGeofence" style="display:none">
+                                                <!--<label for="ListDevices">Select Geofence</label><button type="button" id="btnViewMap" class="btn btn-primary btn-sm" data-role="button" ng-click="viewMap()">Map</button>-->
+                                                <select class="form-control" id="ListGeofence" style="border-radius:20px;" onchange="cboDispatchGeofencesChange(this);">
+                                                </select>
+                                                <div id="GeofenceDetail" style=" display: none; margin: 5px">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="textJobs">Name</th>
+                                                                <th class="textJobs">Phone</th>
+                                                                <th class="textJobs">Street</th>
+                                                                <th class="textJobs">City</th>
+                                                                <th class="textJobs">State</th>
+                                                                <th class="textJobs">PostalCode</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><label id="geof_name"></label></td>
+                                                                <td><label id="geof_phone"></label></td>
+                                                                <td><label id="geof_street"></label></td>
+                                                                <td><label id="geof_city"></label></td>
+                                                                <td><label id="geof_state"></label></td>
+                                                                <td><label id="geof_postalCode"></label></td>
+                                                                <!--<td><button type="button" id="btnViewMap" class="btn btn-info btn-sm" data-role="button" ng-click="viewMap()">Map</button></td>-->
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <input type="hidden" id="geof_latitude" />
+                                                    <input type="hidden" id="geof_longitude" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div id="jobDlgSearchLocation" class="form-dispatchnew" style="display: none;">
+                                                    <fieldset>
+                                                        <div class="row">
+                                                            <div class="col-md-3"><input id="dispatchName" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="Job/Cust.Name*" /></div>
+                                                            <div class="col-md-3"><input id="dispatchJobPhone" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="Job/Cust.Phone" /></div>
+                                                            <div class="col-md-3"><input id="dispatchStreet" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="Street*" readonly /></div>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-3"><input id="dispatchCity" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="City" readonly /></div>
+                                                            <div class="col-md-3"><input id="dispatchState" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="State" readonly /></div>
+                                                            <div class="col-md-3"><input id="dispatchPostalCode" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="Postal Code*" readonly /></div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-9"><textarea id="dispatchJobDescription" cols="50" rows="2" style="border-radius:20px;" placeholder="Job Description" class="form-control" value=""></textarea></div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-5"><button class="btn btn-success" style="margin:20px" onclick="Searchgeocode('customer','coordenate')">Find location</button></div>
+                                                            <div class="col-md-5"><button class="btn btn-success" style="margin:20px" onclick="savegeocode('customer','coordenate')">Save Geocode</button></div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ListDevices" class="textJobs">Vehicle</label>
+                                                <select class="form-control" id="ListDevices" style="border-radius:20px;" onchange="viewRoute(this.value)">
+                                                    <option value="-1">Select Vehicle...</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ListDrivers" class="textJobs">Driver</label>
+                                                <select class="form-control" style="border-radius:20px;" id="ListDrivers">
+                                                    <option value="-1">Select Drivers...</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="jobStop" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <button type="button" id="btnshowstop" class="btn btn-light" onclick="showhide('divNewJobStop','btnshowstop')">
+                                                new
+                                                <!--<img src="icons/add.svg" style="width:30px;width:20px"> new-->
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="width: 100% ">
+                                        <div id="divNewJobStop" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <span>¿New Stop?</span>
+                                                    <label class="switch">
+                                                        <input type="checkbox" id="stopexisting" onchange="existingStop()">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6" id="divexistingstop" style="padding-bottom:6px">
+                                                    <select class="form-control" id="ListexistingStop" style="border-radius:20px;" onchange="changeStopExisting()">
+                                                        <option value="-1">select one..</option>
+                                                    </select>
+                                                    <input type="image" src="appFieldService/img/RefreshIcon.png" onclick="loadstopexisting()" />
+                                                </div>
+                                            </div>
+                                            <!--<div class="row" id="loading" style="display:none">
+                                                <div class="alert alert-primary" role="alert">
+                                                    <img src="images/loading.gif" /><br />querying information, please wait......
+                                                </div>
+                                            </div>-->
+                                            <div class="row" style="margin:1px">
+                                                <div class="col-md-12" id="div_stopJobForm">
+                                                    <div class="row" style="margin: 1px">
+                                                        <div class="col-md-3"><input id="jstName" type="text" class="form-control" style="border-radius:20px;" placeholder="name*" readonly /></div>
+                                                        <div class="col-md-3"><input id="jstPhone" type="text" class="form-control" style="border-radius:20px;" placeholder="Phone*" readonly /></div>
+                                                        <div class="col-md-3"><input id="jstStreet" type="text" class="form-control" style="border-radius:20px;" placeholder="Street*" readonly /></div>
+                                                    </div>
+                                                    <div class="row" style="margin: 1px">
+                                                        <div class="col-md-3"><input id="jstCity" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="City" readonly /></div>
+                                                        <div class="col-md-3"><input id="jstState" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="State" readonly /></div>
+                                                        <div class="col-md-3"><input id="jstPostalCode" type="text" class="form-control" style="border-radius:20px;" value="" placeholder="Postal Code*" readonly /></div>
+                                                    </div>
+                                                    <div class="row" style="margin: 1px">
+                                                        <div class="col-md-9"><textarea id="jstDescription" cols="50" rows="4" style="border-radius:20px;" placeholder="Description" class="form-control" value=""></textarea></div>
+                                                    </div>
+                                                    <div class="row" style="margin: 1px">
+                                                        <!--<div class="col-md-3"><button id="findstop" class="btn btn-primary" style="margin:2px" onclick="Searchgeocode('jobstop')"><img src="images/search.png" height="20" width="20" />find stop</button></div>-->
+                                                        <div class="col-md-3"><button class="btn btn-success" style="margin:2px" onclick="savejobstop()"><img src="images/save.png" height="20" width="20" />save stop</button></div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-3"></div>
+                                                    </div>
+                                                    <!--<div class="row" style="margin: 1px">
+                                                        <div class="col-md-12">
+                                                            <div id="map_jstLocation" style="height: 200px;"></div>
+                                                        </div>
+                                                    </div>-->
+                                                </div>
+                                                <div class="col-md-6"></div>
+                                            </div>
+                                            <!--<div class="row">
+                                                <div class="col-md-4">
+                                                    <button onclick="$(divNewJobStop).hide();">Close</button>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Street</th>
+                                                    <th>FullAddress</th>
+                                                    <th>City</th>
+                                                    <th>State</th>
+                                                    <th>description</th>
+                                                    <th>delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="jobStopTables"></tbody>
+                                        </table>
+                                        <input type="hidden" id="stop_latitude" />
+                                        <input type="hidden" id="stop_longitude" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="container">
+                                    <div class="row">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>File</th>
+                                                    <th>Created In</th>
+                                                    <th>View</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="jobimg"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <button type="button" id="btnshownote" class="btn btn-light" onclick="showhide('divNewJobNote','btnshownote')">
+                                                new
+                                                <!--<img src="icons/add.svg" style="width:30px;width:20px"> new-->
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="width: 100% ">
+                                        <div id="divNewJobNote" style="display: none;">
+                                            <div class="row" id="loading2" style="display:none">
+                                                <div class="alert alert-primary" role="alert">
+                                                    <img src="images/loading.gif" /><br />querying information, please wait......
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin:1px">
+                                                <div class="col-md-12" id="div_noteJobForm">
+                                                    <div class="row" style="margin: 1px">
+                                                        <div class="col-md-9"><textarea id="jnoteDescription" cols="50" rows="4" style="border-radius:20px;" placeholder="Description" class="form-control" value=""></textarea></div>
+                                                    </div>
+                                                    <div class="row" style="margin: 1px">
+                                                        <div class="col-md-2"><button class="btn btn-success" style="margin:2px" onclick="savejobnote()"><img src="images/save.png" height="20" width="20" />saveNote</button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Note</th>
+                                                    <th>EventDate</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="jobnotes"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="map_jobLocation" style="height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div id="jobDlgViewMap" title="Event Location">
+                <div id="mapGeo"></div>
+            </div>-->
+        </div>
+    </div>
+    <div id="trakingnumber1">
+        <div class="modal fade" id="formtrakingn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span>
+                            Create Traking Number
+                        </span>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="row" style="display:none">
+                                <div class="col-6">
+                                    <label>GeofencesTarget</label>
+                                </div>
+                                <div class="col-6">
+                                    <label id="GeofencesTarget"></label>
+                                </div>
+                            </div>
+                            <div class="row" style="display:none">
+                                <div class="col-6">
+                                    <label>DeviceId2</label>
+                                </div>
+                                <div class="col-6">
+                                    <label id="DeviceId2"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Device</label>
+                                </div>
+                                <div class="col-6">
+                                    <label id="device"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Destination</label>
+                                </div>
+                                <div class="col-6">
+                                    <label id="destination"></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>ValidUntil</label>
+                                </div>
+                                <div class="col-6">
+                                    <label id="ValidUntil">ValidUntil</label>
+                                    <!--<input id="ValidUntil" type="datetime-local" class="form-control" placeholder="ValidUntil" required>-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>SendTo</label>
+                                </div>
+                                <div class="col-6">
+                                    <input id="SendTo" type="email" class="form-control" placeholder="Emails" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Message</label>
+                                </div>
+                                <div class="col-6">
+                                    <textarea rows="5" class="form-control" cols="60" id="Message" placeholder="Observations"></textarea>
+                                </div>
+                            </div>
+                            <span id="msg"></span>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="save()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+    <script src="Scripts/underscore-min.js" type="text/javascript"></script>
+
+    <script src="vendors/angular.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-resource.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js" type="text/javascript"></script>
+
+    <!--<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!--<script type="text/javascript" src="Scripts/MarkerWithLabel.js"></script>
+    <script type="text/javascript" src="Scripts/latLngGridLayer.js"></script>-->
+
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.tools.min.js" type="text/javascript"></script>
+
+    <script src="vendors/kendo-2013.3.1119/js/kendo.web.min.js"></script>
+    <script src="vendors/angular-kendo.min.js"></script>
+    <script src="vendors/xdate.js"></script>
+
+    <script src="Scripts/authorization_006.js"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/util.js"></script>
+    <script src="Scripts/map_v003.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js"></script>
+
+    <script src="appFieldService/etApp.js"></script>
+    <script src="appFieldService/services/services.js"></script>
+    <script src="appFieldService/controllers/jobsController.js"></script>
+    <script src="appFieldService/controllers/jobController.js"></script>
+    <script src="app/controllers/etLogoutController.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+
+    <script src="Scripts/HereMapsApi.js"></script>
+    <script src="appFieldService/fs.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            getGeofences_All();
+            JobSupport();
+            getDrivers();
+            loadstopexisting();
+            if (validateToken(false, 'jobs.html') == true) {
+                setWelcomeTitle();
+                position = setPosition();
+
+                showLocationInMapHere("map_jobLocation", position, 15, true);
+                addMarker(position);
+                marker.draggable = true;
+                addDraggableMarker();
+                $("#rbtFieldService").prop("checked", true);
+                $("#tabs").tabs();
+                var contentH = h - 150;
+                $("#jobsMain").attr("style", "height: " + contentH + "px");
+                $("#leftPanes").attr("style", "height: " + contentH + "px");
+                $("#jobsData").attr("style", "height: " + (contentH - 10) + "px");
+                $("#jobsGrid").attr("style", "height: " + (contentH - 70) + "px");
+                $("#woStatsPane").attr("style", "height: " + (contentH / 3) + "px");
+                $("#woStatsGrid").attr("style", "height: " + ((contentH / 3) - 40) + "px");
+                $("#workZonesPane").attr("style", "height: " + (contentH / 3) + "px");
+                $("#wzGrid").attr("style", "height: " + ((contentH / 3) - 40) + "px");
+                $("#techsPane").attr("style", "height: " + (contentH / 3) + "px");
+                $("#techsGrid").attr("style", "height: " + ((contentH / 3) - 50) + "px");
+
+                $("#jobsMain").kendoSplitter({
+                    panes: [
+                        { collapsible: true, size: "300px" },
+                        { collapsible: true }
+                    ]
+                });
+                $("#leftPanes").kendoSplitter({
+                    orientation: "vertical",
+                    panes: [
+                        { collapsible: false, size: (contentH / 3) + "px" },
+                        { collapsible: false, size: (contentH / 3) + "px" },
+                        { collapsible: false, size: (contentH / 3) + "px" }
+                    ]
+                });
+                $("#jobsData").kendoSplitter({
+                    orientation: "vertical",
+                    panes: [
+                        { collapsible: false, resizable: false, size: "50px" },
+                        { collapsible: false, resizable: false, size: (contentH) + "px" }
+                    ]
+                });
+
+                kendo.init("#woStatsToolbar");
+                kendo.init("#wzToolbar");
+                kendo.init("#techsToolbar");
+
+                $("#filterJobNumber").kendoAutoComplete({ dataSource: [], placeholder: "Job Number" });
+                $("#filterCustomerName").kendoAutoComplete({ dataSource: [], placeholder: "Customer Name" });
+                $("#filterSearch").kendoButton({ spriteCssClass: "k-icon k-i-search" });
+                $("#filterClear").kendoButton({ spriteCssClass: "k-icon k-i-cancel" });
+                $("#btnNewJob").kendoButton({ spriteCssClass: "k-icon k-i-save" });
+
+
+                $("#jobDlg").dialog({
+                    autoOpen: false,
+                    resizable: false,
+                    height: 1000,
+                    width: 1000,
+                    modal: true
+                });
+                $("#jobDlgViewMap").dialog({
+                    autoOpen: false,
+                    resizable: false,
+                    height: 1000,
+                    width: 1000,
+                    modal: true
+                });
+            }
+            //var d1 = new Date("2022-04-21 12:30");
+            //var d2 = new Date("2022-04-25 17:50");
+            //console.log(getInterval(d1,d2))
+            //console.log(d1)
+            //console.log(d2)
+        });
+
+        flatpickr("#date1", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            static: true
+        });
+        flatpickr("#date2", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            static: true
+
+        });
+        $("#date2").on("change", function () {
+            getInterval();
+        });
+        function cboView(object) {
+            clearJobs(2);
+            addMarker(position);
+
+            var checkBox = object.value;
+            if (checkBox == 'rbGeofence') {
+                $("#jobDlgSearchLocation").hide();
+                $("#divselectGeofence").show();
+                marker.draggable = false;
+                //    showLocationInMapHere('mapGeo', 37.09024, -95.712891, "1", 16);
+            }
+            if (checkBox == 'rbDirection') {
+                //$("#divselectGeofence").hide();
+                //$("#jobDlgSearchLocation").show();
+                //marker.draggable = true;
+                //showLocationInMap1('map_jobLocation', 37.09024, -95.712891, "1", 5)
+                //showLocationInMapHere('map_jobLocation', 37.09024, -95.712891, "1", 3)
+
+                var win = window.open("/Settings.html?fromjobs=true", '_blank');
+                // Cambiar el foco al nuevo tab (punto opcional)
+                document.getElementById('rbGeofence').checked = true;
+                win.focus();
+            }
+        }
+        function save() {
+            var result = savepost();
+
+            if (result.isOk == 1) {
+                toastr.success('created successfully');
+                clearinputs();
+            } else {
+                toastr.error('error registering');
+            }
+        }
+        function savepost() {
+            
+            var obj = {};
+            var device = $('#device').text();
+            var DeviceId2 = $('#DeviceId2').text(); 
+            var deviceName = $('select[name=Device] option').filter(':selected').text();
+            var email = $("#SendTo").val();
+            var validateuntil = $("#ValidUntil").text();
+            var obervations = $("#Message").val();
+            var GeofenceTargetJob = $("#GeofencesTarget").text();
+
+            debugger
+
+            obj.Device = DeviceId2;
+            obj.SendTo = email;
+            obj.ValidUntil = validateuntil;
+            obj.Message = obervations;
+            obj.DeviceName = deviceName;
+            obj.GeofenceTargetJob = GeofenceTargetJob;
+            obj.Flat_FromJob = 1;
+
+            var result = postTrakingnumber(obj);
+
+            return result;
+        }
+        function clearinputs() {
+            $("#SendTo").val('');
+            $("#Message").val('');           
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.SharpDX</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.SharpDX.Sink`1">
+            <summary>
+            An abstract Direct2D-based view sink.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.SharpDX.Sink`1.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.SharpDX.Sink`1.View">
+            <summary>
+            Gets the view.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.SharpDX.Sink`1.ViewMirror">
+            <summary>
+            Gets or sets a value indicating whether the view is mirrored.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.SharpDX.Sink`1.ViewScale">
+            <summary>
+            Gets or sets the view scale.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.Sink`1"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.Sink`1"/> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.#ctor(FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.Sink`1"/> class.
+            </summary>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.Sink`1"/> class.
+            </summary>
+            <param name="view">The view.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.#ctor(`0,FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.Sink`1"/> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.#ctor(`0,FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.Sink`1"/> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.CreateView">
+            <summary>
+            Creates a view. Used if a view is not given as
+            a constructor argument or if the view is null.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.GetViewHandle(`0)">
+            <summary>
+            Gets a view handle.
+            </summary>
+            <param name="view">The view.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.GetViewWidth(`0)">
+            <summary>
+            Gets the width of a view.
+            </summary>
+            <param name="view">The view.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.GetViewHeight(`0)">
+            <summary>
+            Gets the height of a view.
+            </summary>
+            <param name="view">The view.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.DoDestroy">
+            <summary>
+            Destroys this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.Sink`1.RenderBuffer(FM.LiveSwitch.VideoBuffer)">
+            <summary>
+            Renders a video buffer.
+            </summary>
+            <param name="buffer">The buffer.</param>
+        </member>
+        <member name="T:FM.LiveSwitch.SharpDX.WinForms.Sink">
+            <summary>
+            A Direct2D-based WinForms view sink.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.WinForms.Sink"/> class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.#ctor(FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.WinForms.Sink"/> class.
+            </summary>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.#ctor(FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.WinForms.Sink" /> class.
+            </summary>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.#ctor(System.Windows.Forms.Control)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.WinForms.Sink"/> class.
+            </summary>
+            <param name="view">The view.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.#ctor(System.Windows.Forms.Control,FM.LiveSwitch.IVideoOutput)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.WinForms.Sink" /> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.#ctor(System.Windows.Forms.Control,FM.LiveSwitch.IVideoOutput[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.SharpDX.WinForms.Sink" /> class.
+            </summary>
+            <param name="view">The view.</param>
+            <param name="inputs">The inputs.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.CreateView">
+            <summary>
+            Creates a view.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.GetViewHandle(System.Windows.Forms.Control)">
+            <summary>
+            Gets the view handle.
+            </summary>
+            <param name="view">The view.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.GetViewWidth(System.Windows.Forms.Control)">
+            <summary>
+            Gets the width of the view.
+            </summary>
+            <param name="view">The view.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FM.LiveSwitch.SharpDX.WinForms.Sink.GetViewHeight(System.Windows.Forms.Control)">
+            <summary>
+            Gets the height of the view.
+            </summary>
+            <param name="view">The view.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

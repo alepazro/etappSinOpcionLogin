@@ -1,0 +1,51 @@
+﻿#headerWS
+{
+    width:100%;
+    height:80px;
+    margin-top:4px;
+    margin-bottom:4px;
+    border:1px solid gray;
+    background-color:#60b501;
+}
+#topMenu
+{
+    height:40px;
+    margin-top:3px;
+    width:100%;
+    background-color:#60b501;
+    display:block;
+}
+#topMenuWS
+{
+    height:75px;
+    margin:0px auto;
+    margin-top:3px;
+    width:980px;
+    background-color:#60b501;
+    display:block;
+}
+.topMenuOption {
+    margin-right:5px;
+    color:#000000;
+}
+#welcomeTitleSpan
+{
+    color:#000000;
+}
+.logoPosition
+{
+    float:left;
+    width:250px;
+    margin:0px;
+    padding:0px;
+    padding-left:20px;
+}
+.logoDesign {
+    margin:0px;
+    padding:0px;
+    font-size:10px;
+}
+.recoverCredentialsTitle {
+    color:#000000;
+    text-decoration:none;
+}

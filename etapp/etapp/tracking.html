@@ -1,0 +1,864 @@
+﻿<!DOCTYPE html>
+<html ng-app="etApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Module</title>
+
+    <!--    CSS includes -->
+    <!-- <link href="Styles/common.css" rel="stylesheet" type="text/css" /> --->
+    <link href="themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="themes/flick/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/app.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/logo.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/toggleSwitches.css" rel="stylesheet" type="text/css" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="vendors/kendo-2013.3.1119/styles/kendo.default.min.css" rel="stylesheet" />
+    <!--<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+    <!-----custome files----------->
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+    <section class="header-easytrack" id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="topstrip" id="topMenu">
+                    <nav class="navbar navbar-expand-md navbar-dark" id="toggle">
+                        <a href="#"><img src="images/Logo3.png" height="50"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown" id="mod1">
+                                    <!--  <a class="nav-link" id="rbtTracking">Tracking</a> -->
+                                    <label><input id="rbtTracking" name="panelType" checked="checked" onclick="changePanel(1)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Tracking">Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod2">
+                                    <!--  <a class="nav-link" id="rbtMultiTracking">Multi-Tracking</a> -->
+                                    <label><input id="rbtMultiTracking" name="panelType" onclick="changePanel(2)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Multi-Tracking">Multi-Tracking</span></label>
+                                </li>
+                                <li class="nav-item" id="mod3">
+                                    <!--  <a class="nav-link" id="rbtReports">Reports</a> -->
+                                    <label><input id="rbtReports" name="panelType" onclick="changePanel(3)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Reports">Reports</span></label>
+                                </li>
+                                <li class="nav-item" id="mod5">
+                                    <!--     <a class="nav-link" id="rbtMaintenance">Maintenance</a> -->
+                                    <label><input id="rbtMaintenance" name="panelType" onclick="changePanel(5)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Maintenance">Maintenance</span></label>
+                                </li>
+                                <li class="nav-item" id="mod13">
+                                    <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                    <label><input id="rbtELOG" name="panelType" onclick="changePanel(13)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="E-LOG">E-LOG</span></label>
+                                </li>
+                                <!--<li class="nav-item" id="mod6">-->
+                                <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                <!--<label><input id="rbtVideo" name="panelType" onclick="changePanel(14)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Video">Video</span></label>
+    </li>-->
+                                <!--<li class="nav-item" id="mod6">-->
+                                    <!-- <a class="nav-link" id="rbtELOG">E-LOG</a> -->
+                                    <!--<label><input id="rbtFieldService" name="panelType" onclick="changePanel(6)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="FieldService">Field Service</span></label>
+                                </li>-->
+                                <li class="nav-item" id="mod4">
+                                    <!--   <a class="nav-link" id="rbtSettings">Settings</a> -->
+                                    <label><input id="rbtSettings" name="panelType" onclick="changePanel(4)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Settings">Settings</span></label>
+                                </li>
+                                <li class="nav-item dropdown" id="mod7">
+                                    <!--  <a class="nav-link" id="rbtTracking">Tracking</a> -->
+                                    <label><input id="rbtVideo" name="panelType" checked="checked" onclick="changePanel(17)" type="radio" style="margin-top:10px;" /><span class="topMenuOption lang" style="font-size:16px;font-weight:bold" key="Video">Video</span></label>
+                                </li>
+                                <li id="mod6">
+                                    <img id="feedback" src="icons/feedback.png" style="width:40px;height:40px;" title="Send Feedback" data-toggle="modal" data-target="#myModal1" />
+                                </li>
+                                <li class="mobiletext"><a id="trackingFleetLocation" href="#" class="mainMenuOption linkmobilenew lang" onclick="mainMenuClick('fleetLocationDiv',1)" key="FleetLocation">FleetLocation</a></li>
+                                <li class="mobiletext"><a id="trackingQuickDispatch" href="#" class="mainMenuOption linkmobilenew lang" onclick="mainMenuClick('dispatchingDiv',1)" key="QuickDispatching">Quick Dispatching</a></li>
+                                <li class="mobiletext"><a id="trackingBreadcrumbTrail" href="#" class="mainMenuOption linkmobilenew lang" onclick="mainMenuClick('breadcrumbDiv',1)" key="BreadcrumbTrail">Breadcrumb Trail</a></li>
+                                <li class="mobiletext"><a id="trackingFleetStatusBoard" href="fleetStatusBoard.html" class="mainMenuOption linkmobilenew lang" key="FleetStatusBoard">Fleet Status Board</a></li>
+                                <li class="mobiletext"><a id="trackingHotSpots" href="hotSpots.html" class="mainMenuOption linkmobilenew lang" key="HotSpots">Hot Spots</a></li>
+                                <li class="mobiletext"><a id="trakingnumberpanel" href="trakingnumberPanel.html" class="mainMenuOption linkmobilenew lang" key="trakingnumberPanel">Traking Number</a></li>
+                                <li class="mobiletext"><a id="brokerorderpanel" href="brokerorderpanel.html" class="mainMenuOption linkmobilenew lang" key="brokerorderpanel">Broker Order</a></li>
+                                <li class="linkmobilenew mobiletext">
+                                    <a href="#" onclick="logout()" class="loginDivClass lang" key="Logout">Logout</a>
+                                </li>
+                                <!-- <li class="linkmobilenew mobiletext">
+       <a id="feedback" class="dropdown-item" href="#">
+            <span style="font-weight:600;">Feedback</span>
+        </a>
+    </li>-->
+
+                            </ul>
+
+                        </div>
+                        <div class="login-content-right">
+                            <ul>
+                                <li>
+                                    <div id="welcomeTitleDiv">
+                                        <span id="welcomeTitleSpan" style="color:white;font:bold"></span>
+                                    </div>
+                                </li>
+                                <li style="color:white;font:bold">
+                                    <a href="#" onclick="logout()" class="lang" key="Logout">Logout</a>
+                                </li>
+                                <!-- <li class="linkmobilenew mobiletext">
+                                   <a id="feedback" class="dropdown-item" href="#">
+                                        <span style="font-weight:600;">Feedback</span>
+                                    </a>
+                                </li>-->
+                                <li class="cart-icon" id="buyNowDiv">
+                                    <a href="#" onclick="buyNow()"><img src="images/cart-header.png"></a>
+                                </li>
+                                <li>
+                                    <select id="language" class="form-control" onchange="selectLanguage(this.value)" style="width:auto">
+                                        <option value="-1">Language</option>
+                                        <option value="es">ES</option>
+                                        <option value="en">EN</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="second-strip" id="middleMenu">
+        <div class="container-fluid">
+            <ul id="mainMenu">
+                <li id="li_trackingFleetLocation"><a id="trackingFleetLocation" href="#" class="mainMenuOption lang" onclick="mainMenuClick('fleetLocationDiv',1)" style="font-size:14px;font-weight:bold" key="FleetLocation">Fleet Location</a></li>
+                <li id="li_trackingQuickDispatch"><a id="trackingQuickDispatch" href="#" class="mainMenuOption lang" onclick="mainMenuClick('dispatchingDiv',1)" style="font-size: 14px; font-weight: bold" key="QuickDispatching">Quick Dispatching</a></li>
+                <li id="li_trackingBreadcrumbTrail"><a id="trackingBreadcrumbTrail" href="#" class="mainMenuOption lang" onclick="mainMenuClick('breadcrumbDiv',1)" style="font-size: 14px; font-weight: bold" key="BreadcrumbTrail">Breadcrumb Trail</a></li>
+                <li id="li_trackingFleetStatusBoard"><a id="trackingFleetStatusBoard" href="fleetStatusBoard.html" class="mainMenuOption lang" style="font-size: 14px; font-weight: bold" key="FleetStatusBoard">Fleet Status Board</a></li>
+                <li id="li_trackingHotSpots"><a id="trackingHotSpots" href="hotSpots.html" class="mainMenuOption lang" style="font-size: 14px; font-weight: bold" key="HotSpots">Hot Spots</a></li>
+                <li id="li_trakingnumberPanel"><a id="trakingnumberPanel" href="trakingnumberpanel.html" class="mainMenuOption lang" style="font-size: 14px; font-weight: bold" key="trakingnumberpanel">Traking Number</a></li>
+                <li id="li_brokerorderpanel"><a id="brokerorderpanel" href="brokerorderpanel.html" class="mainMenuOption lang" style="font-size: 14px; font-weight: bold" key="brokerorderpanel">Broker Order</a></li>
+
+            </ul>
+        </div>
+    </section>
+    <div id="wrapper" class="content-wrap-custome">
+        <!--<button class="toggleBtn arrow-sidebarnew"><img src="icons/arrow-sidbar.png" alt="side-bar-arrow"></button>-->
+        <button class="toggleBtn arrow-sidebarnew"><img src="icons/arrow-sidbar.png" alt="side-bar-arrow"></button>
+        <div id="ctrlPanel" style="display:none; width:20%;float:left;" class="fleet-location-cusotme">
+
+            <div id="ctrlPanelContainer">
+                <div id="closeCtrlPanelDiv">
+                    <img src="images/RedCloseX.bmp" alt="Close Control Panel" onclick="closeCtrlPanel()" />
+                </div>
+                <div id="ctrlPanelContent" style="padding:1px">
+                    <div id="fleetLocationDiv" style="display:none;">
+                        <div style="width:100%; display:block;" class="search-topbox">
+                            <!--  <p class="panelTitle">Fleet Location</p> -->
+                            <!--<div>
+                                <h3>Select a group:</h3>
+                                <select id="cbxGroups" style="width:100%;" onchange="applyGroupFilter()">
+                                    <option value="">All Devices</option>
+                                </select>
+                            </div>-->
+                            <div id="lastKnownLocation">
+                                <a href="#" onclick="getLastKnowLocation()" class="lang" key="GetLastKnownLocation">Get Last Known Location</a>
+                            </div>
+                            <!--<div id="fleetSelectors">
+                                <ul>
+                                    <li><a href="#" style="padding-right:5px;" onclick="addAllDevicesToMap()">Select All</a></li>
+                                    <li><a href="#" onclick="removeAllDevicesFromMap()">Unselect All</a></li>
+                                </ul>
+                            </div>-->
+                        </div>
+                        <br />
+                        <div id="search" class="container">
+                            <input type="text" id="searchInput" class="form-control" style="border-radius: 40px;" placeholder="Search" />
+                        </div>
+                        <br />
+                        <div id="fleetListDiv" class="search-list-custome">
+                            <ul id="fleetList" class="devicesListClass">
+                                <li>&nbsp;</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="dispatchingDiv" style="display:none;" class="dispatching-custome">
+                        <div class="click-heading-new">
+                            <a href="jobs.html" target="_blank" class="lang" key="Clicktoopenjobsviewer">Click to open jobs viewer</a>
+                        </div>
+                        <div class="enter-custome-new" id="accordion">
+                            <div class="dispatch-instructure-custome dispachin" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="background-color: #d0dbdb; color: black ">
+                                <div id="dispatchNoticeDiv" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapsetwo">
+                                    <h3 class="lang" key="AddNewJob">Add New Job</h3>
+                                    <br /><!--syle="background-color: #D7DBDD"-->
+                                </div>
+                                <!--<button class="dispatch-instructure-custome" data-toggle="collapse" style="width: 100%; background-color: #F4F6F6; color: black " data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Add New Job
+                                </button>-->
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="background-color: #F4F6F6; color: black ">
+                                <div class="form-dispatchnew">
+                                    <fieldset>
+                                        <legend><label><input type="radio" id="dispatchToGeofence" name="dispatchToType" checked="checked" value="1" onclick="dispatchToTypeToggle(1);" />Select a geofence</label></legend>
+                                        <legend><label> <input type="radio" id="dispatchToAddress" name="dispatchToType" value="2" onclick="dispatchToTypeToggle(2);" />Enter an address</label></legend>
+                                        <table style="padding:5px;" class="table">
+                                            <tr>
+                                                <!--<td>Select a Geofence</td>-->
+                                                <td>
+                                                    <select id="cboDispatchGeofences" onchange="cboDispatchGeofencesChange(this);" style="font-size:11px; width:160px;">
+                                                        <option style="font-size:11px;">[There are no geofences]</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td>Job/Cust.Name*</td>-->
+                                                <td><input id="dispatchName" type="text" style="font-size:11px; width:160px;" value="" placeholder="Job/Cust.Name*" /></td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td>Job/Cust.Phone</td>-->
+                                                <td><input id="dispatchJobPhone" type="text" style="font-size:11px; width:160px;" value="" placeholder="Job/Cust.Phone" /></td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td><span class="dispatchToAddress">Street*</span></td>-->
+                                                <td><input id="dispatchStreet" type="text" style="font-size:11px; width:160px;" value="" class="dispatchToAddress" placeholder="Street*" /></td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td><span class="dispatchToAddress">City</span></td>-->
+                                                <td><input id="dispatchCity" type="text" style="font-size:11px; width:160px;" value="" class="dispatchToAddress" placeholder="City" /></td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td><span class="dispatchToAddress">State</span></td>-->
+                                                <td><input id="dispatchState" type="text" style="font-size:11px; width:160px;" value="" class="dispatchToAddress" placeholder="State" /></td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td><span class="dispatchToAddress">Postal Code*</span></td>-->
+                                                <td><input id="dispatchPostalCode" type="text" style="font-size:11px; width:160px;" value="" class="dispatchToAddress" placeholder="Postal Code*" /></td>
+                                            </tr>
+                                            <tr>
+                                                <!--<td>Job Description</td>-->
+                                                <td><textarea id="dispatchJobDescription" cols="20" rows="4" placeholder="Job Description"></textarea></td>
+                                            </tr>
+                                        </table>
+                                    </fieldset>
+                                </div>
+                                <div class="find-location-btns-new">
+                                    <button style="font-size:12px; margin:5px;" onclick="findDispatchLocation()">Find location</button>
+                                    <a href="#" class="deviceAction" id="saveDispatchLocation" onclick="saveNewDispatchLocation()" style="display:none;">Save Location</a>
+                                    <a href="#" class="deviceAction" onclick="clearDispatchPanel()">Clear</a>
+                                </div>
+                            </div>
+                            <div class="dispatch-instructure-custome" style="background-color: #d0dbdb ">
+                                <div class="dispachin" style="color: black">
+                                    <div id="dispatchNoticeDiv" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo">
+                                        <h3 class="lang" key="Instructions">Instructions</h3>
+                                        <br /><!--syle="background-color: #D7DBDD"-->
+                                    </div>
+                                </div>
+                                <div id="collapsetwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" style="background-color: #F4F6F6;color:black;text-align:justify">
+                                    <p class="lang" key="Youcansendthisjob">You can send this job directly to a Driver by selecting a driver below, or to a vehicle.  When you send it to a vehicle, the system will actually send the job to the driver assigned to that vehicle.</p>
+                                    <div id="dispatchDriversListDiv">
+                                        <hr />
+                                        <br />
+                                        <div style="width:100%;display:block;">
+                                            <h4 class="lang" key="PickaDriver">Pick a Driver...</h4>
+                                        </div>
+                                        <div id="cbxDriversListDiv">
+                                            <select id="cbxDriversList" style="width:100%;"></select>
+                                            <p><strong class="lang" key="SendJobVia">Send Job Via:</strong></p>
+                                            <button style="font-size:12px; margin:5px;" onclick="dispatchDriver(1)" class="lang" key="Text">Text</button>
+                                            <button style="font-size:12px; margin:5px;" onclick="dispatchDriver(2)" class="lang" key="Email">Email</button>
+                                            <button style="font-size:12px; margin:5px;" onclick="dispatchDriver(3)" class="lang" key="eTrackFieldapp">eTrack Field app</button>
+                                        </div>
+                                        <br />
+                                        <hr />
+                                    </div>
+                                    <div id="dispatchFleetListDiv">
+                                        <div style="width:100%; display:block;">
+                                            <h4 class="lang" key="orpickaVehicle">... or pick a Vehicle</h4>
+                                        </div>
+                                        <div style="width:100%; display:block;">
+                                            <span class="panelSubTitle lang" key="Vehiclesareorder">(Vehicles are order by distance to the job location)</span>
+                                            <a href="#" class="deviceAction" onclick="findClosestDevice()"><img src="icons/refrech-icon.png" class="refrech-icons-new"></a>
+                                        </div>
+                                        <div id="dispatchListDiv" class="sispatch-listing-new">
+                                            <ul id="devicesByDistanceList" class="devicesListClass">
+                                                <li>[Empty list]</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="breadcrumbDiv" style="display:none;" class="breadcrumbs-custome-new">
+                        <div class="bread-crummbs">
+                            <div class="information-vehicle-date-custome">
+                                <fieldset>
+                                    <legend class="lang" key="Selectavehicleandadate">Select a vehicle and a date</legend>
+                                    <table>
+                                        <tr>
+                                            <td class="lang" key="Vehicle">Vehicle</td>
+                                            <td>
+                                                <select id="cboBreadcrumbVehicles" style="font-size:11px; width:150px;">
+                                                    <option style="font-size:11px;">[There are no Vehicles]</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lang" key="Date">Date</td>
+                                            <td><input id="breadcrumbDatepicker" type="text" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lang" key="HourFrom">Hour From:</td>
+                                            <td>
+                                                <select id="cboHourFrom" style="font-size:11px; width:80px;" onclick="setQuickTrailCustom()">
+                                                    <option style="font-size:11px;">12:00 AM</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="padding-bottom-new">
+                                            <td class="lang" key="HourTo">Hour To:</td>
+                                            <td>
+                                                <select id="cboHourTo" style="font-size:11px; width:80px;" onclick="setQuickTrailCustom()">
+                                                    <option style="font-size:11px;">11:59 PM</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="checkbox-customenew">
+                                            <td></td>
+                                            <td>
+                                                <input id="quickTrailCustom" name="quickTrailSpan" type="radio" value="0" onclick="quickTrailChange(0)" checked="checked" /><span class="lang" key="Custom">Custom</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="checkbox-customenew">
+                                            <td></td>
+                                            <td>
+                                                <input id="quickTrailLast3" name="quickTrailSpan" type="radio" value="1" onclick="quickTrailChange(1)" /><span class="lang" key="Last3hours">Last 3 hours</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="checkbox-customenew">
+                                            <td></td>
+                                            <td>
+                                                <input id="quickTrailLast6" name="quickTrailSpan" type="radio" value="2" onclick="quickTrailChange(2)" /><span class="lang" key="Last6hours">Last 6 hours</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="checkbox-customenew">
+                                            <td></td>
+                                            <td>
+                                                <input id="quickTrailToday" name="quickTrailSpan" type="radio" value="3" onclick="quickTrailChange(3)" /><span class="lang" key="Today">Today</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="checkbox-customenew">
+                                            <td></td>
+                                            <td>
+                                                <input id="quickTrailYesterday" name="quickTrailSpan" type="radio" value="4" onclick="quickTrailChange(4)" /><span class="lang" key="Yesterday">Yesterday</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                                <div class="show-trial-custome-new">
+                                    <button style="font-size:12px; margin:5px;" onclick="createBreadcrumbTrail()" class="lang" key="ShowTrail">Show Trail</button>
+                                    <a href="#" class="deviceAction lang" onclick="clearBreadcrumbTrail()" key="Clear">Clear</a>
+                                </div>
+                            </div>
+                            <div id="trailDetailDiv" style="display:none;">
+                                <div style="width:100%; display:block;">
+                                    <span class="panelSubTitle">Trail Detail</span>
+                                </div>
+                                <div id="trailListDiv">
+                                    <ul id="trailDetailsList" class="devicesListClass">
+                                        <li>[No Trail]</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="geofencesDiv" style="display:none;">
+                        <div style="width:100%; display:block;">
+                            <p class="panelTitle">Geofences</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mapcontrol customecontrol" id="map_area">
+            <div class="dropdown" id="map_controls" style="position:absolute; top:10%; right:10px;">
+                <button type="button" class="btn btn-primary dropdown-toggle lang" onclick="myFunction()" key="MapControls">
+                    map controls
+                </button>
+                <div class="dropdown-menu" id="myDIV">
+                    <ul>
+                        <li>
+                            <span class="name-text">Freeze Auto-Zoom</span>
+                            <div class="toggle-right-custome">
+                                <span class="toggle-slider"><input class="checkbox" type="checkbox" name="freezeAutoZoom" value="yes" id="freezeAutoZoom" data-function="toggleFreezeAutoZoom" /></span>
+                                <span class="tolltipnew"><img id="help_freezeZoom" src="icons\icon_question_mark.jpg" alt="help" title="" /><p>Freeze Auto-Zoom: Turn On to prevent the screen from zooming out everytime the update happens, which is every minute.</p></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="name-text">Show Traffic Information</span>
+                            <div class="toggle-right-custome">
+                                <span class="toggle-slider"><input class="checkbox" type="checkbox" name="mapTraffic" value="yes" id="mapTraffic" data-function="toggleGoogleTraffic" /></span>
+                                <span class="tolltipnew"><img id="help_showTraffic" src="icons\icon_question_mark.jpg" alt="help" title="" /><p>Show Traffic Information: Turn On to display the current traffic conditions of the locations where your vehicles are located at.</p></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="name-text">Show Geofences</span>
+                            <div class="toggle-right-custome">
+                                <span class="toggle-slider"><input class="checkbox" type="checkbox" name="geoLayers" value="yes" id="geoLayers" data-function="toggleGeofencesLayer" /></span>
+                                <span class="tolltipnew"><img id="help_geoLayer" src="icons\icon_question_mark.jpg" alt="help" title="" /><p>Show Geofences: Turn On to overlay all your geofences. Tip: Click geofence to display more information.</p></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="name-text">Show Geofences Name</span>
+                            <div class="toggle-right-custome">
+                                <span class="toggle-slider"><input class="checkbox" type="checkbox" name="geoLayersNames" value="yes" id="geoLayersNames" data-function="toggleGeofencesLayerName" /></span>
+                                <span class="tolltipnew"><img id="help_geoLayer" src="icons\icon_question_mark.jpg" alt="help" title="" /><p>Show Geofences: Turn On to overlay all your geofences. Tip: Click geofence to display more information.</p></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="name-text">Show Lat/Lng Grid</span>
+                            <div class="toggle-right-custome">
+                                <span class="toggle-slider"><input class="checkbox" type="checkbox" name="latLngGridLayer" value="yes" id="latLngGridLayer" data-function="toggleLatLngGridLayer" /></span>
+                                <span class="tolltipnew"><img id="help_latLngGridLayer" src="icons\icon_question_mark.jpg" alt="#" title="" /><p>Show Lat/Lng Grid: Turn On to overlay a grid of Latitude and Longitude. It is useful to segment your work areas in a geographical manner.</p></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="map_canvas" style="width:99%;"></div>
+        </div>
+
+
+    </div>
+    <div style="clear:both;"></div>
+    <div id="footer" style="position:fixed;bottom:0px;width:100%;height:50px;background-color:#f6f6f6; border:1px solid #808080;">
+        <table border="0" cellpadding="0" cellspacing="0" style="width:100%;" ng-controller="fleetHeartBeatCtrl">
+            <tr>
+                <!-- Total Miles Today -->
+                <td style="width:13%;background-color:#f6f6f6; padding-top:1px; padding-bottom:1px; border-top:2px solid #aadc46;">
+                    <table>
+                        <tr>
+                            <td style="padding:1px;">
+                                <img src="https://www.easitrack.net/img/road.png" alt="Road" />
+                            </td>
+                            <td style="padding:1px;">
+                                <span style="font-size:10px; font-family:Arial; color:#000000;" class="lang" key="FleetMilesToday">Fleet Miles Today</span><br />
+                                <span style="font-size:12px; font-family:Arial; font-weight:bold; color:#636363;">{{fleet.fleetMiles}}</span>
+                                <span style="font-size:10px; color:#636363;">miles</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <!-- Total Drive Today -->
+                <td style="width:13%;background-color:#f6f6f6; padding-top:1px; padding-bottom:1px; border-top:2px solid #00ffff;">
+                    <table>
+                        <tr>
+                            <td style="padding:1px;">
+                                <img src="https://www.easitrack.net/img/time.png" alt="Move Time" />
+                            </td>
+                            <td style="padding:1px;">
+                                <span style="font-size:10px; font-family:Arial; color:#000000;" class="lang" key="FleetDriveTimeToday">Fleet Drive Time Today</span><br />
+                                <span style="font-size:12px; font-family:Arial; font-weight:bold; color:#636363;">{{fleet.drivingHours}}</span>
+                                <span style="font-size:10px; color:#636363;">hours</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <!-- Total Idle Today -->
+                <td style="width:13%;background-color:#f6f6f6; padding-top:1px; padding-bottom:1px; border-top:2px solid #ffd800;">
+                    <table>
+                        <tr>
+                            <td style="padding:1px;">
+                                <img src="https://www.easitrack.net/img/time-idle.png" alt="Idle Time" />
+                            </td>
+                            <td style="padding:1px;">
+                                <span style="font-size:10px; font-family:Arial; color:#000000;" class="lang" key="FleetIdleTimeToday">Fleet Idle Time Today</span><br />
+                                <span style="font-size:12px; font-family:Arial; font-weight:bold; color:#636363;">{{fleet.idleHours}}</span>
+                                <span style="font-size:10px; color:#636363;">hours</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <!-- Most Active Vehicle -->
+                <td style="width:19%;background-color:#f6f6f6; padding-top:1px; padding-bottom:1px; border-top:2px solid #0026ff;">
+                    <table>
+                        <tr>
+                            <td style="padding:1px;">
+                                <img src="https://www.easitrack.net/img/map.png" alt="Most Active" />
+                            </td>
+                            <td style="padding:1px;">
+                                <span style="font-size:10px; font-family:Arial; color:#000000;" class="lang" key="MostActiveVehicle">Most Active Vehicle</span><br />
+                                <span style="font-size:12px; font-family:Arial; font-weight:bold; color:#636363;">{{fleet.mostActive.name}}</span>
+                                <span style="font-size:10px; color:#636363;">({{fleet.mostActive.miles}} miles driven)</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <!-- Best Driver Behavior -->
+                <td style="width:21%;background-color:#f6f6f6; padding-top:1px; padding-bottom:1px; border-top:2px solid #aadc46;">
+                    <table>
+                        <tr>
+                            <td style="padding:1px;">
+                                <img src="https://www.easitrack.net/img/vehicle.png" alt="Best Driver" />
+                            </td>
+                            <td style="padding:1px;">
+                                <span style="font-size:10px; font-family:Arial; color:#000000;" class="lang" key="BestDriving">Best Driving</span><br />
+                                <span style="font-size:12px; font-family:Arial; font-weight:bold; color:#636363;">{{fleet.bestDriver.name}}</span>
+                                <span style="font-size:10px; color:#636363;">({{fleet.bestDriver.incidents}} incidents)</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <!-- Worst Driver Behavior -->
+                <td style="width:21%;background-color:#f6f6f6; padding-top:1px; padding-bottom:1px; border-top:2px solid #ed1c24;">
+                    <table>
+                        <tr>
+                            <td style="padding:1px;">
+                                <img src="https://www.easitrack.net/img/vehicle-red.png" alt="Worst Driver" />
+                            </td>
+                            <td style="padding:1px;">
+                                <span style="font-size:10px; font-family:Arial; color:#000000;" class="lang" key="WorstDriving">Worst Driving</span><br />
+                                <span style="font-size:12px; font-family:Arial; font-weight:bold; color:#636363;">{{fleet.worstDriver.name}}</span>
+                                <span style="font-size:10px; color:#636363;">({{fleet.worstDriver.incidents}} incidents)</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="geofenceForm" title="Create new Geofence" style="display:none;">
+        <p class="validateTips"></p>
+        <table style="margin:5px;">
+            <tr>
+                <td>Geofence Name*</td>
+                <td><input type="text" name="geoFormName" id="geoFormName" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td>Street*</td>
+                <td><input type="text" name="geoFormStreet" id="geoFormStreet" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td>City*</td>
+                <td><input type="text" name="geoFormCity" id="geoFormCity" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td>State*</td>
+                <td><input type="text" name="geoFormState" id="geoFormState" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td>Postal Code*</td>
+                <td><input type="text" name="geoFormPostalCode" id="geoFormPostalCode" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td>Latitude (optional)</td>
+                <td><input type="text" name="geoFormLatitude" id="geoFormLatitude" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td>Longitude (optional)</td>
+                <td><input type="text" name="geoFormLongitude" id="geoFormLongitude" class="text ui-widget-content ui-corner-all" /></td>
+            </tr>
+            <tr>
+                <td>Radius (Feet):</td>
+                <td><input type="text" name="geoFormRadius" id="geoFormRadius" class="text ui-widget-content ui-corner-all" style="width:50px;" /></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="dlgTelemetry" title="Telemetry Control Panel" style="display:none;" ng-controller="telemetryCtrl">
+        <div class="k-content">
+            <h1>{{dev.name}}</h1>
+            <br />
+            <p>Telemetry allows you to control remotely (from the web) things in your vehicle, like Horn, Alarm, Locks, and Ignition.  You can turn them On or OFF remotely, or you can Disable / Enable ignition remotely.</p>
+            <br />
+            <hr />
+            <br />
+            <div class="k-content">
+                <div class="k-block k-info-colored">
+                    <table class="k-grid" style="width:100%;">
+                        <thead class="k-grid-header">
+                            <tr>
+                                <td class="k-grid-column-menu" style="width:50%;">Relay</td>
+                                <td class="k-grid-column-menu" style="width:25%;text-align:center;">State</td>
+                                <td class="k-grid-column-menu" style="width:25%;text-align:center;">Switch</td>
+                            </tr>
+                        </thead>
+                        <tbody class="k-grid-content">
+                            <tr>
+                                <td>{{dev.name1}}</td>
+                                <td><div class="k-block" ng-class="(dev.status1==true) ? 'k-success-colored' : 'k-error-colored'"><div style="text-align:center;font-weight:600;">{{statusText(1, dev.status1, false)}}</div></div></td>
+                                <td><button class="k-button" ng-click="switchOutput(1, dev.status1)">Turn {{statusText(1, dev.status1, true)}}</button></td>
+                            </tr>
+                            <tr>
+                                <td>{{dev.name2}}</td>
+                                <td><div class="k-block" ng-class="(dev.status2==true) ? 'k-success-colored' : 'k-error-colored'"><div style="text-align:center;font-weight:600;">{{statusText(2, dev.status2, false)}}</div></div></td>
+                                <td><button class="k-button" ng-click="switchOutput(2, dev.status2)">Turn {{statusText(2, dev.status2, true)}}</button></td>
+                            </tr>
+                            <tr>
+                                <td>{{dev.name3}}</td>
+                                <td><div class="k-block" ng-class="(dev.status3==true) ? 'k-success-colored' : 'k-error-colored'"><div style="text-align:center;font-weight:600;">{{statusText(3, dev.status3, false)}}</div></div></td>
+                                <td><button class="k-button" ng-click="switchOutput(3, dev.status3)">Turn {{statusText(3, dev.status3, true)}}</button></td>
+                            </tr>
+                            <tr>
+                                <td>{{dev.name4}}</td>
+                                <td><div class="k-block" ng-class="(dev.status4==true) ? 'k-success-colored' : 'k-error-colored'"><div style="text-align:center;font-weight:600;">{{statusText(4, dev.status4, false)}}</div></div></td>
+                                <td><button class="k-button" ng-click="switchOutput(4, dev.status4)">Turn {{statusText(4, dev.status4, true)}}</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dlgQuickMsg" title="Quick Message" style="display:none;" ng-controller="quickMsgCtrl">
+        <div class="k-content">
+            <h2>Send Quick Message to Driver</h2>
+            <br />
+            <div class="k-content">
+                <div class="k-block k-info-colored">
+                    <p>Select a driver</p>
+                    <select id="cbxQuickMsgDrivers" ng-model="driverId" ng-options="item.id as item.name for item in drivers" ng-change="quickMsgDriverChange()" style="width:100%;"></select>
+                </div>
+                <div class="k-block k-info-colored">
+                    <table>
+                        <tr><td style="font-weight:600;">Phone:</td><td>{{driver.phone}}</td></tr>
+                        <tr><td style="font-weight:600;">Email:</td><td>{{driver.email}}</td></tr>
+                        <tr><td style="font-weight:600;">Vehicle:</td><td>{{driver.deviceName}}</td></tr>
+                    </table>
+                </div>
+                <div class="k-block k-info-colored">
+                    <p style="font-weight:600;">Type a message here</p>
+                    <textarea rows="3" ng-model="message" style="width:100%;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="msgSystem" ng-controller="msgSystemCtrl"></div>
+
+    <div id="waitingSpinner" style="display:none"><p><img src="images/loading.gif" alt="Loading Spinner" width="100" height="100" /></p></div>
+    <div id="streetViewDlg" style="display:none;">
+        <div id="streetViewContainer" style="width:400px;height:400px;"></div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Feedback</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <label>
+                        You can send us an observation, comment, suggestion or report an error of the new EasiTrack platform
+                    </label><br />
+                    <form class="form was-validated">
+                        <div class="form-group">
+                            <label for="Type">Select Type</label>
+                            <select id="Type" class="form-control">
+                                <option value="-1">Select</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Type">Description</label>
+                            <textarea class="form-control" rows="5" id="comment" required></textarea>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">the description cannot be empty</div>
+                        </div>
+                    </form>
+                    <span id="confirmation" style="display:none"></span>
+
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="sendFeedBack()">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="_webengage_script_tag" type="text/javascript">
+        window.webengageWidgetInit = window.webengageWidgetInit || function () {
+            webengage.init({
+                licenseCode: "~10a5cbb2c"
+            }).onReady(function () {
+                webengage.render();
+            });
+        };
+        (function (d) {
+            var _we = d.createElement('script');
+            _we.type = 'text/javascript';
+            _we.async = true;
+            _we.src = (d.location.protocol == 'https:' ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-3.0.js";
+            var _sNode = d.getElementById('_webengage_script_tag');
+            _sNode.parentNode.insertBefore(_we, _sNode);
+        })(document);
+    </script>
+    <!-- BEGIN ProvideSupport.com Graphics Chat Button Code -->
+    <div id="ciJY41" style="z-index:100;position:fixed"></div><div id="scJY41" style="display:inline"></div><div id="sdJY41" style="display:none"></div>
+    <script type="text/javascript">
+        if (window.location.href.indexOf('matchpointgps') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/matchpointgps.css" />')
+        }
+        if (window.location.href.indexOf('adapco') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/adapco.css" />')
+        }
+        if (window.location.href.indexOf('mobilefleetsolutions') != -1) {
+            document.write('<link rel="stylesheet" type="text/css" href="Styles/mfs.css" />')
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">var seJY41 = document.createElement("script"); seJY41.type = "text/javascript"; var seJY41s = (location.protocol.indexOf("https") == 0 ? "https" : "http") + "://image.providesupport.com/js/0325vm2g5aj6809q0cspkf44yw/safe-standard.js?ps_h=JY41&ps_t=" + new Date().getTime(); setTimeout("seJY41.src=seJY41s;document.getElementById('sdJY41').appendChild(seJY41)", 1)</script><noscript><div style="display:inline"><a href="http://vm.providesupport.com/0325vm2g5aj6809q0cspkf44yw">Customer Support Chat</a></div></noscript>
+    <!-- END ProvideSupport.com Graphics Chat Button Code -->
+    <!--    Javascript includes -->
+    <script src="Scripts/authorization_006.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery.tools.min.js" type="text/javascript"></script>
+    <script src="Scripts/date.format.js" type="text/javascript"></script>
+    <script src="Scripts/db_v002.js" type="text/javascript"></script>
+    <script src="Scripts/branding.js" type="text/javascript"></script>
+    <script src="Scripts/map_v003.js" type="text/javascript"></script>
+    <script src="Scripts/utilities_002.js" type="text/javascript"></script>
+    <script src="Scripts/tracking_v009.js" type="text/javascript"></script>
+    <script src="Scripts/geofence.js" type="text/javascript"></script>
+    <script src="Scripts/sendQuickMessage.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAekGGZACHuofFJ65TxBQFAlYvhw2GjM6U&v=3.17&sensor=false"></script>
+
+    <script type="text/javascript" src="Scripts/MarkerWithLabel.js"></script>
+    <script type="text/javascript" src="Scripts/latLngGridLayer.js"></script>
+    <script src="Scripts/toggleSwitches_v006.js" type="text/javascript"></script>
+    <script src="Scripts/helpTracking.js" type="text/javascript"></script>
+    <script src="Scripts/streetView.js" type="text/javascript"></script>
+    <script src="Scripts/helpPopovers.js" type="text/javascript"></script>
+    <script src="Scripts/telemetry.js" type="text/javascript"></script>
+    <script src="Scripts/userPreferences.js" type="text/javascript"></script>
+    <script src="vendors/angular.min.js" type="text/javascript"></script>
+    <script src="vendors/underscore-min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-resource.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js" type="text/javascript"></script>
+    <script src="vendors/kendo-2013.3.1119/js/kendo.web.min.js" type="text/javascript"></script>
+    <script src="vendors/angular-kendo.min.js" type="text/javascript"></script>
+    <script src="Scripts/infobox_packed.js" type="text/javascript"></script>
+    <script src="appTelemetry/etApp.js" type="text/javascript"></script>
+    <script src="appTelemetry/services/services.js" type="text/javascript"></script>
+    <script src="appTelemetry/controllers/telemetryCtrl.js" type="text/javascript"></script>
+    <script src="appQuickMsg/controllers/quickMsgCtrl.js" type="text/javascript"></script>
+    <script src="appMsgSystem/controllers/msgSystemCtrl.js" type="text/javascript"></script>
+    <script src="appFleetHeartBeat/fleetHeartBeatCtrl.js" type="text/javascript"></script>
+    <script src="PruebaMultiIdioma/js/script.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        //$('.second-strip #mainMenu li').click(function () {
+        //    $('#mainMenu li.active').removeClass('active');
+        //    $(this).closest('li').addClass('active');
+        //});
+        //$('.header-easytrack .navbar-nav li').click(function () {
+        //    $('.navbar-nav li.current').removeClass('current');
+        //    $(this).closest('li').addClass('current');
+        //});
+
+        //$('.form-dispatchnew legend label').click(function () {
+        //    $('legend label.active').removeClass('active');
+        //    $(this).closest('label').addClass('active');
+        //});
+
+        $(document).ready(function () {
+            var groupnameid = "";
+            $("#breadcrumbDatepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+            traductor();
+            loadFeedBackType();
+            getBrand(onBrandSet);
+
+            searchInput.addEventListener("keyup", filter);
+            $(document.getElementById('ctrlPanel')).attr('style', 'max-height:' + (h - 90 - 50) + 'px;');
+            $("#waitingSpinner").attr('style', 'display:none;width:100px;height:100px;right:' + (w / 2) + 'px;top:' + (h / 2) + 'px;position:fixed;z-index:999;');
+            $("#breadcrumbDatepicker").datepicker();
+            $('#breadcrumbDatepicker').val(getNow());
+
+            setGeofenceDlg();
+            setStreetViewDlg();
+            dispatchToTypeToggle(1);
+            $(document.getElementById('map_canvas')).attr('style', 'height:' + (h - 90 - 30 - 50) + 'px;');
+            $(".toggleBtn").click(function () {
+                $("#ctrlPanel").toggle();
+            });
+            $('#toggle .navbar-toggler').on('click', function () {
+                $('.navbar-collapse').toggleClass('open');
+            });
+            if (validateToken(false, 'tracking.html') == true) {
+
+                setWelcomeTitle();
+                
+                getAppFeatures(1);
+                initialize("map_canvas");
+                toggleSwitches();
+
+                //applyAccessRights();
+                //loadDevicesGroups();
+                
+                loadDevicesGroupsNew();
+                tooltipsSetUp();
+                setLiveChat();
+                //pageEngagement();
+            }
+            //activityIndicator();
+            
+            mainMenuClick('fleetLocationDiv', 3);
+
+            SelectAllDevices("groupAll", "chkgroup" + groupnameid, "4");
+        });
+        function filter() {
+            const searchInput = document.querySelector('#searchInput');
+            var text = searchInput.value;
+
+            if (text.trim().length > 0) {
+
+                var regxp = /^([a-zA-Z0-9_-]){1,16}$/;
+                if (text.trim().match(regxp) || (text.trim() == "")) {
+                    loadDevicesBySearchText(text.trim());
+                } else {
+                    console.log("Valor NO aceptado");
+                }
+            } else if (text == "") {
+                loadDevicesGroupsNew();
+                SelectAllDevices("groupAll", "chkgroup" + groupnameid, "4");
+            }
+
+        }
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+        function onBrandSet() {
+            try {
+                if (dealerShowAccountSettings == true) {
+                    $('#buyNowDiv').show();
+                }
+                else {
+                    $('#buyNowDiv').hide();
+                }
+            }
+            catch (err) {
+            }
+        }
+    </script>
+    <!--<script type="text/javascript">
+        setInterval("getLastKnowLocation()", 1 * 15 * 1000);
+    </script>-->
+    <script type="text/javascript" src="Scripts/buyNowButton.js"></script>
+</body>
+</html>

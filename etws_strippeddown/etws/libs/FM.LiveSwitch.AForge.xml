@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FM.LiveSwitch.AForge</name>
+    </assembly>
+    <members>
+        <member name="T:FM.LiveSwitch.AForge.CameraInfo">
+            <summary>
+            Information about a camera.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.AForge.CameraInfo.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.AForge.CameraInfo.MonikerString">
+            <summary>
+            Gets or sets the moniker string.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.AForge.CameraSource">
+            <summary>
+            A camera source.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.AForge.CameraSource.VideoCaptureDevice">
+            <summary>
+            Gets the video capture device.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.CameraSource.GetInputs">
+            <summary>
+            Gets the available inputs.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FM.LiveSwitch.AForge.CameraSource.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.CameraSource.#ctor(FM.LiveSwitch.VideoConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.AForge.CameraSource"/> class.
+            </summary>
+            <param name="targetConfig">The target configuration.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.CameraSource.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.CameraSource.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.AForge.MotionJpegSource">
+            <summary>
+            A motion JPEG source.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.AForge.MotionJpegSource.Url">
+            <summary>
+            Gets the URL.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.AForge.MotionJpegSource.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.MotionJpegSource.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.AForge.MotionJpegSource" /> class.
+            </summary>
+            <param name="url">The URL.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.MotionJpegSource.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.MotionJpegSource.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+        <member name="T:FM.LiveSwitch.AForge.ScreenSource">
+            <summary>
+            A screen source.
+            </summary>
+        </member>
+        <member name="P:FM.LiveSwitch.AForge.ScreenSource.Label">
+            <summary>
+            Gets a label that identifies this class.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.ScreenSource.#ctor(FM.LiveSwitch.Rectangle,System.Int32)">
+            
+             <summary>
+             Initializes a new instance of the <see cref="T:FM.LiveSwitch.AForge.ScreenSource" /> class.
+             </summary>
+             <param name="targetRegion">The target region.</param>
+             <param name="targetFrameRate">The target frame rate.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.ScreenSource.#ctor(FM.LiveSwitch.ScreenConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FM.LiveSwitch.AForge.ScreenSource"/> class.
+            </summary>
+            <param name="targetConfig">The target configuration.</param>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.ScreenSource.DoStart">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:FM.LiveSwitch.AForge.ScreenSource.DoStop">
+            <summary>
+            Stops this instance.
+            </summary>
+        </member>
+    </members>
+</doc>

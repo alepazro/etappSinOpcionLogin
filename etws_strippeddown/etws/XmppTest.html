@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="Scripts/underscore-min.js"></script>
+
+    <script type="text/javascript">
+
+        var users = [];
+        var apiKey = 'yC4I44GJfNqEJ7PW';
+        var teamsAuthToken = '66419D13-FC5E-4187-A7BE-DBE19814A77A';
+
+        function testUserIsRegistered() {
+            try{
+                var data = {
+                    UserName: 'aarlee',
+                    IsRegistered: true
+                }
+
+                ChatUserIsRegistered(data);
+
+            } catch (err) {
+
+            }
+        }
+
+        function ChatUserIsRegistered(user) {
+            try{
+                var data = {
+                    AuthToken: teamsAuthToken,
+                    User: user
+                }
+
+                data = JSON.stringify(data);
+
+                var url = 'teams.svc/api/v1/chat/users/registered/' + user.UserName;
+
+                $.ajax({
+                    url: url,
+                    type: "PUT",
+                    data: data,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    processdata: true,
+                    success: function (data, textStatus, jqXHR) {
+                        var a = 1;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var isOk = false;                      
+                    },
+                    async: true
+                });
+
+            } catch (err) {
+
+            }
+        }
+
+        function getUsers() {
+            try {
+                var url = 'http://xmpp.teams.us:9090/plugins/restapi/v1/users';
+
+                $.ajax({
+                    url: url,
+                    headers:{
+                        'Authorization': apiKey,
+                        'Accept': "application/json; charset=utf-8"
+                    },
+                    type: "GET",
+                    data: 0,
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    processdata: true,
+                    success: function (data, textStatus, jqXHR) {
+                        var a = 1;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var a = 1;
+                    },
+                    async: true
+                });
+            } catch (err) {
+
+            }
+        }
+
+        function createUser() {
+            try {
+                var data = {
+                    'username': 'TadDon',
+                    'password': '1234',
+                    'name': 'Tad Dontje',
+                    'email': 'tdontje@crmwi.com'
+                };
+
+                data = JSON.stringify(data);
+
+                var url = 'http://xmpp.teams.us:9090/plugins/restapi/v1/users';
+
+                $.ajax({
+                    url: url,
+                    headers: {
+                        'Authorization': apiKey,
+                        'Accept': "application/json; charset=utf-8"
+                    },
+                    type: "POST",
+                    data: data,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    processdata: true,
+                    success: function (data, textStatus, jqXHR) {
+                        var a = 1;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var isOk = false;
+                        if (jqXHR.status == 201) {
+                            //created
+                            isOk = true;
+                        } else if (jqXHR.status == 409) {
+                            //conflict: user already exists
+                            isOk = false;
+                        } else {
+                            isOk = false;
+                        }
+                    },
+                    async: true
+                });
+
+            } catch (err) {
+
+            }
+        }
+
+        function createUser(user) {
+            try {
+                var a = 1;
+
+                var data = {
+                    'username': user.UserName,
+                    'password': user.Password,
+                    'name': user.DisplayName,
+                    'email': user.Email
+                };
+
+                data = JSON.stringify(data);
+
+                var url = 'http://xmpp.teams.us:9090/plugins/restapi/v1/users';
+
+                $.ajax({
+                    url: url,
+                    headers: {
+                        'Authorization': apiKey,
+                        'Accept': "application/json; charset=utf-8"
+                    },
+                    type: "POST",
+                    data: data,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    processdata: true,
+                    success: function (data, textStatus, jqXHR) {
+                        var a = 1;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var isOk = false;
+                        if (jqXHR.status == 201) {
+                            //created
+                            isOk = true;
+                        } else if (jqXHR.status == 409) {
+                            //conflict: user already exists
+                            isOk = false;
+                        } else {
+                            isOk = false;
+                        }
+                    },
+                    async: true
+                });
+
+            } catch (err) {
+
+            }
+        }
+
+        function updateUser() {
+            try {
+                var username = 'jco';
+                var data = {
+                    'username': 'jcot',
+                    'password': '1234',
+                    'name': 'Juan K',
+                    'email': 'jcolano@teams.us'
+                }
+
+                data = JSON.stringify(data);
+
+                var url = 'http://xmpp.teams.us:9090/plugins/restapi/v1/users/' + username;
+
+                $.ajax({
+                    url: url,
+                    headers: {
+                        'Authorization': apiKey,
+                        'Accept': "application/json; charset=utf-8"
+                    },
+                    type: "PUT",
+                    data: data,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    processdata: true,
+                    success: function (data, textStatus, jqXHR) {
+                        var a = 1;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var isOk = false;
+                        if (jqXHR.status == 200) {
+                            //OK
+                            isOk = true;
+                        } else if (jqXHR.status == 201) {
+                            //created
+                            isOk = true;
+                        } else if (jqXHR.status == 404) {
+                            //Not Found: User not found
+                            isOk = false;
+                        } else if (jqXHR.status == 409) {
+                            //conflict: user already exists
+                            isOk = false;
+                        } else {
+                            isOk = false;
+                        }
+                    },
+                    async: true
+                });
+
+            } catch (err) {
+
+            }
+        }
+
+        function getTechnicians() {
+            try {
+                var uid = 22;
+
+                var url = 'teams.svc/api/v1/technicians?UserId=' + uid + '&clientId=android&resyncAll=true';
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    data: 0,
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    processdata: true,
+                    success: function (data, textStatus, jqXHR) {
+                        users = data.Technicians;
+                        for(i = 0; i < users.length; i++){
+                            createUser(users[i]);
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var a = 1;
+                    },
+                    async: true
+                });
+            } catch (err) {
+
+            }
+        }
+
+        $(document).ready(function () {
+
+        });
+
+    </script>
+
+</head>
+<body>
+    <h1 style="text-align:center;">XMPP Rest API Test Page</h1>
+
+    <table>
+        <tr>
+            <td style="vertical-align:top;border-right:1px solid #000;padding:10px;margin:10px;">
+                <button onclick="getUsers()">getUsers</button>
+                <br />
+                <button onclick="createUser()">createUser</button>
+                <br />
+                <button onclick="updateUser()">updateUser</button>
+                <br />
+                <button onclick="getTechnicians()">Get Technicians</button>
+                <br />
+                <button onclick="testUserIsRegistered()">testUserIsRegistered</button>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

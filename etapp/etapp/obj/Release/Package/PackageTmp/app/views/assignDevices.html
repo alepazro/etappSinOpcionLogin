@@ -1,0 +1,81 @@
+﻿<div class="ContentArea">
+    <!-- Top Options for current module
+    ================================================== -->
+    <div class="TopOptions">
+        <h4 style="margin-top: 2px;">Assign Devices to Companies</h4>
+    </div>
+
+        <!-- Content Area
+    ================================================== -->
+    <div class="MainContent group" style="padding:5px;">
+        <form name="myForm">
+            <div class="row-fluid">
+                <div class="span2">
+			        <div class="control-group">
+				        <label for="companyName" class="control-label">	
+					        Company Name
+				        </label>
+				        <div class="controls">
+                            <select id="cbxCompanies" class="form-control" ng-model="companyId" ng-options="item.id as item.value for item in companies"></select>
+				        </div>
+			        </div>
+                </div>
+                <div class="span2">
+				        <label for="companyName" class="control-label">	
+					       Order No. (if any)
+				        </label>
+				        <div class="controls">
+                            <input type="text" id="txtOrderNo" name="txtOrderNo" ng-model="orderNo" style="width:100px;" />
+				        </div>
+                </div>
+                <div class="span2">
+				        <label for="companyName" class="control-label">	
+					       Email Template
+				        </label>
+				        <div class="controls">
+                            <select id="cbxEmails" class="form-control" ng-model="emailTypeId" ng-options="item.id as item.value for item in emails" style="width:300px;"></select>
+				        </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label for="courrierName" class="control-label">
+                            Courrier
+                        </label>
+                        <div class="controls">
+                            <select id="cbxCourriers" class="form-control" ng-model="courrierId" ng-options="item.id as item.value for item in courriers" style="width:300px;"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <label for="trackingNumber" class="control-label">
+                            Tracking Number
+                        </label>
+                        <div class="controls">
+                            <input type="text" id="txtTrackingNumber" name="txtTrackingNumber" ng-model="trackingNumber" style="width:300px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+			    <div class="control-group">
+				    <label for="inventoryList" class="control-label">	
+					    Inventory
+				    </label>
+                    <div>
+                        <input id="rdSortID" name="rdSort" type="radio" ng-model="sortKey" value="1" ng-change="sortListBy('deviceId')" checked="checked"/> Sort by Device ID
+                        <input id="rdSortSerial" name="rdSort" type="radio" ng-model="sortKey" value="2" ng-change="sortListBy('serialNumber')"/> Sort by Serial Number
+                    </div>
+				    <div class="controls">
+                        <deviceselector fields="devices"></deviceselector>
+				    </div>
+			    </div>
+            </div>
+        </form>
+        <div class="text-center">
+            <a class="btn btn-success" ng-click="save()" ng-disabled="myForm.$invalid">Save</a>
+            <a class="btn btn-warning cancel" ng-click="cancel()">Cancel</a>
+        </div>
+    </div>
+
+</div>

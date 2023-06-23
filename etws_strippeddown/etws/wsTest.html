@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/underscore-min.js"></script>
+
+    <script type="text/javascript">
+        
+        function postDb(method, data, params) {
+            try {
+                var result = false;
+                var url = 'https://pre.etrack.ws/ws.svc/' + method;
+                url = 'ws.svc/' + method;
+
+                if (!_.isUndefined(params)) {
+                    if (params.length > 0) {
+                        url = url + '?' + params;
+                    }
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    contentType: "application/json",
+                    data: data,
+                    dataType: "json",
+                    processdata: false,
+                    success: function (data) {
+                        result = data;
+                    },
+                    error: function (err) {
+                        var a = 1;
+                    },
+                    async: false
+                });
+
+                return result;
+
+            }
+            catch (err) {
+
+            }
+        }
+
+
+        function sendCommand() {
+            try {
+                var did = '54FBD663-CC72-47D3-912E-FFF72C01CA62';
+
+                var cmd = $('#txtCommand').val();
+                if (cmd == '') {
+                    alert('Please enter a command');
+                    return;
+                }
+
+                var data = { deviceId: did, cmd: cmd };
+                data = JSON.stringify(data);
+                var res = postDb('sendDeviceCommand', data, '');
+
+            }
+            catch (err) {
+
+            }
+        }
+
+
+        function getCameras() {
+            try {
+                var postData = {
+                    ClientId: 'web'
+                }
+
+                postData = JSON.stringify(postData);
+
+                var url = 'ws.svc/getCameras';
+
+                post(url, postData);
+
+            } catch (ex) {
+
+            }
+        }
+
+        function post(url, postData) {
+            try {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: postData,
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    processdata: true,
+                    success: function (data, textStatus, jqXHR) {
+                        var a = 1;
+                        data = JSON.stringify(data);
+                        var b = 1;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var a = 1;
+                    },
+                    async: true
+                });
+            } catch (ex) {
+
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1 style="text-align:center;">Test Page</h1>
+    <h3>Send Command to device</h3>
+    <br />
+    <input type="text" id="txtDiD" />
+    <br />
+    <textarea id="txtCommand" rows="5" cols="300"></textarea>
+    <br />
+    <button id="sendCommand" onclick="sendCommand()">Send Command</button>
+    <br />
+    <button onclick="getCameras()">getCameras</button>
+    <br />
+
+
+    
+
+</body>
+</html>
