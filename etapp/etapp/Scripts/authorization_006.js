@@ -475,7 +475,7 @@ function validateCredentials(isMobile) {
         
         
         rememberMe = $('#chkRememberMe').is(':checked');
-        newapp = localStorage.getItem('chknewApp') == "true" ? true : false;
+        newapp = true;// localStorage.getItem('chknewApp') == "true" ? true : false;
         if (!newapp) {
             location.replace("https://classic.easitrack.net/login.html?newapp=false")
             return;
