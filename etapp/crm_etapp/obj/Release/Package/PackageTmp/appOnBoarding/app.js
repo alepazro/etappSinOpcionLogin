@@ -1,1 +1,0 @@
-﻿var crmApp = angular.module('crmApp', ['ngResource', 'ngRoute', 'crmApp.services', 'kendo.directives']);

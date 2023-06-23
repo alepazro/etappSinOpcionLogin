@@ -1,1 +1,0 @@
-﻿var etApp = angular.module('etApp', ['ngResource', 'ngRoute', 'ui.grid', 'ui.grid.resizeColumns', 'etApp.services']);
